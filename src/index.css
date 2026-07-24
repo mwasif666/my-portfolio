@@ -3071,30 +3071,51 @@ body {
   text-transform: uppercase;
 }
 .portfolio-tech-card {
+  position: relative;
+  isolation: isolate;
   overflow: hidden;
-  border: 1px solid rgba(237, 94, 32, 0.5);
+  border: 1px solid rgba(237, 94, 32, 0.58);
   border-radius: 1rem;
-  padding: 1rem 1.15rem 0.95rem;
-  background: linear-gradient(145deg, rgba(22, 18, 16, 0.82), rgba(5, 5, 5, 0.78));
+  padding: 1.1rem 1.25rem 1rem;
+  background:
+    radial-gradient(circle at 0% 18%, rgba(237, 94, 32, 0.18), transparent 35%),
+    linear-gradient(135deg, rgba(33, 25, 21, 0.58), rgba(5, 5, 5, 0.4));
   box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
     inset 0 0 0 1px rgba(255, 255, 255, 0.025),
-    0 1rem 2.6rem rgba(0, 0, 0, 0.18);
-  backdrop-filter: blur(12px);
+    0 1.1rem 2.8rem rgba(0, 0, 0, 0.32),
+    0 0 2.4rem rgba(237, 94, 32, 0.06);
+  backdrop-filter: blur(24px) saturate(1.28);
+  -webkit-backdrop-filter: blur(24px) saturate(1.28);
+}
+.portfolio-tech-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.075),
+    transparent 34%,
+    rgba(237, 94, 32, 0.025) 72%,
+    rgba(255, 255, 255, 0.025)
+  );
 }
 .portfolio-tech-heading {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding-bottom: 0.6rem;
+  padding-bottom: 0.72rem;
 }
 .portfolio-tech-heading svg {
-  width: 1.45rem;
-  height: 1.45rem;
+  width: 1.6rem;
+  height: 1.6rem;
   color: #ed5e20;
 }
 .portfolio-tech-heading h2 {
   color: #fffaf4;
-  font-size: 0.9rem;
+  font-size: 1.02rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -3103,16 +3124,16 @@ body {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 .portfolio-stack-row {
-  min-height: 2.05rem;
+  min-height: 2.3rem;
   display: grid;
-  grid-template-columns: 6.7rem minmax(0, 1fr);
+  grid-template-columns: 7.25rem minmax(0, 1fr);
   align-items: center;
   gap: 0.75rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .portfolio-stack-row strong {
-  color: rgba(247, 242, 235, 0.74);
-  font-size: 0.58rem;
+  color: rgba(247, 242, 235, 0.82);
+  font-size: 0.66rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -3124,8 +3145,8 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.38rem;
-  color: rgba(247, 242, 235, 0.68);
-  font-size: 0.62rem;
+  color: rgba(247, 242, 235, 0.76);
+  font-size: 0.72rem;
   line-height: 1.35;
 }
 .portfolio-stack-dot {
@@ -3137,7 +3158,7 @@ body {
 }
 .portfolio-resume {
   width: 100%;
-  min-height: 2.35rem;
+  min-height: 2.55rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3146,7 +3167,7 @@ body {
   border: 1px solid rgba(237, 94, 32, 0.84);
   border-radius: 0.62rem;
   color: #f7f2eb;
-  font-size: 0.72rem;
+  font-size: 0.8rem;
   font-weight: 500;
   background: rgba(4, 4, 4, 0.28);
   transition:
@@ -3166,7 +3187,7 @@ body {
 /* Preserve the existing Muhammad / Wasif name treatment beneath the portrait. */
 .portfolio-banner .kontour-watermark {
   z-index: 3;
-  bottom: -1.3rem;
+  bottom: 2.7rem;
 }
 .portfolio-banner .kontour-wm-name {
   color: rgba(255, 255, 255, 0.74);
@@ -3341,7 +3362,7 @@ body {
     grid-template-columns: 6rem minmax(0, 1fr);
   }
   .portfolio-stack-row p {
-    font-size: 0.6rem;
+    font-size: 0.66rem;
   }
   .portfolio-banner .kontour-watermark {
     bottom: 0.5rem;
