@@ -1,0 +1,50 @@
+/* Isolated blue treatment for the duplicated portfolio banner. */
+#blue-banner.portfolio-banner--blue {
+  background:
+    radial-gradient(40rem 42rem at 50% 55%, rgba(0, 152, 241, 0.3), transparent 68%),
+    radial-gradient(29rem 30rem at 10% 37%, rgba(0, 88, 145, 0.18), transparent 72%),
+    #090909;
+}
+
+#blue-banner.portfolio-banner--blue .kontour-glow {
+  background:
+    radial-gradient(33rem 38rem at 51% 61%, rgba(0, 152, 241, 0.68), transparent 66%),
+    radial-gradient(43rem 31rem at 50% 56%, rgba(0, 91, 153, 0.24), transparent 72%);
+}
+
+#blue-banner.portfolio-banner--blue .kontour-portrait::before {
+  background: radial-gradient(
+    closest-side,
+    rgba(0, 152, 241, 0.28),
+    rgba(0, 83, 138, 0.18) 56%,
+    transparent 80%
+  );
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-eyebrow,
+#blue-banner.portfolio-banner--blue .portfolio-calendar,
+#blue-banner.portfolio-banner--blue .portfolio-tech-heading svg,
+#blue-banner.portfolio-banner--blue .portfolio-stack-dot {
+  color: #0098f1;
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-stack-dot {
+  background: #0098f1;
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-cta.primary,
+#blue-banner.portfolio-banner--blue .portfolio-resume {
+  background: #0098f1;
+  border-color: #0098f1;
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-cta.primary:hover,
+#blue-banner.portfolio-banner--blue .portfolio-resume:hover {
+  background: #0088d8;
+  border-color: #0088d8;
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-cta.secondary:hover {
+  border-color: #0098f1;
+  background: rgba(0, 152, 241, 0.12);
+}
