@@ -2859,6 +2859,7 @@ body {
   align-items: stretch;
   gap: 1.25rem;
   padding: 3.4rem 4.75rem 4.7rem;
+  transform: translateY(-4rem);
 }
 .portfolio-copy {
   align-self: center;
@@ -2988,25 +2989,25 @@ body {
   align-self: center;
   display: flex;
   flex-direction: column;
-  gap: 2.55rem;
-  padding: 2rem 0 1rem 1.25rem;
+  gap: 1.35rem;
+  padding: 1rem 0 0 1.25rem;
 }
 .portfolio-availability-card {
-  min-height: 10.9rem;
+  min-height: 9.25rem;
   display: grid;
   grid-template-columns: 5.3rem 1fr;
   align-items: center;
   gap: 1.4rem;
   border: 1px solid rgba(226, 109, 51, 0.28);
   border-radius: 1.2rem;
-  padding: 1.8rem;
+  padding: 1.45rem 1.6rem;
   background: linear-gradient(135deg, rgba(35, 24, 18, 0.44), rgba(6, 6, 6, 0.35));
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025);
   backdrop-filter: blur(12px);
 }
 .portfolio-calendar {
-  width: 5.15rem;
-  height: 5.15rem;
+  width: 4.65rem;
+  height: 4.65rem;
   display: grid;
   place-items: center;
   border: 1px solid rgba(237, 94, 32, 0.44);
@@ -3069,23 +3070,97 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
-.portfolio-tech-row {
+.portfolio-tech-card {
+  overflow: hidden;
+  border: 1px solid rgba(237, 94, 32, 0.5);
+  border-radius: 1rem;
+  padding: 1rem 1.15rem 0.95rem;
+  background: linear-gradient(145deg, rgba(22, 18, 16, 0.82), rgba(5, 5, 5, 0.78));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+    0 1rem 2.6rem rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(12px);
+}
+.portfolio-tech-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 0.6rem;
+}
+.portfolio-tech-heading svg {
+  width: 1.45rem;
+  height: 1.45rem;
+  color: #ed5e20;
+}
+.portfolio-tech-heading h2 {
+  color: #fffaf4;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.portfolio-stack-list {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.portfolio-stack-row {
+  min-height: 2.05rem;
+  display: grid;
+  grid-template-columns: 6.7rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.portfolio-stack-row strong {
+  color: rgba(247, 242, 235, 0.74);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.portfolio-stack-row p {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.38rem;
+  color: rgba(247, 242, 235, 0.68);
+  font-size: 0.62rem;
+  line-height: 1.35;
+}
+.portfolio-stack-dot {
+  width: 0.22rem;
+  height: 0.22rem;
+  flex: none;
+  border-radius: 50%;
+  background: #ed5e20;
+}
+.portfolio-resume {
+  width: 100%;
+  min-height: 2.35rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.11);
-  padding-top: 1.7rem;
-  color: rgba(247, 242, 235, 0.68);
-  font-size: 0.94rem;
-  white-space: nowrap;
+  margin-top: 0.8rem;
+  border: 1px solid rgba(237, 94, 32, 0.84);
+  border-radius: 0.62rem;
+  color: #f7f2eb;
+  font-size: 0.72rem;
+  font-weight: 500;
+  background: rgba(4, 4, 4, 0.28);
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
 }
-.portfolio-tech-row i {
-  width: 0.31rem;
-  height: 0.31rem;
-  flex: none;
-  border-radius: 50%;
-  background: #ed5e20;
+.portfolio-resume:hover {
+  border-color: #ff6b2b;
+  background: rgba(237, 94, 32, 0.1);
+}
+.portfolio-resume svg {
+  width: 1rem;
+  height: 1rem;
+  color: #ed5e20;
 }
 
 /* Preserve the existing Muhammad / Wasif name treatment beneath the portrait. */
@@ -3148,6 +3223,7 @@ body {
     min-height: auto;
     grid-template-columns: 1fr 0.9fr;
     padding: 4rem 2rem 7rem;
+    transform: none;
   }
   .portfolio-copy {
     align-self: start;
@@ -3167,7 +3243,7 @@ body {
     align-items: center;
     padding: 1rem 0 0;
   }
-  .portfolio-tech-row {
+  .portfolio-tech-card {
     grid-column: 1 / -1;
   }
   .portfolio-banner .kontour-watermark {
@@ -3191,6 +3267,7 @@ body {
     flex-direction: column;
     gap: 1.2rem;
     padding: 2.5rem 1.25rem 6.5rem;
+    transform: none;
   }
   .portfolio-copy {
     gap: 1.25rem;
@@ -3260,10 +3337,11 @@ body {
     font-size: 0.58rem;
     letter-spacing: 0.12em;
   }
-  .portfolio-tech-row {
-    flex-wrap: wrap;
-    gap: 0.7rem;
-    font-size: 0.8rem;
+  .portfolio-stack-row {
+    grid-template-columns: 6rem minmax(0, 1fr);
+  }
+  .portfolio-stack-row p {
+    font-size: 0.6rem;
   }
   .portfolio-banner .kontour-watermark {
     bottom: 0.5rem;

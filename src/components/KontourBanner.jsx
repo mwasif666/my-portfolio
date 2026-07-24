@@ -17,6 +17,21 @@ const CalendarIcon = () => (
   </svg>
 );
 
+const StackIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M12 3 3.5 7.5 12 12l8.5-4.5L12 3Z" />
+    <path d="m3.5 12 8.5 4.5 8.5-4.5M3.5 16.5 12 21l8.5-4.5" />
+  </svg>
+);
+
+const DownloadIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M12 3v12M7.5 10.5 12 15l4.5-4.5M4 20h16" />
+  </svg>
+);
+
+const Dot = () => <i className="portfolio-stack-dot" aria-hidden="true" />;
+
 export default function KontourBanner({ onContact }) {
   const ref = useRef(null);
   const inView = useInView(ref, { threshold: 0.2 });
@@ -83,11 +98,35 @@ export default function KontourBanner({ onContact }) {
               </div>
             </Reveal>
 
-            <Reveal className="portfolio-tech-row" delay={240}>
-              <span>React</span><i />
-              <span>Next.js</span><i />
-              <span>Node.js</span><i />
-              <span>WordPress</span>
+            <Reveal className="portfolio-tech-card" delay={240}>
+              <div className="portfolio-tech-heading">
+                <StackIcon />
+                <h2>Technology Stack</h2>
+              </div>
+
+              <div className="portfolio-stack-list">
+                <div className="portfolio-stack-row">
+                  <strong>Core Stack</strong>
+                  <p><span>MERN Stack</span><Dot /><span>PHP</span><Dot /><span>Laravel</span></p>
+                </div>
+                <div className="portfolio-stack-row">
+                  <strong>Frontend</strong>
+                  <p><span>React</span><Dot /><span>Next.js</span><Dot /><span>Bootstrap</span><Dot /><span>Tailwind CSS</span></p>
+                </div>
+                <div className="portfolio-stack-row">
+                  <strong>Backend &amp; Data</strong>
+                  <p><span>Node.js</span><Dot /><span>Express</span><Dot /><span>MongoDB</span><Dot /><span>MySQL</span></p>
+                </div>
+                <div className="portfolio-stack-row">
+                  <strong>CMS &amp; Commerce</strong>
+                  <p><span>WordPress</span><Dot /><span>Shopify</span><Dot /><span>Webflow</span><Dot /><span>WooCommerce</span></p>
+                </div>
+              </div>
+
+              <button className="portfolio-resume" type="button">
+                <span>Download Résumé</span>
+                <DownloadIcon />
+              </button>
             </Reveal>
         </aside>
       </div>
