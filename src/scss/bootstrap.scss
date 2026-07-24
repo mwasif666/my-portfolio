@@ -1,0 +1,19 @@
+// Bootstrap entry — the container width is customised through Bootstrap's own
+// $container-max-widths map (before Bootstrap sets its !default), so `.container`
+// caps at 1400px on large screens. No manual CSS override is used.
+@import "bootstrap/scss/functions";
+
+// Keep Bootstrap's Reboot in step with the project's own `*{margin:0}` reset so
+// paragraphs/headings don't gain extra spacing (Bootstrap-native, via variables).
+$paragraph-margin-bottom: 0;
+$headings-margin-bottom: 0;
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1300px,
+);
+
+@import "bootstrap/scss/bootstrap";
