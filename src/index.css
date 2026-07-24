@@ -3011,12 +3011,14 @@ body {
 
 .portfolio-panel {
   position: relative;
-  z-index: 6;
+  z-index: 30;
+  isolation: isolate;
   align-self: center;
   display: flex;
   flex-direction: column;
   gap: 1.35rem;
   padding: 1rem 0 0 1.25rem;
+  transform: translate3d(0, 0, 80px);
   transform-style: preserve-3d;
 }
 .portfolio-availability-card {
@@ -3106,7 +3108,10 @@ body {
   text-transform: uppercase;
 }
 .portfolio-tech-reveal {
+  position: relative;
+  z-index: 10;
   width: 100%;
+  isolation: isolate;
   perspective: 950px;
   transform-style: preserve-3d;
 }
@@ -3118,8 +3123,8 @@ body {
   border-radius: 1rem;
   padding: clamp(18px, 1.15vw, 24px) clamp(20px, 1.35vw, 28px) clamp(16px, 1vw, 22px);
   background:
-    radial-gradient(circle at 0% 18%, rgba(237, 94, 32, 0.18), transparent 35%),
-    linear-gradient(135deg, rgba(33, 25, 21, 0.58), rgba(5, 5, 5, 0.4));
+    radial-gradient(circle at 0% 18%, rgba(237, 94, 32, 0.16), transparent 35%),
+    linear-gradient(135deg, rgba(24, 19, 16, 0.97), rgba(5, 5, 5, 0.94));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
     inset 0 0 0 1px rgba(255, 255, 255, 0.025),
