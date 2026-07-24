@@ -36,8 +36,49 @@ export default function KontourBanner({ onContact }) {
   const ref = useRef(null);
   const inView = useInView(ref, { threshold: 0.2 });
 
+  const resetScene = () => {
+    const scene = ref.current;
+    if (!scene) return;
+
+    scene.style.setProperty('--portrait-x', '0px');
+    scene.style.setProperty('--portrait-y', '0px');
+    scene.style.setProperty('--copy-x', '0px');
+    scene.style.setProperty('--copy-y', '0px');
+    scene.style.setProperty('--card-tilt-x', '0deg');
+    scene.style.setProperty('--card-tilt-y', '0deg');
+    scene.style.setProperty('--shine-x', '50%');
+    scene.style.setProperty('--shine-y', '18%');
+  };
+
+  const moveScene = (event) => {
+    if (
+      event.pointerType === 'touch'
+      || !ref.current
+      || window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) return;
+
+    const bounds = ref.current.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
+    const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+
+    ref.current.style.setProperty('--portrait-x', `${(x * 10).toFixed(2)}px`);
+    ref.current.style.setProperty('--portrait-y', `${(y * 6).toFixed(2)}px`);
+    ref.current.style.setProperty('--copy-x', `${(x * -4).toFixed(2)}px`);
+    ref.current.style.setProperty('--copy-y', `${(y * -3).toFixed(2)}px`);
+    ref.current.style.setProperty('--card-tilt-x', `${(y * -2.5).toFixed(2)}deg`);
+    ref.current.style.setProperty('--card-tilt-y', `${(x * 3.5).toFixed(2)}deg`);
+    ref.current.style.setProperty('--shine-x', `${((x + 1) * 50).toFixed(1)}%`);
+    ref.current.style.setProperty('--shine-y', `${((y + 1) * 35).toFixed(1)}%`);
+  };
+
   return (
-    <section ref={ref} className={'kontour portfolio-banner' + (inView ? ' in' : '')} id="home">
+    <section
+      ref={ref}
+      className={'kontour portfolio-banner' + (inView ? ' in' : '')}
+      id="home"
+      onPointerMove={moveScene}
+      onPointerLeave={resetScene}
+    >
       <div className="kontour-glow" aria-hidden="true" />
       <div className="portfolio-grid-lines" aria-hidden="true" />
 
@@ -70,6 +111,12 @@ export default function KontourBanner({ onContact }) {
 
         <div className="kontour-portrait">
           <img src={myImg} alt="Muhammad Wasif, full-stack web developer" draggable="false" />
+          <div className="portfolio-mobile-watermark" aria-hidden="true">
+            <span className="kontour-wm-inner">
+              <span className="kontour-wm-name">Muhammad</span>
+              <span className="kontour-wm-word">Wasif</span>
+            </span>
+          </div>
         </div>
 
         <aside className="portfolio-panel">
@@ -98,35 +145,37 @@ export default function KontourBanner({ onContact }) {
               </div>
             </Reveal>
 
-            <Reveal className="portfolio-tech-card" delay={240}>
-              <div className="portfolio-tech-heading">
-                <StackIcon />
-                <h2>Technology Stack</h2>
-              </div>
+            <Reveal className="portfolio-tech-reveal" delay={240}>
+              <div className="portfolio-tech-card">
+                <div className="portfolio-tech-heading">
+                  <StackIcon />
+                  <h2>Technology Stack</h2>
+                </div>
 
-              <div className="portfolio-stack-list">
-                <div className="portfolio-stack-row">
-                  <strong>Core Stack</strong>
-                  <p><span>MERN Stack</span><Dot /><span>PHP</span><Dot /><span>Laravel</span></p>
+                <div className="portfolio-stack-list">
+                  <div className="portfolio-stack-row">
+                    <strong>Core Stack</strong>
+                    <p><span>MERN Stack</span><Dot /><span>PHP</span><Dot /><span>Laravel</span></p>
+                  </div>
+                  <div className="portfolio-stack-row">
+                    <strong>Frontend</strong>
+                    <p><span>React</span><Dot /><span>Next.js</span><Dot /><span>Bootstrap</span><Dot /><span>Tailwind CSS</span></p>
+                  </div>
+                  <div className="portfolio-stack-row">
+                    <strong>Backend &amp; Data</strong>
+                    <p><span>Node.js</span><Dot /><span>Express</span><Dot /><span>MongoDB</span><Dot /><span>MySQL</span></p>
+                  </div>
+                  <div className="portfolio-stack-row">
+                    <strong>CMS &amp; Commerce</strong>
+                    <p><span>WordPress</span><Dot /><span>Shopify</span><Dot /><span>Webflow</span><Dot /><span>WooCommerce</span></p>
+                  </div>
                 </div>
-                <div className="portfolio-stack-row">
-                  <strong>Frontend</strong>
-                  <p><span>React</span><Dot /><span>Next.js</span><Dot /><span>Bootstrap</span><Dot /><span>Tailwind CSS</span></p>
-                </div>
-                <div className="portfolio-stack-row">
-                  <strong>Backend &amp; Data</strong>
-                  <p><span>Node.js</span><Dot /><span>Express</span><Dot /><span>MongoDB</span><Dot /><span>MySQL</span></p>
-                </div>
-                <div className="portfolio-stack-row">
-                  <strong>CMS &amp; Commerce</strong>
-                  <p><span>WordPress</span><Dot /><span>Shopify</span><Dot /><span>Webflow</span><Dot /><span>WooCommerce</span></p>
-                </div>
-              </div>
 
-              <button className="portfolio-resume" type="button">
-                <span>Download Résumé</span>
-                <DownloadIcon />
-              </button>
+                <button className="portfolio-resume" type="button">
+                  <span>Download Résumé</span>
+                  <DownloadIcon />
+                </button>
+              </div>
             </Reveal>
         </aside>
       </div>

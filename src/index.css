@@ -2796,6 +2796,14 @@ body {
 }
 
 #home.kontour.portfolio-banner {
+  --portrait-x: 0px;
+  --portrait-y: 0px;
+  --copy-x: 0px;
+  --copy-y: 0px;
+  --card-tilt-x: 0deg;
+  --card-tilt-y: 0deg;
+  --shine-x: 50%;
+  --shine-y: 18%;
   min-height: 100svh;
   padding-top: 7.4rem;
   border-radius: 0;
@@ -2847,6 +2855,8 @@ body {
   background-size: 8rem 8rem;
   -webkit-mask-image: radial-gradient(ellipse at center, #000 18%, transparent 82%);
   mask-image: radial-gradient(ellipse at center, #000 18%, transparent 82%);
+  transform: translate3d(var(--copy-x), var(--copy-y), 0);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .portfolio-hero-grid {
   position: relative;
@@ -2860,6 +2870,8 @@ body {
   gap: 1.25rem;
   padding: 3.4rem 4.75rem 4.7rem;
   transform: translateY(-4rem);
+  perspective: 1100px;
+  transform-style: preserve-3d;
 }
 .portfolio-copy {
   align-self: center;
@@ -2868,6 +2880,8 @@ body {
   align-items: flex-start;
   gap: 1.6rem;
   padding-bottom: 1.8rem;
+  transform: translate3d(var(--copy-x), var(--copy-y), 1px);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .portfolio-eyebrow {
   color: #ed5e20;
@@ -2957,11 +2971,16 @@ body {
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(2rem) scale(0.985);
+  transform: translate3d(var(--portrait-x), calc(2rem + var(--portrait-y)), 10px) scale(0.985);
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition:
+    opacity 1.05s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .portfolio-banner.in .kontour-portrait {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translate3d(var(--portrait-x), var(--portrait-y), 10px) scale(1);
 }
 .portfolio-banner .kontour-portrait::before {
   bottom: 7%;
@@ -2976,6 +2995,8 @@ body {
   filter: blur(20px);
 }
 .portfolio-banner .kontour-portrait img {
+  position: relative;
+  z-index: 2;
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -2984,13 +3005,19 @@ body {
   -webkit-mask-image: linear-gradient(180deg, #000 76%, rgba(0, 0, 0, 0.92) 87%, transparent 100%);
   mask-image: linear-gradient(180deg, #000 76%, rgba(0, 0, 0, 0.92) 87%, transparent 100%);
 }
+.portfolio-mobile-watermark {
+  display: none;
+}
 
 .portfolio-panel {
+  position: relative;
+  z-index: 6;
   align-self: center;
   display: flex;
   flex-direction: column;
   gap: 1.35rem;
   padding: 1rem 0 0 1.25rem;
+  transform-style: preserve-3d;
 }
 .portfolio-availability-card {
   min-height: 9.25rem;
@@ -3040,6 +3067,14 @@ body {
 .portfolio-stat {
   min-width: 0;
   padding: 0 1.45rem;
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.3s ease;
+}
+.portfolio-stat:hover {
+  z-index: 1;
+  transform: translateY(-0.28rem) translateZ(18px);
+  filter: drop-shadow(0 0.75rem 1.1rem rgba(237, 94, 32, 0.16));
 }
 .portfolio-stat:first-child {
   padding-left: 1.55rem;
@@ -3070,13 +3105,18 @@ body {
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
+.portfolio-tech-reveal {
+  width: 100%;
+  perspective: 950px;
+  transform-style: preserve-3d;
+}
 .portfolio-tech-card {
   position: relative;
   isolation: isolate;
   overflow: hidden;
   border: 1px solid rgba(237, 94, 32, 0.58);
   border-radius: 1rem;
-  padding: 1.1rem 1.25rem 1rem;
+  padding: clamp(18px, 1.15vw, 24px) clamp(20px, 1.35vw, 28px) clamp(16px, 1vw, 22px);
   background:
     radial-gradient(circle at 0% 18%, rgba(237, 94, 32, 0.18), transparent 35%),
     linear-gradient(135deg, rgba(33, 25, 21, 0.58), rgba(5, 5, 5, 0.4));
@@ -3087,6 +3127,26 @@ body {
     0 0 2.4rem rgba(237, 94, 32, 0.06);
   backdrop-filter: blur(24px) saturate(1.28);
   -webkit-backdrop-filter: blur(24px) saturate(1.28);
+  transform:
+    perspective(950px)
+    rotateX(var(--card-tilt-x))
+    rotateY(var(--card-tilt-y))
+    translateZ(0);
+  transform-style: preserve-3d;
+  transform-origin: center;
+  will-change: transform;
+  transition:
+    transform 0.22s ease-out,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.portfolio-tech-card:hover {
+  border-color: rgba(255, 111, 45, 0.88);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.035),
+    0 1.4rem 3.4rem rgba(0, 0, 0, 0.42),
+    0 0 3.2rem rgba(237, 94, 32, 0.12);
 }
 .portfolio-tech-card::before {
   content: "";
@@ -3102,20 +3162,41 @@ body {
     rgba(255, 255, 255, 0.025)
   );
 }
+.portfolio-tech-card::after {
+  content: "";
+  position: absolute;
+  inset: -35%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.68;
+  background: radial-gradient(
+    circle at var(--shine-x) var(--shine-y),
+    rgba(255, 255, 255, 0.14),
+    rgba(237, 94, 32, 0.045) 19%,
+    transparent 43%
+  );
+  transition: opacity 0.3s ease;
+}
+.portfolio-tech-card:hover::after {
+  opacity: 1;
+}
 .portfolio-tech-heading {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding-bottom: 0.72rem;
+  gap: clamp(11px, 0.75vw, 16px);
+  padding-bottom: clamp(12px, 0.78vw, 17px);
+  transform: translateZ(28px);
 }
 .portfolio-tech-heading svg {
-  width: 1.6rem;
-  height: 1.6rem;
+  width: clamp(24px, 1.55vw, 31px);
+  height: clamp(24px, 1.55vw, 31px);
   color: #ed5e20;
+  filter: drop-shadow(0 0 0.65rem rgba(237, 94, 32, 0.28));
+  animation: portfolioStackFloat 3.4s ease-in-out infinite;
 }
 .portfolio-tech-heading h2 {
   color: #fffaf4;
-  font-size: 1.02rem;
+  font-size: clamp(18px, 1.05vw, 22px);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -3124,18 +3205,19 @@ body {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 .portfolio-stack-row {
-  min-height: 2.3rem;
+  min-height: clamp(42px, 2.65vw, 52px);
   display: grid;
-  grid-template-columns: 7.25rem minmax(0, 1fr);
+  grid-template-columns: clamp(128px, 8.7vw, 164px) minmax(0, 1fr);
   align-items: center;
-  gap: 0.75rem;
+  gap: clamp(12px, 0.8vw, 17px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transform: translateZ(18px);
 }
 .portfolio-stack-row strong {
   color: rgba(247, 242, 235, 0.82);
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: clamp(12px, 0.68vw, 14px);
+  font-weight: 650;
+  letter-spacing: 0.075em;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -3144,44 +3226,85 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.38rem;
-  color: rgba(247, 242, 235, 0.76);
-  font-size: 0.72rem;
-  line-height: 1.35;
+  gap: clamp(6px, 0.42vw, 9px);
+  color: rgba(247, 242, 235, 0.82);
+  font-size: clamp(14px, 0.79vw, 16px);
+  font-weight: 450;
+  line-height: 1.4;
 }
 .portfolio-stack-dot {
-  width: 0.22rem;
-  height: 0.22rem;
+  width: 4px;
+  height: 4px;
   flex: none;
   border-radius: 50%;
   background: #ed5e20;
 }
 .portfolio-resume {
   width: 100%;
-  min-height: 2.55rem;
+  min-height: clamp(43px, 2.7vw, 54px);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  margin-top: 0.8rem;
+  margin-top: clamp(13px, 0.85vw, 18px);
   border: 1px solid rgba(237, 94, 32, 0.84);
   border-radius: 0.62rem;
   color: #f7f2eb;
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: clamp(14px, 0.8vw, 16px);
+  font-weight: 550;
   background: rgba(4, 4, 4, 0.28);
+  transform: translateZ(24px);
   transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
     border-color 0.2s ease,
-    background 0.2s ease;
+    background 0.2s ease,
+    box-shadow 0.25s ease;
 }
 .portfolio-resume:hover {
   border-color: #ff6b2b;
   background: rgba(237, 94, 32, 0.1);
+  transform: translateY(-2px) translateZ(30px);
+  box-shadow: 0 0.8rem 1.8rem rgba(237, 94, 32, 0.12);
 }
 .portfolio-resume svg {
-  width: 1rem;
-  height: 1rem;
+  width: clamp(17px, 1vw, 20px);
+  height: clamp(17px, 1vw, 20px);
   color: #ed5e20;
+}
+
+@keyframes portfolioStackFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(3deg);
+  }
+}
+@keyframes portfolioStackRowIn {
+  from {
+    opacity: 0;
+    transform: translate3d(18px, 0, 18px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 18px);
+  }
+}
+.portfolio-banner.in .portfolio-stack-row {
+  animation: portfolioStackRowIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.portfolio-banner.in .portfolio-stack-row:nth-child(1) {
+  animation-delay: 0.46s;
+}
+.portfolio-banner.in .portfolio-stack-row:nth-child(2) {
+  animation-delay: 0.54s;
+}
+.portfolio-banner.in .portfolio-stack-row:nth-child(3) {
+  animation-delay: 0.62s;
+}
+.portfolio-banner.in .portfolio-stack-row:nth-child(4) {
+  animation-delay: 0.7s;
 }
 
 /* Preserve the existing Muhammad / Wasif name treatment beneath the portrait. */
@@ -3264,11 +3387,22 @@ body {
     align-items: center;
     padding: 1rem 0 0;
   }
-  .portfolio-tech-card {
+  .portfolio-tech-reveal {
     grid-column: 1 / -1;
   }
-  .portfolio-banner .kontour-watermark {
+  .portfolio-banner > .kontour-watermark {
+    display: none;
+  }
+  .portfolio-mobile-watermark {
+    position: absolute;
+    left: 50%;
     bottom: 0;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    pointer-events: none;
+    text-align: center;
+    transform: translateX(-50%) translateZ(0);
   }
   .portfolio-banner .kontour-wm-word {
     font-size: 20vw;
@@ -3359,13 +3493,31 @@ body {
     letter-spacing: 0.12em;
   }
   .portfolio-stack-row {
-    grid-template-columns: 6rem minmax(0, 1fr);
+    grid-template-columns: 1fr;
+    gap: 5px;
+    padding: 11px 0 12px;
+  }
+  .portfolio-stack-row strong {
+    font-size: 12px;
   }
   .portfolio-stack-row p {
-    font-size: 0.66rem;
+    gap: 6px;
+    font-size: 14px;
   }
-  .portfolio-banner .kontour-watermark {
-    bottom: 0.5rem;
+  .portfolio-tech-card {
+    padding: 18px 16px 16px;
+    transform: none;
+  }
+  .portfolio-tech-heading h2 {
+    font-size: 17px;
+  }
+  .portfolio-tech-heading svg {
+    width: 23px;
+    height: 23px;
+  }
+  .portfolio-resume {
+    min-height: 46px;
+    font-size: 14px;
   }
   .portfolio-banner .kontour-wm-name {
     top: -0.8rem;
@@ -3373,5 +3525,16 @@ body {
   }
   .portfolio-banner .kontour-wm-word {
     font-size: 25vw;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .portfolio-copy,
+  .portfolio-grid-lines,
+  .portfolio-banner.in .kontour-portrait {
+    transform: none;
+  }
+  .portfolio-tech-card {
+    transform: none;
   }
 }
