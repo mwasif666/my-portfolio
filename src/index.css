@@ -2708,3 +2708,571 @@ body {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* ============================================================
+   Portfolio hero — screenshot-matched composition
+   ============================================================ */
+body {
+  background: #090909;
+}
+
+#header.portfolio-header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 50;
+  width: 100%;
+  color: #f7f2eb;
+  opacity: 0;
+  transform: translateY(-0.8rem);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+#header.portfolio-header.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.portfolio-header-inner {
+  width: 100%;
+  min-height: 7.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem 4.75rem;
+}
+.portfolio-logo {
+  color: #f7f2eb;
+  font-family: "Onest", sans-serif;
+  font-size: 1.55rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.055em;
+}
+.portfolio-logo span {
+  color: #ed5e20;
+}
+.portfolio-nav ul {
+  display: flex;
+  align-items: center;
+  gap: 3.75rem;
+}
+.portfolio-nav button {
+  position: relative;
+  padding: 0.5rem 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-family: "Onest", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+.portfolio-nav button::after {
+  content: "";
+  position: absolute;
+  right: 0.25em;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: #ed5e20;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.portfolio-nav button:hover::after {
+  transform: scaleX(1);
+}
+.portfolio-menu {
+  display: none;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  color: #fff;
+}
+.portfolio-menu .icon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+#home.kontour.portfolio-banner {
+  min-height: 100svh;
+  padding-top: 7.4rem;
+  border-radius: 0;
+  background:
+    radial-gradient(40rem 42rem at 50% 55%, rgba(238, 84, 20, 0.28), transparent 68%),
+    radial-gradient(29rem 30rem at 10% 37%, rgba(102, 35, 11, 0.14), transparent 72%),
+    #090909;
+  font-family: "Onest", sans-serif;
+}
+.portfolio-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.64), transparent 24%, transparent 76%, rgba(0, 0, 0, 0.62)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.26), transparent 30%, rgba(0, 0, 0, 0.18));
+}
+.portfolio-banner.kontour::after {
+  z-index: 2;
+  background: linear-gradient(180deg, transparent 64%, rgba(7, 7, 7, 0.92) 100%);
+}
+.portfolio-banner .kontour-glow {
+  z-index: 0;
+  background:
+    radial-gradient(33rem 38rem at 51% 61%, rgba(238, 76, 14, 0.62), transparent 66%),
+    radial-gradient(43rem 31rem at 50% 56%, rgba(116, 42, 14, 0.2), transparent 72%);
+  animation: portfolioGlow 8s ease-in-out infinite;
+}
+@keyframes portfolioGlow {
+  0%,
+  100% {
+    opacity: 0.82;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.portfolio-grid-lines {
+  position: absolute;
+  inset: 7.4rem 0 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.42;
+  background-image:
+    linear-gradient(rgba(237, 94, 32, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(237, 94, 32, 0.08) 1px, transparent 1px);
+  background-size: 8rem 8rem;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 18%, transparent 82%);
+  mask-image: radial-gradient(ellipse at center, #000 18%, transparent 82%);
+}
+.portfolio-hero-grid {
+  position: relative;
+  z-index: 4;
+  flex: 1;
+  width: 100%;
+  min-height: calc(100svh - 7.4rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(25rem, 0.95fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 1.25rem;
+  padding: 3.4rem 4.75rem 4.7rem;
+}
+.portfolio-copy {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.6rem;
+  padding-bottom: 1.8rem;
+}
+.portfolio-eyebrow {
+  color: #ed5e20;
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+.portfolio-title {
+  max-width: 34rem;
+  color: #f7f2eb;
+  font-size: 5.35rem;
+  font-weight: 760;
+  line-height: 0.98;
+  letter-spacing: -0.058em;
+}
+.portfolio-title .line-clip {
+  white-space: nowrap;
+}
+.portfolio-sub {
+  max-width: 28rem;
+  color: rgba(247, 242, 235, 0.66);
+  font-size: 1.06rem;
+  line-height: 1.62;
+}
+.portfolio-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 0.3rem;
+}
+.portfolio-cta {
+  min-height: 3.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.72rem;
+  padding: 0.8rem 2rem;
+  color: #f7f2eb;
+  font-size: 0.98rem;
+  font-weight: 600;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+.portfolio-cta:hover {
+  transform: translateY(-2px);
+}
+.portfolio-cta.primary {
+  min-width: 13.9rem;
+  justify-content: space-between;
+  gap: 2rem;
+  border: 1px solid #ed5e20;
+  background: #ed5e20;
+  box-shadow: 0 0.8rem 2.2rem rgba(237, 94, 32, 0.16);
+}
+.portfolio-cta.primary:hover {
+  background: #ff6b2b;
+  border-color: #ff6b2b;
+}
+.portfolio-cta.primary svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.portfolio-cta.secondary {
+  min-width: 9.7rem;
+  border: 1px solid rgba(237, 94, 32, 0.66);
+  background: rgba(8, 8, 8, 0.36);
+}
+.portfolio-cta.secondary:hover {
+  border-color: #ed5e20;
+  background: rgba(237, 94, 32, 0.1);
+}
+
+.portfolio-banner .kontour-portrait {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  z-index: 5;
+  width: 160%;
+  height: 100%;
+  min-height: 42rem;
+  margin-left: -30%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(2rem) scale(0.985);
+}
+.portfolio-banner.in .kontour-portrait {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.portfolio-banner .kontour-portrait::before {
+  bottom: 7%;
+  width: 80%;
+  height: 76%;
+  background: radial-gradient(
+    closest-side,
+    rgba(244, 87, 21, 0.5),
+    rgba(133, 43, 11, 0.18) 56%,
+    transparent 80%
+  );
+  filter: blur(20px);
+}
+.portfolio-banner .kontour-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: contrast(1.04) saturate(1.02) brightness(1.02);
+  -webkit-mask-image: linear-gradient(180deg, #000 76%, rgba(0, 0, 0, 0.92) 87%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 76%, rgba(0, 0, 0, 0.92) 87%, transparent 100%);
+}
+
+.portfolio-panel {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2.55rem;
+  padding: 2rem 0 1rem 1.25rem;
+}
+.portfolio-availability-card {
+  min-height: 10.9rem;
+  display: grid;
+  grid-template-columns: 5.3rem 1fr;
+  align-items: center;
+  gap: 1.4rem;
+  border: 1px solid rgba(226, 109, 51, 0.28);
+  border-radius: 1.2rem;
+  padding: 1.8rem;
+  background: linear-gradient(135deg, rgba(35, 24, 18, 0.44), rgba(6, 6, 6, 0.35));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(12px);
+}
+.portfolio-calendar {
+  width: 5.15rem;
+  height: 5.15rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(237, 94, 32, 0.44);
+  border-radius: 50%;
+  color: #f7f2eb;
+  background: radial-gradient(circle, rgba(237, 94, 32, 0.2), rgba(237, 94, 32, 0.035) 68%);
+}
+.portfolio-calendar svg {
+  width: 1.95rem;
+  height: 1.95rem;
+}
+.portfolio-availability-card h2 {
+  color: #fffaf4;
+  font-size: 1.22rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+.portfolio-availability-card p {
+  max-width: 18rem;
+  margin-top: 0.58rem;
+  color: rgba(247, 242, 235, 0.62);
+  font-size: 0.92rem;
+  line-height: 1.52;
+}
+.portfolio-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.portfolio-stat {
+  min-width: 0;
+  padding: 0 1.45rem;
+}
+.portfolio-stat:first-child {
+  padding-left: 1.55rem;
+}
+.portfolio-stat + .portfolio-stat {
+  border-left: 1px solid rgba(237, 94, 32, 0.24);
+}
+.portfolio-stat strong {
+  display: block;
+  color: #ed5e20;
+  font-size: 3.35rem;
+  font-weight: 760;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+}
+.portfolio-stat strong sup {
+  position: relative;
+  top: -0.36em;
+  margin-left: 0.08em;
+  font-size: 0.52em;
+}
+.portfolio-stat span {
+  display: block;
+  margin-top: 0.85rem;
+  color: rgba(247, 242, 235, 0.66);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.portfolio-tech-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
+  padding-top: 1.7rem;
+  color: rgba(247, 242, 235, 0.68);
+  font-size: 0.94rem;
+  white-space: nowrap;
+}
+.portfolio-tech-row i {
+  width: 0.31rem;
+  height: 0.31rem;
+  flex: none;
+  border-radius: 50%;
+  background: #ed5e20;
+}
+
+/* Preserve the existing Muhammad / Wasif name treatment beneath the portrait. */
+.portfolio-banner .kontour-watermark {
+  z-index: 3;
+  bottom: -1.3rem;
+}
+.portfolio-banner .kontour-wm-name {
+  color: rgba(255, 255, 255, 0.74);
+}
+.portfolio-banner .kontour-wm-word {
+  color: rgba(255, 255, 255, 0.94);
+}
+
+@media (max-width: 1280px) {
+  .portfolio-header-inner,
+  .portfolio-hero-grid {
+    padding-right: 3rem;
+    padding-left: 3rem;
+  }
+  .portfolio-nav ul {
+    gap: 2.6rem;
+  }
+  .portfolio-title {
+    font-size: 4.6rem;
+  }
+  .portfolio-hero-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(22rem, 0.88fr) minmax(0, 1fr);
+  }
+  .portfolio-banner .kontour-portrait {
+    width: 156%;
+    margin-left: -28%;
+  }
+  .portfolio-panel {
+    padding-left: 0;
+  }
+  .portfolio-stat {
+    padding-inline: 1rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .portfolio-header-inner {
+    min-height: 6rem;
+    padding: 1.25rem 2rem;
+  }
+  .portfolio-nav {
+    display: none;
+  }
+  .portfolio-menu {
+    display: grid;
+  }
+  #home.kontour.portfolio-banner {
+    padding-top: 6rem;
+  }
+  .portfolio-grid-lines {
+    inset-block-start: 6rem;
+  }
+  .portfolio-hero-grid {
+    min-height: auto;
+    grid-template-columns: 1fr 0.9fr;
+    padding: 4rem 2rem 7rem;
+  }
+  .portfolio-copy {
+    align-self: start;
+    padding-top: 2rem;
+  }
+  .portfolio-banner .kontour-portrait {
+    grid-column: 2;
+    grid-row: 1;
+    width: 142%;
+    min-height: 37rem;
+    margin-left: -28%;
+  }
+  .portfolio-panel {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 1rem 0 0;
+  }
+  .portfolio-tech-row {
+    grid-column: 1 / -1;
+  }
+  .portfolio-banner .kontour-watermark {
+    bottom: 0;
+  }
+  .portfolio-banner .kontour-wm-word {
+    font-size: 20vw;
+  }
+}
+
+@media (max-width: 640px) {
+  .portfolio-logo {
+    font-size: 1.1rem;
+  }
+  .portfolio-menu {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+  .portfolio-hero-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 2.5rem 1.25rem 6.5rem;
+  }
+  .portfolio-copy {
+    gap: 1.25rem;
+    padding: 0;
+  }
+  .portfolio-eyebrow {
+    font-size: 0.72rem;
+  }
+  .portfolio-title {
+    max-width: 8.7ch;
+    font-size: 3.55rem;
+  }
+  .portfolio-title .line-clip {
+    white-space: normal;
+  }
+  .portfolio-sub {
+    font-size: 0.92rem;
+  }
+  .portfolio-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .portfolio-cta,
+  .portfolio-cta.primary,
+  .portfolio-cta.secondary {
+    width: 100%;
+  }
+  .portfolio-banner .kontour-portrait {
+    order: 2;
+    width: 122%;
+    min-height: 29rem;
+    margin: -1.8rem -11% -2rem;
+  }
+  .portfolio-panel {
+    order: 3;
+    display: flex;
+    gap: 1.5rem;
+    padding: 0;
+  }
+  .portfolio-availability-card {
+    min-height: auto;
+    grid-template-columns: 4rem 1fr;
+    padding: 1.2rem;
+  }
+  .portfolio-calendar {
+    width: 4rem;
+    height: 4rem;
+  }
+  .portfolio-availability-card h2 {
+    font-size: 1rem;
+  }
+  .portfolio-availability-card p {
+    font-size: 0.78rem;
+  }
+  .portfolio-stat,
+  .portfolio-stat:first-child {
+    padding: 0 0.75rem;
+  }
+  .portfolio-stat:first-child {
+    padding-left: 0;
+  }
+  .portfolio-stat strong {
+    font-size: 2.45rem;
+  }
+  .portfolio-stat span {
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+  }
+  .portfolio-tech-row {
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    font-size: 0.8rem;
+  }
+  .portfolio-banner .kontour-watermark {
+    bottom: 0.5rem;
+  }
+  .portfolio-banner .kontour-wm-name {
+    top: -0.8rem;
+    font-size: 0.95rem;
+  }
+  .portfolio-banner .kontour-wm-word {
+    font-size: 25vw;
+  }
+}

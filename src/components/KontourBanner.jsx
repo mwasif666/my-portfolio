@@ -1,106 +1,95 @@
 import { useRef } from 'react';
 import Reveal from './Reveal';
 import LineReveal from './LineReveal';
-import PillButton from './PillButton';
-import { ArrowUpRight } from './Icons';
 import { useInView } from '../hooks/useInView';
 import myImg from '../../myimg.png';
 
-const NAV_LEFT = ['Home', 'Services', 'About Us', 'Projects'];
-const NAV_RIGHT = ['Philosophy', 'Team', 'FAQ', 'Contact'];
-
-// Small chevrons for the recognition carousel.
-const ChevronLeft = (p) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...p}>
-    <path d="M15 6l-6 6 6 6" />
-  </svg>
-);
-const ChevronRight = (p) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...p}>
-    <path d="M9 6l6 6-6 6" />
+const ArrowRight = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M5 12h14M13 6l6 6-6 6" />
   </svg>
 );
 
-export default function KontourBanner() {
+const CalendarIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="3" y="5" width="18" height="16" rx="2.5" />
+    <path d="M16 3v4M8 3v4M3 10h18" />
+  </svg>
+);
+
+export default function KontourBanner({ onContact }) {
   const ref = useRef(null);
   const inView = useInView(ref, { threshold: 0.2 });
 
   return (
-    <section ref={ref} className={'kontour' + (inView ? ' in' : '')} id="kontour">
+    <section ref={ref} className={'kontour portfolio-banner' + (inView ? ' in' : '')} id="home">
       <div className="kontour-glow" aria-hidden="true" />
+      <div className="portfolio-grid-lines" aria-hidden="true" />
 
-      {/* centre portrait (full-height figure that overlaps the watermark) */}
-      <div className="kontour-portrait">
-        <img src={myImg} alt="Portrait" draggable="false" />
-      </div>
-
-      {/* top bar — Bootstrap container + grid, no side padding */}
-      <header className="container px-0 kontour-top">
-        <div className="row g-0 align-items-center">
-          <nav className="col-4 kontour-nav">
-            {NAV_LEFT.map((item) => <button key={item} type="button">{item}</button>)}
-          </nav>
-          <div className="col-4 d-flex justify-content-center">
-            <div className="kontour-brand"><span>Kontour</span><small>Studios</small></div>
-          </div>
-          <nav className="col-4 kontour-nav end">
-            {NAV_RIGHT.map((item) => <button key={item} type="button">{item}</button>)}
-          </nav>
-        </div>
-      </header>
-
-      {/* main — Bootstrap container + grid */}
-      <div className="container px-0 kontour-main">
-        <div className="row g-0 w-100">
-          <div className="col-12 col-lg-7 kontour-copy">
-            <Reveal as="span" className="kontour-eyebrow" move={10}>Marketing agency</Reveal>
+      <div className="portfolio-hero-grid">
+        <div className="portfolio-copy">
+            <Reveal as="span" className="portfolio-eyebrow" move={10}>
+              Full-Stack Web Developer
+            </Reveal>
             <LineReveal
-              as="h2"
-              className="kontour-title"
-              lines={['Clarity first.', 'Then the', 'system.']}
+              as="h1"
+              className="portfolio-title"
+              lines={['I build fast.', 'Scalable.', 'Built to last.']}
               stagger={90}
               delay={80}
             />
-            <Reveal as="p" className="kontour-sub" delay={220}>
-              Strategy, identity and communication<br />shaped into one clear brand system.
+            <Reveal as="p" className="portfolio-sub" delay={220}>
+              I design and develop high-performance websites, web apps and digital products
+              from front end to back end.
             </Reveal>
-            <Reveal className="kontour-actions" delay={320}>
-              <PillButton variant="light" arrow="up-right">Start a Project</PillButton>
-              <PillButton variant="outline">View Our Work</PillButton>
-            </Reveal>
-          </div>
-
-          <div className="col-12 col-lg-4 ms-lg-auto kontour-panel">
-            <Reveal className="kontour-reco" move={14}>
-              <div className="kontour-reco-thumb"><img src={myImg} alt="" draggable="false" /></div>
-              <div className="kontour-reco-body">
-                <h3>Recognition</h3>
-                <p>We build visual systems that make brands clear and memorable.</p>
-              </div>
-              <button className="kontour-reco-open" type="button" aria-label="Open recognition">
-                <ArrowUpRight />
+            <Reveal className="portfolio-actions" delay={320}>
+              <button className="portfolio-cta primary" type="button">
+                <span>View Projects</span>
+                <ArrowRight />
               </button>
-              <div className="kontour-reco-foot">
-                <div className="kontour-progress"><i /></div>
-                <div className="kontour-arrows">
-                  <button type="button" aria-label="Previous"><ChevronLeft /></button>
-                  <button type="button" className="on" aria-label="Next"><ChevronRight /></button>
-                </div>
+              <button className="portfolio-cta secondary" type="button" onClick={onContact}>
+                Let&apos;s Talk
+              </button>
+            </Reveal>
+        </div>
+
+        <div className="kontour-portrait">
+          <img src={myImg} alt="Muhammad Wasif, full-stack web developer" draggable="false" />
+        </div>
+
+        <aside className="portfolio-panel">
+            <Reveal className="portfolio-availability-card" move={14}>
+              <div className="portfolio-calendar">
+                <CalendarIcon />
+              </div>
+              <div>
+                <h2>Available for select projects</h2>
+                <p>Building reliable digital experiences for startups, agencies and growing brands.</p>
               </div>
             </Reveal>
 
-            <Reveal className="kontour-stats" delay={160}>
-              <div className="kontour-stat">
-                <strong>100%</strong>
-                <span>No random visuals. Only clear systems built for recognition.</span>
+            <Reveal className="portfolio-stats" delay={160}>
+              <div className="portfolio-stat">
+                <strong>4<sup>+</sup></strong>
+                <span>Years</span>
               </div>
-              <div className="kontour-stat">
-                <strong>360&deg;</strong>
-                <span>Full brand presence. From strategy and identity to launch.</span>
+              <div className="portfolio-stat">
+                <strong>30<sup>+</sup></strong>
+                <span>Projects</span>
+              </div>
+              <div className="portfolio-stat">
+                <strong>99<sup>%</sup></strong>
+                <span>Performance</span>
               </div>
             </Reveal>
-          </div>
-        </div>
+
+            <Reveal className="portfolio-tech-row" delay={240}>
+              <span>React</span><i />
+              <span>Next.js</span><i />
+              <span>Node.js</span><i />
+              <span>WordPress</span>
+            </Reveal>
+        </aside>
       </div>
 
       <div className="kontour-watermark" aria-hidden="true">
