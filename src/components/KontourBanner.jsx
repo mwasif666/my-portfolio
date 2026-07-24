@@ -32,7 +32,7 @@ const DownloadIcon = () => (
 
 const Dot = () => <i className="portfolio-stack-dot" aria-hidden="true" />;
 
-export default function KontourBanner({ onContact }) {
+export default function KontourBanner({ onContact, id = 'home', theme = 'orange' }) {
   const ref = useRef(null);
   const inView = useInView(ref, { threshold: 0.2 });
 
@@ -74,8 +74,8 @@ export default function KontourBanner({ onContact }) {
   return (
     <section
       ref={ref}
-      className={'kontour portfolio-banner' + (inView ? ' in' : '')}
-      id="home"
+      className={`kontour portfolio-banner portfolio-banner--${theme}${inView ? ' in' : ''}`}
+      id={id}
       onPointerMove={moveScene}
       onPointerLeave={resetScene}
     >
@@ -84,29 +84,29 @@ export default function KontourBanner({ onContact }) {
 
       <div className="portfolio-hero-grid">
         <div className="portfolio-copy">
-            <Reveal as="span" className="portfolio-eyebrow" move={10}>
-              Full-Stack Web Developer
-            </Reveal>
-            <LineReveal
-              as="h1"
-              className="portfolio-title"
-              lines={['I build fast.', 'Scalable.', 'Built to last.']}
-              stagger={90}
-              delay={80}
-            />
-            <Reveal as="p" className="portfolio-sub" delay={220}>
-              I design and develop high-performance websites, web apps and digital products
-              from front end to back end.
-            </Reveal>
-            <Reveal className="portfolio-actions" delay={320}>
-              <button className="portfolio-cta primary" type="button">
-                <span>View Projects</span>
-                <ArrowRight />
-              </button>
-              <button className="portfolio-cta secondary" type="button" onClick={onContact}>
-                Let&apos;s Talk
-              </button>
-            </Reveal>
+          <Reveal as="span" className="portfolio-eyebrow" move={10}>
+            Full-Stack Web Developer
+          </Reveal>
+          <LineReveal
+            as="h1"
+            className="portfolio-title"
+            lines={['I build fast.', 'Scalable.', 'Built to last.']}
+            stagger={90}
+            delay={80}
+          />
+          <Reveal as="p" className="portfolio-sub" delay={220}>
+            I design and develop high-performance websites, web apps and digital products
+            from front end to back end.
+          </Reveal>
+          <Reveal className="portfolio-actions" delay={320}>
+            <button className="portfolio-cta primary" type="button">
+              <span>View Projects</span>
+              <ArrowRight />
+            </button>
+            <button className="portfolio-cta secondary" type="button" onClick={onContact}>
+              Let&apos;s Talk
+            </button>
+          </Reveal>
         </div>
 
         <div className="kontour-portrait">
@@ -120,63 +120,63 @@ export default function KontourBanner({ onContact }) {
         </div>
 
         <aside className="portfolio-panel">
-            <Reveal className="portfolio-availability-card" move={14}>
-              <div className="portfolio-calendar">
-                <CalendarIcon />
-              </div>
-              <div>
-                <h2>Available for select projects</h2>
-                <p>Building reliable digital experiences for startups, agencies and growing brands.</p>
-              </div>
-            </Reveal>
+          <Reveal className="portfolio-availability-card" move={14}>
+            <div className="portfolio-calendar">
+              <CalendarIcon />
+            </div>
+            <div>
+              <h2>Available for select projects</h2>
+              <p>Building reliable digital experiences for startups, agencies and growing brands.</p>
+            </div>
+          </Reveal>
 
-            <Reveal className="portfolio-stats" delay={160}>
-              <div className="portfolio-stat">
-                <strong>4<sup>+</sup></strong>
-                <span>Years</span>
-              </div>
-              <div className="portfolio-stat">
-                <strong>30<sup>+</sup></strong>
-                <span>Projects</span>
-              </div>
-              <div className="portfolio-stat">
-                <strong>99<sup>%</sup></strong>
-                <span>Performance</span>
-              </div>
-            </Reveal>
+          <Reveal className="portfolio-stats" delay={160}>
+            <div className="portfolio-stat">
+              <strong>4<sup>+</sup></strong>
+              <span>Years</span>
+            </div>
+            <div className="portfolio-stat">
+              <strong>30<sup>+</sup></strong>
+              <span>Projects</span>
+            </div>
+            <div className="portfolio-stat">
+              <strong>99<sup>%</sup></strong>
+              <span>Performance</span>
+            </div>
+          </Reveal>
 
-            <Reveal className="portfolio-tech-reveal" delay={240}>
-              <div className="portfolio-tech-card">
-                <div className="portfolio-tech-heading">
-                  <StackIcon />
-                  <h2>Technology Stack</h2>
+          <Reveal className="portfolio-tech-reveal" delay={240}>
+            <div className="portfolio-tech-card">
+              <div className="portfolio-tech-heading">
+                <StackIcon />
+                <h2>Technology Stack</h2>
+              </div>
+
+              <div className="portfolio-stack-list">
+                <div className="portfolio-stack-row">
+                  <strong>Core Stack</strong>
+                  <p><span>MERN Stack</span><Dot /><span>PHP</span><Dot /><span>Laravel</span></p>
                 </div>
-
-                <div className="portfolio-stack-list">
-                  <div className="portfolio-stack-row">
-                    <strong>Core Stack</strong>
-                    <p><span>MERN Stack</span><Dot /><span>PHP</span><Dot /><span>Laravel</span></p>
-                  </div>
-                  <div className="portfolio-stack-row">
-                    <strong>Frontend</strong>
-                    <p><span>React</span><Dot /><span>Next.js</span><Dot /><span>Bootstrap</span><Dot /><span>Tailwind CSS</span></p>
-                  </div>
-                  <div className="portfolio-stack-row">
-                    <strong>Backend &amp; Data</strong>
-                    <p><span>Node.js</span><Dot /><span>Express</span><Dot /><span>MongoDB</span><Dot /><span>MySQL</span></p>
-                  </div>
-                  <div className="portfolio-stack-row">
-                    <strong>CMS &amp; Commerce</strong>
-                    <p><span>WordPress</span><Dot /><span>Shopify</span><Dot /><span>Webflow</span><Dot /><span>WooCommerce</span></p>
-                  </div>
+                <div className="portfolio-stack-row">
+                  <strong>Frontend</strong>
+                  <p><span>React</span><Dot /><span>Next.js</span><Dot /><span>Bootstrap</span><Dot /><span>Tailwind CSS</span></p>
                 </div>
-
-                <button className="portfolio-resume" type="button">
-                  <span>Download Résumé</span>
-                  <DownloadIcon />
-                </button>
+                <div className="portfolio-stack-row">
+                  <strong>Backend &amp; Data</strong>
+                  <p><span>Node.js</span><Dot /><span>Express</span><Dot /><span>MongoDB</span><Dot /><span>MySQL</span></p>
+                </div>
+                <div className="portfolio-stack-row">
+                  <strong>CMS &amp; Commerce</strong>
+                  <p><span>WordPress</span><Dot /><span>Shopify</span><Dot /><span>Webflow</span><Dot /><span>WooCommerce</span></p>
+                </div>
               </div>
-            </Reveal>
+
+              <button className="portfolio-resume" type="button">
+                <span>Download Résumé</span>
+                <DownloadIcon />
+              </button>
+            </div>
+          </Reveal>
         </aside>
       </div>
 
