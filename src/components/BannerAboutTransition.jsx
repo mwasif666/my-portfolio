@@ -24,20 +24,25 @@ export default function BannerAboutTransition({ onContact }) {
 
     let frame = 0;
 
+    const setFinalState = () => {
+      stage.style.setProperty("--banner-clip-x", "50%");
+      stage.style.setProperty("--banner-clip-y", "9svh");
+      stage.style.setProperty("--banner-card-opacity", "0");
+      stage.style.setProperty("--hero-side-opacity", "0");
+      stage.style.setProperty("--about-left-opacity", "1");
+      stage.style.setProperty("--about-right-opacity", "1");
+      stage.style.setProperty("--about-card-opacity", "1");
+      stage.style.setProperty("--about-left-x", "0px");
+      stage.style.setProperty("--about-right-x", "0px");
+      stage.style.setProperty("--about-card-scale", "1");
+      stage.classList.add("is-about-active");
+    };
+
     const render = () => {
       frame = 0;
 
       if (reduceMotion || window.innerWidth <= 900) {
-        stage.style.setProperty("--transition-progress", "1");
-        stage.style.setProperty("--banner-scale", "1");
-        stage.style.setProperty("--banner-radius", "0px");
-        stage.style.setProperty("--banner-inset", "0px");
-        stage.style.setProperty("--banner-y", "0px");
-        stage.style.setProperty("--banner-opacity", "1");
-        stage.style.setProperty("--about-y", "0px");
-        stage.style.setProperty("--about-opacity", "1");
-        stage.style.setProperty("--about-card-y", "0px");
-        stage.style.setProperty("--about-card-scale", "1");
+        setFinalState();
         return;
       }
 
@@ -45,38 +50,69 @@ export default function BannerAboutTransition({ onContact }) {
       const travel = Math.max(track.offsetHeight - window.innerHeight, 1);
       const progress = clamp(-rect.top / travel, 0, 1);
 
-      const wrapPhase = easeOutCubic(clamp(progress / 0.36, 0, 1));
-      const liftPhase = easeInOutCubic(clamp((progress - 0.2) / 0.58, 0, 1));
-      const aboutPhase = easeOutCubic(clamp((progress - 0.08) / 0.5, 0, 1));
-      const cardPhase = easeOutCubic(clamp((progress - 0.18) / 0.46, 0, 1));
+      /*
+       * Phase 1: only crop the hero from the left and right. There is no
+       * landscape-card scaling or upward movement. The centre portrait remains.
+       */
+      const clipPhase = easeInOutCubic(clamp((progress - 0.01) / 0.48, 0, 1));
+      const sideContentPhase = easeOutCubic(clamp(progress / 0.28, 0, 1));
 
-      const viewportHeight = window.innerHeight;
-      const bannerScale = 1 - wrapPhase * 0.115;
-      const bannerInset = wrapPhase * 28;
-      const bannerRadius = wrapPhase * 30;
-      const bannerY = -liftPhase * viewportHeight * 1.04;
-      const bannerOpacity = 1 - clamp((progress - 0.64) / 0.2, 0, 1);
-      const aboutY = (1 - aboutPhase) * viewportHeight * 0.92;
-      const aboutOpacity = clamp((progress - 0.04) / 0.24, 0, 1);
-      const aboutCardY = (1 - cardPhase) * viewportHeight * 0.58;
-      const aboutCardScale = 0.86 + cardPhase * 0.14;
-
-      stage.style.setProperty(
-        "--transition-progress",
-        progress.toFixed(4),
+      /*
+       * Phase 2: once the portrait-sized crop is established, reveal the
+       * About copy on the left and capability cards on the right.
+       */
+      const sideRevealPhase = easeOutCubic(
+        clamp((progress - 0.4) / 0.28, 0, 1),
       );
-      stage.style.setProperty("--banner-scale", bannerScale.toFixed(4));
-      stage.style.setProperty("--banner-radius", `${bannerRadius.toFixed(2)}px`);
-      stage.style.setProperty("--banner-inset", `${bannerInset.toFixed(2)}px`);
-      stage.style.setProperty("--banner-y", `${bannerY.toFixed(2)}px`);
-      stage.style.setProperty("--banner-opacity", bannerOpacity.toFixed(3));
-      stage.style.setProperty("--about-y", `${aboutY.toFixed(2)}px`);
-      stage.style.setProperty("--about-opacity", aboutOpacity.toFixed(3));
-      stage.style.setProperty("--about-card-y", `${aboutCardY.toFixed(2)}px`);
+
+      /*
+       * Phase 3: crossfade the cropped hero into the matching About portrait
+       * card, keeping the centre composition visually continuous.
+       */
+      const cardCrossfadePhase = easeInOutCubic(
+        clamp((progress - 0.7) / 0.2, 0, 1),
+      );
+
+      const bannerClipX = clipPhase * 33.6;
+      const bannerClipY = clipPhase * 9;
+      const heroSideOpacity = 1 - sideContentPhase;
+      const bannerCardOpacity = 1 - cardCrossfadePhase;
+      const aboutCardOpacity = cardCrossfadePhase;
+      const aboutLeftX = (1 - sideRevealPhase) * -54;
+      const aboutRightX = (1 - sideRevealPhase) * 54;
+      const aboutCardScale = 0.985 + cardCrossfadePhase * 0.015;
+
+      stage.style.setProperty("--transition-progress", progress.toFixed(4));
+      stage.style.setProperty("--banner-clip-x", `${bannerClipX.toFixed(3)}%`);
+      stage.style.setProperty("--banner-clip-y", `${bannerClipY.toFixed(3)}svh`);
+      stage.style.setProperty(
+        "--banner-card-opacity",
+        bannerCardOpacity.toFixed(3),
+      );
+      stage.style.setProperty(
+        "--hero-side-opacity",
+        heroSideOpacity.toFixed(3),
+      );
+      stage.style.setProperty(
+        "--about-left-opacity",
+        sideRevealPhase.toFixed(3),
+      );
+      stage.style.setProperty(
+        "--about-right-opacity",
+        sideRevealPhase.toFixed(3),
+      );
+      stage.style.setProperty(
+        "--about-card-opacity",
+        aboutCardOpacity.toFixed(3),
+      );
+      stage.style.setProperty("--about-left-x", `${aboutLeftX.toFixed(2)}px`);
+      stage.style.setProperty("--about-right-x", `${aboutRightX.toFixed(2)}px`);
       stage.style.setProperty(
         "--about-card-scale",
         aboutCardScale.toFixed(4),
       );
+
+      stage.classList.toggle("is-about-active", progress >= 0.76);
     };
 
     const requestRender = () => {
