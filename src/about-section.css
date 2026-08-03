@@ -1,33 +1,40 @@
 /* ============================================================
-   SharpLink-inspired banner -> About handoff
-   The hero stays pinned and is cropped from its left/right edges.
-   Its centre portrait remains as a vertical card while the About
-   columns fade into the newly revealed side areas.
+   SharpLink-style banner -> About transition
    ============================================================ */
 .banner-about-track {
+  --final-opacity: 0;
+  --final-y: 0px;
   position: relative;
-  height: 245svh;
+  height: 200svh;
   background: #dbe8f2;
 }
 
 .banner-about-stage {
-  --banner-clip-x: 0%;
-  --banner-clip-y: 0svh;
+  --banner-clip-top: 0px;
+  --banner-clip-right: 0px;
+  --banner-clip-bottom: 0px;
+  --banner-clip-left: 0px;
+  --banner-radius: 0px;
   --banner-card-opacity: 1;
   --hero-side-opacity: 1;
+  --hero-portrait-width: 160%;
+  --hero-portrait-margin: -30%;
   --about-left-opacity: 0;
   --about-right-opacity: 0;
   --about-card-opacity: 0;
-  --about-left-x: -54px;
-  --about-right-x: 54px;
-  --about-card-scale: 0.985;
+  --about-left-x: -48px;
+  --about-right-x: 48px;
+  --stage-opacity: 1;
 
   position: sticky;
   top: 0;
+  z-index: 3;
   height: 100svh;
   overflow: hidden;
-  background: #dbe8f2;
   isolation: isolate;
+  background: #dbe8f2;
+  opacity: var(--stage-opacity);
+  will-change: opacity;
 }
 
 .banner-about-about-layer,
@@ -46,19 +53,21 @@
   overflow: hidden;
   opacity: var(--banner-card-opacity);
   -webkit-clip-path: inset(
-    var(--banner-clip-y) var(--banner-clip-x)
+    var(--banner-clip-top)
+    var(--banner-clip-right)
+    var(--banner-clip-bottom)
+    var(--banner-clip-left)
+    round var(--banner-radius)
   );
-  clip-path: inset(var(--banner-clip-y) var(--banner-clip-x));
+  clip-path: inset(
+    var(--banner-clip-top)
+    var(--banner-clip-right)
+    var(--banner-clip-bottom)
+    var(--banner-clip-left)
+    round var(--banner-radius)
+  );
   box-shadow: 0 2rem 6rem rgba(16, 34, 48, 0.34);
   will-change: clip-path, opacity;
-}
-
-.banner-about-stage.is-about-active .banner-about-banner-layer {
-  pointer-events: none;
-}
-
-.banner-about-stage.is-about-active .banner-about-about-layer {
-  pointer-events: auto;
 }
 
 .banner-about-banner-layer > .portfolio-banner {
@@ -67,7 +76,7 @@
   min-height: 100%;
 }
 
-/* Fade the hero's side information while retaining the central portrait. */
+/* The outer hero columns disappear only after the crop has started. */
 .banner-about-banner-layer .portfolio-copy,
 .banner-about-banner-layer .portfolio-panel,
 .banner-about-banner-layer .kontour-watermark,
@@ -76,8 +85,32 @@
   will-change: opacity;
 }
 
+/* The original portrait tightens into its own centre column while cropping. */
 .banner-about-banner-layer .kontour-portrait {
+  width: var(--hero-portrait-width) !important;
+  margin-left: var(--hero-portrait-margin) !important;
   opacity: 1 !important;
+  will-change: width, margin-left, transform;
+}
+
+/* The real About section is placed at the bottom of the 200vh track.
+   At the final scroll frames it is lifted into exact alignment with the
+   sticky preview, then continues in normal document flow with no gap. */
+.banner-about-final-layer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  height: 100svh;
+  opacity: var(--final-opacity);
+  transform: translate3d(0, var(--final-y), 0);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.banner-about-track.is-final-active .banner-about-final-layer {
+  pointer-events: auto;
 }
 
 /* ============================================================
@@ -93,6 +126,11 @@
     radial-gradient(circle at 52% 44%, rgba(103, 164, 222, 0.22), transparent 35%),
     linear-gradient(180deg, #d4e3ef 0%, #eaf0f4 53%, #f7f4ed 100%);
   color: #071019;
+}
+
+.about-panel--preview {
+  pointer-events: none;
+  user-select: none;
 }
 
 .about-blueprint {
@@ -150,6 +188,9 @@
   min-width: 0;
   flex-direction: column;
   padding-top: clamp(1rem, 5vh, 4rem);
+}
+
+.banner-about-about-layer .about-intro {
   opacity: var(--about-left-opacity);
   transform: translate3d(var(--about-left-x), 0, 0);
   will-change: transform, opacity;
@@ -233,7 +274,6 @@
   white-space: nowrap;
 }
 
-/* This card aligns with the final cropped width of the hero. */
 .about-feature-card {
   position: relative;
   align-self: center;
@@ -241,19 +281,21 @@
   min-height: 36rem;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0.7rem;
   background: linear-gradient(
     180deg,
     rgba(0, 10, 25, 0.99) 0%,
-    rgba(0, 30, 69, 0.98) 37%,
-    rgba(68, 139, 211, 0.96) 72%,
-    rgba(218, 233, 246, 0.98) 100%
+    rgba(0, 30, 69, 0.99) 37%,
+    rgba(68, 139, 211, 0.97) 72%,
+    rgba(218, 233, 246, 0.99) 100%
   );
   color: #fff;
   box-shadow: 0 2rem 5rem rgba(28, 70, 108, 0.22);
+}
+
+.banner-about-about-layer .about-feature-card {
   opacity: var(--about-card-opacity);
-  transform: scale(var(--about-card-scale));
-  transform-origin: 50% 50%;
-  will-change: transform, opacity;
+  will-change: opacity;
 }
 
 .about-card-topline {
@@ -374,6 +416,9 @@
   grid-template-rows: repeat(3, minmax(0, 1fr));
   gap: 1.4rem;
   padding-block: clamp(1rem, 5vh, 4rem);
+}
+
+.banner-about-about-layer .about-capabilities {
   opacity: var(--about-right-opacity);
   transform: translate3d(var(--about-right-x), 0, 0);
   will-change: transform, opacity;
@@ -468,7 +513,7 @@
   }
 }
 
-/* Mobile uses a normal document flow: banner first, then About. */
+/* Tablet/mobile: banner and About return to a simple document flow. */
 @media (max-width: 900px) {
   .banner-about-track {
     height: auto;
@@ -479,26 +524,22 @@
     position: relative;
     height: auto;
     overflow: visible;
+    opacity: 1;
+    background: #060010;
   }
 
-  .banner-about-banner-layer,
   .banner-about-about-layer {
-    position: relative;
-    inset: auto;
-    opacity: 1;
-    transform: none;
+    display: none;
   }
 
   .banner-about-banner-layer {
+    position: relative;
+    inset: auto;
     overflow: hidden;
+    opacity: 1;
     -webkit-clip-path: none;
     clip-path: none;
     box-shadow: none;
-  }
-
-  .banner-about-banner-layer > .portfolio-banner {
-    min-height: 100svh;
-    height: auto;
   }
 
   .banner-about-banner-layer .portfolio-copy,
@@ -507,6 +548,22 @@
   .banner-about-banner-layer .portfolio-mobile-watermark,
   .banner-about-banner-layer .kontour-portrait {
     opacity: 1 !important;
+  }
+
+  .banner-about-banner-layer .kontour-portrait {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  .banner-about-final-layer {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    height: auto;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
   }
 
   .about-panel {
@@ -518,13 +575,6 @@
     grid-template-columns: 1fr;
     height: auto;
     padding: 5rem 1.25rem 4rem;
-  }
-
-  .about-intro,
-  .about-capabilities,
-  .about-feature-card {
-    opacity: 1;
-    transform: none;
   }
 
   .about-intro {
@@ -603,26 +653,25 @@
     position: relative;
     height: auto;
     overflow: visible;
+    opacity: 1 !important;
   }
 
-  .banner-about-banner-layer,
   .banner-about-about-layer {
-    position: relative;
-    inset: auto;
-    opacity: 1 !important;
-    transform: none !important;
+    display: none;
   }
 
   .banner-about-banner-layer {
+    position: relative;
+    opacity: 1 !important;
     -webkit-clip-path: none !important;
     clip-path: none !important;
-    pointer-events: auto !important;
   }
 
-  .about-intro,
-  .about-capabilities,
-  .about-feature-card {
+  .banner-about-final-layer {
+    position: relative;
+    height: auto;
     opacity: 1 !important;
     transform: none !important;
+    pointer-events: auto;
   }
 }
