@@ -18,7 +18,8 @@ const WORDS = [
 const COUNTER_DURATION = 2350;
 const HOLD_DURATION = 140;
 const EXIT_DURATION = 1200;
-const WORD_INTERVAL = 450;
+const WORD_INTERVAL = 900;
+const WORD_FADE_DURATION = 340;
 
 const easeOutQuart = (value) => 1 - Math.pow(1 - value, 4);
 
@@ -44,9 +45,11 @@ export default function PageLoader({ onDone }) {
       "(prefers-reduced-motion: reduce)",
     ).matches;
     const timeouts = [];
+    const animationFrames = [];
     let counterFrame;
     let wordTimer;
     let finished = false;
+    let changingWord = false;
 
     const finish = () => {
       if (finished) return;
@@ -62,17 +65,36 @@ export default function PageLoader({ onDone }) {
       return id;
     };
 
+    const scheduleFrame = (callback) => {
+      const id = window.requestAnimationFrame(callback);
+      animationFrames.push(id);
+      return id;
+    };
+
+    const rotateWord = () => {
+      if (changingWord) return;
+      changingWord = true;
+      setWordChanging(true);
+
+      schedule(() => {
+        setWordIndex((current) => (current + 1) % WORDS.length);
+
+        // Give the browser one painted frame with the new word still hidden,
+        // then smoothly fade it back in instead of swapping it abruptly.
+        scheduleFrame(() => {
+          scheduleFrame(() => {
+            setWordChanging(false);
+            changingWord = false;
+          });
+        });
+      }, WORD_FADE_DURATION);
+    };
+
     if (reduceMotion) {
       setProgress(100);
       schedule(finish, 80);
     } else {
-      wordTimer = window.setInterval(() => {
-        setWordChanging(true);
-        schedule(() => {
-          setWordIndex((current) => (current + 1) % WORDS.length);
-          setWordChanging(false);
-        }, 150);
-      }, WORD_INTERVAL);
+      wordTimer = window.setInterval(rotateWord, WORD_INTERVAL);
 
       const startedAt = performance.now();
       const updateCounter = (now) => {
@@ -96,6 +118,7 @@ export default function PageLoader({ onDone }) {
 
     return () => {
       cancelAnimationFrame(counterFrame);
+      animationFrames.forEach(cancelAnimationFrame);
       window.clearInterval(wordTimer);
       timeouts.forEach(window.clearTimeout);
       if (!finished) startScroll();
