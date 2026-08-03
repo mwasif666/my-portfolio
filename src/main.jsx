@@ -6,5 +6,6 @@ import './banner-themes.css';
 import './loader-background.css';
 import './about-section.css';
 import './about-transition-runtime.css';
+import './about-dark-background.css';
 
 createRoot(document.getElementById('root')).render(<App />);
