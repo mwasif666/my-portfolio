@@ -25,7 +25,7 @@ export default function BannerAboutTransition({ onContact }) {
     let frame = 0;
 
     const setFinalState = () => {
-      stage.style.setProperty("--banner-clip-x", "50%");
+      stage.style.setProperty("--banner-clip-x", "34.2%");
       stage.style.setProperty("--banner-clip-y", "9svh");
       stage.style.setProperty("--banner-card-opacity", "0");
       stage.style.setProperty("--hero-side-opacity", "0");
@@ -51,29 +51,23 @@ export default function BannerAboutTransition({ onContact }) {
       const progress = clamp(-rect.top / travel, 0, 1);
 
       /*
-       * Phase 1: only crop the hero from the left and right. There is no
-       * landscape-card scaling or upward movement. The centre portrait remains.
+       * Phase 1: crop the pinned hero from its left and right edges.
+       * It is not scaled into a landscape card and it does not move upward.
        */
       const clipPhase = easeInOutCubic(clamp((progress - 0.01) / 0.48, 0, 1));
       const sideContentPhase = easeOutCubic(clamp(progress / 0.28, 0, 1));
 
-      /*
-       * Phase 2: once the portrait-sized crop is established, reveal the
-       * About copy on the left and capability cards on the right.
-       */
+      /* Phase 2: reveal About copy in the space exposed beside the portrait. */
       const sideRevealPhase = easeOutCubic(
         clamp((progress - 0.4) / 0.28, 0, 1),
       );
 
-      /*
-       * Phase 3: crossfade the cropped hero into the matching About portrait
-       * card, keeping the centre composition visually continuous.
-       */
+      /* Phase 3: crossfade the hero crop into the matching portrait card. */
       const cardCrossfadePhase = easeInOutCubic(
         clamp((progress - 0.7) / 0.2, 0, 1),
       );
 
-      const bannerClipX = clipPhase * 33.6;
+      const bannerClipX = clipPhase * 34.2;
       const bannerClipY = clipPhase * 9;
       const heroSideOpacity = 1 - sideContentPhase;
       const bannerCardOpacity = 1 - cardCrossfadePhase;
@@ -134,16 +128,16 @@ export default function BannerAboutTransition({ onContact }) {
   return (
     <section className="banner-about-track" ref={trackRef}>
       <div className="banner-about-stage" ref={stageRef}>
-        <div className="banner-about-about-layer">
-          <AboutSection />
-        </div>
-
         <div className="banner-about-banner-layer">
           <KontourBanner
             id="blue-banner"
             theme="blue"
             onContact={onContact}
           />
+        </div>
+
+        <div className="banner-about-about-layer">
+          <AboutSection />
         </div>
       </div>
     </section>
