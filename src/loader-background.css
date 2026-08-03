@@ -9,11 +9,7 @@
   z-index: 0;
   overflow: hidden;
   opacity: 1;
-  transform: scale(1);
-  transition:
-    opacity 700ms ease 120ms,
-    transform 900ms cubic-bezier(0.76, 0, 0.24, 1) 120ms;
-  will-change: opacity, transform;
+  pointer-events: none;
 }
 
 .preloader__background canvas {
@@ -26,15 +22,15 @@
   pointer-events: none;
 }
 
+/*
+ * During loading the panels stay transparent so the animated blue grid,
+ * spotlight and grain remain visible. At 100% they instantly become solid
+ * black and then rise one-by-one using the original staggered panel motion.
+ */
 .preloader .preloader__panel {
   --panel-glow: transparent;
-  border-right: 1px solid rgba(255, 255, 255, 0.018);
-  background: linear-gradient(
-    180deg,
-    rgba(6, 0, 16, 0.08) 0%,
-    rgba(3, 8, 20, 0.13) 55%,
-    rgba(0, 0, 0, 0.26) 100%
-  );
+  border-right: 1px solid rgba(255, 255, 255, 0.025);
+  background: transparent;
 }
 
 .preloader .preloader__panel:last-child {
@@ -42,21 +38,14 @@
 }
 
 .preloader .preloader__panel::after {
-  opacity: 0.2;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.03),
-    transparent 22%,
-    transparent 78%,
-    rgba(0, 152, 241, 0.025)
-  );
+  display: none;
 }
 
 .preloader__content {
   z-index: 2;
 }
 
-/* Smooth loader-word crossfade. This overrides the quicker base transition. */
+/* Smooth loader-word crossfade. */
 .preloader__title span {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
@@ -74,13 +63,29 @@
   filter: blur(4px);
 }
 
+/*
+ * Reference-style exit:
+ * 1. Hide the decorative background immediately.
+ * 2. Make the loader root transparent so the page can be revealed.
+ * 3. Keep five solid-black curtains above the page.
+ * 4. Let the existing staggered translateY animation lift each curtain.
+ */
+.preloader.is-complete {
+  background: transparent;
+}
+
 .preloader.is-complete .preloader__background {
   opacity: 0;
-  transform: scale(1.025);
+  visibility: hidden;
+  transition: none;
+}
+
+.preloader.is-complete .preloader__panel {
+  background: #000000;
+  border-right-color: rgba(255, 255, 255, 0.02);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .preloader__background,
   .preloader__title span {
     transition-duration: 0.01ms !important;
   }
