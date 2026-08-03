@@ -5,5 +5,6 @@ import './index.css';
 import './banner-themes.css';
 import './loader-background.css';
 import './about-section.css';
+import './about-transition-runtime.css';
 
 createRoot(document.getElementById('root')).render(<App />);
