@@ -60,29 +60,29 @@ export default function BannerAboutTransition({ onContact }) {
       const scrolled = clamp(-rect.top, 0, travel);
       const progress = clamp(scrolled / travel, 0, 1);
 
-      // 1) The full banner stays pinned while its four edges crop toward the
-      // exact measured bounds of the About portrait card underneath.
-      const cropPhase = easeInOutCubic(clamp(progress / 0.56, 0, 1));
+      // Keep the hero pinned longer and crop it gradually toward the exact
+      // measured bounds of the About portrait card underneath.
+      const cropPhase = easeInOutCubic(clamp(progress / 0.68, 0, 1));
 
-      // 2) Hero copy disappears naturally after the crop is underway.
+      // Fade the outer hero content only after the slower crop is underway.
       const heroSidePhase = easeOutCubic(
-        clamp((progress - 0.2) / 0.3, 0, 1),
+        clamp((progress - 0.24) / 0.34, 0, 1),
       );
 
-      // 3) About content appears in the exposed left and right columns.
+      // Reveal About copy when the centre card is almost established.
       const sideRevealPhase = easeOutCubic(
-        clamp((progress - 0.46) / 0.26, 0, 1),
+        clamp((progress - 0.56) / 0.25, 0, 1),
       );
 
-      // 4) The cropped hero becomes the real About portrait card.
+      // Crossfade the cropped hero into the About portrait card near the end.
       const cardMorphPhase = easeInOutCubic(
-        clamp((progress - 0.66) / 0.19, 0, 1),
+        clamp((progress - 0.76) / 0.16, 0, 1),
       );
 
-      // 5) The sticky visual preview hands off to the real document-flow
-      // About section at the bottom of the scroll track without a blank gap.
+      // Hand off to the document-flow About section without changing the
+      // surrounding dark-blue background or creating a blank gap.
       const handoffPhase = easeInOutCubic(
-        clamp((progress - 0.92) / 0.08, 0, 1),
+        clamp((progress - 0.94) / 0.06, 0, 1),
       );
 
       const naturalFinalOffset = travel - scrolled;
@@ -162,7 +162,7 @@ export default function BannerAboutTransition({ onContact }) {
         `${finalCompensation.toFixed(2)}px`,
       );
 
-      track.classList.toggle("is-final-active", progress >= 0.96);
+      track.classList.toggle("is-final-active", progress >= 0.97);
     };
 
     const requestRender = () => {
