@@ -30,7 +30,7 @@ export default function App() {
 
       <main id="main">
         {/* <Hero ready={ready} onContact={openModal} /> */}
-        <KontourBanner onContact={openModal} />
+        {/* <KontourBanner onContact={openModal} /> */}
         <KontourBanner id="blue-banner" theme="blue" onContact={openModal} />
       </main>
 

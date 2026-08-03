@@ -10,13 +10,6 @@ const ArrowRight = () => (
   </svg>
 );
 
-const CalendarIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <rect x="3" y="5" width="18" height="16" rx="2.5" />
-    <path d="M16 3v4M8 3v4M3 10h18" />
-  </svg>
-);
-
 const StackIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M12 3 3.5 7.5 12 12l8.5-4.5L12 3Z" />
@@ -29,8 +22,6 @@ const DownloadIcon = () => (
     <path d="M12 3v12M7.5 10.5 12 15l4.5-4.5M4 20h16" />
   </svg>
 );
-
-const Dot = () => <i className="portfolio-stack-dot" aria-hidden="true" />;
 
 export default function KontourBanner({ onContact, id = 'home', theme = 'orange' }) {
   const ref = useRef(null);
@@ -120,16 +111,6 @@ export default function KontourBanner({ onContact, id = 'home', theme = 'orange'
         </div>
 
         <aside className="portfolio-panel">
-          <Reveal className="portfolio-availability-card" move={14}>
-            <div className="portfolio-calendar">
-              <CalendarIcon />
-            </div>
-            <div>
-              <h2>Available for select projects</h2>
-              <p>Building reliable digital experiences for startups, agencies and growing brands.</p>
-            </div>
-          </Reveal>
-
           <Reveal className="portfolio-stats" delay={160}>
             <div className="portfolio-stat">
               <strong>4<sup>+</sup></strong>
@@ -155,24 +136,43 @@ export default function KontourBanner({ onContact, id = 'home', theme = 'orange'
               <div className="portfolio-stack-list">
                 <div className="portfolio-stack-row">
                   <strong>Core Stack</strong>
-                  <p><span>MERN Stack</span><Dot /><span>PHP</span><Dot /><span>Laravel</span></p>
+                  <div className="portfolio-tags">
+                    <span className="portfolio-tag">MERN Stack</span>
+                    <span className="portfolio-tag">PHP</span>
+                    <span className="portfolio-tag">Laravel</span>
+                  </div>
                 </div>
                 <div className="portfolio-stack-row">
                   <strong>Frontend</strong>
-                  <p><span>React</span><Dot /><span>Next.js</span><Dot /><span>Bootstrap</span><Dot /><span>Tailwind CSS</span></p>
+                  <div className="portfolio-tags">
+                    <span className="portfolio-tag">React</span>
+                    <span className="portfolio-tag">Next.js</span>
+                    <span className="portfolio-tag">Bootstrap</span>
+                    <span className="portfolio-tag">Tailwind CSS</span>
+                  </div>
                 </div>
                 <div className="portfolio-stack-row">
                   <strong>Backend &amp; Data</strong>
-                  <p><span>Node.js</span><Dot /><span>Express</span><Dot /><span>MongoDB</span><Dot /><span>MySQL</span></p>
+                  <div className="portfolio-tags">
+                    <span className="portfolio-tag">Node.js</span>
+                    <span className="portfolio-tag">Express</span>
+                    <span className="portfolio-tag">MongoDB</span>
+                    <span className="portfolio-tag">MySQL</span>
+                  </div>
                 </div>
                 <div className="portfolio-stack-row">
                   <strong>CMS &amp; Commerce</strong>
-                  <p><span>WordPress</span><Dot /><span>Shopify</span><Dot /><span>Webflow</span><Dot /><span>WooCommerce</span></p>
+                  <div className="portfolio-tags">
+                    <span className="portfolio-tag">WordPress</span>
+                    <span className="portfolio-tag">Shopify</span>
+                    <span className="portfolio-tag">Webflow</span>
+                    <span className="portfolio-tag">WooCommerce</span>
+                  </div>
                 </div>
               </div>
 
               <button className="portfolio-resume" type="button">
-                <span>Download Résumé</span>
+                <span>Download Resume</span>
                 <DownloadIcon />
               </button>
             </div>

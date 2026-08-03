@@ -22,14 +22,8 @@
 }
 
 #blue-banner.portfolio-banner--blue .portfolio-eyebrow,
-#blue-banner.portfolio-banner--blue .portfolio-calendar,
-#blue-banner.portfolio-banner--blue .portfolio-tech-heading svg,
-#blue-banner.portfolio-banner--blue .portfolio-stack-dot {
+#blue-banner.portfolio-banner--blue .portfolio-tech-heading svg {
   color: #0098f1;
-}
-
-#blue-banner.portfolio-banner--blue .portfolio-stack-dot {
-  background: #0098f1;
 }
 
 #blue-banner.portfolio-banner--blue .portfolio-cta.primary,
@@ -47,4 +41,99 @@
 #blue-banner.portfolio-banner--blue .portfolio-cta.secondary:hover {
   border-color: #0098f1;
   background: rgba(0, 152, 241, 0.12);
+}
+
+/* Remaining orange spots recoloured to the blue palette. */
+#blue-banner.portfolio-banner--blue .portfolio-grid-lines {
+  background-image:
+    linear-gradient(rgba(0, 152, 241, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 152, 241, 0.08) 1px, transparent 1px);
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-cta.primary {
+  box-shadow: 0 0.8rem 2.2rem rgba(0, 152, 241, 0.16);
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-cta.secondary {
+  border-color: rgba(0, 152, 241, 0.66);
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-availability-card {
+  border-color: rgba(0, 152, 241, 0.28);
+  background: linear-gradient(135deg, rgba(18, 28, 35, 0.44), rgba(6, 6, 6, 0.35));
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-calendar {
+  border-color: rgba(0, 152, 241, 0.44);
+  background: radial-gradient(circle, rgba(0, 152, 241, 0.2), rgba(0, 152, 241, 0.035) 68%);
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-stat strong {
+  color: #0098f1;
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-stat:hover {
+  filter: drop-shadow(0 0.75rem 1.1rem rgba(0, 152, 241, 0.16));
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-stat + .portfolio-stat {
+  border-left-color: rgba(0, 152, 241, 0.24);
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-tech-card {
+  border-color: rgba(0, 152, 241, 0.58);
+  background:
+    radial-gradient(circle at 0% 18%, rgba(0, 152, 241, 0.16), transparent 35%),
+    linear-gradient(135deg, rgba(16, 21, 24, 0.97), rgba(5, 5, 5, 0.94));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+    0 1.1rem 2.8rem rgba(0, 0, 0, 0.32),
+    0 0 2.4rem rgba(0, 152, 241, 0.06);
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-tech-card:hover {
+  border-color: rgba(51, 173, 255, 0.88);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.035),
+    0 1.4rem 3.4rem rgba(0, 0, 0, 0.42),
+    0 0 3.2rem rgba(0, 152, 241, 0.12);
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-tech-card::before {
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.075),
+    transparent 34%,
+    rgba(0, 152, 241, 0.025) 72%,
+    rgba(255, 255, 255, 0.025)
+  );
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-tech-card::after {
+  background: radial-gradient(
+    circle at var(--shine-x) var(--shine-y),
+    rgba(255, 255, 255, 0.14),
+    rgba(0, 152, 241, 0.045) 19%,
+    transparent 43%
+  );
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-tech-heading svg {
+  filter: drop-shadow(0 0 0.65rem rgba(0, 152, 241, 0.28));
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-resume:hover {
+  box-shadow: 0 0.8rem 1.8rem rgba(0, 152, 241, 0.12);
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-resume svg {
+  color: #0098f1;
+}
+
+#blue-banner.portfolio-banner--blue .portfolio-tag:hover {
+  border-color: rgba(0, 152, 241, 0.55);
+  background: rgba(0, 152, 241, 0.14);
+  color: #fff;
 }
