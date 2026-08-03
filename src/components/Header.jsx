@@ -26,7 +26,7 @@ export default function Header({ ready, onMenu, onContact }) {
     <header id="header" className={shown ? 'in portfolio-header' : 'portfolio-header'}>
       <div className="portfolio-header-inner">
         <button className="portfolio-logo" onClick={() => scrollToId('home')} aria-label="Wasif.dev home">
-          WASIF<span>.DEV</span>
+          WASIF<span>.DEVELOPER</span>
         </button>
 
         <nav className="portfolio-nav" aria-label="Primary navigation">
