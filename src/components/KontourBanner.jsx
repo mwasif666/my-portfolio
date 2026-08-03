@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import Reveal from './Reveal';
 import LineReveal from './LineReveal';
+import NoiseDarkBlueGradientWithSquares from './ui/noise-dark-blue-gradient-with-squares';
 import { useInView } from '../hooks/useInView';
 import myImg from '../../myimg.png';
 
@@ -70,6 +71,18 @@ export default function KontourBanner({ onContact, id = 'home', theme = 'orange'
       onPointerMove={moveScene}
       onPointerLeave={resetScene}
     >
+      {theme === 'blue' && (
+        <div className="portfolio-loader-background" aria-hidden="true">
+          <NoiseDarkBlueGradientWithSquares
+            direction="diagonal"
+            speed={0.6}
+            squareSize={44}
+            borderColor="rgba(255,255,255,0.12)"
+            vignette
+          />
+        </div>
+      )}
+
       <div className="kontour-glow" aria-hidden="true" />
       <div className="portfolio-grid-lines" aria-hidden="true" />
 
