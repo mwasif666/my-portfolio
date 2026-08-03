@@ -1,0 +1,68 @@
+/* Loader-only dark blue moving-grid background overrides. */
+.preloader {
+  background: #060010;
+}
+
+.preloader__background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 700ms ease 120ms,
+    transform 900ms cubic-bezier(0.76, 0, 0.24, 1) 120ms;
+  will-change: opacity, transform;
+}
+
+.preloader__background canvas {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+.preloader__panels {
+  z-index: 1;
+  pointer-events: none;
+}
+
+.preloader .preloader__panel {
+  --panel-glow: transparent;
+  border-right: 1px solid rgba(255, 255, 255, 0.018);
+  background: linear-gradient(
+    180deg,
+    rgba(6, 0, 16, 0.08) 0%,
+    rgba(3, 8, 20, 0.13) 55%,
+    rgba(0, 0, 0, 0.26) 100%
+  );
+}
+
+.preloader .preloader__panel:last-child {
+  border-right: 0;
+}
+
+.preloader .preloader__panel::after {
+  opacity: 0.2;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03),
+    transparent 22%,
+    transparent 78%,
+    rgba(0, 152, 241, 0.025)
+  );
+}
+
+.preloader__content {
+  z-index: 2;
+}
+
+.preloader.is-complete .preloader__background {
+  opacity: 0;
+  transform: scale(1.025);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader__background {
+    transition-duration: 0.01ms !important;
+  }
+}
