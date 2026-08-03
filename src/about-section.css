@@ -1,41 +1,83 @@
 /* ============================================================
-   Scroll-wrapped About section — inspired by SharpLink's
-   editorial grid, icy-blue surface and three-column composition.
+   Banner -> About transition
+   The current hero is the foreground layer. As the user scrolls it
+   wraps into an inset card, lifts away, and reveals the About section
+   plus Muhammad's portrait card underneath.
    ============================================================ */
-.about-wrap-track {
+.banner-about-track {
   position: relative;
-  height: 185svh;
+  height: 235svh;
   background: #060010;
 }
 
-.about-wrap-sticky {
+.banner-about-stage {
+  --banner-scale: 1;
+  --banner-radius: 0px;
+  --banner-inset: 0px;
+  --banner-y: 0px;
+  --banner-opacity: 1;
+  --about-y: 92svh;
+  --about-opacity: 0;
+  --about-card-y: 58svh;
+  --about-card-scale: 0.86;
+
   position: sticky;
   top: 0;
   height: 100svh;
   overflow: hidden;
   background: #060010;
+  isolation: isolate;
 }
 
-.about-wrap-frame {
-  --about-scale: 0.88;
-  --about-radius: 34px;
-  --about-inset: 28px;
-  --about-lift: 72px;
-  --about-content-opacity: 0;
-
+.banner-about-about-layer,
+.banner-about-banner-layer {
   position: absolute;
-  inset: var(--about-inset);
+  inset: 0;
+}
+
+.banner-about-about-layer {
+  z-index: 1;
+  opacity: var(--about-opacity);
+  transform: translate3d(0, var(--about-y), 0);
+  will-change: transform, opacity;
+}
+
+.banner-about-banner-layer {
+  z-index: 3;
+  inset: var(--banner-inset);
+  overflow: hidden;
+  border-radius: var(--banner-radius);
+  opacity: var(--banner-opacity);
+  transform: translate3d(0, var(--banner-y), 0) scale(var(--banner-scale));
+  transform-origin: 50% 50%;
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.38);
+  will-change: inset, border-radius, transform, opacity;
+}
+
+.banner-about-banner-layer > .portfolio-banner {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
+/* The hero portrait fades while the same portrait rises inside the card below. */
+.banner-about-banner-layer .kontour-portrait {
+  opacity: calc(1 - var(--transition-progress, 0) * 1.25);
+}
+
+/* ============================================================
+   About panel
+   ============================================================ */
+.about-panel {
+  position: relative;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   border: 1px solid rgba(71, 105, 131, 0.16);
-  border-radius: var(--about-radius);
   background:
     radial-gradient(circle at 52% 44%, rgba(103, 164, 222, 0.24), transparent 34%),
     linear-gradient(180deg, #d7e6f2 0%, #e9f0f5 54%, #f5f4ef 100%);
   color: #071019;
-  transform: translate3d(0, var(--about-lift), 0) scale(var(--about-scale));
-  transform-origin: 50% 50%;
-  box-shadow: 0 -1.5rem 5rem rgba(0, 0, 0, 0.28);
-  will-change: inset, border-radius, transform;
 }
 
 .about-blueprint {
@@ -54,11 +96,27 @@
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0.45;
-  background-image: radial-gradient(circle, rgba(27, 73, 109, 0.38) 0.75px, transparent 0.9px);
+  opacity: 0.42;
+  background-image: radial-gradient(
+    circle,
+    rgba(27, 73, 109, 0.38) 0.75px,
+    transparent 0.9px
+  );
   background-size: 8px 8px;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 15%,
+    #000 85%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 15%,
+    #000 85%,
+    transparent
+  );
 }
 
 .about-layout {
@@ -70,8 +128,6 @@
   width: 100%;
   height: 100%;
   padding: clamp(1.5rem, 2.4vw, 3rem);
-  opacity: var(--about-content-opacity);
-  transition: opacity 160ms linear;
 }
 
 .about-intro {
@@ -159,6 +215,8 @@
   white-space: nowrap;
 }
 
+/* The image card deliberately starts below the viewport and rises as the
+   banner wraps, matching the requested SharpLink-style handoff. */
 .about-feature-card {
   position: relative;
   align-self: center;
@@ -167,9 +225,19 @@
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.18);
   background:
-    linear-gradient(180deg, rgba(0, 10, 25, 0.98) 0%, rgba(0, 30, 69, 0.98) 37%, rgba(68, 139, 211, 0.96) 72%, rgba(218, 233, 246, 0.98) 100%);
+    linear-gradient(
+      180deg,
+      rgba(0, 10, 25, 0.98) 0%,
+      rgba(0, 30, 69, 0.98) 37%,
+      rgba(68, 139, 211, 0.96) 72%,
+      rgba(218, 233, 246, 0.98) 100%
+    );
   color: #fff;
   box-shadow: 0 2rem 5rem rgba(28, 70, 108, 0.22);
+  transform: translate3d(0, var(--about-card-y), 0)
+    scale(var(--about-card-scale));
+  transform-origin: 50% 100%;
+  will-change: transform;
 }
 
 .about-card-topline {
@@ -381,34 +449,51 @@
   }
 }
 
+/* Mobile uses a normal document flow: banner first, then About. */
 @media (max-width: 900px) {
-  .about-wrap-track {
+  .banner-about-track {
     height: auto;
-    background: #dbe8f2;
+    background: #060010;
   }
 
-  .about-wrap-sticky {
+  .banner-about-stage {
     position: relative;
     height: auto;
     overflow: visible;
-    background: #dbe8f2;
   }
 
-  .about-wrap-frame {
+  .banner-about-banner-layer,
+  .banner-about-about-layer {
     position: relative;
     inset: auto;
-    overflow: hidden;
-    min-height: 100svh;
-    border: 0;
-    border-radius: 0;
+    opacity: 1;
     transform: none;
+  }
+
+  .banner-about-banner-layer {
+    overflow: hidden;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .banner-about-banner-layer > .portfolio-banner {
+    min-height: 100svh;
+    height: auto;
+  }
+
+  .banner-about-banner-layer .kontour-portrait {
+    opacity: 1;
+  }
+
+  .about-panel {
+    height: auto;
+    min-height: 100svh;
   }
 
   .about-layout {
     grid-template-columns: 1fr;
     height: auto;
     padding: 5rem 1.25rem 4rem;
-    opacity: 1;
   }
 
   .about-intro {
@@ -425,6 +510,7 @@
     height: 44rem;
     min-height: 0;
     justify-self: center;
+    transform: none;
   }
 
   .about-capabilities {
@@ -464,29 +550,25 @@
   }
 
   .about-feature-card {
-    height: 38rem;
+    height: 39rem;
   }
 
   .about-card-topline {
-    padding: 1.2rem;
-    font-size: 0.58rem;
-  }
-
-  .about-card-topline strong {
-    font-size: 0.8rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
   }
 
   .about-linkedin-link {
     right: 1rem;
-    bottom: 1rem;
     left: 1rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about-wrap-frame,
-  .about-layout,
-  .about-capability-card {
-    transition: none !important;
+  .banner-about-banner-layer,
+  .banner-about-about-layer,
+  .about-feature-card {
+    transform: none !important;
+    opacity: 1 !important;
   }
 }
