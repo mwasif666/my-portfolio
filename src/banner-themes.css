@@ -28,9 +28,7 @@
   display: none;
 }
 
-#blue-banner.portfolio-banner--blue .portfolio-hero-grid,
-#blue-banner.portfolio-banner--blue .kontour-watermark {
-  position: relative;
+#blue-banner.portfolio-banner--blue .portfolio-hero-grid {
   z-index: 4;
 }
 
@@ -111,7 +109,7 @@
   border-color: rgba(51, 173, 255, 0.88);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    inset 0 0 0 1px rgba(255, 255,255, 0.035),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.035),
     0 1.4rem 3.4rem rgba(0, 0, 0, 0.42),
     0 0 3.2rem rgba(0, 152, 241, 0.12);
 }
