@@ -29,6 +29,7 @@ export default function BannerAboutTransition({ onContact }) {
 
       if (reduceMotion || window.innerWidth <= 900) {
         stage.style.setProperty("--transition-progress", "1");
+        stage.style.setProperty("--background-opacity", "1");
         stage.style.setProperty("--banner-scale", "1");
         stage.style.setProperty("--banner-radius", "0px");
         stage.style.setProperty("--banner-inset", "0px");
@@ -45,25 +46,38 @@ export default function BannerAboutTransition({ onContact }) {
       const travel = Math.max(track.offsetHeight - window.innerHeight, 1);
       const progress = clamp(-rect.top / travel, 0, 1);
 
-      const wrapPhase = easeOutCubic(clamp(progress / 0.36, 0, 1));
-      const liftPhase = easeInOutCubic(clamp((progress - 0.2) / 0.58, 0, 1));
-      const aboutPhase = easeOutCubic(clamp((progress - 0.08) / 0.5, 0, 1));
-      const cardPhase = easeOutCubic(clamp((progress - 0.18) / 0.46, 0, 1));
+      // Keep the handoff deliberately sequential: first the full banner wraps
+      // into a card, then it lifts away, and only then does About rise in.
+      const wrapPhase = easeOutCubic(clamp(progress / 0.3, 0, 1));
+      const backgroundPhase = easeOutCubic(clamp(progress / 0.24, 0, 1));
+      const liftPhase = easeInOutCubic(
+        clamp((progress - 0.3) / 0.42, 0, 1),
+      );
+      const aboutPhase = easeInOutCubic(
+        clamp((progress - 0.27) / 0.55, 0, 1),
+      );
+      const cardPhase = easeOutCubic(
+        clamp((progress - 0.32) / 0.52, 0, 1),
+      );
 
       const viewportHeight = window.innerHeight;
-      const bannerScale = 1 - wrapPhase * 0.115;
-      const bannerInset = wrapPhase * 28;
-      const bannerRadius = wrapPhase * 30;
-      const bannerY = -liftPhase * viewportHeight * 1.04;
-      const bannerOpacity = 1 - clamp((progress - 0.64) / 0.2, 0, 1);
-      const aboutY = (1 - aboutPhase) * viewportHeight * 0.92;
-      const aboutOpacity = clamp((progress - 0.04) / 0.24, 0, 1);
-      const aboutCardY = (1 - cardPhase) * viewportHeight * 0.58;
-      const aboutCardScale = 0.86 + cardPhase * 0.14;
+      const bannerScale = 1 - wrapPhase * 0.32;
+      const bannerInset = wrapPhase * 36;
+      const bannerRadius = wrapPhase * 18;
+      const bannerY = -liftPhase * viewportHeight * 0.96;
+      const bannerOpacity = 1 - clamp((progress - 0.56) / 0.18, 0, 1);
+      const aboutY = (1 - aboutPhase) * viewportHeight * 0.78;
+      const aboutOpacity = clamp((progress - 0.25) / 0.2, 0, 1);
+      const aboutCardY = (1 - cardPhase) * viewportHeight * 0.72;
+      const aboutCardScale = 0.82 + cardPhase * 0.18;
 
       stage.style.setProperty(
         "--transition-progress",
         progress.toFixed(4),
+      );
+      stage.style.setProperty(
+        "--background-opacity",
+        backgroundPhase.toFixed(3),
       );
       stage.style.setProperty("--banner-scale", bannerScale.toFixed(4));
       stage.style.setProperty("--banner-radius", `${bannerRadius.toFixed(2)}px`);
@@ -98,16 +112,16 @@ export default function BannerAboutTransition({ onContact }) {
   return (
     <section className="banner-about-track" ref={trackRef}>
       <div className="banner-about-stage" ref={stageRef}>
-        <div className="banner-about-about-layer">
-          <AboutSection />
-        </div>
-
         <div className="banner-about-banner-layer">
           <KontourBanner
             id="blue-banner"
             theme="blue"
             onContact={onContact}
           />
+        </div>
+
+        <div className="banner-about-about-layer">
+          <AboutSection />
         </div>
       </div>
     </section>

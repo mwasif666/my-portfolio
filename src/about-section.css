@@ -11,6 +11,7 @@
 }
 
 .banner-about-stage {
+  --background-opacity: 0;
   --banner-scale: 1;
   --banner-radius: 0px;
   --banner-inset: 0px;
@@ -27,6 +28,22 @@
   overflow: hidden;
   background: #060010;
   isolation: isolate;
+}
+
+.banner-about-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: var(--background-opacity);
+  background: radial-gradient(
+    ellipse 100% 130% at 50% -30%,
+    #c4d5e7 45%,
+    #fdfbf7 85%,
+    #f7f7f5
+  );
+  will-change: opacity;
 }
 
 .banner-about-about-layer,
@@ -74,9 +91,12 @@
   height: 100%;
   overflow: hidden;
   border: 1px solid rgba(71, 105, 131, 0.16);
-  background:
-    radial-gradient(circle at 52% 44%, rgba(103, 164, 222, 0.24), transparent 34%),
-    linear-gradient(180deg, #d7e6f2 0%, #e9f0f5 54%, #f5f4ef 100%);
+  background: radial-gradient(
+    ellipse 100% 130% at 50% -30%,
+    #c4d5e7 45%,
+    #fdfbf7 85%,
+    #f7f7f5
+  );
   color: #071019;
 }
 
