@@ -1,0 +1,180 @@
+/* Keep the entire banner -> About handoff on the same dark-blue visual system. */
+.banner-about-track {
+  height: 235svh;
+  background: #0a0a0a;
+}
+
+.banner-about-stage,
+.banner-about-final-layer {
+  background: #0a0a0a;
+}
+
+.about-panel {
+  border-color: rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(
+      circle 620px at 50% 200px,
+      rgba(37, 99, 235, 0.35),
+      transparent 70%
+    ),
+    #0a0a0a;
+  color: #f7f2eb;
+}
+
+/* Same moving 44px grid language used by the banner background. */
+.about-blueprint {
+  z-index: 1;
+  opacity: 0.58;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 44px 44px;
+  animation: aboutDarkGridMove 24s linear infinite;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 15%, transparent 88%);
+  mask-image: radial-gradient(ellipse at center, #000 15%, transparent 88%);
+}
+
+.about-blueprint::after {
+  display: none;
+}
+
+.about-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.72) 0.55px,
+    transparent 0.75px
+  );
+  background-size: 3px 3px;
+  mix-blend-mode: soft-light;
+}
+
+.about-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at center, transparent 34%, rgba(6, 0, 16, 0.64) 100%),
+    linear-gradient(to bottom, transparent 0%, transparent 55%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+.about-layout {
+  z-index: 2;
+}
+
+.about-kicker {
+  background: #0098f1;
+  color: #03111c;
+}
+
+.about-intro,
+.about-intro h2,
+.about-meta-grid strong,
+.about-capability-card h3 {
+  color: #f7f2eb;
+}
+
+.about-intro-copy p {
+  color: rgba(247, 242, 235, 0.94);
+}
+
+.about-intro-copy p + p {
+  color: rgba(247, 242, 235, 0.62);
+}
+
+.about-meta-grid {
+  border-top-color: rgba(0, 152, 241, 0.28);
+}
+
+.about-meta-grid > div + div {
+  border-left-color: rgba(0, 152, 241, 0.2);
+}
+
+.about-meta-grid span {
+  color: rgba(247, 242, 235, 0.5);
+}
+
+.about-feature-card {
+  border-color: rgba(0, 152, 241, 0.52);
+  background:
+    radial-gradient(circle at 50% 24%, rgba(0, 152, 241, 0.22), transparent 42%),
+    linear-gradient(180deg, rgba(4, 15, 30, 0.98), rgba(3, 25, 51, 0.98) 58%, rgba(3, 11, 22, 0.99));
+  box-shadow:
+    0 2rem 5rem rgba(0, 0, 0, 0.38),
+    0 0 3.2rem rgba(0, 152, 241, 0.1);
+}
+
+.about-capability-card,
+.about-capability-card:nth-child(2),
+.about-capability-card:nth-child(3) {
+  border-color: rgba(0, 152, 241, 0.2);
+  background:
+    radial-gradient(circle at 100% 100%, rgba(0, 152, 241, 0.12), transparent 42%),
+    rgba(5, 13, 24, 0.74);
+  color: #f7f2eb;
+  backdrop-filter: blur(12px);
+}
+
+.about-capability-card:hover {
+  border-color: rgba(0, 152, 241, 0.52);
+  background:
+    radial-gradient(circle at 100% 100%, rgba(0, 152, 241, 0.2), transparent 44%),
+    rgba(7, 19, 35, 0.9);
+}
+
+.about-card-number {
+  background: #0098f1;
+  color: #04111b;
+}
+
+.about-capability-card p {
+  color: rgba(247, 242, 235, 0.58);
+}
+
+.about-capability-icon {
+  color: rgba(0, 152, 241, 0.3);
+}
+
+.about-linkedin-link {
+  border-color: rgba(0, 152, 241, 0.52);
+  background: rgba(3, 15, 28, 0.72);
+}
+
+.about-linkedin-link svg {
+  border-left-color: rgba(0, 152, 241, 0.52);
+}
+
+.about-linkedin-link:hover {
+  background: #0098f1;
+  color: #03111c;
+}
+
+@keyframes aboutDarkGridMove {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: -44px -44px, -44px -44px;
+  }
+}
+
+@media (max-width: 900px) {
+  .banner-about-track,
+  .banner-about-stage,
+  .banner-about-final-layer {
+    background: #0a0a0a;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-blueprint {
+    animation: none;
+  }
+}
