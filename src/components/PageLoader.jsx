@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useScroll } from "../contexts/ScrollContext";
+import NoiseDarkBlueGradientWithSquares from "./ui/noise-dark-blue-gradient-with-squares";
 
 const WORDS = [
   "Full Stack",
@@ -24,7 +25,9 @@ const easeOutQuart = (value) => 1 - Math.pow(1 - value, 4);
 export default function PageLoader({ onDone }) {
   const { stopScroll, startScroll } = useScroll();
   const [progress, setProgress] = useState(0);
-  const [wordIndex, setWordIndex] = useState(0);
+  const [wordIndex, setWordIndex] = useState(() =>
+    Math.floor(Math.random() * WORDS.length),
+  );
   const [wordChanging, setWordChanging] = useState(false);
   const [exit, setExit] = useState(false);
   const [gone, setGone] = useState(false);
@@ -107,6 +110,16 @@ export default function PageLoader({ onDone }) {
       className={`preloader${exit ? " is-complete" : ""}`}
       aria-hidden="true"
     >
+      <div className="preloader__background">
+        <NoiseDarkBlueGradientWithSquares
+          direction="diagonal"
+          speed={0.6}
+          squareSize={44}
+          borderColor="rgba(255,255,255,0.12)"
+          vignette
+        />
+      </div>
+
       <div className="preloader__panels">
         {Array.from({ length: 5 }, (_, index) => (
           <span className="preloader__panel" key={index} />
