@@ -18,95 +18,151 @@ export default function BannerAboutTransition({ onContact }) {
     const stage = stageRef.current;
     if (!track || !stage) return undefined;
 
+    const previewCard = stage.querySelector(
+      ".banner-about-about-layer .about-feature-card",
+    );
+
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
     let frame = 0;
+    let targetBounds = {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    };
 
-    const setFinalState = () => {
-      stage.style.setProperty("--banner-clip-x", "34.2%");
-      stage.style.setProperty("--banner-clip-y", "9svh");
-      stage.style.setProperty("--banner-card-opacity", "0");
-      stage.style.setProperty("--hero-side-opacity", "0");
-      stage.style.setProperty("--about-left-opacity", "1");
-      stage.style.setProperty("--about-right-opacity", "1");
-      stage.style.setProperty("--about-card-opacity", "1");
-      stage.style.setProperty("--about-left-x", "0px");
-      stage.style.setProperty("--about-right-x", "0px");
-      stage.style.setProperty("--about-card-scale", "1");
-      stage.classList.add("is-about-active");
+    const measure = () => {
+      if (!previewCard || window.innerWidth <= 900) return;
+
+      const stageRect = stage.getBoundingClientRect();
+      const cardRect = previewCard.getBoundingClientRect();
+
+      targetBounds = {
+        top: Math.max(cardRect.top - stageRect.top, 0),
+        right: Math.max(stageRect.right - cardRect.right, 0),
+        bottom: Math.max(stageRect.bottom - cardRect.bottom, 0),
+        left: Math.max(cardRect.left - stageRect.left, 0),
+      };
     };
 
     const render = () => {
       frame = 0;
 
-      if (reduceMotion || window.innerWidth <= 900) {
-        setFinalState();
-        return;
-      }
+      if (reduceMotion || window.innerWidth <= 900) return;
+
+      measure();
 
       const rect = track.getBoundingClientRect();
       const travel = Math.max(track.offsetHeight - window.innerHeight, 1);
-      const progress = clamp(-rect.top / travel, 0, 1);
+      const scrolled = clamp(-rect.top, 0, travel);
+      const progress = clamp(scrolled / travel, 0, 1);
 
-      /*
-       * Phase 1: crop the pinned hero from its left and right edges.
-       * It is not scaled into a landscape card and it does not move upward.
-       */
-      const clipPhase = easeInOutCubic(clamp((progress - 0.01) / 0.48, 0, 1));
-      const sideContentPhase = easeOutCubic(clamp(progress / 0.28, 0, 1));
+      // 1) The full banner stays pinned while its four edges crop toward the
+      // exact measured bounds of the About portrait card underneath.
+      const cropPhase = easeInOutCubic(clamp(progress / 0.56, 0, 1));
 
-      /* Phase 2: reveal About copy in the space exposed beside the portrait. */
+      // 2) Hero copy disappears naturally after the crop is underway.
+      const heroSidePhase = easeOutCubic(
+        clamp((progress - 0.2) / 0.3, 0, 1),
+      );
+
+      // 3) About content appears in the exposed left and right columns.
       const sideRevealPhase = easeOutCubic(
-        clamp((progress - 0.4) / 0.28, 0, 1),
+        clamp((progress - 0.46) / 0.26, 0, 1),
       );
 
-      /* Phase 3: crossfade the hero crop into the matching portrait card. */
-      const cardCrossfadePhase = easeInOutCubic(
-        clamp((progress - 0.7) / 0.2, 0, 1),
+      // 4) The cropped hero becomes the real About portrait card.
+      const cardMorphPhase = easeInOutCubic(
+        clamp((progress - 0.66) / 0.19, 0, 1),
       );
 
-      const bannerClipX = clipPhase * 34.2;
-      const bannerClipY = clipPhase * 9;
-      const heroSideOpacity = 1 - sideContentPhase;
-      const bannerCardOpacity = 1 - cardCrossfadePhase;
-      const aboutCardOpacity = cardCrossfadePhase;
-      const aboutLeftX = (1 - sideRevealPhase) * -54;
-      const aboutRightX = (1 - sideRevealPhase) * 54;
-      const aboutCardScale = 0.985 + cardCrossfadePhase * 0.015;
+      // 5) The sticky visual preview hands off to the real document-flow
+      // About section at the bottom of the scroll track without a blank gap.
+      const handoffPhase = easeInOutCubic(
+        clamp((progress - 0.92) / 0.08, 0, 1),
+      );
 
-      stage.style.setProperty("--transition-progress", progress.toFixed(4));
-      stage.style.setProperty("--banner-clip-x", `${bannerClipX.toFixed(3)}%`);
-      stage.style.setProperty("--banner-clip-y", `${bannerClipY.toFixed(3)}svh`);
+      const naturalFinalOffset = travel - scrolled;
+      const finalCompensation =
+        handoffPhase > 0 ? -naturalFinalOffset : 0;
+
+      const portraitWidth = 160 - cropPhase * 60;
+      const portraitMargin = -30 + cropPhase * 30;
+
       stage.style.setProperty(
-        "--banner-card-opacity",
-        bannerCardOpacity.toFixed(3),
+        "--banner-clip-top",
+        `${(targetBounds.top * cropPhase).toFixed(2)}px`,
+      );
+      stage.style.setProperty(
+        "--banner-clip-right",
+        `${(targetBounds.right * cropPhase).toFixed(2)}px`,
+      );
+      stage.style.setProperty(
+        "--banner-clip-bottom",
+        `${(targetBounds.bottom * cropPhase).toFixed(2)}px`,
+      );
+      stage.style.setProperty(
+        "--banner-clip-left",
+        `${(targetBounds.left * cropPhase).toFixed(2)}px`,
+      );
+      stage.style.setProperty(
+        "--banner-radius",
+        `${(cropPhase * 12).toFixed(2)}px`,
       );
       stage.style.setProperty(
         "--hero-side-opacity",
-        heroSideOpacity.toFixed(3),
+        (1 - heroSidePhase).toFixed(3),
+      );
+      stage.style.setProperty(
+        "--hero-portrait-width",
+        `${portraitWidth.toFixed(3)}%`,
+      );
+      stage.style.setProperty(
+        "--hero-portrait-margin",
+        `${portraitMargin.toFixed(3)}%`,
       );
       stage.style.setProperty(
         "--about-left-opacity",
-        sideRevealPhase.toFixed(3),
+        (sideRevealPhase * (1 - handoffPhase)).toFixed(3),
       );
       stage.style.setProperty(
         "--about-right-opacity",
-        sideRevealPhase.toFixed(3),
+        (sideRevealPhase * (1 - handoffPhase)).toFixed(3),
+      );
+      stage.style.setProperty(
+        "--about-left-x",
+        `${((1 - sideRevealPhase) * -48).toFixed(2)}px`,
+      );
+      stage.style.setProperty(
+        "--about-right-x",
+        `${((1 - sideRevealPhase) * 48).toFixed(2)}px`,
+      );
+      stage.style.setProperty(
+        "--banner-card-opacity",
+        ((1 - cardMorphPhase) * (1 - handoffPhase)).toFixed(3),
       );
       stage.style.setProperty(
         "--about-card-opacity",
-        aboutCardOpacity.toFixed(3),
+        (cardMorphPhase * (1 - handoffPhase)).toFixed(3),
       );
-      stage.style.setProperty("--about-left-x", `${aboutLeftX.toFixed(2)}px`);
-      stage.style.setProperty("--about-right-x", `${aboutRightX.toFixed(2)}px`);
       stage.style.setProperty(
-        "--about-card-scale",
-        aboutCardScale.toFixed(4),
+        "--stage-opacity",
+        (1 - handoffPhase).toFixed(3),
       );
 
-      stage.classList.toggle("is-about-active", progress >= 0.76);
+      track.style.setProperty(
+        "--final-opacity",
+        handoffPhase.toFixed(3),
+      );
+      track.style.setProperty(
+        "--final-y",
+        `${finalCompensation.toFixed(2)}px`,
+      );
+
+      track.classList.toggle("is-final-active", progress >= 0.96);
     };
 
     const requestRender = () => {
@@ -114,6 +170,7 @@ export default function BannerAboutTransition({ onContact }) {
       frame = window.requestAnimationFrame(render);
     };
 
+    measure();
     render();
     window.addEventListener("scroll", requestRender, { passive: true });
     window.addEventListener("resize", requestRender);
@@ -128,6 +185,10 @@ export default function BannerAboutTransition({ onContact }) {
   return (
     <section className="banner-about-track" ref={trackRef}>
       <div className="banner-about-stage" ref={stageRef}>
+        <div className="banner-about-about-layer">
+          <AboutSection preview />
+        </div>
+
         <div className="banner-about-banner-layer">
           <KontourBanner
             id="blue-banner"
@@ -135,10 +196,10 @@ export default function BannerAboutTransition({ onContact }) {
             onContact={onContact}
           />
         </div>
+      </div>
 
-        <div className="banner-about-about-layer">
-          <AboutSection />
-        </div>
+      <div className="banner-about-final-layer">
+        <AboutSection />
       </div>
     </section>
   );
