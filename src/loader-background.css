@@ -56,13 +56,32 @@
   z-index: 2;
 }
 
+/* Smooth loader-word crossfade. This overrides the quicker base transition. */
+.preloader__title span {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  filter: blur(0);
+  transition:
+    opacity 340ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 340ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 340ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform, filter;
+}
+
+.preloader__title span.is-changing {
+  opacity: 0;
+  transform: translate3d(0, 10%, 0) scale(0.985);
+  filter: blur(4px);
+}
+
 .preloader.is-complete .preloader__background {
   opacity: 0;
   transform: scale(1.025);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .preloader__background {
+  .preloader__background,
+  .preloader__title span {
     transition-duration: 0.01ms !important;
   }
 }
