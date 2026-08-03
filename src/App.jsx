@@ -2,14 +2,12 @@ import { useState } from "react";
 import { ScrollProvider } from "./contexts/ScrollContext";
 import PageLoader from "./components/PageLoader";
 import Header from "./components/Header";
-import Hero from "./components/Hero";
-import KontourBanner from "./components/KontourBanner";
-import AboutSection from "./components/AboutSection";
+import BannerAboutTransition from "./components/BannerAboutTransition";
 import NavMenu from "./components/NavMenu";
 import RequestModal from "./components/RequestModal";
 
 export default function App() {
-  const [ready, setReady] = useState(false); // true once the intro loader leaves
+  const [ready, setReady] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -30,10 +28,7 @@ export default function App() {
       />
 
       <main id="main">
-        {/* <Hero ready={ready} onContact={openModal} /> */}
-        {/* <KontourBanner onContact={openModal} /> */}
-        <KontourBanner id="blue-banner" theme="blue" onContact={openModal} />
-        <AboutSection />
+        <BannerAboutTransition onContact={openModal} />
       </main>
 
       <NavMenu
