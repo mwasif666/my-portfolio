@@ -22,9 +22,25 @@ const capabilities = [
   },
 ];
 
-export default function AboutSection() {
+export default function AboutSection({
+  preview = false,
+  id = "about",
+  className = "",
+}) {
+  const classes = [
+    "about-panel",
+    preview ? "about-panel--preview" : "about-panel--final",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <section className="about-panel" id="about">
+    <section
+      className={classes}
+      id={preview ? undefined : id}
+      aria-hidden={preview ? "true" : undefined}
+    >
       <div className="about-blueprint" aria-hidden="true" />
 
       <div className="about-layout">
@@ -98,6 +114,7 @@ export default function AboutSection() {
             href="https://www.linkedin.com/in/muhammad-wasif-944741202/"
             target="_blank"
             rel="noreferrer"
+            tabIndex={preview ? -1 : undefined}
           >
             <span>VIEW LINKEDIN PROFILE</span>
             <ArrowUpRight aria-hidden="true" />
