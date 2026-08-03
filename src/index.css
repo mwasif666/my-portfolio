@@ -2860,7 +2860,7 @@ body {
   height: 1.2rem;
 }
 
-#home.kontour.portfolio-banner {
+.kontour.portfolio-banner {
   --portrait-x: 0px;
   --portrait-y: 0px;
   --copy-x: 0px;
@@ -3443,7 +3443,7 @@ body {
   .portfolio-menu {
     display: grid;
   }
-  #home.kontour.portfolio-banner {
+  .kontour.portfolio-banner {
     padding-top: 6rem;
   }
   .portfolio-grid-lines {
