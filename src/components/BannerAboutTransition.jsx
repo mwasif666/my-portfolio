@@ -60,27 +60,20 @@ export default function BannerAboutTransition({ onContact }) {
       const scrolled = clamp(-rect.top, 0, travel);
       const progress = clamp(scrolled / travel, 0, 1);
 
-      // Keep the hero pinned longer and crop it gradually toward the exact
-      // measured bounds of the About portrait card underneath.
       const cropPhase = easeInOutCubic(clamp(progress / 0.68, 0, 1));
 
-      // Fade the outer hero content only after the slower crop is underway.
       const heroSidePhase = easeOutCubic(
         clamp((progress - 0.24) / 0.34, 0, 1),
       );
 
-      // Reveal About copy when the centre card is almost established.
       const sideRevealPhase = easeOutCubic(
         clamp((progress - 0.56) / 0.25, 0, 1),
       );
 
-      // Crossfade the cropped hero into the About portrait card near the end.
       const cardMorphPhase = easeInOutCubic(
         clamp((progress - 0.76) / 0.16, 0, 1),
       );
 
-      // Hand off to the document-flow About section without changing the
-      // surrounding dark-blue background or creating a blank gap.
       const handoffPhase = easeInOutCubic(
         clamp((progress - 0.94) / 0.06, 0, 1),
       );
@@ -89,8 +82,8 @@ export default function BannerAboutTransition({ onContact }) {
       const finalCompensation =
         handoffPhase > 0 ? -naturalFinalOffset : 0;
 
-      const portraitWidth = 160 - cropPhase * 60;
-      const portraitMargin = -30 + cropPhase * 30;
+      const portraitWidth = 144 - cropPhase * 44;
+      const portraitMargin = -22 + cropPhase * 22;
 
       stage.style.setProperty(
         "--banner-clip-top",
