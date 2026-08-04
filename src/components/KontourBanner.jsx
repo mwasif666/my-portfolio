@@ -61,7 +61,11 @@ export default function KontourBanner({
             Full-Stack Web Developer
           </Reveal>
 
-          <Reveal as="h1" className="clean-hero-title clean-hero-title--left" delay={70}>
+          <Reveal
+            as="h1"
+            className="clean-hero-title clean-hero-title--left"
+            delay={70}
+          >
             <span>Build fast.</span>
             <span>Scale smart.</span>
           </Reveal>
@@ -72,8 +76,8 @@ export default function KontourBanner({
               <span>Digital projects delivered</span>
             </div>
             <p>
-              I design and develop dependable websites, web apps and digital
-              products from first interface to production deployment.
+              Full-stack delivery across interfaces, APIs, databases and
+              production deployment.
             </p>
           </Reveal>
         </div>
@@ -92,12 +96,20 @@ export default function KontourBanner({
             aria-label="Start a project with Muhammad Wasif"
           >
             <ArrowUpRight />
-            <span>Start a<br />project</span>
+            <span>
+              Start a
+              <br />
+              project
+            </span>
           </button>
         </div>
 
         <aside className="portfolio-panel clean-hero-right">
-          <Reveal as="h2" className="clean-hero-title clean-hero-title--right" delay={110}>
+          <Reveal
+            as="h2"
+            className="clean-hero-title clean-hero-title--right"
+            delay={110}
+          >
             <span>From idea</span>
             <span>to production.</span>
           </Reveal>
