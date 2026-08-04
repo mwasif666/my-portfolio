@@ -7,5 +7,6 @@ import './loader-background.css';
 import './about-section.css';
 import './about-transition-runtime.css';
 import './about-dark-background.css';
+import './clean-portfolio-layout.css';
 
 createRoot(document.getElementById('root')).render(<App />);
