@@ -1,0 +1,17 @@
+/* Keep the first rendered frame consistent with the scroll-morph dimensions. */
+.banner-about-stage {
+  --hero-portrait-width: 144%;
+  --hero-portrait-margin: -22%;
+}
+
+@media (max-width: 900px) {
+  .banner-about-stage {
+    --hero-portrait-width: 128%;
+    --hero-portrait-margin: -14%;
+  }
+
+  #blue-banner .clean-hero-portrait {
+    width: 128% !important;
+    margin-left: -14% !important;
+  }
+}
