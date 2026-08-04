@@ -1,4 +1,4 @@
-import { ArrowUpRight, Code2, Gauge, Layers3 } from "lucide-react";
+import { Code2, Gauge, Layers3 } from "lucide-react";
 import myImg from "../../myimg.png";
 
 const capabilities = [
@@ -81,26 +81,7 @@ export default function AboutSection({
           </div>
         </div>
 
-        <article className="about-feature-card">
-          <div className="about-card-topline">
-            <span>FULL-STACK DELIVERY</span>
-            <strong>30+ PROJECTS</strong>
-          </div>
-
-          <div className="about-card-chart" aria-hidden="true">
-            <svg viewBox="0 0 520 330" preserveAspectRatio="none">
-              <path
-                className="about-chart-grid"
-                d="M0 48H520M0 118H520M0 188H520M0 258H520M66 0V330M132 0V330M198 0V330M264 0V330M330 0V330M396 0V330M462 0V330"
-              />
-              <path
-                className="about-chart-line"
-                d="M8 292 C72 286 92 272 132 244 S212 203 260 170 S341 125 392 88 S455 48 512 18"
-              />
-              <circle cx="512" cy="18" r="5" />
-            </svg>
-          </div>
-
+        <article className="about-feature-card" aria-label="Muhammad Wasif portrait">
           <div className="about-portrait-glow" aria-hidden="true" />
           <img
             className="about-card-portrait"
@@ -108,17 +89,6 @@ export default function AboutSection({
             alt="Muhammad Wasif, full-stack web developer"
             draggable="false"
           />
-
-          <a
-            className="about-linkedin-link"
-            href="https://www.linkedin.com/in/muhammad-wasif-944741202/"
-            target="_blank"
-            rel="noreferrer"
-            tabIndex={preview ? -1 : undefined}
-          >
-            <span>VIEW LINKEDIN PROFILE</span>
-            <ArrowUpRight aria-hidden="true" />
-          </a>
         </article>
 
         <div className="about-capabilities">
