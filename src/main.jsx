@@ -10,5 +10,6 @@ import './about-dark-background.css';
 import './clean-portfolio-layout.css';
 import './clean-portfolio-runtime.css';
 import './clean-portfolio-polish.css';
+import './clean-portfolio-final.css';
 
 createRoot(document.getElementById('root')).render(<App />);
