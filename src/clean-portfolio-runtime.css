@@ -1,0 +1,21 @@
+/* Final safeguards against legacy hero transforms and spacing. */
+#blue-banner .clean-hero-left,
+#blue-banner .clean-hero-right {
+  gap: 0;
+}
+
+#blue-banner .clean-hero-portrait::before {
+  top: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+#blue-banner .clean-hero-portrait,
+#blue-banner.portfolio-banner--blue.in .clean-hero-portrait {
+  transform: none !important;
+}
+
+#blue-banner .clean-portrait-cta,
+#blue-banner .clean-contact-row button {
+  cursor: pointer;
+}
