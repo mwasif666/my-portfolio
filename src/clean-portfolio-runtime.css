@@ -15,7 +15,6 @@
   transform: none !important;
 }
 
-#blue-banner .clean-portrait-cta,
-#blue-banner .clean-contact-row button {
+#blue-banner .clean-portrait-cta {
   cursor: pointer;
 }

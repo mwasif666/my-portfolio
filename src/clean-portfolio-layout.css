@@ -245,57 +245,6 @@
   line-height: 1.35;
 }
 
-#blue-banner .clean-contact-row {
-  display: flex;
-  width: min(100%, 27rem);
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin: 1.45rem 0 2.1rem auto;
-  font-family: "Onest", sans-serif;
-}
-
-#blue-banner .clean-contact-row > span {
-  max-width: 10rem;
-  color: rgba(247, 248, 251, 0.44);
-  font-size: 0.64rem;
-  font-weight: 580;
-  letter-spacing: 0.08em;
-  line-height: 1.35;
-  text-transform: uppercase;
-}
-
-#blue-banner .clean-contact-row button {
-  display: inline-flex;
-  min-height: 3.15rem;
-  align-items: center;
-  justify-content: center;
-  gap: 1.1rem;
-  padding: 0.75rem 1.15rem 0.75rem 1.35rem;
-  border: 1px solid rgba(0, 152, 241, 0.72);
-  border-radius: 999px;
-  background: rgba(0, 152, 241, 0.12);
-  color: #f7f8fb;
-  font-size: 0.76rem;
-  font-weight: 650;
-  white-space: nowrap;
-  transition:
-    background 220ms ease,
-    color 220ms ease,
-    transform 220ms ease;
-}
-
-#blue-banner .clean-contact-row button:hover {
-  background: #0098f1;
-  color: #03111c;
-  transform: translateY(-0.18rem);
-}
-
-#blue-banner .clean-contact-row svg {
-  width: 1.05rem;
-  height: 1.05rem;
-}
-
 #blue-banner .portfolio-nameplate {
   position: absolute;
   z-index: 4;
@@ -542,8 +491,7 @@
     padding-bottom: 0;
   }
 
-  #blue-banner .clean-service-list,
-  #blue-banner .clean-contact-row {
+  #blue-banner .clean-service-list {
     width: 100%;
     margin-right: 0;
     margin-left: 0;
@@ -593,12 +541,4 @@
     padding: 0;
   }
 
-  #blue-banner .clean-contact-row {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  #blue-banner .clean-contact-row button {
-    width: 100%;
-  }
 }

@@ -19,9 +19,18 @@ const ArrowUpRight = () => (
 );
 
 const services = [
-  "Web apps from front end to backend",
-  "Responsive, performance-focused builds",
-  "Scalable systems ready for production",
+  {
+    title: "Full-stack web apps",
+    detail: "From polished front ends to dependable backends",
+  },
+  {
+    title: "Fast on every screen",
+    detail: "Responsive, accessible and performance-focused",
+  },
+  {
+    title: "Ready for production",
+    detail: "Scalable systems built to grow with your product",
+  },
 ];
 
 export default function KontourBanner({
@@ -70,16 +79,28 @@ export default function KontourBanner({
             <span>Scale smart.</span>
           </Reveal>
 
-          <Reveal className="clean-left-summary" delay={210}>
-            <div className="clean-proof">
-              <strong>30+</strong>
-              <span>Digital projects delivered</span>
-            </div>
-            <p>
-              Full-stack delivery across interfaces, APIs, databases and
-              production deployment.
-            </p>
-          </Reveal>
+          <div className="clean-left-details">
+            <Reveal className="clean-left-summary" delay={210}>
+              <div className="clean-proof">
+                <strong>30+</strong>
+                <span>Digital projects delivered</span>
+              </div>
+              <p>
+                Interfaces, APIs, databases and deployment — shaped into one
+                clear, dependable product.
+              </p>
+            </Reveal>
+
+            <button
+              className="clean-portrait-cta"
+              type="button"
+              onClick={onContact}
+              aria-label="Start a project with Muhammad Wasif"
+            >
+              <ArrowUpRight />
+              <span>Start a project</span>
+            </button>
+          </div>
         </div>
 
         <div className="kontour-portrait clean-hero-portrait">
@@ -88,23 +109,14 @@ export default function KontourBanner({
             alt="Muhammad Wasif, full-stack web developer"
             draggable="false"
           />
-
-          <button
-            className="clean-portrait-cta"
-            type="button"
-            onClick={onContact}
-            aria-label="Start a project with Muhammad Wasif"
-          >
-            <ArrowUpRight />
-            <span>
-              Start a
-              <br />
-              project
-            </span>
-          </button>
         </div>
 
         <aside className="portfolio-panel clean-hero-right">
+          {/* Mirrors the role pill so both headlines share one baseline. */}
+          <span className="clean-role-pill clean-role-pill--ghost" aria-hidden="true">
+            Full-Stack Web Developer
+          </span>
+
           <Reveal
             as="h2"
             className="clean-hero-title clean-hero-title--right"
@@ -116,19 +128,14 @@ export default function KontourBanner({
 
           <Reveal as="ol" className="clean-service-list" delay={230}>
             {services.map((service, index) => (
-              <li key={service}>
+              <li key={service.title}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
-                <p>{service}</p>
+                <p>
+                  <strong>{service.title}</strong>
+                  <small>{service.detail}</small>
+                </p>
               </li>
             ))}
-          </Reveal>
-
-          <Reveal className="clean-contact-row" delay={320}>
-            <span>Available for selected projects</span>
-            <button type="button" onClick={onContact}>
-              Let&apos;s talk
-              <ArrowUpRight />
-            </button>
           </Reveal>
         </aside>
 
