@@ -88,7 +88,7 @@
 .portraitWrap {
   position: absolute;
   z-index: 4;
-  left: clamp(0rem, 7vw, 7rem);
+  left: clamp(0rem, 14vw, 20rem);
   bottom: -2.5rem;
   width: clamp(27rem, 39vw, 43rem);
   height: min(72vh, 47rem);
@@ -151,6 +151,9 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(8.5rem, 1fr));
   width: min(45vw, 34rem);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 4px;
   opacity: 0;
   transform: translateY(1.25rem);
   transition: opacity 700ms ease 300ms, transform 700ms cubic-bezier(.22,1,.36,1) 300ms;
@@ -165,16 +168,14 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.11);
+  border: 0;
   background: linear-gradient(145deg, rgba(29, 113, 158, 0.2), rgba(3, 47, 77, 0.32));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
   text-align: center;
   backdrop-filter: blur(16px);
 }
 
-.stat:first-child { border-radius: 1.1rem 0 0 1.1rem; }
-.stat:last-child { border-radius: 0 1.1rem 1.1rem 0; }
-.stat + .stat { border-left: 0; }
+.stat + .stat { border-left: 1px solid rgba(255, 255, 255, 0.11); }
 .stat strong { font-size: clamp(1.7rem, 2.4vw, 2.75rem); font-weight: 650; letter-spacing: -0.05em; line-height: 1; }
 .stat span { margin-top: 0.55rem; color: rgba(230, 248, 255, 0.58); font-size: 0.58rem; line-height: 1.3; }
 
@@ -214,8 +215,6 @@
 
 .in .activity { opacity: 1; transform: translateY(0); }
 
-.scrollCue { position: absolute; right: clamp(2rem, 5vw, 5.5rem); bottom: 1.35rem; color: rgba(230, 248, 255, 0.42); font-size: 0.52rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; }
-
 @media (max-width: 1100px) {
   .layout { padding-inline: 2rem; }
   .headingBlock { width: 82%; }
@@ -235,7 +234,6 @@
   .stat { min-height: 6.25rem; padding: 0.75rem 0.45rem; }
   .pitch { position: relative; order: 4; right: auto; bottom: auto; width: 100%; }
   .activity { position: relative; order: 5; left: auto; bottom: auto; width: 100%; }
-  .scrollCue { display: none; }
 }
 
 @media (max-width: 520px) {
@@ -243,8 +241,9 @@
   .headingBlock h1 { font-size: 3.35rem; }
   .portraitWrap { height: 27rem; margin-bottom: -3rem; }
   .orbitCta { width: 5.4rem; height: 5.4rem; }
-  .stats { grid-template-columns: 1fr; gap: 0.6rem; }
-  .stat, .stat:first-child, .stat:last-child { min-height: 5.6rem; border: 1px solid rgba(255,255,255,.11); border-radius: 0.9rem; }
+  .stats { grid-template-columns: 1fr; gap: 0.6rem; overflow: visible; border: 0; border-radius: 0; }
+  .stat, .stat:first-child, .stat:last-child { min-height: 5.6rem; border: 1px solid rgba(255,255,255,.11); border-radius: 4px; }
+  .stat + .stat { border-left: 1px solid rgba(255,255,255,.11); }
   .actions { flex-direction: column; }
   .actions button, .actions a { width: 100%; }
 }
