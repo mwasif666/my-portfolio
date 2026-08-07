@@ -7,18 +7,51 @@ export function ScrollProvider({ children }) {
   const lenisRef = useRef(null);
   const enabledRef = useRef(true);
 
-  // Lenis smooth-scroll + manual rAF loop, reset to top on load.
   useEffect(() => {
     window.scrollTo(0, 0);
-    const lenis = new Lenis({ smoothWheel: true });
+
+    const lenis = new Lenis({
+      smoothWheel: true,
+      lerp: 0.075,
+      wheelMultiplier: 0.9,
+      touchMultiplier: 1.05,
+      syncTouch: false,
+    });
     lenisRef.current = lenis;
-    let raf;
-    function loop(t) { lenis.raf(t); raf = requestAnimationFrame(loop); }
+
+    const gsap = window.gsap;
+    const ScrollTrigger = window.ScrollTrigger;
+    let raf = 0;
+
+    if (gsap && ScrollTrigger) {
+      gsap.registerPlugin(ScrollTrigger);
+      lenis.on('scroll', ScrollTrigger.update);
+
+      const update = (time) => lenis.raf(time * 1000);
+      gsap.ticker.add(update);
+      gsap.ticker.lagSmoothing(0);
+      ScrollTrigger.refresh();
+
+      return () => {
+        gsap.ticker.remove(update);
+        lenis.destroy();
+        lenisRef.current = null;
+      };
+    }
+
+    const loop = (time) => {
+      lenis.raf(time);
+      raf = requestAnimationFrame(loop);
+    };
     raf = requestAnimationFrame(loop);
-    return () => { cancelAnimationFrame(raf); lenis.destroy(); };
+
+    return () => {
+      cancelAnimationFrame(raf);
+      lenis.destroy();
+      lenisRef.current = null;
+    };
   }, []);
 
-  // Adaptive grid scale-up above 1920px (media queries handle scale-down).
   useEffect(() => {
     function applyAdaptiveGrid() {
       const FONT_BASE = 16, baseWidth = 1920, coef = 0.6666;
@@ -54,12 +87,17 @@ export function ScrollProvider({ children }) {
   const scrollToId = useCallback((id) => {
     const el = document.getElementById(id);
     if (!el) return;
-    enabledRef.current = false;
-    setTimeout(() => {
-      const top = el.getBoundingClientRect().top + window.pageYOffset;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }, 50);
-    setTimeout(() => { enabledRef.current = true; }, 100);
+
+    const lenis = lenisRef.current;
+    if (lenis) {
+      lenis.scrollTo(el, {
+        duration: 1.25,
+        easing: (t) => 1 - Math.pow(1 - t, 4),
+      });
+      return;
+    }
+
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, []);
 
   return (
