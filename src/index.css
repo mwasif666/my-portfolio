@@ -1,3 +1,8 @@
+/* Legacy stylesheets are unlayered by nature and would otherwise outrank
+   every Tailwind utility. Slotting them into a `legacy` layer above
+   Tailwind base but below utilities keeps their existing wins over
+   preflight while letting utility classes take effect. */
+@layer theme, base, legacy, components, utilities;
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -11,6 +16,8 @@
   font-style: normal;
   font-display: swap;
 }
+
+@layer legacy {
 
 /* ============ tokens ============ */
 :root {
@@ -3624,4 +3631,6 @@ body {
   .portfolio-tech-card {
     transform: none;
   }
+}
+
 }

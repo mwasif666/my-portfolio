@@ -1,7 +1,0 @@
-.banner-about-track.is-final-active .banner-about-stage {
-  pointer-events: none;
-}
-
-.banner-about-track.is-final-active .banner-about-final-layer {
-  pointer-events: auto;
-}

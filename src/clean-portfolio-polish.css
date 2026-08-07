@@ -1,3 +1,4 @@
+@layer legacy {
 /* ============================================================
    Final editorial polish for the portfolio hero.
    Keeps the existing dark-blue identity while bringing the spacing,
@@ -598,4 +599,6 @@
     margin-top: 0;
     margin-right: 0;
   }
+}
+
 }

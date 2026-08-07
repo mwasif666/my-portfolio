@@ -1,3 +1,4 @@
+@layer legacy {
 /* Loader-only dark blue moving-grid background overrides. */
 .preloader {
   background: #060010;
@@ -89,4 +90,6 @@
   .preloader__title span {
     transition-duration: 0.01ms !important;
   }
+}
+
 }

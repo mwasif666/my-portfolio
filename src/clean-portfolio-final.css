@@ -1,3 +1,4 @@
+@layer legacy {
 /* Keep the first rendered frame consistent with the scroll-morph dimensions. */
 .banner-about-stage {
   --hero-portrait-width: 144%;
@@ -14,4 +15,6 @@
     width: 128% !important;
     margin-left: -14% !important;
   }
+}
+
 }

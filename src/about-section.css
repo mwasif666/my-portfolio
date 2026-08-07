@@ -1,3 +1,4 @@
+@layer legacy {
 /* ============================================================
    SharpLink-style banner -> About transition
    ============================================================ */
@@ -674,4 +675,6 @@
     transform: none !important;
     pointer-events: auto;
   }
+}
+
 }

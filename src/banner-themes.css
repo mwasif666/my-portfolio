@@ -1,3 +1,4 @@
+@layer legacy {
 /* Isolated blue treatment for the duplicated portfolio banner. */
 #blue-banner.portfolio-banner--blue {
   background: #060010;
@@ -149,4 +150,6 @@
   border-color: rgba(0, 152, 241, 0.55);
   background: rgba(0, 152, 241, 0.14);
   color: #fff;
+}
+
 }

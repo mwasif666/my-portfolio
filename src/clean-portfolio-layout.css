@@ -1,3 +1,4 @@
+@layer legacy {
 /* ============================================================
    Clean editorial portfolio hero
    Inspired by the supplied reference while preserving the existing
@@ -540,5 +541,7 @@
     order: 2;
     padding: 0;
   }
+
+}
 
 }

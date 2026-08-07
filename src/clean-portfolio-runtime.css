@@ -1,3 +1,4 @@
+@layer legacy {
 /* Final safeguards against legacy hero transforms and spacing. */
 #blue-banner .clean-hero-left,
 #blue-banner .clean-hero-right {
@@ -17,4 +18,6 @@
 
 #blue-banner .clean-portrait-cta {
   cursor: pointer;
+}
+
 }

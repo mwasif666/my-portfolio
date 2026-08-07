@@ -1,3 +1,4 @@
+@layer legacy {
 /* Slow SharpLink-style wrap while preserving the original light About section. */
 .banner-about-track {
   height: 235svh;
@@ -49,4 +50,6 @@
   .banner-about-final-layer {
     background: #dbe8f2;
   }
+}
+
 }

@@ -2,7 +2,8 @@ import { useState } from "react";
 import { ScrollProvider } from "./contexts/ScrollContext";
 import PageLoader from "./components/PageLoader";
 import Header from "./components/Header";
-import BannerAboutTransition from "./components/BannerAboutTransition";
+import KontourBanner from "./components/KontourBanner";
+import AboutSection from "./components/AboutSection";
 import NavMenu from "./components/NavMenu";
 import RequestModal from "./components/RequestModal";
 
@@ -28,7 +29,8 @@ export default function App() {
       />
 
       <main id="main">
-        <BannerAboutTransition onContact={openModal} />
+        <KontourBanner id="blue-banner" theme="blue" onContact={openModal} />
+        <AboutSection />
       </main>
 
       <NavMenu
