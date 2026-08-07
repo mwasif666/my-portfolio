@@ -10,4 +10,5 @@ import './clean-portfolio-runtime.css';
 import './clean-portfolio-polish.css';
 import './clean-portfolio-final.css';
 
+// Deployment refresh: keep current banner/header fixes intact.
 createRoot(document.getElementById('root')).render(<App />);
