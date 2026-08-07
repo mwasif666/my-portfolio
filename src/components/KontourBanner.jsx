@@ -243,20 +243,6 @@ export default function KontourBanner({ onContact, id = "home", theme = "orange"
         >
           <GitHubActivity username="mwasif666" />
         </div>
-
-        <span
-          className={clsx(
-            "hidden items-center gap-2.5 text-[0.64rem] font-semibold tracking-[0.13em] text-[#e6f8ff]/50 uppercase",
-            "min-[901px]:absolute min-[901px]:z-[7] min-[901px]:inline-flex",
-            "min-[901px]:right-[var(--rail)] min-[901px]:bottom-[clamp(1.6rem,3.4vh,2.6rem)]",
-          )}
-          aria-hidden="true"
-        >
-          <i className="grid size-7 place-items-center rounded-full border border-white/15 bg-[#022b47]/30 backdrop-blur-md">
-            <ChevronDown />
-          </i>
-          Scroll down
-        </span>
       </div>
     </section>
   );
