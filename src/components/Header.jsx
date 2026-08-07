@@ -54,13 +54,13 @@ export default function Header({ ready, onMenu, onContact }) {
                 <button
                   onClick={() => scrollToId(item.target)}
                   className={clsx(
-                    "min-h-10 rounded-full border border-white/30 bg-[#0a547f]/38 backdrop-blur-lg",
+                    "min-h-10 rounded-full border border-white/30 bg-[#0a547f]/40 backdrop-blur-lg",
                     "px-4.5 py-2.5 text-[0.8rem] font-semibold text-white",
                     "shadow-[inset_0_1px_0_rgba(255,255,255,0.2),0_5px_18px_rgba(0,35,58,0.12)]",
                     "[text-shadow:0_1px_10px_rgba(0,24,42,0.32)]",
                     "transition-[color,background,transform,border-color] duration-200",
-                    "hover:-translate-y-0.5 hover:border-white/45 hover:bg-white/24 hover:text-white",
-                    "focus-visible:border-white/50 focus-visible:bg-white/22",
+                    "hover:-translate-y-0.5 hover:border-white/50 hover:bg-white/25 hover:text-white",
+                    "focus-visible:border-white/50 focus-visible:bg-white/20",
                     "max-[1180px]:px-3.5 max-[1180px]:text-[0.75rem]",
                   )}
                 >
@@ -76,7 +76,7 @@ export default function Header({ ready, onMenu, onContact }) {
             type="button"
             onClick={onContact}
             className={clsx(
-              "hidden min-h-12 rounded-full border border-white/15 bg-[#03121f]/92 px-7 py-3",
+              "hidden min-h-12 rounded-full border border-white/15 bg-[#03121f]/90 px-7 py-3",
               "text-[0.82rem] font-semibold text-white shadow-[0_0.65rem_1.6rem_rgba(0,17,32,0.32)]",
               "transition-[background,transform] duration-200 hover:-translate-y-0.5 hover:bg-[#01111e]",
               "min-[901px]:block max-[1180px]:px-5 max-[1180px]:text-[0.76rem]",
