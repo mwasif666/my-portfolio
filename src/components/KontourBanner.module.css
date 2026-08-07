@@ -189,6 +189,50 @@
 
 .in .activity { opacity: 1; transform: translateY(0); }
 
+.signatureBand {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  min-height: clamp(12rem, 19vw, 23rem);
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: -2px;
+  padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 3vw, 3rem);
+  background:
+    radial-gradient(ellipse 68% 90% at 50% 0%, rgba(20, 91, 133, 0.18), transparent 68%),
+    linear-gradient(180deg, #012540 0%, #011f36 32%, #011929 67%, #00131f 100%);
+  color: #f3fbff;
+  font-family: "Onest", sans-serif;
+  isolation: isolate;
+}
+
+.signatureBand::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.34;
+  background:
+    linear-gradient(90deg, rgba(35, 128, 179, 0.08), transparent 35%, transparent 70%, rgba(0, 18, 31, 0.2)),
+    radial-gradient(circle at 50% -25%, rgba(86, 190, 238, 0.18), transparent 44%);
+}
+
+.signatureName {
+  display: block;
+  width: 100%;
+  margin: 0;
+  color: rgba(242, 251, 255, 0.96);
+  font-size: clamp(4rem, 10vw, 12rem);
+  font-weight: 430;
+  letter-spacing: -0.075em;
+  line-height: 0.84;
+  text-align: center;
+  white-space: nowrap;
+  text-shadow: 0 1.2rem 4rem rgba(0, 11, 20, 0.28);
+}
+
 @media (max-width: 1100px) {
   .layout { padding-inline: 2rem; }
   .headingBlock { width: 82%; }
@@ -208,6 +252,8 @@
   .stat { min-height: 6.25rem; padding: 0.75rem 0.45rem; }
   .pitch { position: relative; order: 4; right: auto; bottom: auto; width: 100%; }
   .activity { position: relative; order: 5; left: auto; bottom: auto; width: 100%; }
+  .signatureBand { min-height: clamp(9rem, 31vw, 14rem); }
+  .signatureName { font-size: clamp(3.15rem, 12.5vw, 6.6rem); }
 }
 
 @media (max-width: 520px) {
@@ -220,6 +266,8 @@
   .stat + .stat { border-left: 1px solid rgba(255,255,255,.11); }
   .actions { flex-direction: column; }
   .actions button, .actions a { width: 100%; }
+  .signatureBand { min-height: 8.5rem; padding-inline: 0.75rem; }
+  .signatureName { font-size: clamp(2.7rem, 13vw, 4.2rem); letter-spacing: -0.065em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
