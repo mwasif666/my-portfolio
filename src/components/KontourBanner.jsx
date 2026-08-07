@@ -93,8 +93,6 @@ export default function KontourBanner({ onContact, id = "home", theme = "orange"
         <div className={styles.activity}>
           <GitHubActivity username="mwasif666" />
         </div>
-
-        <span className={styles.scrollCue} aria-hidden="true">Scroll down</span>
       </div>
     </section>
   );
