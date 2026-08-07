@@ -18,12 +18,6 @@ const Play = ({ className = "size-4" }) => (
   </svg>
 );
 
-const ChevronDown = ({ className = "size-3.5" }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="m6 9 6 6 6-6" />
-  </svg>
-);
-
 const stats = [
   { value: "30+", label: "Projects delivered" },
   { value: "4+", label: "Years building" },
@@ -72,8 +66,6 @@ export default function KontourBanner({ onContact, id = "home", theme = "orange"
 
       <div
         className={clsx(
-          // --rail is the shared left/right alignment edge; Header uses the same
-          // track width and inline padding so both agree at every breakpoint.
           "[--rail:clamp(1.25rem,5.5vw,7.5rem)] [--rail-top:clamp(8.5rem,14vh,11rem)]",
           "relative z-[4] mx-auto w-[min(100%,140rem)]",
           "flex flex-col items-center gap-7 px-5 pt-30 pb-10",
@@ -97,8 +89,6 @@ export default function KontourBanner({ onContact, id = "home", theme = "orange"
           Full-Stack Development
         </span>
 
-        {/* Sits on the right so the portrait can layer over the left of the
-            stage without covering any of the headline. */}
         <div
           className={clsx(
             reveal("delay-[120ms]"),
@@ -125,11 +115,7 @@ export default function KontourBanner({ onContact, id = "home", theme = "orange"
             "pointer-events-none relative order-2 -mt-8 -mb-16 h-144 w-[118%]",
             "max-[520px]:-mb-12 max-[520px]:h-108",
             "min-[901px]:absolute min-[901px]:z-[6] min-[901px]:m-0",
-            "min-[901px]:left-[clamp(0rem,8vw,11rem)] min-[901px]:-bottom-20",
-            // Matching the source ratio keeps the box the same size as the
-            // rendered image, so the portrait never sinks into letterbox space.
-            // The width term grows slower than vw so the portrait stays large on
-            // narrow screens without ever reaching the headline on wide ones.
+            "min-[901px]:left-[clamp(0rem,14vw,20rem)] min-[901px]:-bottom-20",
             "min-[901px]:aspect-[887/882] min-[901px]:h-[min(100vh,33rem_+_21vw,60rem)] min-[901px]:w-auto",
           )}
         >
@@ -149,10 +135,10 @@ export default function KontourBanner({ onContact, id = "home", theme = "orange"
           className={clsx(
             "hidden opacity-0 transition-[background,transform,opacity] duration-200 delay-[340ms]",
             "group-data-[visible=true]:opacity-100 motion-reduce:opacity-100 motion-reduce:transition-none",
-            "min-[901px]:absolute min-[901px]:z-[6] min-[901px]:grid min-[901px]:place-content-center",
-            "min-[901px]:left-[var(--rail)] min-[901px]:top-1/2 min-[901px]:-translate-y-1/2",
+            "min-[901px]:absolute min-[901px]:z-[7] min-[901px]:grid min-[901px]:place-content-center",
+            "min-[901px]:left-[clamp(4.5rem,11vw,15rem)] min-[901px]:top-1/2 min-[901px]:-translate-y-1/2",
             "min-[901px]:size-25 min-[1101px]:size-30 min-[901px]:gap-1 min-[901px]:rounded-full",
-            "min-[901px]:border min-[901px]:border-[#d0f1ff]/30 min-[901px]:bg-[#05486e]/35 min-[901px]:text-white min-[901px]:backdrop-blur-md",
+            "min-[901px]:border min-[901px]:border-[#d0f1ff]/35 min-[901px]:bg-[#05486e]/45 min-[901px]:text-white min-[901px]:backdrop-blur-md",
             "min-[901px]:hover:bg-[#7cdaff]/30 min-[901px]:hover:scale-105",
           )}
         >
@@ -160,13 +146,12 @@ export default function KontourBanner({ onContact, id = "home", theme = "orange"
           <span className="text-xs font-semibold min-[1101px]:text-[0.8rem]">Start now</span>
         </button>
 
-        {/* One continuous glass panel, split by hairline dividers. */}
         <div
           className={clsx(
             reveal("delay-[300ms]"),
-            "order-3 grid w-full grid-cols-1 overflow-hidden rounded-[1.35rem]",
-            "border border-white/10 bg-[linear-gradient(145deg,rgba(29,113,158,0.2),rgba(3,47,77,0.32))]",
-            "shadow-[inset_0_1px_0_rgba(255,255,255,0.07)] backdrop-blur-lg",
+            "order-3 grid w-full grid-cols-1 overflow-hidden rounded-[4px] box-border",
+            "border border-white/[0.18] bg-[linear-gradient(145deg,rgba(29,113,158,0.2),rgba(3,47,77,0.32))]",
+            "shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-lg",
             "min-[521px]:grid-cols-3",
             "min-[901px]:absolute min-[901px]:z-[7] min-[901px]:right-[var(--rail)] min-[901px]:top-[52%]",
             "min-[901px]:w-[min(44vw,50rem)]",
@@ -178,8 +163,8 @@ export default function KontourBanner({ onContact, id = "home", theme = "orange"
               key={stat.label}
               className={clsx(
                 "flex min-h-28 flex-col items-center justify-center px-2 py-4 text-center",
-                "border-t border-white/10 first:border-t-0",
-                "min-[521px]:min-h-30 min-[521px]:border-t-0 min-[521px]:border-l min-[521px]:first:border-l-0",
+                "border-t border-white/[0.14] first:border-t-0",
+                "min-[521px]:min-h-30 min-[521px]:border-t-0 min-[521px]:border-l min-[521px]:border-white/[0.14] min-[521px]:first:border-l-0",
                 "min-[901px]:min-h-[7.5rem] min-[901px]:px-4 min-[901px]:py-5",
               )}
             >
