@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ScrollProvider } from "./contexts/ScrollContext";
 import PageLoader from "./components/PageLoader";
 import Header from "./components/Header";
-import KontourBanner from "./components/KontourBanner";
+import ScrollHero3D from "./components/ScrollHero3D";
 import AboutSection from "./components/AboutSection";
 import NavMenu from "./components/NavMenu";
 import RequestModal from "./components/RequestModal";
@@ -29,7 +29,7 @@ export default function App() {
       />
 
       <main id="main">
-        <KontourBanner id="blue-banner" theme="blue" onContact={openModal} />
+        <ScrollHero3D onContact={openModal} />
         <AboutSection />
       </main>
 
