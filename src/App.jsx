@@ -29,6 +29,7 @@ export default function App() {
       />
 
       <main id="main">
+        {/* Keep the banner static; smooth scrolling remains handled globally. */}
         <KontourBanner id="home" theme="blue" onContact={openModal} />
         <AboutSection />
       </main>
