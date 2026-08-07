@@ -12,7 +12,7 @@ const setHiDPICanvas = (
   const parent = canvas.parentElement;
   const width = (parent?.clientWidth ?? window.innerWidth) | 0;
   const height = (parent?.clientHeight ?? window.innerHeight) | 0;
-  const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+  const dpr = Math.max(1, Math.min(1.5, window.devicePixelRatio || 1));
 
   canvas.width = Math.floor(width * dpr);
   canvas.height = Math.floor(height * dpr);
@@ -27,8 +27,8 @@ const originFromOffset = (offset: Offset, cell: number) => ({
 });
 
 const Noise: React.FC<{ refresh?: number; alpha?: number }> = ({
-  refresh = 2,
-  alpha = 18,
+  refresh = 5,
+  alpha = 14,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -41,7 +41,7 @@ const Noise: React.FC<{ refresh?: number; alpha?: number }> = ({
 
     let frame = 0;
     let animationFrame = 0;
-    const size = 1024;
+    const size = 320;
 
     const resize = () => {
       canvas.width = size;
@@ -73,6 +73,7 @@ const Noise: React.FC<{ refresh?: number; alpha?: number }> = ({
 
     window.addEventListener("resize", resize);
     resize();
+    draw();
     loop();
 
     return () => {
@@ -262,7 +263,7 @@ export default function NoiseDarkBlueGradientWithSquares({
       )}
 
       <div className="pointer-events-none absolute inset-0 z-20">
-        <Noise refresh={2} alpha={18} />
+        <Noise refresh={5} alpha={14} />
       </div>
 
       <div
