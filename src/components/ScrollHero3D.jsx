@@ -26,9 +26,7 @@ export default function ScrollHero3D({ onContact }) {
 
     const hero = stage.querySelector(".portfolio-banner");
     const stats = stage.querySelector('[aria-label="Professional highlights"]');
-    const portraitImage = stage.querySelector(
-      'img[alt*="Muhammad Wasif"]',
-    );
+    const portraitImage = stage.querySelector('img[alt*="Muhammad Wasif"]');
     const portrait = portraitImage?.parentElement;
     const heading = stage.querySelector("h1")?.parentElement;
     const cta = stage.querySelector(
@@ -42,20 +40,14 @@ export default function ScrollHero3D({ onContact }) {
 
     if (!hero || !layout) return undefined;
 
-    const animated = [
-      kicker,
-      heading,
-      portrait,
-      cta,
-      stats,
-      pitch,
-      activity,
-    ].filter(Boolean);
+    const animated = [kicker, heading, portrait, cta, stats, pitch, activity].filter(Boolean);
 
     hero.style.transformStyle = "preserve-3d";
     layout.style.transformStyle = "preserve-3d";
 
     let frame = 0;
+    let pointerX = 0;
+    let pointerY = 0;
 
     const apply = (element, transform, opacity = null, origin = null) => {
       if (!element) return;
@@ -66,7 +58,65 @@ export default function ScrollHero3D({ onContact }) {
       if (origin) element.style.transformOrigin = origin;
     };
 
-    const clear = () => {
+    const setBackgroundVars = (progress) => {
+      const depth = easeOutCubic(clamp(progress / 0.92));
+
+      stage.style.setProperty("--bg-tilt-x", `${(-pointerY * 1.8).toFixed(2)}deg`);
+      stage.style.setProperty("--bg-tilt-y", `${(pointerX * 2.2).toFixed(2)}deg`);
+
+      stage.style.setProperty(
+        "--bg-grid-x",
+        `${(pointerX * 20 - depth * 18).toFixed(2)}px`,
+      );
+      stage.style.setProperty(
+        "--bg-grid-y",
+        `${(-60 + depth * 155 + pointerY * 14).toFixed(2)}px`,
+      );
+      stage.style.setProperty(
+        "--bg-grid-z",
+        `${(-120 + depth * 330).toFixed(2)}px`,
+      );
+      stage.style.setProperty(
+        "--bg-grid-rx",
+        `${(62 - depth * 20 + pointerY * 2).toFixed(2)}deg`,
+      );
+      stage.style.setProperty(
+        "--bg-grid-rz",
+        `${(-3 + pointerX * 2.2 + depth * 1.2).toFixed(2)}deg`,
+      );
+
+      stage.style.setProperty(
+        "--bg-glow-x",
+        `${(pointerX * 42 + depth * 24).toFixed(2)}px`,
+      );
+      stage.style.setProperty(
+        "--bg-glow-y",
+        `${(pointerY * 28 - depth * 46).toFixed(2)}px`,
+      );
+      stage.style.setProperty(
+        "--bg-glow-scale",
+        `${(1 + depth * 0.15).toFixed(4)}`,
+      );
+
+      stage.style.setProperty(
+        "--bg-orb-x",
+        `${(pointerX * 54 + depth * 72).toFixed(2)}px`,
+      );
+      stage.style.setProperty(
+        "--bg-orb-y",
+        `${(pointerY * 34 - depth * 34).toFixed(2)}px`,
+      );
+      stage.style.setProperty(
+        "--bg-beam-x",
+        `${(-pointerX * 36 - depth * 42).toFixed(2)}px`,
+      );
+      stage.style.setProperty(
+        "--bg-beam-y",
+        `${(-pointerY * 22 + depth * 30).toFixed(2)}px`,
+      );
+    };
+
+    const clearForeground = () => {
       layout.style.removeProperty("transition");
       layout.style.removeProperty("transform");
       layout.style.removeProperty("will-change");
@@ -87,93 +137,63 @@ export default function ScrollHero3D({ onContact }) {
       const travel = Math.max(track.offsetHeight - window.innerHeight, 1);
       const progress = clamp(-rect.top / travel);
 
+      setBackgroundVars(progress);
+
       if (progress <= 0.002) {
-        clear();
+        clearForeground();
         return;
       }
 
-      const depth = easeOutCubic(clamp(progress / 0.86));
-      const exit = easeInOutCubic(clamp((progress - 0.72) / 0.28));
-      const cameraY = -10 * depth;
-      const cameraScale = 1 - 0.018 * depth;
+      const depth = easeOutCubic(clamp(progress / 0.9));
+      const exit = easeInOutCubic(clamp((progress - 0.88) / 0.12));
 
       layout.style.transition = "none";
       layout.style.willChange = "transform";
-      layout.style.transform = `translate3d(0, ${cameraY.toFixed(2)}px, 0) rotateX(${(
-        2.2 * depth
-      ).toFixed(2)}deg) rotateY(${(-1.2 * depth).toFixed(2)}deg) scale(${cameraScale.toFixed(4)})`;
+      layout.style.transform = `translate3d(${(pointerX * 3).toFixed(2)}px, ${(-5 * depth + pointerY * 2).toFixed(2)}px, 0) rotateX(${(0.75 * depth - pointerY * 0.4).toFixed(2)}deg) rotateY(${(-0.65 * depth + pointerX * 0.45).toFixed(2)}deg)`;
 
       apply(
         heading,
-        `translate3d(${(18 * depth).toFixed(2)}px, ${(-68 * depth).toFixed(
-          2,
-        )}px, ${(-300 * depth).toFixed(2)}px) rotateX(${(
-          4.5 * depth
-        ).toFixed(2)}deg) scale(${(1 - 0.055 * depth).toFixed(4)})`,
-        Math.max(0.16, 1 - exit * 0.78),
+        `translate3d(${(10 * depth + pointerX * 4).toFixed(2)}px, ${(-30 * depth + pointerY * 3).toFixed(2)}px, ${(-135 * depth).toFixed(2)}px) scale(${(1 - 0.025 * depth).toFixed(4)})`,
+        Math.max(0.58, 1 - exit * 0.42),
         "50% 35%",
       );
 
       apply(
         kicker,
-        `translate3d(${(-8 * depth).toFixed(2)}px, ${(-28 * depth).toFixed(
-          2,
-        )}px, ${(-125 * depth).toFixed(2)}px)`,
-        Math.max(0.12, 1 - exit * 0.84),
+        `translate3d(${(-5 * depth + pointerX * 3).toFixed(2)}px, ${(-14 * depth + pointerY * 2).toFixed(2)}px, ${(-55 * depth).toFixed(2)}px)`,
+        Math.max(0.54, 1 - exit * 0.46),
       );
 
       apply(
         portrait,
-        `translate3d(${(82 * depth).toFixed(2)}px, ${(-18 * depth).toFixed(
-          2,
-        )}px, ${(235 * depth).toFixed(2)}px) rotateY(${(-7.5 * depth).toFixed(
-          2,
-        )}deg) rotateZ(${(0.8 * depth).toFixed(2)}deg) scale(${(
-          1 + 0.065 * depth
-        ).toFixed(4)})`,
-        Math.max(0.72, 1 - exit * 0.18),
-        "55% 70%",
+        `translate3d(${(44 * depth + pointerX * 8).toFixed(2)}px, ${(-10 * depth + pointerY * 4).toFixed(2)}px, ${(185 * depth).toFixed(2)}px) rotateY(${(-3.6 * depth + pointerX * 0.9).toFixed(2)}deg) scale(${(1 + 0.038 * depth).toFixed(4)})`,
+        Math.max(0.84, 1 - exit * 0.12),
+        "55% 72%",
       );
 
       apply(
         cta,
-        `translate3d(${(58 * depth).toFixed(2)}px, ${(-8 * depth).toFixed(
-          2,
-        )}px, ${(175 * depth).toFixed(2)}px) scale(${(
-          1 + 0.035 * depth
-        ).toFixed(4)})`,
-        Math.max(0.42, 1 - exit * 0.5),
+        `translate3d(${(30 * depth + pointerX * 6).toFixed(2)}px, ${(-4 * depth + pointerY * 2).toFixed(2)}px, ${(115 * depth).toFixed(2)}px) scale(${(1 + 0.02 * depth).toFixed(4)})`,
+        Math.max(0.68, 1 - exit * 0.32),
       );
 
       apply(
         stats,
-        `translate3d(${(-36 * depth).toFixed(2)}px, ${(-14 * depth).toFixed(
-          2,
-        )}px, ${(155 * depth).toFixed(2)}px) rotateY(${(
-          4.2 * depth
-        ).toFixed(2)}deg) scale(${(1 + 0.025 * depth).toFixed(4)})`,
-        Math.max(0.62, 1 - exit * 0.3),
+        `translate3d(${(-18 * depth + pointerX * -4).toFixed(2)}px, ${(-8 * depth + pointerY * 2).toFixed(2)}px, ${(105 * depth).toFixed(2)}px) rotateY(${(1.8 * depth - pointerX * 0.7).toFixed(2)}deg)`,
+        Math.max(0.72, 1 - exit * 0.28),
         "50% 50%",
       );
 
       apply(
         pitch,
-        `translate3d(${(-22 * depth).toFixed(2)}px, ${(-44 * depth).toFixed(
-          2,
-        )}px, ${(105 * depth).toFixed(2)}px) rotateY(${(
-          2.6 * depth
-        ).toFixed(2)}deg)`,
-        Math.max(0.3, 1 - exit * 0.68),
+        `translate3d(${(-10 * depth + pointerX * -3).toFixed(2)}px, ${(-20 * depth + pointerY * 2).toFixed(2)}px, ${(62 * depth).toFixed(2)}px)`,
+        Math.max(0.58, 1 - exit * 0.42),
       );
 
       apply(
         activity,
-        `translate3d(${(24 * depth).toFixed(2)}px, ${(34 * depth).toFixed(
-          2,
-        )}px, ${(90 * depth).toFixed(2)}px) rotateY(${(-3.5 * depth).toFixed(
-          2,
-        )}deg)`,
-        Math.max(0.32, 1 - exit * 0.64),
+        `translate3d(${(12 * depth + pointerX * 4).toFixed(2)}px, ${(16 * depth + pointerY * 3).toFixed(2)}px, ${(52 * depth).toFixed(2)}px)`,
+        Math.max(0.6, 1 - exit * 0.4),
       );
     };
 
@@ -182,15 +202,32 @@ export default function ScrollHero3D({ onContact }) {
       frame = window.requestAnimationFrame(render);
     };
 
+    const onPointerMove = (event) => {
+      const bounds = stage.getBoundingClientRect();
+      pointerX = clamp(((event.clientX - bounds.left) / bounds.width) * 2 - 1, -1, 1);
+      pointerY = clamp(((event.clientY - bounds.top) / bounds.height) * 2 - 1, -1, 1);
+      requestRender();
+    };
+
+    const onPointerLeave = () => {
+      pointerX = 0;
+      pointerY = 0;
+      requestRender();
+    };
+
     render();
     window.addEventListener("scroll", requestRender, { passive: true });
     window.addEventListener("resize", requestRender);
+    stage.addEventListener("pointermove", onPointerMove, { passive: true });
+    stage.addEventListener("pointerleave", onPointerLeave);
 
     return () => {
       window.removeEventListener("scroll", requestRender);
       window.removeEventListener("resize", requestRender);
+      stage.removeEventListener("pointermove", onPointerMove);
+      stage.removeEventListener("pointerleave", onPointerLeave);
       if (frame) window.cancelAnimationFrame(frame);
-      clear();
+      clearForeground();
       hero.style.removeProperty("transform-style");
       layout.style.removeProperty("transform-style");
     };
@@ -199,11 +236,7 @@ export default function ScrollHero3D({ onContact }) {
   return (
     <section className={styles.track} ref={trackRef} id="home">
       <div className={styles.stage} ref={stageRef}>
-        <KontourBanner
-          id="blue-banner"
-          theme="blue"
-          onContact={onContact}
-        />
+        <KontourBanner id="blue-banner" theme="blue" onContact={onContact} />
       </div>
     </section>
   );
