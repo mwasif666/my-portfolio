@@ -8,6 +8,8 @@ export function ScrollProvider({ children }) {
   const enabledRef = useRef(true);
 
   useEffect(() => {
+    const previousRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
 
     const lenis = new Lenis({
@@ -18,10 +20,18 @@ export function ScrollProvider({ children }) {
       syncTouch: false,
     });
     lenisRef.current = lenis;
+    lenis.scrollTo(0, { immediate: true });
 
     const gsap = window.gsap;
     const ScrollTrigger = window.ScrollTrigger;
     let raf = 0;
+
+    const resetOnPageShow = () => {
+      window.scrollTo(0, 0);
+      lenis.scrollTo(0, { immediate: true });
+    };
+
+    window.addEventListener('pageshow', resetOnPageShow);
 
     if (gsap && ScrollTrigger) {
       gsap.registerPlugin(ScrollTrigger);
@@ -33,6 +43,8 @@ export function ScrollProvider({ children }) {
       ScrollTrigger.refresh();
 
       return () => {
+        window.removeEventListener('pageshow', resetOnPageShow);
+        window.history.scrollRestoration = previousRestoration;
         gsap.ticker.remove(update);
         lenis.destroy();
         lenisRef.current = null;
@@ -46,6 +58,8 @@ export function ScrollProvider({ children }) {
     raf = requestAnimationFrame(loop);
 
     return () => {
+      window.removeEventListener('pageshow', resetOnPageShow);
+      window.history.scrollRestoration = previousRestoration;
       cancelAnimationFrame(raf);
       lenis.destroy();
       lenisRef.current = null;
@@ -84,6 +98,18 @@ export function ScrollProvider({ children }) {
     h.style.removeProperty('height');
   }, []);
 
+  const scrollToTop = useCallback((immediate = true) => {
+    const lenis = lenisRef.current;
+    if (lenis) {
+      lenis.scrollTo(0, {
+        immediate,
+        duration: immediate ? 0 : 0.9,
+        easing: (t) => 1 - Math.pow(1 - t, 4),
+      });
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   const scrollToId = useCallback((id) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -101,7 +127,7 @@ export function ScrollProvider({ children }) {
   }, []);
 
   return (
-    <ScrollCtx.Provider value={{ stopScroll, startScroll, scrollToId }}>
+    <ScrollCtx.Provider value={{ stopScroll, startScroll, scrollToId, scrollToTop }}>
       {children}
     </ScrollCtx.Provider>
   );
