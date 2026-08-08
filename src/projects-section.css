@@ -241,7 +241,7 @@
     white-space: nowrap;
   }
 
-  /* A large, deliberate website frame. The whole screenshot stays visible
+  /* A full-bleed website frame. The screenshot fills the row edge to edge
      instead of sitting as a small image inside a wide empty canvas. */
   .project-row__preview {
     position: absolute;
@@ -249,7 +249,7 @@
     z-index: 1;
     display: grid;
     place-items: center;
-    padding: clamp(1.25rem, 2vw, 2rem) clamp(1.4rem, 3vw, 3.4rem) clamp(4.4rem, 6vw, 5.4rem);
+    padding: 0;
     opacity: 0;
     visibility: hidden;
     transform: translateY(0.8rem);
@@ -260,7 +260,7 @@
   }
 
   .project-row__preview-frame {
-    width: min(92%, 62rem);
+    width: 100%;
     aspect-ratio: 16 / 9;
     max-height: 100%;
     overflow: hidden;
@@ -274,7 +274,7 @@
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: top center;
     background: #fff;
   }
