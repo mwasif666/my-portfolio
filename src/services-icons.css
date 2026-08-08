@@ -1,205 +1,150 @@
 @layer legacy {
-  /* Title-matched service sculptures.
-     Keeps the soft monochrome 3D language from the reference artwork while
-     using the portfolio's existing #0098f1 accent as a restrained detail. */
-  .service-orbit__sculpture {
-    --sculpture-turn: -6deg;
-    --sculpture-back-turn: -31deg;
-    --sculpture-mid-turn: 23deg;
-    --sculpture-face-turn: -3deg;
+  /* Generated service artwork: premium monochrome 3D SVGs with subtle motion. */
+  .service-orbit__art {
+    --art-turn: -4deg;
     position: absolute;
     top: 50%;
-    right: clamp(-4.4rem, -2.8vw, -2rem);
-    width: clamp(22rem, 27vw, 31rem);
+    right: clamp(-4.5rem, -2.8vw, -2rem);
+    width: clamp(24rem, 31vw, 36rem);
     aspect-ratio: 1;
     pointer-events: none;
-    transform: translateY(-50%) rotate(var(--sculpture-turn));
+    transform: translateY(-50%) rotate(var(--art-turn));
     transform-origin: 50% 50%;
-    transform-style: preserve-3d;
     user-select: none;
+    will-change: transform;
   }
 
-  .service-orbit__sculpture::before {
+  .service-orbit__art::before {
     content: "";
     position: absolute;
-    inset: 15%;
+    inset: 17%;
+    z-index: -1;
     border-radius: 50%;
     background: radial-gradient(
       circle,
-      rgba(0, 152, 241, 0.16) 0%,
-      rgba(114, 199, 255, 0.08) 42%,
+      rgba(0, 152, 241, 0.12) 0%,
+      rgba(114, 199, 255, 0.05) 48%,
       transparent 74%
     );
-    filter: blur(1.55rem);
-    transform: scale(1.2);
+    filter: blur(1.5rem);
+    opacity: 0.82;
+    transform: scale(1.18);
   }
 
-  .service-orbit__sculpture-shadow {
-    position: absolute;
-    right: 10%;
-    bottom: 8%;
-    left: 12%;
-    height: 15%;
-    border-radius: 50%;
-    background: rgba(7, 16, 25, 0.2);
-    filter: blur(1.3rem);
-    opacity: 0.34;
-    transform: translateY(32%) rotate(-5deg) scaleX(0.92);
+  .service-orbit__art img,
+  .service-orbit__visual .service-orbit__art img,
+  .service-orbit__mobile-visual .service-orbit__art img {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain;
+    opacity: 1;
+    transform: none !important;
+    filter: drop-shadow(0 1.5rem 2.1rem rgba(7, 16, 25, 0.09)) !important;
   }
 
-  .service-orbit__sculpture-plate {
-    position: absolute;
-    inset: 22%;
-    border: 1px solid rgba(7, 16, 25, 0.075);
-    background:
-      radial-gradient(circle at 28% 20%, rgba(255, 255, 255, 0.98), transparent 31%),
-      linear-gradient(145deg, #ffffff 0%, #f5f6f7 34%, #e4e7e9 69%, #cfd4d7 100%);
-    box-shadow:
-      inset 0.55rem 0.65rem 1.25rem rgba(255, 255, 255, 0.84),
-      inset -0.8rem -0.9rem 1.35rem rgba(95, 106, 114, 0.13),
-      0 1.4rem 2.2rem rgba(7, 16, 25, 0.11),
-      0 0.18rem 0.45rem rgba(7, 16, 25, 0.08);
+  .service-orbit__visual.is-active .service-orbit__art {
+    animation: serviceArtworkFloat 5.8s ease-in-out infinite;
   }
 
-  .service-orbit__sculpture-plate--back {
-    border-radius: 44% 36% 47% 34%;
-    opacity: 0.68;
-    transform: translate(-20%, -8%) rotate(var(--sculpture-back-turn)) scale(0.9);
+  .service-orbit__visual.is-active .service-orbit__art img {
+    animation: serviceArtworkBreath 5.8s ease-in-out infinite;
   }
 
-  .service-orbit__sculpture-plate--mid {
-    border-radius: 35% 46% 34% 48%;
-    opacity: 0.88;
-    transform: translate(18%, 10%) rotate(var(--sculpture-mid-turn)) scale(0.92);
+  .service-orbit__art--website {
+    --art-turn: -5deg;
   }
 
-  .service-orbit__sculpture-face {
-    position: absolute;
-    inset: 21%;
-    display: grid;
-    place-items: center;
-    overflow: hidden;
-    border: 1px solid rgba(7, 16, 25, 0.085);
-    border-radius: 38% 32% 40% 34%;
-    background:
-      radial-gradient(circle at 30% 22%, rgba(255, 255, 255, 1), transparent 28%),
-      linear-gradient(148deg, #ffffff 0%, #f7f8f8 35%, #e8ebed 72%, #d5dadd 100%);
-    box-shadow:
-      inset 0.75rem 0.8rem 1.5rem rgba(255, 255, 255, 0.96),
-      inset -0.9rem -1rem 1.45rem rgba(88, 100, 108, 0.14),
-      0 1.8rem 2.8rem rgba(7, 16, 25, 0.14),
-      0 0.25rem 0.6rem rgba(7, 16, 25, 0.09);
-    transform: rotate(var(--sculpture-face-turn));
+  .service-orbit__art--commerce {
+    --art-turn: 4deg;
   }
 
-  .service-orbit__sculpture-face::before {
-    content: "";
-    position: absolute;
-    top: -8%;
-    left: -12%;
-    width: 82%;
-    height: 58%;
-    border-radius: 50%;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), transparent 72%);
-    filter: blur(0.2rem);
-    opacity: 0.78;
-    transform: rotate(-18deg);
+  .service-orbit__art--fullstack {
+    --art-turn: -2deg;
   }
 
-  .service-orbit__sculpture-icon {
-    position: relative;
-    z-index: 2;
-    width: 42%;
-    height: 42%;
-    color: rgba(7, 16, 25, 0.84);
-    filter: drop-shadow(0 0.22rem 0.18rem rgba(255, 255, 255, 0.76));
+  .service-orbit__art--api {
+    --art-turn: 5deg;
   }
 
-  .service-orbit__sculpture-badge {
-    position: absolute;
-    z-index: 3;
-    right: 11%;
-    bottom: 11%;
-    display: grid;
-    min-width: 2.65rem;
-    height: 2.65rem;
-    place-items: center;
-    padding: 0 0.48rem;
-    border: 0.26rem solid rgba(243, 248, 251, 0.94);
-    border-radius: 999px;
-    background: var(--service-blue, #0098f1);
-    color: #ffffff;
-    font-family: "Onest", sans-serif;
-    font-size: 0.58rem;
-    font-weight: 760;
-    letter-spacing: 0.07em;
-    line-height: 1;
-    box-shadow:
-      0 0.65rem 1.3rem rgba(0, 105, 170, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  .service-orbit__art--performance {
+    --art-turn: -6deg;
   }
 
-  .service-orbit__sculpture--website {
-    --sculpture-turn: -7deg;
-    --sculpture-back-turn: -34deg;
-    --sculpture-mid-turn: 21deg;
-    --sculpture-face-turn: -2deg;
+  @keyframes serviceArtworkFloat {
+    0%,
+    100% {
+      transform: translateY(-50%) translate3d(0, 0, 0) rotate(var(--art-turn));
+    }
+
+    50% {
+      transform: translateY(-50%) translate3d(-0.45rem, -0.8rem, 0)
+        rotate(calc(var(--art-turn) + 1.4deg));
+    }
   }
 
-  .service-orbit__sculpture--commerce {
-    --sculpture-turn: 6deg;
-    --sculpture-back-turn: -24deg;
-    --sculpture-mid-turn: 31deg;
-    --sculpture-face-turn: 2deg;
-  }
+  @keyframes serviceArtworkBreath {
+    0%,
+    100% {
+      scale: 0.985;
+    }
 
-  .service-orbit__sculpture--fullstack {
-    --sculpture-turn: -2deg;
-    --sculpture-back-turn: -38deg;
-    --sculpture-mid-turn: 16deg;
-    --sculpture-face-turn: -4deg;
-  }
-
-  .service-orbit__sculpture--api {
-    --sculpture-turn: 7deg;
-    --sculpture-back-turn: -27deg;
-    --sculpture-mid-turn: 35deg;
-    --sculpture-face-turn: 3deg;
-  }
-
-  .service-orbit__sculpture--performance {
-    --sculpture-turn: -9deg;
-    --sculpture-back-turn: -36deg;
-    --sculpture-mid-turn: 18deg;
-    --sculpture-face-turn: -1deg;
+    50% {
+      scale: 1.015;
+    }
   }
 
   @media (max-width: 1280px) {
-    .service-orbit__sculpture {
+    .service-orbit__art {
       right: -4rem;
-      width: clamp(20rem, 28vw, 27rem);
+      width: clamp(21rem, 30vw, 30rem);
     }
   }
 
   @media (max-width: 980px) {
-    .service-orbit__mobile-visual .service-orbit__sculpture {
+    .service-orbit__mobile-visual .service-orbit__art {
       position: relative;
       top: auto;
       right: auto;
-      width: min(86%, 24rem);
-      transform: rotate(var(--sculpture-turn)) scale(0.94);
+      width: min(100%, 28rem);
+      margin: 0 auto;
+      transform: rotate(var(--art-turn));
+      animation: serviceArtworkMobileFloat 5.8s ease-in-out infinite;
     }
 
-    .service-orbit__sculpture-badge {
-      min-width: 2.4rem;
-      height: 2.4rem;
-      font-size: 0.54rem;
+    .service-orbit__mobile-visual .service-orbit__art img {
+      width: 100% !important;
+    }
+
+    @keyframes serviceArtworkMobileFloat {
+      0%,
+      100% {
+        transform: translateY(0) rotate(var(--art-turn));
+      }
+
+      50% {
+        transform: translateY(-0.55rem) rotate(calc(var(--art-turn) + 1deg));
+      }
     }
   }
 
   @media (max-width: 640px) {
-    .service-orbit__mobile-visual .service-orbit__sculpture {
-      width: min(92%, 21rem);
+    .service-orbit__mobile-visual .service-orbit__art {
+      width: min(108%, 23rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-orbit__visual.is-active .service-orbit__art,
+    .service-orbit__visual.is-active .service-orbit__art img,
+    .service-orbit__mobile-visual .service-orbit__art {
+      animation: none !important;
     }
   }
 }
