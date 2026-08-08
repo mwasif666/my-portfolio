@@ -26,7 +26,7 @@
   .about-story::before {
     inset: 0;
     z-index: 0;
-    opacity: 0.28;
+    opacity: 0.25;
     background-image:
       radial-gradient(circle, rgba(255, 255, 255, 0.32) 0.65px, transparent 0.8px),
       radial-gradient(circle, rgba(0, 152, 241, 0.38) 0.55px, transparent 0.75px);
@@ -37,16 +37,16 @@
   }
 
   .about-story::after {
-    top: -24%;
-    right: -8%;
+    top: -27%;
+    right: -9%;
     z-index: 0;
-    width: 46rem;
-    height: 46rem;
-    border: 1px solid rgba(0, 152, 241, 0.08);
+    width: clamp(38rem, 43vw, 50rem);
+    aspect-ratio: 1;
+    border: 1px solid rgba(0, 152, 241, 0.07);
     border-radius: 50%;
     box-shadow:
-      0 0 0 6rem rgba(0, 152, 241, 0.018),
-      0 0 0 12rem rgba(0, 152, 241, 0.012);
+      0 0 0 6rem rgba(0, 152, 241, 0.016),
+      0 0 0 12rem rgba(0, 152, 241, 0.01);
   }
 
   .about-story__noise {
@@ -54,20 +54,19 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.2;
-    background:
-      linear-gradient(115deg, transparent 42%, rgba(255, 255, 255, 0.025) 50%, transparent 58%);
+    opacity: 0.18;
+    background: linear-gradient(115deg, transparent 42%, rgba(255, 255, 255, 0.025) 50%, transparent 58%);
   }
 
   .about-story__glow {
     position: absolute;
     z-index: 0;
-    top: 15%;
-    right: 7%;
-    width: min(35vw, 34rem);
+    top: 18%;
+    right: 8%;
+    width: min(34vw, 33rem);
     aspect-ratio: 1;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(0, 152, 241, 0.13), transparent 68%);
+    background: radial-gradient(circle, rgba(0, 152, 241, 0.12), transparent 68%);
     filter: blur(1.8rem);
     pointer-events: none;
   }
@@ -75,13 +74,13 @@
   .about-story__label {
     position: absolute;
     z-index: 3;
-    top: clamp(1.7rem, 4vw, 3.2rem);
-    left: clamp(1.4rem, 5.3vw, 5.5rem);
+    top: clamp(2rem, 4.5vh, 3.25rem);
+    left: clamp(1.5rem, 5.3vw, 5.5rem);
     display: inline-flex;
     align-items: center;
     gap: 0.8rem;
     font-family: "Onest", sans-serif;
-    font-size: clamp(0.88rem, 1vw, 1.08rem);
+    font-size: clamp(0.88rem, 1vw, 1.05rem);
     font-weight: 600;
     letter-spacing: -0.015em;
   }
@@ -111,24 +110,30 @@
     position: relative;
     z-index: 2;
     display: flex;
-    width: min(100%, 88rem);
+    width: 100%;
     min-height: 100svh;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    margin: 0 auto;
-    padding:
-      clamp(7.5rem, 12vh, 10rem)
-      clamp(1.5rem, 5.8vw, 6rem)
-      clamp(6rem, 9vh, 8rem);
+    padding: clamp(7rem, 11vh, 9rem) clamp(1.5rem, 5vw, 5rem) clamp(4.5rem, 7vh, 6rem);
+  }
+
+  .about-story__body {
+    display: grid;
+    grid-template-columns: clamp(4.2rem, 5vw, 5.25rem) minmax(0, 68rem);
+    column-gap: clamp(2.2rem, 4vw, 4.5rem);
+    width: min(100%, 78rem);
+    margin: clamp(3rem, 6vh, 5rem) auto 0;
+    align-items: start;
   }
 
   .about-story__code-orb {
-    position: absolute;
-    top: 30%;
-    left: clamp(0.5rem, 3vw, 2rem);
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+    top: clamp(1.15rem, 2.2vw, 2.25rem);
     display: grid;
-    width: clamp(3.8rem, 5vw, 5.2rem);
-    height: clamp(3.8rem, 5vw, 5.2rem);
+    width: clamp(4rem, 5vw, 5.15rem);
+    height: clamp(4rem, 5vw, 5.15rem);
     place-items: center;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 50%;
@@ -150,36 +155,39 @@
   }
 
   .about-story__statement {
-    width: min(100%, 65rem);
-    margin: 0 auto;
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    margin: 0;
     color: var(--about-muted);
     font-family: "Onest", sans-serif;
-    font-size: clamp(2.15rem, 3.2vw, 4.05rem);
+    font-size: clamp(2.1rem, 2.8vw, 3.55rem);
     font-weight: 520;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.043em;
     line-height: 1.27;
     text-wrap: pretty;
   }
 
   .about-story__statement span {
-    color: rgba(255, 255, 255, 0.96);
+    color: rgba(255, 255, 255, 0.97);
   }
 
   .about-story__profile {
+    grid-column: 2;
+    grid-row: 2;
     display: flex;
-    width: min(100%, 65rem);
     align-items: center;
     gap: 0.95rem;
-    margin: clamp(2.6rem, 4vw, 4rem) auto 0;
+    margin-top: clamp(2.5rem, 4.5vh, 3.8rem);
   }
 
   .about-story__avatar {
     position: relative;
-    width: clamp(3.8rem, 4.6vw, 5rem);
-    height: clamp(3.8rem, 4.6vw, 5rem);
+    width: clamp(3.8rem, 4.5vw, 4.8rem);
+    height: clamp(3.8rem, 4.5vw, 4.8rem);
     flex: 0 0 auto;
     overflow: hidden;
-    border: 1px solid rgba(0, 152, 241, 0.6);
+    border: 1px solid rgba(0, 152, 241, 0.65);
     border-radius: 50%;
     background:
       radial-gradient(circle at 50% 32%, rgba(0, 152, 241, 0.18), transparent 56%),
@@ -205,7 +213,7 @@
   }
 
   .about-story__profile-copy strong {
-    font-size: clamp(1rem, 1.25vw, 1.28rem);
+    font-size: clamp(1rem, 1.2vw, 1.24rem);
     font-weight: 640;
     letter-spacing: -0.02em;
   }
@@ -220,7 +228,7 @@
     position: absolute;
     z-index: 2;
     right: clamp(1.4rem, 4vw, 4.5rem);
-    bottom: clamp(1.4rem, 3vw, 2.7rem);
+    bottom: clamp(1.5rem, 3vw, 2.7rem);
     display: flex;
     align-items: center;
     gap: 0.8rem;
@@ -241,25 +249,37 @@
 
   @media (max-width: 900px) {
     .about-story {
-      min-height: 86svh;
+      min-height: 88svh;
     }
 
     .about-story__inner {
-      min-height: 86svh;
+      min-height: 88svh;
+      align-items: flex-start;
       padding-top: 8.5rem;
       padding-bottom: 5.5rem;
     }
 
-    .about-story__statement {
-      font-size: clamp(2rem, 6.9vw, 3.2rem);
-      line-height: 1.22;
+    .about-story__body {
+      display: block;
+      width: min(100%, 42rem);
+      margin-top: 1.5rem;
     }
 
     .about-story__code-orb {
       position: relative;
       top: auto;
-      left: auto;
+      width: 4rem;
+      height: 4rem;
       margin: 0 0 2rem;
+    }
+
+    .about-story__statement {
+      font-size: clamp(2rem, 6.6vw, 3.15rem);
+      line-height: 1.22;
+    }
+
+    .about-story__profile {
+      margin-top: 2.7rem;
     }
 
     .about-story__meta {
@@ -277,12 +297,8 @@
     }
 
     .about-story__statement {
-      font-size: clamp(1.8rem, 9.2vw, 2.55rem);
+      font-size: clamp(1.8rem, 9vw, 2.5rem);
       letter-spacing: -0.04em;
-    }
-
-    .about-story__profile {
-      margin-top: 2.4rem;
     }
   }
 
