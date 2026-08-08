@@ -15,13 +15,19 @@ export default function App() {
 
   const openModal = () => setModalOpen(true);
 
+  const handleLoaderDone = () => {
+    window.scrollTo(0, 0);
+    setReady(true);
+    window.requestAnimationFrame(() => window.scrollTo(0, 0));
+  };
+
   return (
     <ScrollProvider>
       <a href="#main" className="skip">
         Skip to content
       </a>
 
-      <PageLoader onDone={() => setReady(true)} />
+      <PageLoader onDone={handleLoaderDone} />
 
       <Header
         ready={ready}
