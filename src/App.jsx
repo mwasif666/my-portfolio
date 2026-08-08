@@ -4,6 +4,7 @@ import PageLoader from "./components/PageLoader";
 import Header from "./components/Header";
 import KontourBanner from "./components/KontourBanner";
 import AboutSection from "./components/AboutSection";
+import ServicesSection from "./components/ServicesSection";
 import ProjectsSection from "./components/ProjectsSection";
 import NavMenu from "./components/NavMenu";
 import RequestModal from "./components/RequestModal";
@@ -39,6 +40,7 @@ export default function App() {
         {/* Keep the banner static; smooth scrolling remains handled globally. */}
         <KontourBanner id="home" theme="blue" onContact={openModal} />
         <AboutSection />
+        <ServicesSection />
         <ProjectsSection />
       </main>
 
