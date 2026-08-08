@@ -2,17 +2,26 @@
    portrait mask read far better as CSS than as arbitrary Tailwind values.
    Everything else on the banner is Tailwind utilities. */
 
+/* The section now also contains the signature band, so these inset-0 washes
+   span hero + name as one field. Stops are expressed against that taller box:
+   the hero occupies roughly the first ~76%, the band the remainder. */
 .tint {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 30%, rgba(0, 22, 41, 0.3)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 23%, rgba(0, 22, 41, 0.3) 76%, rgba(0, 17, 30, 0.38)),
     linear-gradient(90deg, rgba(4, 36, 61, 0.16), transparent 36%, transparent 74%, rgba(2, 27, 48, 0.14));
 }
 
 .light {
   background:
-    radial-gradient(ellipse 75% 48% at 50% 2%, rgba(190, 237, 255, 0.85), transparent 65%),
-    radial-gradient(circle 42rem at 50% 36%, rgba(63, 188, 240, 0.36), transparent 72%),
-    linear-gradient(180deg, rgba(70, 187, 231, 0.5), rgba(5, 71, 111, 0.7) 54%, rgba(1, 37, 64, 0.96));
+    radial-gradient(ellipse 75% 36% at 50% 1.5%, rgba(190, 237, 255, 0.85), transparent 65%),
+    radial-gradient(circle 42rem at 50% 28%, rgba(63, 188, 240, 0.36), transparent 72%),
+    linear-gradient(
+      180deg,
+      rgba(70, 187, 231, 0.5),
+      rgba(5, 71, 111, 0.7) 41%,
+      rgba(1, 37, 64, 0.96) 76%,
+      rgba(0, 27, 47, 0.98) 100%
+    );
 }
 
 .layout {
@@ -189,34 +198,19 @@
 
 .in .activity { opacity: 1; transform: translateY(0); }
 
+/* No background of its own — it simply sits on top of the banner's washes so
+   the hero gradient runs straight through the name with no seam. */
 .signatureBand {
   position: relative;
-  z-index: 3;
+  z-index: 5;
   display: flex;
   min-height: clamp(12rem, 19vw, 23rem);
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  margin-top: -2px;
   padding: clamp(1.5rem, 3vw, 3rem) clamp(1rem, 3vw, 3rem);
-  background:
-    radial-gradient(ellipse 68% 90% at 50% 0%, rgba(20, 91, 133, 0.18), transparent 68%),
-    linear-gradient(180deg, #012540 0%, #011f36 32%, #011929 67%, #00131f 100%);
+  background: transparent;
   color: #f3fbff;
   font-family: "Onest", sans-serif;
-  isolation: isolate;
-}
-
-.signatureBand::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.34;
-  background:
-    linear-gradient(90deg, rgba(35, 128, 179, 0.08), transparent 35%, transparent 70%, rgba(0, 18, 31, 0.2)),
-    radial-gradient(circle at 50% -25%, rgba(86, 190, 238, 0.18), transparent 44%);
 }
 
 .signatureName {
