@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { Gauge, Layers, Monitor, Plug, ShoppingCart } from "lucide-react";
 import { useScroll } from "../contexts/ScrollContext";
 import "../services-icons.css";
 
@@ -10,9 +9,8 @@ const services = [
     description:
       "Responsive, production-ready websites built around clear interfaces, maintainable code and a polished experience across every screen.",
     tags: ["UI Development", "Responsive Systems", "SEO Setup"],
-    icon: Monitor,
+    image: "/service-art/website-design.svg",
     visual: "website",
-    visualBadge: "WEB",
   },
   {
     number: "02",
@@ -20,9 +18,8 @@ const services = [
     description:
       "Flexible WordPress and WooCommerce builds for businesses that need reliable content management, commerce flows and room to grow.",
     tags: ["Custom WordPress", "WooCommerce", "CMS"],
-    icon: ShoppingCart,
+    image: "/service-art/wordpress-commerce.svg",
     visual: "commerce",
-    visualBadge: "W+",
   },
   {
     number: "03",
@@ -30,9 +27,8 @@ const services = [
     description:
       "Interactive web products that connect thoughtful frontend experiences with dependable backend logic, data and real application workflows.",
     tags: ["React", "Node / APIs", "Databases"],
-    icon: Layers,
+    image: "/service-art/fullstack-apps.svg",
     visual: "fullstack",
-    visualBadge: "APP",
   },
   {
     number: "04",
@@ -40,9 +36,8 @@ const services = [
     description:
       "Secure integrations that connect interfaces to authentication, payments, third-party services and the backend systems your product depends on.",
     tags: ["REST APIs", "Authentication", "Payments"],
-    icon: Plug,
+    image: "/service-art/api-backend.svg",
     visual: "api",
-    visualBadge: "API",
   },
   {
     number: "05",
@@ -50,24 +45,20 @@ const services = [
     description:
       "Focused improvements for speed, technical SEO, accessibility and Core Web Vitals so the final experience feels fast and works reliably.",
     tags: ["Core Web Vitals", "Technical SEO", "Accessibility"],
-    icon: Gauge,
+    image: "/service-art/performance.svg",
     visual: "performance",
-    visualBadge: "99",
   },
 ];
 
-function ServiceVisual({ service }) {
-  const Icon = service.icon;
-
+function ServiceVisual({ service, eager = false }) {
   return (
-    <div className={`service-orbit__sculpture service-orbit__sculpture--${service.visual}`}>
-      <span className="service-orbit__sculpture-shadow" />
-      <span className="service-orbit__sculpture-plate service-orbit__sculpture-plate--back" />
-      <span className="service-orbit__sculpture-plate service-orbit__sculpture-plate--mid" />
-      <span className="service-orbit__sculpture-face">
-        <Icon className="service-orbit__sculpture-icon" strokeWidth={1.55} />
-        <span className="service-orbit__sculpture-badge">{service.visualBadge}</span>
-      </span>
+    <div className={`service-orbit__art service-orbit__art--${service.visual}`}>
+      <img
+        src={service.image}
+        alt=""
+        loading={eager ? "eager" : "lazy"}
+        decoding="async"
+      />
     </div>
   );
 }
@@ -184,7 +175,7 @@ export default function ServicesSection() {
                 className={`service-orbit__visual${activeIndex === index ? " is-active" : ""}`}
                 key={service.number}
               >
-                <ServiceVisual service={service} />
+                <ServiceVisual service={service} eager={index === 0} />
               </div>
             ))}
           </div>
