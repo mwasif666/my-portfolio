@@ -1,101 +1,82 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useScroll } from "../contexts/ScrollContext";
 
-const screenshot = (url) =>
-  `https://s.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=1600`;
+const websiteShot = (url) =>
+  `https://s.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=1600&h=900`;
 
 const projects = [
   {
     number: "01",
-    title: "George Will Buy It",
+    title: "Vampire Tools",
     label: "WEB DEVELOPMENT",
-    subtitle: "Nationwide Car Buying Platform for CyberKing George Saliba",
-    preview: screenshot("https://georgewillbuyit.com/"),
-    client: "George Saliba",
-    services: ["Web Development", "UX Strategy", "Lead Generation"],
-    challenge:
-      "Selling a vehicle is usually slow, stressful and fragmented across dealerships, marketplaces and faceless online forms. The experience needed to make a nationwide sale feel fast, transparent and human.",
-    solution:
-      "A focused car-buying experience was built around a simple offer flow: customers submit their vehicle, receive a real offer quickly, confirm condition with photos or video, agree on price, and arrange pickup and payment without the usual dealership friction.",
-    results: [
-      { value: "< 2 min", label: "Real offer flow" },
-      { value: "Nationwide", label: "Car buying coverage" },
-      { value: "1M+", label: "Social audience" },
-      { value: "1.2B", label: "Views and counting" },
-    ],
+    brief: "E-commerce tool store developed using WordPress and WooCommerce.",
+    site: "https://vampiretools.com/",
+    preview: websiteShot("https://vampiretools.com/"),
+    platform: ["WordPress", "WooCommerce", "Responsive Development"],
   },
   {
     number: "02",
-    title: "CloverWoo",
-    label: "SAAS DEVELOPMENT",
-    subtitle: "Clover POS to WooCommerce Integration Plugin",
-    preview: screenshot("https://cloverwoo.com/"),
-    client: "CloverWoo",
-    year: "2025",
-    duration: "8 Months",
-    services: ["SaaS Development", "Plugin Development", "UI/UX Design"],
-    challenge:
-      "Retailers and restaurants using Clover POS did not have a dependable way to keep their physical point-of-sale and WooCommerce store in sync. Existing tools handled only pieces of the workflow and often required separate payment solutions.",
-    solution:
-      "CloverWoo was built as one WordPress plugin for bidirectional products, orders, inventory, customers and payments, with a PCI-compliant Clover gateway, webhook-driven inventory updates, kitchen auto-print and multi-region support.",
-    results: [
-      { value: "All-in-One", label: "Sync + payments" },
-      { value: "Real-Time", label: "Inventory sync" },
-      { value: "$60/mo", label: "Flat rate" },
-      { value: "< 10 min", label: "Setup time" },
-    ],
+    title: "Bridge Precision Tools",
+    label: "WEB DEVELOPMENT",
+    brief: "Industrial tools company website built with WordPress.",
+    site: "https://bridgeprecisiontools.com/",
+    preview: websiteShot("https://bridgeprecisiontools.com/"),
+    platform: ["WordPress", "Web Development", "Responsive Development"],
   },
   {
     number: "03",
-    title: "Claivra",
-    label: "SAAS DEVELOPMENT",
-    subtitle: "AI-Powered Ad Creative Generator",
-    preview: screenshot("https://claivra.com/"),
-    client: "Claivra",
-    year: "2026",
-    duration: "4 Months",
-    services: ["SaaS Development", "AI & Automation", "UI/UX Design"],
-    challenge:
-      "Marketers and small businesses were spending heavily on agencies or freelancers and waiting days for a handful of ad concepts. They needed a much faster way to create high-quality campaign creative without the traditional production overhead.",
-    solution:
-      "Claivra turns a website URL into production-ready ad concepts in under two minutes. It researches the brand, audience and competitors, then generates multiple concepts with images, headlines and CTAs, supported by brand kits and revision workflows.",
-    results: [
-      { value: "< 2 min", label: "URL to ads" },
-      { value: "17%", label: "Lower CPA" },
-      { value: "27%", label: "Conversion lift" },
-      { value: "$8–20K", label: "Annual savings" },
-    ],
+    title: "Roots BMD",
+    label: "WEB DEVELOPMENT",
+    brief: "Healthcare and supplements company website built with WordPress.",
+    site: "https://rootsbmd.com/",
+    preview: websiteShot("https://rootsbmd.com/"),
+    platform: ["WordPress", "Web Development", "Responsive Development"],
   },
   {
     number: "04",
-    title: "StackSerp",
-    label: "SAAS DEVELOPMENT",
-    subtitle: "AI SEO Auto-Blogging & Content Generation Platform",
-    preview: screenshot("https://stackserp.com/"),
-    client: "StackSerp",
-    year: "2025",
-    duration: "6 Months",
-    services: ["SaaS Development", "AI & Automation", "UI/UX Design", "SEO"],
-    challenge:
-      "Content teams and agencies were spending many hours on keyword research, writing, optimization and publishing for every article. Producing consistent SEO content at scale was too slow and expensive for small teams.",
-    solution:
-      "StackSerp automates the content pipeline from research and outlining through writing, SEO optimization, image generation and CMS publishing. One dashboard manages multiple sites, brand voices, internal linking, topic clusters and analytics.",
-    results: [
-      { value: "10,000+", label: "Articles generated" },
-      { value: "500+", label: "Active users" },
-      { value: "~3 min", label: "Time to publish" },
-      { value: "4 Plans", label: "Pricing tiers" },
-    ],
+    title: "Secure Surve",
+    label: "WEB DEVELOPMENT",
+    brief: "Security and surveillance company website.",
+    site: "https://secure-surve.com/",
+    preview: websiteShot("https://secure-surve.com/"),
+    platform: ["WordPress", "Web Development", "Responsive Development"],
+  },
+  {
+    number: "05",
+    title: "Park Point 24",
+    label: "WEB DEVELOPMENT",
+    brief: "Real estate and parking management website built with WordPress.",
+    site: "https://www.parkpoint24.de/",
+    preview: websiteShot("https://www.parkpoint24.de/"),
+    platform: ["WordPress", "Web Development", "Responsive Development"],
+  },
+  {
+    number: "06",
+    title: "Tooth Shine",
+    label: "WEB DEVELOPMENT",
+    brief: "Dental clinic website built with WordPress.",
+    site: "https://toothshine.pk/",
+    preview: websiteShot("https://toothshine.pk/"),
+    platform: ["WordPress", "Web Development", "Responsive Development"],
   },
 ];
 
 export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState(null);
+  const casePanelRef = useRef(null);
+  const { stopScroll, startScroll, scrollToId } = useScroll();
 
   useEffect(() => {
     if (!selectedProject) return undefined;
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    stopScroll();
+
+    const resetCaseScroll = () => {
+      casePanelRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    };
+
+    resetCaseScroll();
+    const frame = requestAnimationFrame(resetCaseScroll);
 
     const onKeyDown = (event) => {
       if (event.key === "Escape") setSelectedProject(null);
@@ -104,17 +85,18 @@ export default function ProjectsSection() {
     document.addEventListener("keydown", onKeyDown);
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      cancelAnimationFrame(frame);
       document.removeEventListener("keydown", onKeyDown);
+      startScroll();
     };
-  }, [selectedProject]);
+  }, [selectedProject, startScroll, stopScroll]);
 
   const openCaseStudy = (project) => setSelectedProject(project);
 
-  const exploreProjects = () => {
-    document
-      .getElementById("projects-list")
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const handleRowKeyDown = (event, project) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
+    openCaseStudy(project);
   };
 
   return (
@@ -130,8 +112,8 @@ export default function ProjectsSection() {
               <em>projects.</em>
             </h2>
             <p className="projects-intro__copy">
-              Four selected builds from Innovation With Pixels — web products,
-              SaaS platforms and conversion-focused digital experiences.
+              WordPress builds, e-commerce experiences and business websites
+              selected from recent development work.
             </p>
           </div>
 
@@ -140,7 +122,7 @@ export default function ProjectsSection() {
             <button
               className="projects-intro__more"
               type="button"
-              onClick={exploreProjects}
+              onClick={() => scrollToId("projects-list")}
             >
               <span>Explore projects</span>
               <span className="projects-intro__more-arrow" aria-hidden="true">
@@ -160,19 +142,8 @@ export default function ProjectsSection() {
             role="button"
             aria-label={`Open ${project.title} case study`}
             onClick={() => openCaseStudy(project)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                openCaseStudy(project);
-              }
-            }}
+            onKeyDown={(event) => handleRowKeyDown(event, project)}
           >
-            <div className="project-row__preview" aria-hidden="true">
-              <div className="project-row__preview-frame">
-                <img src={project.preview} alt="" loading="lazy" />
-              </div>
-            </div>
-
             <div className="project-row__header">
               <span className="project-row__number">({project.number})</span>
 
@@ -182,6 +153,12 @@ export default function ProjectsSection() {
               </div>
 
               <span className="project-row__label">({project.label})</span>
+            </div>
+
+            <div className="project-row__preview" aria-hidden="true">
+              <div className="project-row__preview-frame">
+                <img src={project.preview} alt="" loading="lazy" />
+              </div>
             </div>
 
             <button
@@ -213,7 +190,11 @@ export default function ProjectsSection() {
             if (event.target === event.currentTarget) setSelectedProject(null);
           }}
         >
-          <article className="project-case__panel">
+          <article
+            className="project-case__panel"
+            ref={casePanelRef}
+            data-lenis-prevent
+          >
             <header className="project-case__topbar">
               <span>
                 CASE STUDY / {selectedProject.number} / {selectedProject.label}
@@ -230,66 +211,37 @@ export default function ProjectsSection() {
             </header>
 
             <div className="project-case__hero">
-              <div className="project-case__hero-copy">
-                <span>{selectedProject.label}</span>
+              <img src={selectedProject.preview} alt={`${selectedProject.title} website`} />
+            </div>
+
+            <div className="project-case__content">
+              <div className="project-case__heading">
+                <span className="project-case__eyebrow">WEB DEVELOPMENT</span>
                 <h3 id="project-case-title">{selectedProject.title}</h3>
-                <p>{selectedProject.subtitle}</p>
               </div>
 
-              <div className="project-case__hero-image">
-                <img src={selectedProject.preview} alt="" />
-              </div>
-            </div>
-
-            <div className="project-case__meta">
-              <div>
-                <span>CLIENT</span>
-                <strong>{selectedProject.client}</strong>
-              </div>
-              {selectedProject.year ? (
+              <div className="project-case__details">
                 <div>
-                  <span>YEAR</span>
-                  <strong>{selectedProject.year}</strong>
+                  <span className="project-case__label">PROJECT BRIEF</span>
+                  <p>{selectedProject.brief}</p>
                 </div>
-              ) : null}
-              {selectedProject.duration ? (
+
                 <div>
-                  <span>DURATION</span>
-                  <strong>{selectedProject.duration}</strong>
+                  <span className="project-case__label">BUILD</span>
+                  <ul className="project-case__tags">
+                    {selectedProject.platform.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
                 </div>
-              ) : null}
-              <div className="project-case__meta-services">
-                <span>SERVICES</span>
-                <strong>{selectedProject.services.join(" · ")}</strong>
-              </div>
-            </div>
 
-            <div className="project-case__story">
-              <section>
-                <span className="project-case__section-label">THE CHALLENGE</span>
-                <h4>What we were solving</h4>
-                <p>{selectedProject.challenge}</p>
-              </section>
-
-              <section>
-                <span className="project-case__section-label">OUR SOLUTION</span>
-                <h4>How we solved it</h4>
-                <p>{selectedProject.solution}</p>
-              </section>
-            </div>
-
-            <div className="project-case__results">
-              <div className="project-case__results-heading">
-                <span>THE RESULTS</span>
-                <h4>Impact delivered</h4>
-              </div>
-              <div className="project-case__results-grid">
-                {selectedProject.results.map((result) => (
-                  <div key={`${result.value}-${result.label}`}>
-                    <strong>{result.value}</strong>
-                    <span>{result.label}</span>
-                  </div>
-                ))}
+                <div>
+                  <span className="project-case__label">DELIVERY</span>
+                  <p>
+                    The case study stays inside this portfolio. The project
+                    preview, title and brief above match the selected work card.
+                  </p>
+                </div>
               </div>
             </div>
           </article>
