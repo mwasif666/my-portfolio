@@ -15,24 +15,26 @@ export default function AboutSection({ id = "about", className = "" }) {
       </div>
 
       <div className="about-story__inner">
-        <div className="about-story__code-orb" aria-hidden="true">
-          <Code2 />
-        </div>
-
-        <p className="about-story__statement">
-          Building <span>digital products</span> through thoughtful interfaces,
-          reliable systems, <span>clean engineering</span>, and
-          performance-focused experiences that <span>work beautifully.</span>
-        </p>
-
-        <div className="about-story__profile">
-          <div className="about-story__avatar">
-            <img src={myImg} alt="Muhammad Wasif" draggable="false" />
+        <div className="about-story__body">
+          <div className="about-story__code-orb" aria-hidden="true">
+            <Code2 />
           </div>
 
-          <div className="about-story__profile-copy">
-            <strong>Muhammad Wasif</strong>
-            <span>Full-Stack Web Developer</span>
+          <p className="about-story__statement">
+            Building <span>digital products</span> through thoughtful interfaces,
+            reliable systems, <span>clean engineering</span>, and
+            performance-focused experiences that <span>work beautifully.</span>
+          </p>
+
+          <div className="about-story__profile">
+            <div className="about-story__avatar">
+              <img src={myImg} alt="Muhammad Wasif" draggable="false" />
+            </div>
+
+            <div className="about-story__profile-copy">
+              <strong>Muhammad Wasif</strong>
+              <span>Full-Stack Web Developer</span>
+            </div>
           </div>
         </div>
       </div>
