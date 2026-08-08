@@ -1,45 +1,45 @@
+const portfolioUrl = "https://innovationpixel.com/portfolio.htm";
+
 const projects = [
   {
     number: "01",
-    title: "Petrocore",
-    label: "SELECTED WEB DEVELOPMENT BUILD",
-    href: "https://github.com/mwasif666/Petrocore",
-    preview: "https://opengraph.githubassets.com/portfolio-petrocore/mwasif666/Petrocore",
+    title: "E-commerce",
+    label: "E-COMMERCE WEBSITE EXPERIENCE",
+    href: portfolioUrl,
+    preview:
+      "https://www.pinnacledesignagency.com/assets/images/portfolio/ecommerce/img1.jpg",
   },
   {
     number: "02",
-    title: "InnovationPixel",
-    label: "SELECTED WEB DEVELOPMENT BUILD",
-    href: "https://github.com/mwasif666/innovationpixel",
-    preview: "https://opengraph.githubassets.com/portfolio-innovation/mwasif666/innovationpixel",
+    title: "B2B / B2C Portal",
+    label: "BUSINESS PORTAL DESIGN & DEVELOPMENT",
+    href: portfolioUrl,
+    preview:
+      "https://www.pinnacledesignagency.com/assets/images/portfolio/b2b/img1.png",
   },
   {
     number: "03",
-    title: "Caralif",
-    label: "SELECTED WEB DEVELOPMENT BUILD",
-    href: "https://github.com/mwasif666/caralif",
-    preview: "https://opengraph.githubassets.com/portfolio-caralif/mwasif666/caralif",
+    title: "Web Application",
+    label: "CUSTOM WEB APPLICATION EXPERIENCE",
+    href: portfolioUrl,
+    preview:
+      "https://www.pinnacledesignagency.com/assets/images/portfolio/web-app/img1.png",
   },
   {
     number: "04",
-    title: "Vera",
-    label: "SELECTED WEB DEVELOPMENT BUILD",
-    href: "https://github.com/mwasif666/Vera2",
-    preview: "https://opengraph.githubassets.com/portfolio-vera/mwasif666/Vera2",
+    title: "CMS Website",
+    label: "CONTENT-DRIVEN WEBSITE BUILD",
+    href: portfolioUrl,
+    preview:
+      "https://www.pinnacledesignagency.com/assets/images/portfolio/cms/img1.png",
   },
   {
     number: "05",
-    title: "SuperNova",
-    label: "SELECTED WEB DEVELOPMENT BUILD",
-    href: "https://github.com/mwasif666/SuperNova",
-    preview: "https://opengraph.githubassets.com/portfolio-supernova/mwasif666/SuperNova",
-  },
-  {
-    number: "06",
-    title: "Himalayan",
-    label: "SELECTED WEB DEVELOPMENT BUILD",
-    href: "https://github.com/mwasif666/himalayan",
-    preview: "https://opengraph.githubassets.com/portfolio-himalayan/mwasif666/himalayan",
+    title: "Responsive Website",
+    label: "RESPONSIVE WEBSITE DESIGN & DEVELOPMENT",
+    href: portfolioUrl,
+    preview:
+      "https://www.pinnacledesignagency.com/assets/images/portfolio/responsive/img1.png",
   },
 ];
 
@@ -57,14 +57,25 @@ export default function ProjectsSection() {
               <em>projects.</em>
             </h2>
             <p className="projects-intro__copy">
-              Interfaces, products and web systems built from front end to
-              production.
+              A selection of websites, portals and web applications shaped
+              around clear interfaces, responsive systems and production-ready
+              development.
             </p>
           </div>
 
-          <div className="projects-intro__footer" aria-hidden="true">
+          <div className="projects-intro__footer">
             <span>FULL-STACK WEB DEVELOPMENT</span>
-            <span>SCROLL ↓</span>
+            <a
+              className="projects-intro__more"
+              href={portfolioUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span>View all work</span>
+              <span className="projects-intro__more-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </a>
           </div>
         </div>
       </aside>
@@ -99,7 +110,7 @@ export default function ProjectsSection() {
               target="_blank"
               rel="noreferrer"
             >
-              View repository <span aria-hidden="true">↗</span>
+              View case study <span aria-hidden="true">↗</span>
             </a>
 
             <span className="project-row__index" aria-hidden="true">
