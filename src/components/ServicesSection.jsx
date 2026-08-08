@@ -51,7 +51,7 @@ const services = [
 
 export default function ServicesSection() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const triggerRefs = useRef([]);
+  const itemRefs = useRef([]);
   const { scrollToId } = useScroll();
 
   useEffect(() => {
@@ -61,14 +61,13 @@ export default function ServicesSection() {
       frame = 0;
       const viewportCenter = window.innerHeight * 0.5;
       let nextIndex = 0;
-      let closestDistance = Number.POSITIVE_INFINITY;
+      let closestDistance = Infinity;
 
-      triggerRefs.current.forEach((trigger, index) => {
-        if (!trigger) return;
-        const rect = trigger.getBoundingClientRect();
+      itemRefs.current.forEach((item, index) => {
+        if (!item) return;
+        const rect = item.getBoundingClientRect();
         const center = rect.top + rect.height * 0.5;
         const distance = Math.abs(center - viewportCenter);
-
         if (distance < closestDistance) {
           closestDistance = distance;
           nextIndex = index;
@@ -80,7 +79,7 @@ export default function ServicesSection() {
 
     const requestUpdate = () => {
       if (frame) return;
-      frame = window.requestAnimationFrame(updateActive);
+      frame = requestAnimationFrame(updateActive);
     };
 
     updateActive();
@@ -88,7 +87,7 @@ export default function ServicesSection() {
     window.addEventListener("resize", requestUpdate);
 
     return () => {
-      if (frame) window.cancelAnimationFrame(frame);
+      if (frame) cancelAnimationFrame(frame);
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
     };
@@ -96,9 +95,7 @@ export default function ServicesSection() {
 
   return (
     <section className="service-orbit" id="services" aria-labelledby="services-title">
-      <h2 className="sr-only" id="services-title">
-        Services
-      </h2>
+      <h2 className="sr-only" id="services-title">Services</h2>
 
       <div className="service-orbit__layout">
         <aside className="service-orbit__progress" aria-label="Services progress">
@@ -130,42 +127,31 @@ export default function ServicesSection() {
           </div>
         </aside>
 
-        <div className="service-orbit__center">
-          <div className="service-orbit__center-sticky">
-            <div className="service-orbit__content-stage" aria-live="polite">
-              {services.map((service, index) => (
-                <article
-                  className={`service-orbit__content-panel${activeIndex === index ? " is-active" : ""}`}
-                  key={service.number}
-                  aria-hidden={activeIndex !== index}
-                >
-                  <h3>{service.title}</h3>
-                  <p>{service.description}</p>
-                  <div
-                    className="service-orbit__tags"
-                    aria-label={`${service.title} capabilities`}
-                  >
-                    {service.tags.map((tag) => (
-                      <span key={tag}>{tag}</span>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
+        <div className="service-orbit__items">
+          {services.map((service, index) => (
+            <article
+              className={`service-orbit__item${activeIndex === index ? " is-active" : ""}`}
+              id={`service-${service.number}`}
+              key={service.number}
+              ref={(node) => {
+                itemRefs.current[index] = node;
+              }}
+            >
+              <div className="service-orbit__item-copy">
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+                <div className="service-orbit__tags" aria-label={`${service.title} capabilities`}>
+                  {service.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
+              </div>
 
-          <div className="service-orbit__scroll-track" aria-hidden="true">
-            {services.map((service, index) => (
-              <div
-                className="service-orbit__trigger"
-                id={`service-${service.number}`}
-                key={service.number}
-                ref={(node) => {
-                  triggerRefs.current[index] = node;
-                }}
-              />
-            ))}
-          </div>
+              <div className="service-orbit__mobile-visual" aria-hidden="true">
+                <img src={service.image} alt="" loading="lazy" />
+              </div>
+            </article>
+          ))}
         </div>
 
         <aside className="service-orbit__illustrations" aria-hidden="true">
@@ -175,11 +161,7 @@ export default function ServicesSection() {
                 className={`service-orbit__visual${activeIndex === index ? " is-active" : ""}`}
                 key={service.number}
               >
-                <img
-                  src={service.image}
-                  alt=""
-                  loading={index === 0 ? "eager" : "lazy"}
-                />
+                <img src={service.image} alt="" loading={index === 0 ? "eager" : "lazy"} />
               </div>
             ))}
           </div>
