@@ -1,4 +1,4 @@
-import { Code2 } from "lucide-react";
+import { ThumbsUp } from "lucide-react";
 import myImg from "../../myimg.png";
 
 export default function AboutSection({ id = "about", className = "" }) {
@@ -11,13 +11,13 @@ export default function AboutSection({ id = "about", className = "" }) {
         <span className="about-story__label-orb" aria-hidden="true">
           <i />
         </span>
-        <span>About Me</span>
+        <span>About Us</span>
       </div>
 
       <div className="about-story__inner">
         <div className="about-story__body">
           <div className="about-story__code-orb" aria-hidden="true">
-            <Code2 />
+            <ThumbsUp />
           </div>
 
           <p className="about-story__statement">
@@ -37,14 +37,6 @@ export default function AboutSection({ id = "about", className = "" }) {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="about-story__meta" aria-hidden="true">
-        <span>DESIGN</span>
-        <i />
-        <span>DEVELOPMENT</span>
-        <i />
-        <span>PERFORMANCE</span>
       </div>
     </section>
   );
