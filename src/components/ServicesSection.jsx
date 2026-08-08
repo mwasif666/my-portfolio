@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { Gauge, Layers, Monitor, Plug, ShoppingCart } from "lucide-react";
 import { useScroll } from "../contexts/ScrollContext";
+import "../services-icons.css";
 
 const services = [
   {
@@ -8,8 +10,9 @@ const services = [
     description:
       "Responsive, production-ready websites built around clear interfaces, maintainable code and a polished experience across every screen.",
     tags: ["UI Development", "Responsive Systems", "SEO Setup"],
-    image:
-      "https://framerusercontent.com/images/l4dV85qhMS96ZgNwZerM9ax6U8.png?width=1360&height=1360",
+    icon: Monitor,
+    visual: "website",
+    visualBadge: "WEB",
   },
   {
     number: "02",
@@ -17,8 +20,9 @@ const services = [
     description:
       "Flexible WordPress and WooCommerce builds for businesses that need reliable content management, commerce flows and room to grow.",
     tags: ["Custom WordPress", "WooCommerce", "CMS"],
-    image:
-      "https://framerusercontent.com/images/MuU4fEfvQ8jCQddULyLuuozyEGc.png?width=1360&height=1360",
+    icon: ShoppingCart,
+    visual: "commerce",
+    visualBadge: "W+",
   },
   {
     number: "03",
@@ -26,8 +30,9 @@ const services = [
     description:
       "Interactive web products that connect thoughtful frontend experiences with dependable backend logic, data and real application workflows.",
     tags: ["React", "Node / APIs", "Databases"],
-    image:
-      "https://framerusercontent.com/images/uEyJGCYCS776ED6W9QADtnCyXo.png?width=1360&height=1360",
+    icon: Layers,
+    visual: "fullstack",
+    visualBadge: "APP",
   },
   {
     number: "04",
@@ -35,8 +40,9 @@ const services = [
     description:
       "Secure integrations that connect interfaces to authentication, payments, third-party services and the backend systems your product depends on.",
     tags: ["REST APIs", "Authentication", "Payments"],
-    image:
-      "https://framerusercontent.com/images/hT4iYoRLtrcvEKW8z0SkgbY70PI.png?width=1360&height=1360",
+    icon: Plug,
+    visual: "api",
+    visualBadge: "API",
   },
   {
     number: "05",
@@ -44,10 +50,27 @@ const services = [
     description:
       "Focused improvements for speed, technical SEO, accessibility and Core Web Vitals so the final experience feels fast and works reliably.",
     tags: ["Core Web Vitals", "Technical SEO", "Accessibility"],
-    image:
-      "https://framerusercontent.com/images/gcXigyqtZNaYxdCS9aX3qKtug.png?width=1360&height=1360",
+    icon: Gauge,
+    visual: "performance",
+    visualBadge: "99",
   },
 ];
+
+function ServiceVisual({ service }) {
+  const Icon = service.icon;
+
+  return (
+    <div className={`service-orbit__sculpture service-orbit__sculpture--${service.visual}`}>
+      <span className="service-orbit__sculpture-shadow" />
+      <span className="service-orbit__sculpture-plate service-orbit__sculpture-plate--back" />
+      <span className="service-orbit__sculpture-plate service-orbit__sculpture-plate--mid" />
+      <span className="service-orbit__sculpture-face">
+        <Icon className="service-orbit__sculpture-icon" strokeWidth={1.55} />
+        <span className="service-orbit__sculpture-badge">{service.visualBadge}</span>
+      </span>
+    </div>
+  );
+}
 
 export default function ServicesSection() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -148,7 +171,7 @@ export default function ServicesSection() {
               </div>
 
               <div className="service-orbit__mobile-visual" aria-hidden="true">
-                <img src={service.image} alt="" loading="lazy" />
+                <ServiceVisual service={service} />
               </div>
             </article>
           ))}
@@ -161,7 +184,7 @@ export default function ServicesSection() {
                 className={`service-orbit__visual${activeIndex === index ? " is-active" : ""}`}
                 key={service.number}
               >
-                <img src={service.image} alt="" loading={index === 0 ? "eager" : "lazy"} />
+                <ServiceVisual service={service} />
               </div>
             ))}
           </div>
