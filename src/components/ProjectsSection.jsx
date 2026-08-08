@@ -1,84 +1,89 @@
 import { useEffect, useState } from "react";
 
+const screenshot = (url) =>
+  `https://s.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=1600`;
+
 const projects = [
   {
     number: "01",
-    title: "E-commerce",
-    label: "E-COMMERCE",
-    preview:
-      "https://www.pinnacledesignagency.com/assets/images/portfolio/ecommerce/img1.jpg",
-    detailImage:
-      "https://www.pinnacledesignagency.com/assets/images/portfolio/expertise/ecommerce/img1.jpg",
-    description:
-      "E-commerce gives customers the flexibility to browse a store at any time and from anywhere. The source content focuses on useful online-retail features and on using design and development to help businesses maintain and grow their brand presence in a competitive market.",
-    focus: [
-      "Anytime storefront access",
-      "Online retail experience",
-      "Brand-focused presentation",
+    title: "George Will Buy It",
+    label: "WEB DEVELOPMENT",
+    subtitle: "Nationwide Car Buying Platform for CyberKing George Saliba",
+    preview: screenshot("https://georgewillbuyit.com/"),
+    client: "George Saliba",
+    services: ["Web Development", "UX Strategy", "Lead Generation"],
+    challenge:
+      "Selling a vehicle is usually slow, stressful and fragmented across dealerships, marketplaces and faceless online forms. The experience needed to make a nationwide sale feel fast, transparent and human.",
+    solution:
+      "A focused car-buying experience was built around a simple offer flow: customers submit their vehicle, receive a real offer quickly, confirm condition with photos or video, agree on price, and arrange pickup and payment without the usual dealership friction.",
+    results: [
+      { value: "< 2 min", label: "Real offer flow" },
+      { value: "Nationwide", label: "Car buying coverage" },
+      { value: "1M+", label: "Social audience" },
+      { value: "1.2B", label: "Views and counting" },
     ],
   },
   {
     number: "02",
-    title: "B2B & B2C Portals",
-    label: "BUSINESS PORTALS",
-    preview:
-      "https://www.pinnacledesignagency.com/assets/images/portfolio/b2b/img2.png",
-    detailImage:
-      "https://www.pinnacledesignagency.com/assets/images/portfolio/expertise/ecommerce/img2.png",
-    description:
-      "The B2B and B2C portal offering is described around a user-friendly content management system and SEO-friendly structure, with support for backend inventory, order fulfilment and accounting-system features.",
-    focus: [
-      "User-friendly CMS",
-      "SEO-ready structure",
-      "Inventory & fulfilment workflows",
+    title: "CloverWoo",
+    label: "SAAS DEVELOPMENT",
+    subtitle: "Clover POS to WooCommerce Integration Plugin",
+    preview: screenshot("https://cloverwoo.com/"),
+    client: "CloverWoo",
+    year: "2025",
+    duration: "8 Months",
+    services: ["SaaS Development", "Plugin Development", "UI/UX Design"],
+    challenge:
+      "Retailers and restaurants using Clover POS did not have a dependable way to keep their physical point-of-sale and WooCommerce store in sync. Existing tools handled only pieces of the workflow and often required separate payment solutions.",
+    solution:
+      "CloverWoo was built as one WordPress plugin for bidirectional products, orders, inventory, customers and payments, with a PCI-compliant Clover gateway, webhook-driven inventory updates, kitchen auto-print and multi-region support.",
+    results: [
+      { value: "All-in-One", label: "Sync + payments" },
+      { value: "Real-Time", label: "Inventory sync" },
+      { value: "$60/mo", label: "Flat rate" },
+      { value: "< 10 min", label: "Setup time" },
     ],
   },
   {
     number: "03",
-    title: "Web Applications",
-    label: "WEB APPLICATIONS",
-    preview:
-      "https://www.pinnacledesignagency.com/assets/images/portfolio/web-app/img3.png",
-    detailImage:
-      "https://www.pinnacledesignagency.com/assets/images/portfolio/expertise/ecommerce/img3.png",
-    description:
-      "The source describes a web application as a browser-based program built to perform a particular function. These applications can serve organisations or individuals and can be created for a wide range of practical uses.",
-    focus: [
-      "Browser-based delivery",
-      "Purpose-built functionality",
-      "Organisation & individual use",
+    title: "Claivra",
+    label: "SAAS DEVELOPMENT",
+    subtitle: "AI-Powered Ad Creative Generator",
+    preview: screenshot("https://claivra.com/"),
+    client: "Claivra",
+    year: "2026",
+    duration: "4 Months",
+    services: ["SaaS Development", "AI & Automation", "UI/UX Design"],
+    challenge:
+      "Marketers and small businesses were spending heavily on agencies or freelancers and waiting days for a handful of ad concepts. They needed a much faster way to create high-quality campaign creative without the traditional production overhead.",
+    solution:
+      "Claivra turns a website URL into production-ready ad concepts in under two minutes. It researches the brand, audience and competitors, then generates multiple concepts with images, headlines and CTAs, supported by brand kits and revision workflows.",
+    results: [
+      { value: "< 2 min", label: "URL to ads" },
+      { value: "17%", label: "Lower CPA" },
+      { value: "27%", label: "Conversion lift" },
+      { value: "$8–20K", label: "Annual savings" },
     ],
   },
   {
     number: "04",
-    title: "CMS Websites",
-    label: "CONTENT MANAGEMENT",
-    preview:
-      "https://www.pinnacledesignagency.com/assets/images/portfolio/cms/img4.png",
-    detailImage:
-      "https://www.pinnacledesignagency.com/assets/images/portfolio/expertise/ecommerce/img4.png",
-    description:
-      "The CMS website service is centred on giving site owners control over their own content. The source highlights the ability to manage and change a website, including text and images, without needing a developer for every update.",
-    focus: [
-      "Editable site content",
-      "Text & image management",
-      "Less developer dependency",
-    ],
-  },
-  {
-    number: "05",
-    title: "Responsive Websites",
-    label: "RESPONSIVE DESIGN",
-    preview:
-      "https://www.pinnacledesignagency.com/assets/images/portfolio/responsive/img5.png",
-    detailImage:
-      "https://www.pinnacledesignagency.com/assets/images/portfolio/expertise/ecommerce/img5.png",
-    description:
-      "Responsive website design is described through media queries, flexible layouts and adaptable graphics. The goal is a more usable and dynamic experience across different device types without layout or media problems.",
-    focus: [
-      "Media-query driven layouts",
-      "Flexible page structure",
-      "Multi-device usability",
+    title: "StackSerp",
+    label: "SAAS DEVELOPMENT",
+    subtitle: "AI SEO Auto-Blogging & Content Generation Platform",
+    preview: screenshot("https://stackserp.com/"),
+    client: "StackSerp",
+    year: "2025",
+    duration: "6 Months",
+    services: ["SaaS Development", "AI & Automation", "UI/UX Design", "SEO"],
+    challenge:
+      "Content teams and agencies were spending many hours on keyword research, writing, optimization and publishing for every article. Producing consistent SEO content at scale was too slow and expensive for small teams.",
+    solution:
+      "StackSerp automates the content pipeline from research and outlining through writing, SEO optimization, image generation and CMS publishing. One dashboard manages multiple sites, brand voices, internal linking, topic clusters and analytics.",
+    results: [
+      { value: "10,000+", label: "Articles generated" },
+      { value: "500+", label: "Active users" },
+      { value: "~3 min", label: "Time to publish" },
+      { value: "4 Plans", label: "Pricing tiers" },
     ],
   },
 ];
@@ -125,8 +130,8 @@ export default function ProjectsSection() {
               <em>projects.</em>
             </h2>
             <p className="projects-intro__copy">
-              Website work selected from the InnovationPixel portfolio — shown
-              here with the same starting visuals and service context.
+              Four selected builds from Innovation With Pixels — web products,
+              SaaS platforms and conversion-focused digital experiences.
             </p>
           </div>
 
@@ -151,7 +156,16 @@ export default function ProjectsSection() {
           <article
             className="project-row"
             key={project.number}
+            tabIndex={0}
+            role="button"
+            aria-label={`Open ${project.title} case study`}
             onClick={() => openCaseStudy(project)}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openCaseStudy(project);
+              }
+            }}
           >
             <div className="project-row__preview" aria-hidden="true">
               <div className="project-row__preview-frame">
@@ -162,15 +176,10 @@ export default function ProjectsSection() {
             <div className="project-row__header">
               <span className="project-row__number">({project.number})</span>
 
-              <button
-                className="project-row__title-link"
-                type="button"
-                onClick={() => openCaseStudy(project)}
-                aria-haspopup="dialog"
-              >
+              <div className="project-row__title-link">
                 <span className="project-row__title">{project.title}</span>
                 <span className="project-row__draw-arrow" aria-hidden="true" />
-              </button>
+              </div>
 
               <span className="project-row__label">({project.label})</span>
             </div>
@@ -178,7 +187,10 @@ export default function ProjectsSection() {
             <button
               className="project-row__cta"
               type="button"
-              onClick={() => openCaseStudy(project)}
+              onClick={(event) => {
+                event.stopPropagation();
+                openCaseStudy(project);
+              }}
               aria-haspopup="dialog"
             >
               View case study <span aria-hidden="true">↗</span>
@@ -217,34 +229,67 @@ export default function ProjectsSection() {
               </button>
             </header>
 
-            <div className="project-case__layout">
-              <div className="project-case__media">
-                <div className="project-case__hero-image">
-                  <img src={selectedProject.preview} alt="" />
-                </div>
-                <div className="project-case__support-image">
-                  <img src={selectedProject.detailImage} alt="" />
-                </div>
+            <div className="project-case__hero">
+              <div className="project-case__hero-copy">
+                <span>{selectedProject.label}</span>
+                <h3 id="project-case-title">{selectedProject.title}</h3>
+                <p>{selectedProject.subtitle}</p>
               </div>
 
-              <div className="project-case__content">
-                <span className="project-case__eyebrow">INNOVATIONPIXEL / WEB</span>
-                <h3 id="project-case-title">{selectedProject.title}</h3>
-                <p>{selectedProject.description}</p>
+              <div className="project-case__hero-image">
+                <img src={selectedProject.preview} alt="" />
+              </div>
+            </div>
 
-                <div className="project-case__focus">
-                  <span>FOCUS</span>
-                  <ul>
-                    {selectedProject.focus.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
+            <div className="project-case__meta">
+              <div>
+                <span>CLIENT</span>
+                <strong>{selectedProject.client}</strong>
+              </div>
+              {selectedProject.year ? (
+                <div>
+                  <span>YEAR</span>
+                  <strong>{selectedProject.year}</strong>
                 </div>
+              ) : null}
+              {selectedProject.duration ? (
+                <div>
+                  <span>DURATION</span>
+                  <strong>{selectedProject.duration}</strong>
+                </div>
+              ) : null}
+              <div className="project-case__meta-services">
+                <span>SERVICES</span>
+                <strong>{selectedProject.services.join(" · ")}</strong>
+              </div>
+            </div>
 
-                <p className="project-case__source">
-                  Content is based on the website-development material and
-                  portfolio categories available in the InnovationPixel source.
-                </p>
+            <div className="project-case__story">
+              <section>
+                <span className="project-case__section-label">THE CHALLENGE</span>
+                <h4>What we were solving</h4>
+                <p>{selectedProject.challenge}</p>
+              </section>
+
+              <section>
+                <span className="project-case__section-label">OUR SOLUTION</span>
+                <h4>How we solved it</h4>
+                <p>{selectedProject.solution}</p>
+              </section>
+            </div>
+
+            <div className="project-case__results">
+              <div className="project-case__results-heading">
+                <span>THE RESULTS</span>
+                <h4>Impact delivered</h4>
+              </div>
+              <div className="project-case__results-grid">
+                {selectedProject.results.map((result) => (
+                  <div key={`${result.value}-${result.label}`}>
+                    <strong>{result.value}</strong>
+                    <span>{result.label}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </article>
