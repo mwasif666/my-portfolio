@@ -1,0 +1,89 @@
+.heroRings {
+  position: absolute;
+  z-index: 2;
+  top: 31%;
+  left: 50%;
+  width: max(112rem, 118vw);
+  aspect-ratio: 1;
+  pointer-events: none;
+  contain: layout paint style;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.heroRings__ring {
+  --ring-duration: 8s;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(226, 248, 255, .12);
+  border-radius: 50%;
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0) scale(1.04);
+  transform-origin: center;
+  animation: heroRingInward var(--ring-duration) linear infinite;
+  animation-delay: calc(var(--ring-index) * -1s);
+  animation-play-state: paused;
+  will-change: transform, opacity;
+}
+
+.heroRings[data-active="true"] .heroRings__ring {
+  animation-play-state: running;
+}
+
+.heroRings__ring:nth-child(2n) {
+  border-color: rgba(226, 248, 255, .095);
+}
+
+.heroRings__ring:nth-child(3n) {
+  border-color: rgba(226, 248, 255, .075);
+}
+
+@keyframes heroRingInward {
+  0% {
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scale(1.06);
+  }
+
+  8% { opacity: .72; }
+
+  70% { opacity: .48; }
+
+  92% { opacity: .18; }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scale(.18);
+  }
+}
+
+@media (max-width: 900px) {
+  .heroRings {
+    top: 35%;
+    width: 176vw;
+  }
+}
+
+@media (max-width: 520px) {
+  .heroRings {
+    top: 34%;
+    width: 195vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroRings__ring {
+    animation: none;
+    opacity: .32;
+  }
+
+  .heroRings__ring:nth-child(1) { transform: translate3d(-50%,-50%,0) scale(1); }
+  .heroRings__ring:nth-child(2) { transform: translate3d(-50%,-50%,0) scale(.88); }
+  .heroRings__ring:nth-child(3) { transform: translate3d(-50%,-50%,0) scale(.76); }
+  .heroRings__ring:nth-child(4) { transform: translate3d(-50%,-50%,0) scale(.64); }
+  .heroRings__ring:nth-child(5) { transform: translate3d(-50%,-50%,0) scale(.52); }
+  .heroRings__ring:nth-child(6) { transform: translate3d(-50%,-50%,0) scale(.40); }
+  .heroRings__ring:nth-child(7) { transform: translate3d(-50%,-50%,0) scale(.28); }
+  .heroRings__ring:nth-child(8) { transform: translate3d(-50%,-50%,0) scale(.18); }
+}
