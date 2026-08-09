@@ -12,12 +12,12 @@ export default function HeroStats() {
     <div
       className={clsx(
         heroReveal("delay-[300ms]"),
-        "order-3 grid w-full grid-cols-1 overflow-hidden rounded-[4px] box-border",
-        "border border-white/[0.18] bg-[linear-gradient(145deg,rgba(29,113,158,0.2),rgba(3,47,77,0.32))]",
-        "shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-lg",
+        "order-3 grid w-full grid-cols-1 overflow-hidden rounded-[0.45rem] box-border",
+        "border border-white/[0.16] bg-[linear-gradient(145deg,rgba(27,104,148,0.22),rgba(3,42,68,0.3))]",
+        "shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_1rem_2.6rem_rgba(0,27,48,0.08)] backdrop-blur-xl",
         "min-[521px]:grid-cols-3",
-        "min-[901px]:absolute min-[901px]:z-[7] min-[901px]:right-[var(--rail)] min-[901px]:top-[52%]",
-        "min-[901px]:w-[min(44vw,50rem)]",
+        "min-[901px]:absolute min-[901px]:z-[7] min-[901px]:right-[var(--rail)] min-[901px]:top-[51.5%]",
+        "min-[901px]:w-[min(43vw,49rem)]",
       )}
       aria-label="Professional highlights"
     >
@@ -25,16 +25,16 @@ export default function HeroStats() {
         <div
           key={stat.label}
           className={clsx(
-            "flex min-h-28 flex-col items-center justify-center px-2 py-4 text-center",
-            "border-t border-white/[0.14] first:border-t-0",
-            "min-[521px]:min-h-30 min-[521px]:border-t-0 min-[521px]:border-l min-[521px]:border-white/[0.14] min-[521px]:first:border-l-0",
-            "min-[901px]:min-h-[7.5rem] min-[901px]:px-4 min-[901px]:py-5",
+            "flex min-h-27 flex-col items-center justify-center px-3 py-4 text-center",
+            "border-t border-white/[0.12] first:border-t-0",
+            "min-[521px]:min-h-29 min-[521px]:border-t-0 min-[521px]:border-l min-[521px]:border-white/[0.12] min-[521px]:first:border-l-0",
+            "min-[901px]:min-h-[7rem] min-[901px]:px-4 min-[901px]:py-4.5",
           )}
         >
-          <strong className="text-[clamp(2.1rem,2.8vw,3.6rem)] leading-none font-[650] tracking-[-0.05em]">
+          <strong className="text-[clamp(2rem,2.65vw,3.4rem)] leading-none font-[650] tracking-[-0.05em] text-white">
             {stat.value}
           </strong>
-          <span className="mt-2.5 text-[0.76rem] leading-tight text-[#e6f8ff]/60">
+          <span className="mt-2.5 text-[0.72rem] leading-tight font-medium text-[#e9f8ff]/58">
             {stat.label}
           </span>
         </div>
