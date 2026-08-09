@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
-import "./noise-dark-blue-gradient-with-squares.css";
+import clsx from "clsx";
+import styles from "./noise-dark-blue-gradient-with-squares.module.css";
 
 type Direction = "right" | "left" | "up" | "down" | "diagonal";
 
@@ -27,7 +28,7 @@ export default function NoiseDarkBlueGradientWithSquares({
   return (
     <div
       aria-hidden="true"
-      className={`motionGrid motionGrid--${direction} ${className}`}
+      className={clsx(styles.root, styles[direction], className)}
       style={{
         "--grid-size": `${squareSize}px`,
         "--grid-offset": `-${squareSize}px`,
@@ -35,10 +36,10 @@ export default function NoiseDarkBlueGradientWithSquares({
         "--grid-duration": `${duration}s`,
       } as CSSProperties}
     >
-      <div className="motionGrid__glow" />
-      {showGrid && <div className="motionGrid__grid" />}
-      <div className="motionGrid__grain" />
-      {vignette && <div className="motionGrid__vignette" />}
+      <div className={styles.glow} />
+      {showGrid && <div className={styles.grid} />}
+      <div className={styles.grain} />
+      {vignette && <div className={styles.vignette} />}
     </div>
   );
 }
