@@ -1,0 +1,14 @@
+.root {
+  order: 5;
+  width: 100%;
+}
+
+@media (min-width: 901px) {
+  .root {
+    position: absolute;
+    z-index: 8;
+    left: var(--rail);
+    bottom: clamp(1.8rem, 4vh, 3.25rem);
+    width: min(40vw, 31rem);
+  }
+}
