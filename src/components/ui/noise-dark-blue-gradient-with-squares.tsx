@@ -30,6 +30,7 @@ export default function NoiseDarkBlueGradientWithSquares({
       className={`motionGrid motionGrid--${direction} ${className}`}
       style={{
         "--grid-size": `${squareSize}px`,
+        "--grid-offset": `-${squareSize}px`,
         "--grid-color": borderColor,
         "--grid-duration": `${duration}s`,
       } as CSSProperties}
