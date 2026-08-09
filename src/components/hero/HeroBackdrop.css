@@ -5,36 +5,78 @@
   overflow: hidden;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 72% 34% at 50% 0%, rgba(190,237,255,.82), transparent 66%),
-    radial-gradient(circle 42rem at 50% 28%, rgba(63,188,240,.32), transparent 72%),
-    linear-gradient(180deg, #67b8d6 0%, #0c5d8b 43%, #043b63 72%, #012d4d 100%);
+    radial-gradient(ellipse 76% 34% at 50% -1%, rgba(205,242,255,.78), transparent 64%),
+    radial-gradient(circle 40rem at 50% 28%, rgba(72,194,242,.28), transparent 70%),
+    linear-gradient(180deg, #6bb8d3 0%, #176f9a 38%, #084a75 64%, #03385f 80%, #022e50 100%);
+}
+
+.heroBackdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 31%, rgba(151,225,255,.16), transparent 34%),
+    radial-gradient(circle at 20% 58%, rgba(0,35,62,.17), transparent 34%),
+    radial-gradient(circle at 82% 55%, rgba(0,26,48,.16), transparent 38%);
+}
+
+.heroBackdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1rem;
+  opacity: .24;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255,255,255,.48) 0 1px,
+    transparent 1px 11px
+  );
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
 .heroBackdrop__grid {
   position: absolute;
   inset: -60px;
-  opacity: .28;
+  opacity: .16;
   background-image:
-    linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
   background-size: 54px 54px;
   transform: translate3d(-54px, -54px, 0);
-  animation: heroGridDrift 24s linear infinite;
+  animation: heroGridDrift 30s linear infinite;
   will-change: transform;
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.9), rgba(0,0,0,.45) 68%, transparent 100%);
+  mask-image: linear-gradient(180deg, rgba(0,0,0,.9), rgba(0,0,0,.45) 68%, transparent 100%);
 }
 
 .heroBackdrop__shade {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.04), transparent 25%, rgba(0,22,41,.2) 76%, rgba(0,17,30,.32)),
-    linear-gradient(90deg, rgba(4,36,61,.15), transparent 38%, transparent 72%, rgba(2,27,48,.12));
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 23%, rgba(0,22,41,.16) 69%, rgba(0,14,28,.34) 100%),
+    linear-gradient(90deg, rgba(1,35,59,.16), transparent 35%, transparent 70%, rgba(1,25,44,.15)),
+    radial-gradient(ellipse 125% 92% at 50% 25%, transparent 45%, rgba(0,20,37,.22) 100%);
 }
 
 @keyframes heroGridDrift {
   to { transform: translate3d(0, 0, 0); }
 }
 
+@media (max-width: 900px) {
+  .heroBackdrop {
+    background:
+      radial-gradient(ellipse 105% 30% at 50% 0%, rgba(205,242,255,.68), transparent 66%),
+      radial-gradient(circle 28rem at 50% 28%, rgba(72,194,242,.24), transparent 72%),
+      linear-gradient(180deg, #61aac8 0%, #176b95 37%, #08486f 67%, #023354 100%);
+  }
+
+  .heroBackdrop__grid { opacity: .11; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .heroBackdrop__grid { animation: none; transform: translate3d(0,0,0); }
+  .heroBackdrop__grid {
+    animation: none;
+    transform: translate3d(0,0,0);
+  }
 }
