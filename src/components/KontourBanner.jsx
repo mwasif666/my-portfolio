@@ -1,4 +1,4 @@
-﻿import { useRef } from "react";
+import { useRef } from "react";
 import NoiseDarkBlueGradientWithSquares from "./ui/noise-dark-blue-gradient-with-squares";
 import GitHubActivity from "./GitHubActivity";
 import { useInView } from "../hooks/useInView";
@@ -79,6 +79,22 @@ export default function KontourBanner({
             borderColor="rgba(255,255,255,0.08)"
             vignette
           />
+        </div>
+      )}
+
+      {theme === "blue" && (
+        <div
+          className={clsx("echofi-orbits", inView && "is-visible")}
+          aria-hidden="true"
+        >
+          <span className="echofi-orbit echofi-orbit--1" />
+          <span className="echofi-orbit echofi-orbit--2" />
+          <span className="echofi-orbit echofi-orbit--3" />
+          <span className="echofi-orbit echofi-orbit--4" />
+          <span className="echofi-orbit echofi-orbit--5" />
+          <span className="echofi-orbit echofi-orbit--6" />
+          <span className="echofi-orbit-plane" />
+          <span className="echofi-orbit-plane echofi-orbit-plane--reverse" />
         </div>
       )}
 
