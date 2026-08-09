@@ -1,0 +1,68 @@
+.wrap {
+  pointer-events: none;
+  position: relative;
+  order: 2;
+  width: 132%;
+  height: 41rem;
+  margin-top: -1.75rem;
+  margin-bottom: -3.5rem;
+}
+
+.glow {
+  position: absolute;
+  inset: 14% 5% 5%;
+  opacity: .9;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(160,229,255,.3), rgba(55,165,211,.11) 48%, transparent 72%);
+  filter: blur(1.35rem);
+  transform: scale(.96);
+}
+
+.rim {
+  position: absolute;
+  inset: 8% 2% 3%;
+  z-index: 1;
+  border-radius: 48% 52% 42% 45%;
+  background: radial-gradient(circle at 54% 38%, rgba(197,239,255,.08), transparent 58%);
+  opacity: .75;
+  filter: blur(1.8rem);
+}
+
+.image {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom;
+}
+
+@media (min-width: 901px) {
+  .wrap {
+    position: absolute;
+    z-index: 6;
+    left: clamp(2rem, 13.5vw, 18rem);
+    bottom: -3rem;
+    width: auto;
+    height: min(100vh, calc(36rem + 23vw), 64rem);
+    aspect-ratio: 887 / 882;
+    margin: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .wrap {
+    width: 138%;
+    height: 30rem;
+    margin-bottom: -2.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .glow {
+    opacity: .78;
+    transform: scale(.9);
+  }
+
+  .rim { opacity: .5; }
+}
