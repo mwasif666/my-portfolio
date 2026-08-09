@@ -1,10 +1,10 @@
-import "./HeroBackdrop.css";
+import styles from "./HeroBackdrop.module.css";
 
 export default function HeroBackdrop() {
   return (
-    <div className="heroBackdrop" aria-hidden="true">
-      <div className="heroBackdrop__grid" />
-      <div className="heroBackdrop__shade" />
+    <div className={styles.root} aria-hidden="true">
+      <div className={styles.grid} />
+      <div className={styles.shade} />
     </div>
   );
 }
