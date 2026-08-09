@@ -1,23 +1,26 @@
-/* EchoFi-inspired motion language for the portfolio hero and navigation.
-   Built from CSS primitives so it stays sharp, responsive, and lightweight. */
+/* EchoFi reference behavior recreated for the portfolio.
+   The hero uses clean concentric rings; the desktop header morphs from a
+   transparent full-width nav into the compact dot navigator shown in the
+   supplied reference screenshots. */
 
-/* ---------------- Hero orbital line field ---------------- */
+/* --------------------------------------------------------------------------
+   HERO — CLEAN CONCENTRIC CIRCLES
+   -------------------------------------------------------------------------- */
 .echofi-orbits {
   position: absolute;
   z-index: 2;
-  top: 46%;
-  left: 48%;
-  width: clamp(42rem, 82vw, 94rem);
+  top: 31%;
+  left: 50%;
+  width: max(112rem, 118vw);
   aspect-ratio: 1;
   pointer-events: none;
   opacity: 0;
-  transform: translate3d(-50%, -50%, 0) scale(0.92);
+  transform: translate3d(-50%, -50%, 0) scale(0.82);
+  transform-origin: 50% 50%;
   transition:
-    opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1) 160ms,
-    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1) 160ms;
+    opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1) 120ms,
+    transform 1550ms cubic-bezier(0.22, 1, 0.36, 1) 120ms;
   will-change: opacity, transform;
-  -webkit-mask-image: radial-gradient(circle, #000 0 62%, rgba(0, 0, 0, 0.92) 72%, transparent 92%);
-  mask-image: radial-gradient(circle, #000 0 62%, rgba(0, 0, 0, 0.92) 72%, transparent 92%);
 }
 
 .echofi-orbits.is-visible {
@@ -26,261 +29,205 @@
 }
 
 .echofi-orbits::before,
-.echofi-orbits::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.echofi-orbits::before {
-  inset: 10%;
-  background: radial-gradient(
-    circle,
-    transparent 0 46%,
-    rgba(149, 225, 255, 0.035) 58%,
-    rgba(210, 244, 255, 0.075) 70%,
-    transparent 82%
-  );
-  filter: blur(0.15rem);
-  animation: echofiOrbitGlow 8s ease-in-out infinite;
-}
-
-.echofi-orbits::after {
-  inset: 24%;
-  border: 1px solid rgba(214, 245, 255, 0.08);
-  box-shadow:
-    0 0 4rem rgba(86, 199, 245, 0.055),
-    inset 0 0 4rem rgba(86, 199, 245, 0.035);
-}
-
+.echofi-orbits::after,
 .echofi-orbit {
-  --orbit-alpha: 0.13;
   position: absolute;
-  border: 1px solid rgba(222, 248, 255, var(--orbit-alpha));
+  box-sizing: border-box;
+  border: 1px solid rgba(226, 248, 255, 0.105);
   border-radius: 50%;
-  box-shadow:
-    inset 0 0 0 1px rgba(7, 66, 101, 0.08),
-    0 0 2.5rem rgba(96, 207, 250, 0.022);
+  background: transparent;
+  box-shadow: none;
+  pointer-events: none;
   transform-origin: 50% 50%;
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
-.echofi-orbit::after {
+.echofi-orbits::before,
+.echofi-orbits::after {
   content: "";
-  position: absolute;
-  top: -2px;
-  left: 50%;
-  width: 0.35rem;
-  height: 0.35rem;
-  border: 1px solid rgba(219, 248, 255, 0.52);
-  border-radius: 50%;
-  background: rgba(180, 233, 255, 0.2);
-  box-shadow: 0 0 1.2rem rgba(126, 218, 255, 0.4);
-  transform: translate(-50%, -50%);
+}
+
+/* The spacing mirrors the reference: every ring steps inward by ~6% of the
+   full field, so on a 1920px viewport the radial gap is about 130-140px. */
+.echofi-orbits::before {
+  inset: 0;
+  border-color: rgba(226, 248, 255, 0.062);
+  animation: echofiRingBreathe 11.6s ease-in-out -4.8s infinite;
 }
 
 .echofi-orbit--1 {
-  inset: 41%;
-  --orbit-alpha: 0.22;
-  animation: echofiOrbitSpin 13s linear infinite;
+  inset: 6%;
+  border-color: rgba(226, 248, 255, 0.072);
+  animation: echofiRingBreathe 10.8s ease-in-out -2.4s infinite;
 }
 
 .echofi-orbit--2 {
-  inset: 34%;
-  --orbit-alpha: 0.19;
-  border-top-color: rgba(234, 251, 255, 0.42);
-  border-right-color: rgba(166, 228, 255, 0.08);
-  animation: echofiOrbitSpin 18s linear infinite reverse;
+  inset: 12%;
+  border-color: rgba(226, 248, 255, 0.082);
+  animation: echofiRingBreathe 11.9s ease-in-out -6.2s infinite reverse;
 }
 
 .echofi-orbit--3 {
-  inset: 27%;
-  --orbit-alpha: 0.15;
-  border-left-color: rgba(230, 250, 255, 0.34);
-  border-bottom-color: rgba(155, 223, 252, 0.06);
-  animation: echofiOrbitSpin 24s linear infinite;
+  inset: 18%;
+  border-color: rgba(226, 248, 255, 0.092);
+  animation: echofiRingBreathe 10.2s ease-in-out -1.6s infinite;
 }
 
 .echofi-orbit--4 {
-  inset: 19%;
-  --orbit-alpha: 0.12;
-  border-top-color: rgba(221, 248, 255, 0.27);
-  border-left-color: rgba(166, 228, 255, 0.055);
-  animation: echofiOrbitSpin 31s linear infinite reverse;
+  inset: 24%;
+  border-color: rgba(226, 248, 255, 0.105);
+  animation: echofiRingBreathe 12.4s ease-in-out -7.1s infinite reverse;
 }
 
 .echofi-orbit--5 {
-  inset: 10%;
-  --orbit-alpha: 0.095;
-  border-right-color: rgba(225, 249, 255, 0.2);
-  animation: echofiOrbitSpin 38s linear infinite;
+  inset: 30%;
+  border-color: rgba(226, 248, 255, 0.115);
+  animation: echofiRingBreathe 10.9s ease-in-out -3.7s infinite;
 }
 
 .echofi-orbit--6 {
-  inset: 0;
-  --orbit-alpha: 0.07;
-  border-top-color: rgba(229, 250, 255, 0.16);
-  border-bottom-color: rgba(147, 218, 249, 0.025);
-  animation: echofiOrbitSpin 46s linear infinite reverse;
+  inset: 36%;
+  border-color: rgba(226, 248, 255, 0.13);
+  animation: echofiRingBreathe 11.7s ease-in-out -5.4s infinite reverse;
 }
 
+.echofi-orbits::after {
+  inset: 42%;
+  border-color: rgba(226, 248, 255, 0.15);
+  animation: echofiRingBreathe 9.8s ease-in-out -2.9s infinite;
+}
+
+/* Remove the old orbit markers/tilted ellipses. The supplied reference uses
+   simple complete circles rather than orbital dots or angled planes. */
+.echofi-orbit::after,
 .echofi-orbit-plane {
-  position: absolute;
-  inset: 13%;
-  border: 1px solid rgba(213, 244, 255, 0.11);
-  border-right-color: rgba(213, 244, 255, 0.025);
-  border-left-color: rgba(213, 244, 255, 0.22);
-  border-radius: 50%;
-  transform: rotate(26deg) scaleY(0.48);
-  animation: echofiOrbitPlane 26s linear infinite;
-  will-change: transform;
+  display: none !important;
 }
 
-.echofi-orbit-plane--reverse {
-  inset: 21%;
-  opacity: 0.75;
-  transform: rotate(-31deg) scaleY(0.6);
-  animation-duration: 33s;
-  animation-direction: reverse;
-}
-
-@keyframes echofiOrbitSpin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes echofiOrbitPlane {
-  from {
-    transform: rotate(26deg) scaleY(0.48) rotate(0deg);
-  }
-  to {
-    transform: rotate(26deg) scaleY(0.48) rotate(360deg);
-  }
-}
-
-@keyframes echofiOrbitGlow {
+@keyframes echofiRingBreathe {
   0%,
   100% {
-    opacity: 0.48;
-    transform: scale(0.98);
+    opacity: 0.68;
+    transform: scale(0.997);
   }
+
   50% {
-    opacity: 0.9;
-    transform: scale(1.025);
+    opacity: 1;
+    transform: scale(1.006);
   }
 }
 
-/* ---------------- EchoFi-style floating navigation ---------------- */
+/* --------------------------------------------------------------------------
+   HEADER — FULL NAV AT TOP -> COMPACT DOT CAPSULE ON SCROLL
+   -------------------------------------------------------------------------- */
 #header.portfolio-header {
   position: fixed;
   inset-inline: 0;
   top: 0;
   z-index: 70;
   pointer-events: none;
-  will-change: transform;
+  will-change: opacity, transform;
 }
 
 #header.portfolio-header .portfolio-header-shell {
   pointer-events: auto;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: blur(0);
+  backdrop-filter: blur(0);
   transition:
-    width 520ms cubic-bezier(0.22, 1, 0.36, 1),
-    min-height 520ms cubic-bezier(0.22, 1, 0.36, 1),
-    margin-top 520ms cubic-bezier(0.22, 1, 0.36, 1),
-    padding 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    width 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    min-height 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    margin-top 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    padding 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    gap 650ms cubic-bezier(0.22, 1, 0.36, 1),
     border-color 420ms ease,
-    border-radius 520ms cubic-bezier(0.22, 1, 0.36, 1),
-    background 420ms ease,
-    box-shadow 420ms ease,
-    backdrop-filter 420ms ease;
+    border-radius 650ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 480ms ease,
+    box-shadow 480ms ease,
+    backdrop-filter 480ms ease;
 }
 
-#header.portfolio-header.is-scrolled .portfolio-header-shell {
-  width: min(calc(100% - 2rem), 78rem) !important;
-  min-height: 4.5rem !important;
-  margin-top: 0.75rem;
-  padding: 0.58rem 0.68rem 0.58rem 1rem !important;
-  border: 1px solid rgba(203, 240, 255, 0.16);
-  border-radius: 999px;
-  background:
-    linear-gradient(180deg, rgba(7, 43, 65, 0.89), rgba(2, 25, 40, 0.91)),
-    rgba(2, 29, 46, 0.88);
-  box-shadow:
-    0 1.15rem 3.2rem rgba(0, 13, 24, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  -webkit-backdrop-filter: blur(22px) saturate(145%);
-  backdrop-filter: blur(22px) saturate(145%);
-}
-
-#header.portfolio-header.is-hidden.in {
-  transform: translate3d(0, calc(-100% - 1.5rem), 0);
-}
-
+/* At the top EchoFi is simply logo / text links / CTA on the hero. */
 .portfolio-header-brand {
   transition:
-    transform 220ms ease,
-    opacity 220ms ease;
+    transform 260ms ease,
+    opacity 260ms ease;
 }
 
 .portfolio-header-brand:hover {
   transform: translateY(-1px);
 }
 
+.portfolio-header-nav-list {
+  transition: gap 560ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.portfolio-header-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .portfolio-header-nav-link {
   position: relative;
-  isolation: isolate;
+  display: inline-flex;
+  min-width: 0;
+  max-width: 9rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
   overflow: hidden;
-  border-color: transparent !important;
+  padding: 0.55rem 0.6rem;
+  border: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
+  opacity: 0.76;
+  transform: translateZ(0);
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
-}
-
-.portfolio-header-nav-link::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  border-radius: inherit;
-  background: rgba(236, 250, 255, 0.1);
-  opacity: 0;
-  transform: scale(0.82);
   transition:
-    opacity 240ms ease,
-    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    max-width 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    padding 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease,
+    transform 260ms ease;
 }
 
-.portfolio-header-nav-link::after {
-  content: "";
-  position: absolute;
-  right: 50%;
-  bottom: 0.3rem;
-  left: 50%;
-  height: 1px;
-  background: rgba(230, 249, 255, 0.75);
-  transition:
-    left 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    right 320ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.portfolio-header-nav-link:hover::before,
-.portfolio-header-nav-link:focus-visible::before,
-.portfolio-header-nav-link.is-current::before {
+.portfolio-header-nav-link:hover,
+.portfolio-header-nav-link:focus-visible {
   opacity: 1;
-  transform: scale(1);
+  transform: translateY(-1px);
 }
 
-.portfolio-header-nav-link:hover::after,
-.portfolio-header-nav-link:focus-visible::after,
-.portfolio-header-nav-link.is-current::after {
-  right: 1rem;
-  left: 1rem;
+.portfolio-header-nav-dot {
+  display: block;
+  width: 0;
+  height: 0;
+  flex: none;
+  border-radius: 50%;
+  background: #ffffff;
+  opacity: 0;
+  transform: scale(0.35);
+  transition:
+    width 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    height 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease,
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-#header.portfolio-header:not(.is-scrolled) .portfolio-header-nav-link.is-current::before {
-  opacity: 0.55;
+.portfolio-header-nav-label {
+  display: block;
+  max-width: 8rem;
+  overflow: hidden;
+  opacity: 1;
+  white-space: nowrap;
+  transform: translateX(0);
+  transition:
+    max-width 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 260ms ease,
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .portfolio-header-cta,
@@ -294,63 +241,153 @@
   content: "";
   position: absolute;
   inset: -2px;
-  background: linear-gradient(105deg, transparent 25%, rgba(255, 255, 255, 0.16), transparent 72%);
-  transform: translateX(-120%);
-  transition: transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+  background: linear-gradient(
+    105deg,
+    transparent 28%,
+    rgba(255, 255, 255, 0.15),
+    transparent 72%
+  );
+  transform: translateX(-125%);
+  transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .portfolio-header-cta:hover::before,
 .portfolio-header-menu:hover::before {
-  transform: translateX(120%);
+  transform: translateX(125%);
 }
 
-#header.portfolio-header.is-scrolled .portfolio-header-cta,
-#header.portfolio-header.is-scrolled .portfolio-header-menu {
-  box-shadow: 0 0.65rem 1.6rem rgba(0, 8, 16, 0.24);
+/* EchoFi's compact desktop state is roughly 850px wide and ~80px tall at a
+   1920px viewport. The hero remains visible through the translucent capsule. */
+@media (min-width: 901px) {
+  #header.portfolio-header.is-scrolled .portfolio-header-shell {
+    width: min(calc(100% - 2rem), 54rem) !important;
+    min-height: 5rem !important;
+    margin-top: 1.25rem;
+    padding: 0.62rem 0.68rem 0.62rem 1.35rem !important;
+    grid-template-columns: 1fr auto 1fr !important;
+    gap: 0.8rem !important;
+    border-color: rgba(220, 246, 255, 0.12);
+    border-radius: 999px;
+    background:
+      linear-gradient(90deg, rgba(3, 44, 66, 0.72), rgba(2, 29, 46, 0.62) 52%, rgba(2, 24, 39, 0.72)),
+      rgba(2, 31, 49, 0.62);
+    box-shadow:
+      0 1rem 2.8rem rgba(0, 15, 27, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.07);
+    -webkit-backdrop-filter: blur(22px) saturate(135%);
+    backdrop-filter: blur(22px) saturate(135%);
+  }
+
+  #header.portfolio-header.is-scrolled .portfolio-header-brand {
+    gap: 0.7rem;
+    font-size: 1rem;
+  }
+
+  #header.portfolio-header.is-scrolled .portfolio-header-brand-mark {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.82rem;
+  }
+
+  #header.portfolio-header.is-scrolled .portfolio-header-nav-list {
+    gap: 0.62rem !important;
+  }
+
+  #header.portfolio-header.is-scrolled .portfolio-header-nav-link {
+    min-height: 2.8rem;
+    max-width: 1.65rem;
+    padding: 0 0.55rem;
+    opacity: 1;
+  }
+
+  #header.portfolio-header.is-scrolled .portfolio-header-nav-dot {
+    width: 0.46rem;
+    height: 0.46rem;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  #header.portfolio-header.is-scrolled .portfolio-header-nav-label {
+    max-width: 0;
+    opacity: 0;
+    transform: translateX(0.35rem);
+  }
+
+  /* Hover/focus replaces one dot with its label — exactly the Marketplace
+     state visible in the supplied EchoFi reference screenshot. */
+  #header.portfolio-header.is-scrolled .portfolio-header-nav-link:hover,
+  #header.portfolio-header.is-scrolled .portfolio-header-nav-link:focus-visible {
+    max-width: 8.5rem;
+    padding-inline: 0.45rem;
+    transform: translateY(0);
+  }
+
+  #header.portfolio-header.is-scrolled .portfolio-header-nav-link:hover .portfolio-header-nav-dot,
+  #header.portfolio-header.is-scrolled .portfolio-header-nav-link:focus-visible .portfolio-header-nav-dot {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    transform: scale(0.25);
+  }
+
+  #header.portfolio-header.is-scrolled .portfolio-header-nav-link:hover .portfolio-header-nav-label,
+  #header.portfolio-header.is-scrolled .portfolio-header-nav-link:focus-visible .portfolio-header-nav-label {
+    max-width: 7rem;
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  #header.portfolio-header.is-scrolled .portfolio-header-cta {
+    min-width: 8.75rem;
+    min-height: 3.5rem;
+    padding-inline: 1.45rem;
+    border-color: rgba(255, 255, 255, 0.09);
+    background: rgba(1, 18, 29, 0.88);
+    box-shadow: 0 0.6rem 1.5rem rgba(0, 10, 18, 0.2);
+  }
 }
 
 @media (max-width: 900px) {
   .echofi-orbits {
-    top: 39%;
-    left: 50%;
-    width: clamp(38rem, 145vw, 66rem);
-    opacity: 0;
-  }
-
-  .echofi-orbits.is-visible {
-    opacity: 0.88;
+    top: 35%;
+    width: 176vw;
   }
 
   #header.portfolio-header.is-scrolled .portfolio-header-shell {
     width: calc(100% - 1rem) !important;
-    min-height: 4.2rem !important;
+    min-height: 4.35rem !important;
     margin-top: 0.5rem;
-    padding: 0.48rem 0.5rem 0.48rem 0.75rem !important;
-    border-radius: 1.25rem;
+    padding: 0.5rem 0.55rem 0.5rem 0.85rem !important;
+    border-color: rgba(220, 246, 255, 0.12);
+    border-radius: 999px;
+    background: rgba(2, 30, 47, 0.72);
+    box-shadow: 0 0.85rem 2rem rgba(0, 14, 25, 0.2);
+    -webkit-backdrop-filter: blur(20px) saturate(135%);
+    backdrop-filter: blur(20px) saturate(135%);
   }
 }
 
 @media (max-width: 520px) {
   .echofi-orbits {
-    top: 37%;
-    width: 170vw;
+    top: 34%;
+    width: 215vw;
   }
 
-  .echofi-orbit--5,
-  .echofi-orbit--6 {
-    opacity: 0.64;
+  .echofi-orbits::before,
+  .echofi-orbit--1 {
+    opacity: 0.58;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .echofi-orbits,
   .echofi-orbits::before,
+  .echofi-orbits::after,
   .echofi-orbit,
-  .echofi-orbit-plane,
-  #header.portfolio-header,
   #header.portfolio-header .portfolio-header-shell,
-  .portfolio-header-nav-link::before,
-  .portfolio-header-nav-link::after,
+  .portfolio-header-nav-link,
+  .portfolio-header-nav-dot,
+  .portfolio-header-nav-label,
   .portfolio-header-cta::before,
   .portfolio-header-menu::before {
     animation: none !important;
@@ -358,11 +395,7 @@
   }
 
   .echofi-orbits {
-    opacity: 0.9;
+    opacity: 1;
     transform: translate3d(-50%, -50%, 0) scale(1);
-  }
-
-  #header.portfolio-header.is-hidden.in {
-    transform: translateY(0);
   }
 }
