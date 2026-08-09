@@ -8,15 +8,18 @@ export default function HeroPortrait() {
     <div
       className={clsx(
         heroReveal("delay-[200ms]"),
-        "pointer-events-none relative order-2 -mt-8 -mb-16 h-168 w-[136%]",
-        "max-[520px]:-mb-12 max-[520px]:h-124",
+        "pointer-events-none relative order-2 -mt-7 -mb-14 h-164 w-[132%]",
+        "max-[520px]:-mb-10 max-[520px]:h-120 max-[520px]:w-[138%]",
         "min-[901px]:absolute min-[901px]:z-[6] min-[901px]:m-0",
-        "min-[901px]:left-[clamp(0rem,12vw,18rem)] min-[901px]:-bottom-20",
-        "min-[901px]:aspect-[887/882] min-[901px]:h-[min(110vh,39rem_+_25vw,70rem)] min-[901px]:w-auto",
+        "min-[901px]:left-[clamp(2rem,13.5vw,18rem)] min-[901px]:-bottom-12",
+        "min-[901px]:aspect-[887/882] min-[901px]:h-[min(100vh,36rem_+_23vw,64rem)] min-[901px]:w-auto",
       )}
     >
       <div
-        className={clsx(styles.portraitGlow, "absolute inset-[15%_3%_2%] blur-[1.3rem]")}
+        className={clsx(
+          styles.portraitGlow,
+          "absolute inset-[14%_5%_5%] blur-[1.5rem] opacity-90",
+        )}
         aria-hidden="true"
       />
       <img
