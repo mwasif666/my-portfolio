@@ -2,6 +2,7 @@ import clsx from "clsx";
 import myImg from "../../../myimg.png";
 import styles from "../KontourBanner.module.css";
 import { heroReveal } from "./heroMotion";
+import "./HeroPortrait.css";
 
 export default function HeroPortrait() {
   return (
@@ -16,12 +17,10 @@ export default function HeroPortrait() {
       )}
     >
       <div
-        className={clsx(
-          styles.portraitGlow,
-          "absolute inset-[14%_5%_5%] blur-[1.5rem] opacity-90",
-        )}
+        className="heroPortrait__glow absolute inset-[14%_5%_5%] opacity-90"
         aria-hidden="true"
       />
+      <div className="heroPortrait__rim" aria-hidden="true" />
       <img
         src={myImg}
         alt="Muhammad Wasif, full-stack web developer"
