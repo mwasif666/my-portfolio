@@ -14,7 +14,7 @@
 
 .motionGrid__grid {
   position: absolute;
-  inset: calc(var(--grid-size) * -1);
+  inset: var(--grid-offset);
   background-image:
     linear-gradient(var(--grid-color) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
@@ -58,10 +58,10 @@
   to { transform: translate3d(var(--grid-size), 0, 0); }
 }
 @keyframes motionGridLeft {
-  to { transform: translate3d(calc(var(--grid-size) * -1), 0, 0); }
+  to { transform: translate3d(var(--grid-offset), 0, 0); }
 }
 @keyframes motionGridUp {
-  to { transform: translate3d(0, calc(var(--grid-size) * -1), 0); }
+  to { transform: translate3d(0, var(--grid-offset), 0); }
 }
 @keyframes motionGridDown {
   to { transform: translate3d(0, var(--grid-size), 0); }
