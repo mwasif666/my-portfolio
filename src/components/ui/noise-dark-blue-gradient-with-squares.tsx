@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import "./noise-dark-blue-gradient-with-squares.css";
 
 type Direction = "right" | "left" | "up" | "down" | "diagonal";
@@ -31,7 +32,7 @@ export default function NoiseDarkBlueGradientWithSquares({
         "--grid-size": `${squareSize}px`,
         "--grid-color": borderColor,
         "--grid-duration": `${duration}s`,
-      } as React.CSSProperties}
+      } as CSSProperties}
     >
       <div className="motionGrid__glow" />
       {showGrid && <div className="motionGrid__grid" />}
