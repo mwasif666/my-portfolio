@@ -4,7 +4,7 @@ import { useScroll } from "../contexts/ScrollContext";
 import clsx from "clsx";
 
 export const NAV = [
-  { label: "Home", target: "home", current: true },
+  { label: "Home", target: "home" },
   { label: "About", target: "about" },
   { label: "Services", target: "services" },
   { label: "Projects", target: "projects" },
@@ -13,7 +13,6 @@ export const NAV = [
 export default function Header({ ready, onMenu, onContact }) {
   const [shown, setShown] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const { scrollToId } = useScroll();
 
   useEffect(() => {
@@ -23,22 +22,10 @@ export default function Header({ ready, onMenu, onContact }) {
   }, [ready]);
 
   useEffect(() => {
-    let lastY = window.scrollY;
     let frame = 0;
 
     const updateHeader = () => {
-      const currentY = window.scrollY;
-      const delta = currentY - lastY;
-
-      setScrolled(currentY > 72);
-
-      if (currentY <= 220) {
-        setHidden(false);
-      } else if (Math.abs(delta) > 5) {
-        setHidden(delta > 0);
-      }
-
-      lastY = currentY;
+      setScrolled(window.scrollY > 72);
       frame = 0;
     };
 
@@ -63,7 +50,6 @@ export default function Header({ ready, onMenu, onContact }) {
         "portfolio-header text-[#f5fbff] font-[Onest,sans-serif]",
         shown && "in",
         scrolled && "is-scrolled",
-        hidden && "is-hidden",
       )}
     >
       <div
@@ -82,38 +68,35 @@ export default function Header({ ready, onMenu, onContact }) {
         >
           <span
             aria-hidden="true"
-            className="grid size-8 place-items-center rounded-full bg-white text-[0.88rem] font-extrabold text-[#07466f]"
+            className="portfolio-header-brand-mark grid size-8 place-items-center rounded-full bg-white text-[0.88rem] font-extrabold text-[#07466f]"
           >
             W
           </span>
-          WASIF.DEV
+          <span className="portfolio-header-brand-text">WASIF.DEV</span>
         </button>
 
         <nav className="portfolio-header-nav hidden min-[901px]:block" aria-label="Primary navigation">
-          <ul className="m-0 flex items-center gap-1 p-0">
+          <ul className="portfolio-header-nav-list m-0 flex items-center gap-2 p-0">
             {NAV.map((item) => (
-              <li key={item.label}>
+              <li key={item.label} className="portfolio-header-nav-item">
                 <button
                   onClick={() => scrollToId(item.target)}
-                  aria-current={item.current ? "page" : undefined}
                   className={clsx(
-                    "portfolio-header-nav-link min-h-10 rounded-full px-4.5 py-2.5",
+                    "portfolio-header-nav-link min-h-10 rounded-full",
                     "text-[0.8rem] font-semibold text-white",
                     "[text-shadow:0_1px_10px_rgba(0,24,42,0.32)]",
-                    "transition-[color,transform] duration-200",
-                    "hover:-translate-y-0.5 hover:text-white focus-visible:text-white",
-                    "max-[1180px]:px-3.5 max-[1180px]:text-[0.75rem]",
-                    item.current && "is-current",
                   )}
+                  aria-label={`Go to ${item.label}`}
                 >
-                  {item.label}
+                  <span className="portfolio-header-nav-dot" aria-hidden="true" />
+                  <span className="portfolio-header-nav-label">{item.label}</span>
                 </button>
               </li>
             ))}
           </ul>
         </nav>
 
-        <div className="flex items-center justify-self-end gap-2.5">
+        <div className="portfolio-header-actions flex items-center justify-self-end gap-2.5">
           <button
             type="button"
             onClick={onContact}
