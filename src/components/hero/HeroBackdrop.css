@@ -1,0 +1,40 @@
+.heroBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 72% 34% at 50% 0%, rgba(190,237,255,.82), transparent 66%),
+    radial-gradient(circle 42rem at 50% 28%, rgba(63,188,240,.32), transparent 72%),
+    linear-gradient(180deg, #67b8d6 0%, #0c5d8b 43%, #043b63 72%, #012d4d 100%);
+}
+
+.heroBackdrop__grid {
+  position: absolute;
+  inset: -60px;
+  opacity: .28;
+  background-image:
+    linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size: 54px 54px;
+  transform: translate3d(-54px, -54px, 0);
+  animation: heroGridDrift 24s linear infinite;
+  will-change: transform;
+}
+
+.heroBackdrop__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.04), transparent 25%, rgba(0,22,41,.2) 76%, rgba(0,17,30,.32)),
+    linear-gradient(90deg, rgba(4,36,61,.15), transparent 38%, transparent 72%, rgba(2,27,48,.12));
+}
+
+@keyframes heroGridDrift {
+  to { transform: translate3d(0, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroBackdrop__grid { animation: none; transform: translate3d(0,0,0); }
+}
