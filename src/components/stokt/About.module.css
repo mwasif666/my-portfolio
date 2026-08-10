@@ -13,32 +13,34 @@
 }
 
 .inner {
-  width: min(calc(100% - 3rem), 96rem);
+  width: min(calc(100% - 5rem), 110rem);
   margin: 0 auto;
-  padding: 0 0 clamp(7rem, 11vw, 12rem);
+  padding: clamp(1.5rem, 3vw, 3.4rem) 0 clamp(7rem, 10vw, 11rem);
 }
 
 .eyebrowRow {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-top: clamp(1rem, 2vw, 2rem);
-  margin-bottom: clamp(2rem, 4vw, 4rem);
-  color: #8f8f8f;
-  font-size: .72rem;
-  font-weight: 560;
-  letter-spacing: .04em;
+  gap: .75rem;
+  min-height: 3rem;
+  margin-bottom: clamp(2.7rem, 4vw, 4rem);
+  color: #a2a2a2;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: clamp(.82rem, 1vw, 1rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: .065em;
+  text-transform: uppercase;
 }
 
+.eyebrow::before { content: "[ "; color: #8b8b8b; }
+.eyebrow::after { content: " ]"; color: #8b8b8b; }
+
 .arrow {
-  display: grid;
-  width: 1.9rem;
-  height: 1.9rem;
+  display: inline-grid;
   place-items: center;
-  border: 1px solid #242424;
-  border-radius: 50%;
-  font-size: .8rem;
+  color: #a2a2a2;
+  font-size: 1rem;
 }
 
 .srOnly {
@@ -50,177 +52,210 @@
   white-space: nowrap;
 }
 
-.bento {
+.aboutTop,
+.aboutBottom {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-auto-rows: minmax(7rem, auto);
-  gap: .8rem;
+  gap: .75rem;
+}
+
+.aboutTop {
+  grid-template-columns: minmax(12rem, 1fr) minmax(23rem, 2.05fr) minmax(35rem, 4.15fr);
+  min-height: clamp(34rem, 39vw, 38.5rem);
+}
+
+.aboutBottom {
+  grid-template-columns: minmax(25rem, 1.45fr) minmax(34rem, 2.15fr) minmax(24rem, 1.4fr);
+  margin-top: .75rem;
 }
 
 .stats {
-  grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: .8rem;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: .75rem;
+  min-width: 0;
 }
 
 .statCard,
-.availabilityCard,
+.showcaseCard,
+.locationCard,
 .profileCard,
 .bioCard,
+.expertCard,
 .toolboxCard {
   position: relative;
   overflow: hidden;
-  border: 1px solid #252525;
-  border-radius: 10px;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.015), transparent 45%),
-    #0a0a0a;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+  border: 1px solid #262626;
+  border-radius: 11px;
+  background: #090909;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.018);
 }
 
 .statCard {
-  min-height: clamp(9rem, 12vw, 11.5rem);
   display: flex;
+  min-height: 0;
   flex-direction: column;
-  justify-content: space-between;
-  padding: clamp(1.15rem, 2vw, 1.7rem);
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  text-align: center;
 }
 
 .statCard strong {
-  color: #f0f0ed;
-  font-size: clamp(2.6rem, 4vw, 4.2rem);
-  font-weight: 500;
-  line-height: .9;
+  color: #f1f1ef;
+  font-size: clamp(2.6rem, 3.4vw, 3.8rem);
+  font-weight: 480;
+  line-height: .92;
   letter-spacing: -.055em;
 }
 
 .statCard span {
-  color: #8d8d8d;
-  font-size: .76rem;
+  margin-top: 1rem;
+  color: #a0a0a0;
+  font-size: clamp(.72rem, .8vw, .88rem);
   line-height: 1.2;
 }
 
-.availabilityCard {
-  grid-column: span 4;
-  min-height: 31rem;
-  padding: 1.3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-}
-
-.availabilityCard::before {
-  content: "";
-  position: absolute;
-  inset: 0;
+.showcaseCard {
+  min-height: 100%;
   background:
-    radial-gradient(circle at 50% 38%, rgba(108,255,131,.08), transparent 30%),
-    radial-gradient(circle at 50% 38%, rgba(255,255,255,.03), transparent 50%);
-  pointer-events: none;
+    radial-gradient(circle at 50% 38%, rgba(255,255,255,.025), transparent 40%),
+    #080808;
 }
 
-.availabilityTop {
+.showcaseCard img {
   position: absolute;
-  top: 1.2rem;
-  right: 1.2rem;
-  left: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  top: 7%;
+  left: 50%;
+  width: min(84%, 26rem);
+  height: 72%;
+  object-fit: contain;
+  transform: translateX(-50%);
+  filter: grayscale(1) contrast(1.05) brightness(.82);
 }
 
-.mutedLabel,
-.status {
-  color: #8d8d8d;
-  font-size: .68rem;
-  letter-spacing: .04em;
-  text-transform: uppercase;
+.showcaseMeta {
+  position: absolute;
+  right: clamp(1.25rem, 2vw, 2.25rem);
+  bottom: clamp(1.4rem, 2vw, 2.35rem);
+  left: clamp(1.25rem, 2vw, 2.25rem);
+  display: grid;
+  gap: .32rem;
+}
+
+.showcaseMeta strong,
+.expertMeta strong {
+  color: #f4f4f2;
+  font-size: .88rem;
+  font-weight: 500;
+}
+
+.showcaseMeta span,
+.expertMeta span {
+  color: #a2a2a2;
+  font-size: .78rem;
+  line-height: 1.35;
+}
+
+.showcaseMeta b {
+  margin-left: .35rem;
+  color: #777;
+  font-weight: 500;
+}
+
+.locationCard {
+  min-height: 100%;
+  background:
+    radial-gradient(circle at 50% 76%, rgba(255,255,255,.018), transparent 42%),
+    #080808;
+}
+
+.locationCopy {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  justify-items: center;
+  gap: .6rem;
+  padding: clamp(2.4rem, 4vw, 4rem) 2rem 0;
+  text-align: center;
+}
+
+.locationCopy h3 {
+  margin: 0;
+  color: #f4f4f2;
+  font-size: clamp(1.55rem, 2vw, 2rem);
+  font-weight: 450;
+  line-height: 1.1;
+  letter-spacing: -.035em;
 }
 
 .status {
   display: inline-flex;
   align-items: center;
-  gap: .45rem;
+  gap: .6rem;
+  color: #a8a8a8;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: clamp(.72rem, .9vw, .9rem);
+  font-weight: 600;
+  letter-spacing: .05em;
 }
 
 .status i {
-  width: .48rem;
-  height: .48rem;
+  position: relative;
+  width: .7rem;
+  height: .7rem;
   border-radius: 50%;
   background: #31ee33;
-  box-shadow: 0 0 1rem rgba(49,238,51,.65);
-  animation: statusPulse 2.1s ease-in-out infinite;
+  box-shadow: 0 0 .85rem rgba(49,238,51,.8);
 }
 
-.globe {
-  position: absolute;
-  top: 17%;
-  left: 50%;
-  width: min(19rem, 74%);
-  aspect-ratio: 1;
-  border: 1px solid rgba(255,255,255,.09);
-  border-radius: 50%;
-  transform: translateX(-50%);
-  opacity: .9;
-}
-
-.globe::before,
-.globe::after,
-.globe span {
+.status i::before {
   content: "";
   position: absolute;
-  border: 1px solid rgba(255,255,255,.07);
-  border-radius: 50%;
+  inset: -.42rem;
+  border-radius: inherit;
+  background: rgba(49,238,51,.16);
+  animation: statusPulse 2.2s ease-in-out infinite;
 }
 
-.globe::before { inset: 15% 38%; }
-.globe::after { inset: 38% 15%; }
-.globe span:nth-child(1) { inset: 0 22%; }
-.globe span:nth-child(2) { inset: 22% 0; }
-.globe span:nth-child(3) {
-  top: 50%;
-  right: -8%;
-  left: -8%;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid rgba(255,255,255,.07);
-  border-radius: 0;
+.globeStage {
+  position: absolute;
+  right: -2%;
+  bottom: -30%;
+  left: -2%;
+  height: 88%;
+  pointer-events: none;
 }
 
-.availabilityCard h3 {
-  position: relative;
-  margin: 0 0 .7rem;
-  color: #f1f1ee;
-  font-size: clamp(1.9rem, 3vw, 3.05rem);
-  font-weight: 500;
-  line-height: .95;
-  letter-spacing: -.05em;
+.globeSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: .93;
+  filter: drop-shadow(0 0 1rem rgba(255,255,255,.025));
+  transform-origin: 50% 72%;
+  animation: globeFloat 12s ease-in-out infinite alternate;
 }
 
-.availabilityCard p {
-  position: relative;
-  max-width: 24rem;
-  margin: 0;
-  color: #868686;
-  font-size: .82rem;
-  line-height: 1.5;
+.profileCard,
+.bioCard,
+.expertCard {
+  min-height: clamp(33rem, 39vw, 38.5rem);
 }
 
 .profileCard {
-  grid-column: span 4;
-  min-height: 31rem;
   background:
-    radial-gradient(circle at 62% 35%, rgba(255,118,35,.32), transparent 35%),
-    linear-gradient(155deg, #281208 0%, #120c09 48%, #090909 100%);
+    radial-gradient(circle at 48% 32%, rgba(255,117,49,.48), transparent 43%),
+    linear-gradient(150deg, #ff6a34 0%, #9a2d0f 48%, #1a0905 100%);
 }
 
 .profileGlow {
   position: absolute;
-  inset: 8% 5% 2%;
-  background: radial-gradient(circle at 54% 42%, rgba(255,120,36,.34), transparent 57%);
-  filter: blur(1rem);
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(255,110,46,.08), transparent 50%, rgba(0,0,0,.48) 100%),
+    radial-gradient(circle at 50% 44%, transparent 38%, rgba(0,0,0,.14) 100%);
+  pointer-events: none;
 }
 
 .profileCard img {
@@ -229,241 +264,341 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
-  filter: saturate(.88) contrast(1.03);
-  transform: scale(1.01);
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 78%, transparent 100%);
-  mask-image: linear-gradient(180deg, #000 0%, #000 78%, transparent 100%);
+  object-position: 50% 16%;
+  filter: saturate(.72) contrast(1.1) brightness(.68);
+  transform: scale(1.035);
+  mix-blend-mode: multiply;
+}
+
+.profileCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, transparent 38%, rgba(12,3,1,.08) 58%, rgba(6,2,1,.78) 100%);
+  pointer-events: none;
 }
 
 .profileMeta {
   position: absolute;
-  right: 1.2rem;
-  bottom: 1.15rem;
-  left: 1.2rem;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1rem;
+  right: clamp(1.3rem, 2vw, 2rem);
+  bottom: clamp(1.3rem, 2vw, 2rem);
+  left: clamp(1.3rem, 2vw, 2rem);
+  z-index: 3;
+  display: grid;
+  gap: .55rem;
 }
 
 .profileMeta strong {
-  color: #f3f3f0;
-  font-size: 1rem;
-  font-weight: 560;
+  color: #fff;
+  font-size: clamp(1.45rem, 2vw, 2rem);
+  font-weight: 480;
+  line-height: 1;
+  letter-spacing: -.04em;
 }
 
 .profileMeta span {
-  max-width: 11rem;
-  color: #8d8d8d;
-  font-size: .66rem;
-  line-height: 1.3;
-  text-align: right;
-  text-transform: uppercase;
+  color: #d0c2bb;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: clamp(.62rem, .78vw, .76rem);
+  font-weight: 600;
+  letter-spacing: .045em;
 }
 
 .bioCard {
-  grid-column: span 4;
-  min-height: 31rem;
-  padding: 1.3rem;
   display: flex;
   flex-direction: column;
+  padding: clamp(2.2rem, 3.2vw, 3.5rem);
+  background: #080808;
 }
 
 .bioHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #202020;
-  color: #d8d8d5;
-  font-size: .78rem;
-}
-
-.bioMark {
-  color: #656565;
-  font-size: 1rem;
-  font-weight: 650;
+  color: #f4f4f2;
+  font-size: clamp(1.6rem, 2vw, 2.15rem);
+  font-weight: 450;
+  line-height: 1;
+  letter-spacing: -.045em;
 }
 
 .bioCopy {
   display: grid;
-  gap: 1rem;
-  margin: auto 0;
+  gap: clamp(1.4rem, 2vw, 2rem);
+  margin-top: clamp(2.4rem, 4vw, 4.2rem);
+  max-width: 45rem;
 }
 
 .bioCopy p {
   margin: 0;
-  color: #9a9a9a;
-  font-size: clamp(.82rem, 1vw, .94rem);
-  line-height: 1.58;
+  color: #dededb;
+  font-size: clamp(.82rem, 1vw, .96rem);
+  line-height: 1.55;
 }
 
 .workButton {
-  display: flex;
+  display: inline-flex;
+  width: fit-content;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  width: 100%;
-  min-height: 3.2rem;
-  padding: .85rem 1rem;
-  border: 1px solid #292929;
-  border-radius: 8px;
-  background: #0e0e0e;
-  color: #e9e9e6;
+  gap: .7rem;
+  margin-top: auto;
+  padding: 1rem 0 0;
+  border: 0;
+  background: transparent;
+  color: #b9b9b9;
   font: inherit;
-  font-size: .76rem;
+  font-size: .78rem;
   cursor: pointer;
-  transition: background-color 200ms ease, border-color 200ms ease, transform 200ms ease;
+  transition: color 180ms ease, transform 180ms ease;
 }
 
 .workButton:hover {
-  transform: translateY(-2px);
-  border-color: #383838;
-  background: #141414;
+  color: #fff;
+  transform: translateX(3px);
+}
+
+.expertCard {
+  background:
+    radial-gradient(circle at 51% 36%, rgba(255,255,255,.025), transparent 38%),
+    #080808;
+}
+
+.expertCard img {
+  position: absolute;
+  top: 7%;
+  left: 50%;
+  width: 78%;
+  height: 67%;
+  object-fit: contain;
+  transform: translateX(-50%);
+  filter: grayscale(1) contrast(1.08) brightness(.75);
+}
+
+.expertMeta {
+  position: absolute;
+  right: clamp(1.25rem, 2vw, 2.1rem);
+  bottom: clamp(1.4rem, 2vw, 2.2rem);
+  left: clamp(1.25rem, 2vw, 2.1rem);
+  display: grid;
+  gap: .32rem;
 }
 
 .toolboxCard {
   grid-column: 1 / -1;
-  min-height: 11rem;
   display: grid;
-  grid-template-columns: minmax(13rem, .8fr) 2fr;
+  grid-template-columns: minmax(13rem, .7fr) minmax(0, 3fr);
   align-items: center;
-  gap: 2rem;
-  padding: 1.2rem;
+  gap: clamp(1.5rem, 3vw, 3.5rem);
+  min-height: clamp(10rem, 12vw, 12rem);
+  margin-top: .75rem;
+  padding: clamp(1.5rem, 2.3vw, 2.35rem);
 }
 
 .toolboxHeader {
   display: grid;
-  gap: .35rem;
+  gap: .45rem;
 }
 
 .toolboxHeader span {
-  color: #efefec;
-  font-size: 1rem;
+  color: #f1f1ef;
+  font-size: .92rem;
   font-weight: 520;
 }
 
 .toolboxHeader small {
-  color: #757575;
-  font-size: .72rem;
+  color: #9b9b9b;
+  font-size: .78rem;
 }
 
-.marquee {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-}
-
-.marqueeTrack {
+.toolRow {
   display: flex;
-  width: max-content;
-  gap: .65rem;
-  animation: toolboxMarquee 23s linear infinite;
+  align-items: center;
+  gap: .75rem;
+  overflow-x: auto;
+  padding: .25rem 0;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
 }
+
+.toolRow::-webkit-scrollbar { display: none; }
 
 .tool {
   display: grid;
-  min-width: 7.25rem;
-  height: 4.2rem;
+  min-width: clamp(5.4rem, 6.2vw, 6.8rem);
+  height: clamp(5.2rem, 6vw, 6.2rem);
   place-items: center;
-  padding: 0 1rem;
-  border: 1px solid #282828;
-  border-radius: 8px;
-  background: #0d0d0d;
-  color: #adadad;
-  font-size: .72rem;
-  font-weight: 550;
+  flex: none;
+  border: 1px solid #2a2a2a;
+  border-radius: 11px;
+  background: #0b0b0b;
+  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
 }
 
-@keyframes toolboxMarquee {
-  to { transform: translateX(-50%); }
+.tool strong {
+  color: #efefed;
+  font-size: clamp(1.15rem, 1.4vw, 1.55rem);
+  font-weight: 600;
+  letter-spacing: -.04em;
+}
+
+.tool span {
+  display: none;
+}
+
+.tool:hover {
+  transform: translateY(-3px);
+  border-color: #3a3a3a;
+  background: #101010;
 }
 
 @keyframes statusPulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.45); opacity: .5; }
+  0%, 100% { transform: scale(.78); opacity: .3; }
+  50% { transform: scale(1); opacity: .72; }
+}
+
+@keyframes globeFloat {
+  from { transform: translate3d(0, 2px, 0) rotate(-.35deg); }
+  to { transform: translate3d(0, -8px, 0) rotate(.35deg); }
 }
 
 @supports (animation-timeline: view()) {
-  .stats,
-  .availabilityCard,
-  .profileCard,
-  .bioCard,
+  .aboutTop,
+  .aboutBottom,
   .toolboxCard {
     animation: aboutReveal linear both;
     animation-timeline: view();
-    animation-range: entry 10% cover 35%;
+    animation-range: entry 8% cover 30%;
   }
 }
 
 @keyframes aboutReveal {
-  from { opacity: 0; transform: translateY(1.6rem); }
+  from { opacity: 0; transform: translateY(1.5rem); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 1050px) {
-  .availabilityCard,
-  .profileCard,
-  .bioCard {
-    grid-column: span 6;
+@media (max-width: 1250px) {
+  .inner { width: min(calc(100% - 2.5rem), 110rem); }
+
+  .aboutTop {
+    grid-template-columns: minmax(10.5rem, .95fr) minmax(19rem, 1.75fr) minmax(28rem, 3.3fr);
   }
 
-  .bioCard {
-    grid-column: 1 / -1;
-    min-height: auto;
-  }
-
-  .bioCopy {
-    margin: 2rem 0;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.5rem;
+  .aboutBottom {
+    grid-template-columns: minmax(21rem, 1.25fr) minmax(29rem, 1.85fr) minmax(20rem, 1.2fr);
   }
 }
 
-@media (max-width: 760px) {
-  .inner {
-    width: min(calc(100% - 1.5rem), 96rem);
+@media (max-width: 1020px) {
+  .aboutTop {
+    grid-template-columns: minmax(11rem, .75fr) minmax(0, 2fr);
+    min-height: auto;
   }
 
+  .stats { grid-row: span 2; }
+  .showcaseCard { min-height: 28rem; }
+  .locationCard { min-height: 30rem; }
+
+  .aboutBottom {
+    grid-template-columns: minmax(18rem, .9fr) minmax(0, 1.4fr);
+  }
+
+  .profileCard,
+  .bioCard { min-height: 34rem; }
+
+  .expertCard {
+    grid-column: 1 / -1;
+    min-height: 28rem;
+  }
+
+  .expertCard img {
+    top: 0;
+    width: 46%;
+    height: 82%;
+  }
+}
+
+@media (max-width: 720px) {
+  .inner {
+    width: min(calc(100% - 1.4rem), 110rem);
+    padding-top: 1rem;
+  }
+
+  .eyebrowRow { margin-bottom: 2rem; }
+
+  .aboutTop,
+  .aboutBottom {
+    grid-template-columns: 1fr;
+  }
+
+  .stats {
+    grid-row: auto;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: none;
+  }
+
+  .statCard {
+    min-height: 8.8rem;
+    padding: .75rem;
+  }
+
+  .statCard strong { font-size: clamp(2rem, 9vw, 3rem); }
+  .statCard span { font-size: .62rem; }
+
+  .showcaseCard,
+  .locationCard,
+  .profileCard,
+  .bioCard,
+  .expertCard {
+    min-height: 30rem;
+  }
+
+  .locationCopy {
+    padding-top: 2.2rem;
+  }
+
+  .globeStage {
+    bottom: -20%;
+    height: 80%;
+  }
+
+  .bioCard { padding: 2rem 1.4rem; }
+  .bioCopy { margin-top: 2.4rem; }
+
+  .expertCard { grid-column: auto; }
+  .expertCard img { width: 76%; height: 70%; }
+
+  .toolboxCard {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+    padding: 1.3rem;
+  }
+}
+
+@media (max-width: 500px) {
   .stats {
     grid-template-columns: 1fr;
   }
 
   .statCard {
-    min-height: 8.4rem;
+    min-height: 7.6rem;
   }
 
-  .availabilityCard,
+  .showcaseCard,
+  .locationCard,
   .profileCard,
   .bioCard,
-  .toolboxCard {
-    grid-column: 1 / -1;
+  .expertCard {
+    min-height: 27rem;
   }
 
-  .availabilityCard,
-  .profileCard {
-    min-height: 29rem;
-  }
-
-  .bioCopy {
-    grid-template-columns: 1fr;
-  }
-
-  .toolboxCard {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
+  .locationCopy h3 { font-size: 1.5rem; }
+  .status { font-size: .66rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .status i,
-  .marqueeTrack,
-  .stats,
-  .availabilityCard,
-  .profileCard,
-  .bioCard,
+  .status i::before,
+  .globeSvg,
+  .aboutTop,
+  .aboutBottom,
   .toolboxCard {
     animation: none !important;
   }
