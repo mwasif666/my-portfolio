@@ -3,7 +3,8 @@ import WhyCard from "./WhyCard";
 import useWhyScrollMotion from "./useWhyScrollMotion";
 import styles from "./WhySection.module.css";
 
-const cloudsAsset = "https://hugo.ai/components/home/HomeWhy/clouds.webp";
+const cloudsAsset =
+  "https://hugo.ai/_ipx/w_2800&f_png/components/home/HomeWhy/clouds.webp";
 
 const cards = [
   {
