@@ -38,12 +38,16 @@ export default function useWhyScrollMotion({ sectionRef, cardRefs, layout }) {
       }
 
       const rect = section.getBoundingClientRect();
-      const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
+      const viewport = window.innerHeight;
+
+      if (rect.top > viewport * 1.35 || rect.bottom < -viewport * .35) return;
+
+      const travel = Math.max(section.offsetHeight - viewport, 1);
       const rawProgress = clamp(-rect.top / travel);
       const spreadProgress = clamp((rawProgress - 0.04) / 0.72);
       const eased = easeOutCubic(spreadProgress);
       const vw = window.innerWidth / 100;
-      const vh = window.innerHeight / 100;
+      const vh = viewport / 100;
 
       cardRefs.current.forEach((node, index) => {
         if (!node) return;
