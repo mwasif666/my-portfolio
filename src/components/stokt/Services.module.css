@@ -122,32 +122,20 @@
   right: clamp(1.15rem, 2vw, 1.8rem);
   bottom: clamp(1.1rem, 2vw, 1.65rem);
   left: clamp(1.15rem, 2vw, 1.8rem);
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.cardIndex {
-  color: #5d5d5d;
-  font-size: .66rem;
-  font-weight: 600;
-  letter-spacing: .08em;
 }
 
 .cardTitle {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
   gap: 0 .35em;
-  max-width: 80%;
+  max-width: 88%;
   margin: 0;
   color: #f3f3f0;
   font-size: clamp(1.3rem, 2vw, 2.05rem);
   font-weight: 500;
   line-height: 1;
   letter-spacing: -.035em;
-  text-align: right;
+  text-align: left;
 }
 
 .cardTitle span {
@@ -174,15 +162,11 @@
 
 @supports (animation-timeline: view()) {
   .eyebrowRow,
-  .introGrid,
-  .card {
+  .introGrid {
     animation: servicesReveal linear both;
     animation-timeline: view();
     animation-range: entry 8% cover 34%;
   }
-
-  .card:nth-child(2) { animation-range: entry 12% cover 38%; }
-  .card:nth-child(3) { animation-range: entry 16% cover 42%; }
 }
 
 @keyframes servicesReveal {
@@ -207,7 +191,9 @@
     min-height: min(78vw, 38rem);
   }
 
-  .media { inset-bottom: 14%; }
+  .media {
+    inset: 3% 3% 14%;
+  }
 }
 
 @media (max-width: 640px) {
@@ -225,7 +211,7 @@
   }
 
   .cardTitle {
-    max-width: 86%;
+    max-width: 92%;
     font-size: 1.55rem;
   }
 }
@@ -238,8 +224,7 @@
   }
 
   .eyebrowRow,
-  .introGrid,
-  .card {
+  .introGrid {
     animation: none !important;
   }
 }
