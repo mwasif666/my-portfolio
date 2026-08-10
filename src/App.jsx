@@ -6,6 +6,7 @@ import KontourBanner from "./components/KontourBanner";
 import StoktSections from "./components/stokt/StoktSections";
 import ProjectsSection from "./components/ProjectsSection";
 import WhySection from "./components/why/WhySection";
+import JourneySection from "./components/journey/JourneySection";
 import NavMenu from "./components/NavMenu";
 import RequestModal from "./components/RequestModal";
 
@@ -41,6 +42,7 @@ export default function App() {
         <StoktSections onContact={openModal} />
         <ProjectsSection />
         <WhySection />
+        <JourneySection />
       </main>
 
       <NavMenu
