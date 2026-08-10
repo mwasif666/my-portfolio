@@ -1,7 +1,7 @@
 .section {
   --why-title-y: 110px;
   --why-title-scale: .88;
-  --why-planet-y: 190px;
+  --why-clouds-y: 175px;
   --why-stars-y: 16px;
   position: relative;
   height: 195svh;
@@ -18,8 +18,8 @@
   overflow: hidden;
   isolation: isolate;
   background:
-    radial-gradient(circle at 50% 62%, rgba(23, 113, 155, .22), transparent 29%),
-    radial-gradient(circle at 50% 47%, rgba(3, 32, 49, .72), rgba(0, 8, 14, .94) 54%, #000 78%);
+    radial-gradient(ellipse at 50% 59%, rgba(18, 104, 143, .13), transparent 34%),
+    linear-gradient(180deg, #000 0%, #00070b 43%, #00101a 74%, #000 100%);
 }
 
 .stars,
@@ -98,31 +98,22 @@
   will-change: transform;
 }
 
-.planet {
+.clouds {
   position: absolute;
   z-index: 3;
   left: 50%;
-  bottom: -72%;
-  width: min(84vw, 96rem);
-  aspect-ratio: 1.72 / 1;
-  transform: translate3d(-50%, var(--why-planet-y), 0);
-  border: 1px solid rgba(104, 190, 227, .2);
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 50% 4%, rgba(103,190,228,.19), rgba(31,95,128,.08) 30%, rgba(7,30,45,.74) 56%, rgba(1,8,13,.98) 76%);
-  box-shadow:
-    inset 0 2px 7px rgba(180,231,250,.07),
-    0 -1.3rem 4rem rgba(38,133,177,.08);
+  bottom: -9%;
+  display: block;
+  width: min(96vw, 112rem);
+  max-width: none;
+  height: auto;
+  transform: translate3d(-50%, var(--why-clouds-y), 0) scale(1.015);
+  transform-origin: center bottom;
+  opacity: .78;
+  pointer-events: none;
+  user-select: none;
+  filter: sepia(.08) saturate(1.22) hue-rotate(154deg) brightness(.76) contrast(1.07);
   will-change: transform;
-}
-
-.planet::before {
-  content: "";
-  position: absolute;
-  inset: 5% 8% 18%;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at 50% 0%, rgba(128,205,239,.11), transparent 52%);
-  filter: blur(18px);
 }
 
 .cardsLayer {
@@ -194,6 +185,11 @@
     font-size: clamp(10rem, 22vw, 23rem);
   }
 
+  .clouds {
+    width: min(105vw, 100rem);
+    bottom: -5%;
+  }
+
   .card {
     width: min(34vw, 34rem);
     min-width: 24rem;
@@ -230,11 +226,11 @@
     text-align: center;
   }
 
-  .planet {
-    bottom: -13rem;
-    width: 155vw;
+  .clouds {
+    bottom: -2rem;
+    width: 185vw;
     transform: translateX(-50%) !important;
-    opacity: .58;
+    opacity: .5;
   }
 
   .cardsLayer {
@@ -264,7 +260,7 @@
 @media (prefers-reduced-motion: reduce) {
   .stars,
   .title,
-  .planet,
+  .clouds,
   .card {
     will-change: auto;
   }
