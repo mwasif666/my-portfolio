@@ -1,0 +1,262 @@
+.section {
+  --why-title-y: 145px;
+  --why-title-scale: .84;
+  --why-planet-y: 210px;
+  --why-stars-y: 18px;
+  position: relative;
+  height: 205svh;
+  overflow: clip;
+  background: #000;
+  color: #fff;
+  font-family: "Onest", system-ui, sans-serif;
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 50% 62%, rgba(10, 31, 57, .34), transparent 31%),
+    radial-gradient(circle at 50% 48%, rgba(2, 11, 23, .7), #000 72%);
+}
+
+.stars,
+.stars::before,
+.stars::after {
+  position: absolute;
+  inset: -6%;
+  pointer-events: none;
+}
+
+.stars {
+  z-index: 1;
+  opacity: .72;
+  transform: translate3d(0, var(--why-stars-y), 0);
+  background-image:
+    radial-gradient(circle at 3% 61%, rgba(255,255,255,.9) 0 1px, transparent 1.3px),
+    radial-gradient(circle at 10% 24%, rgba(171,205,232,.72) 0 1px, transparent 1.25px),
+    radial-gradient(circle at 15% 40%, rgba(255,255,255,.52) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 22% 13%, rgba(191,217,241,.68) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 31% 53%, rgba(255,255,255,.75) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 36% 20%, rgba(255,255,255,.44) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 43% 33%, rgba(177,208,235,.74) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 51% 12%, rgba(255,255,255,.62) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 55% 47%, rgba(255,255,255,.7) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 62% 23%, rgba(183,210,236,.68) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 70% 53%, rgba(255,255,255,.54) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 77% 18%, rgba(255,255,255,.8) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 84% 42%, rgba(171,205,232,.68) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 91% 27%, rgba(255,255,255,.48) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 96% 61%, rgba(255,255,255,.8) 0 1px, transparent 1.2px);
+  will-change: transform;
+}
+
+.stars::before {
+  content: "";
+  opacity: .42;
+  background-image:
+    radial-gradient(circle at 8% 74%, #fff 0 .8px, transparent 1px),
+    radial-gradient(circle at 18% 63%, #a8c4de 0 .8px, transparent 1px),
+    radial-gradient(circle at 28% 83%, #fff 0 .8px, transparent 1px),
+    radial-gradient(circle at 39% 68%, #fff 0 .8px, transparent 1px),
+    radial-gradient(circle at 48% 77%, #a8c4de 0 .8px, transparent 1px),
+    radial-gradient(circle at 58% 64%, #fff 0 .8px, transparent 1px),
+    radial-gradient(circle at 68% 81%, #a8c4de 0 .8px, transparent 1px),
+    radial-gradient(circle at 79% 71%, #fff 0 .8px, transparent 1px),
+    radial-gradient(circle at 89% 86%, #fff 0 .8px, transparent 1px);
+}
+
+.stars::after {
+  content: "";
+  opacity: .24;
+  filter: blur(.3px);
+  background: radial-gradient(circle at 50% 50%, rgba(93,145,194,.18), transparent 44%);
+}
+
+.title {
+  position: absolute;
+  z-index: 2;
+  top: 53%;
+  left: 50%;
+  margin: 0;
+  transform: translate3d(-50%, calc(-50% + var(--why-title-y)), 0) scale(var(--why-title-scale));
+  transform-origin: center;
+  color: transparent;
+  background: linear-gradient(180deg, #617da9 0%, #a9bddc 48%, #6e83a7 77%, #2f405e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(13rem, 27vw, 34rem);
+  font-weight: 400;
+  line-height: .72;
+  letter-spacing: -.085em;
+  text-shadow: 0 0 2rem rgba(73, 111, 165, .08);
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.planet {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: -47%;
+  width: min(92vw, 104rem);
+  aspect-ratio: 1.72 / 1;
+  transform: translate3d(-50%, var(--why-planet-y), 0);
+  border: 1px solid rgba(150, 169, 194, .2);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 4%, rgba(178,193,214,.19), rgba(108,125,149,.07) 29%, rgba(17,22,31,.7) 54%, rgba(3,4,7,.98) 73%);
+  box-shadow:
+    inset 0 2px 6px rgba(207,221,238,.09),
+    0 -1rem 3.5rem rgba(105,135,176,.08);
+  will-change: transform;
+}
+
+.planet::before {
+  content: "";
+  position: absolute;
+  inset: 5% 8% 18%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(204,214,227,.11), transparent 52%);
+  filter: blur(18px);
+}
+
+.cardsLayer {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  pointer-events: none;
+}
+
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(31vw, 37rem);
+  min-width: 28rem;
+  padding: clamp(1.3rem, 1.65vw, 1.9rem) clamp(1.4rem, 1.8vw, 2rem) clamp(1.35rem, 1.75vw, 2rem);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 18px;
+  background: rgba(30, 30, 30, .965);
+  box-shadow:
+    0 1.2rem 3.5rem rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.035);
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0) translate3d(0, 17vh, 0) scale(.91);
+  transform-origin: center;
+  pointer-events: auto;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255,255,255,.025), transparent 38%);
+}
+
+.card h3 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: #f4f4f4;
+  font-size: clamp(1.15rem, 1.35vw, 1.52rem);
+  font-weight: 520;
+  line-height: 1.15;
+  letter-spacing: -.027em;
+}
+
+.card p {
+  position: relative;
+  z-index: 1;
+  max-width: 95%;
+  margin: .85rem 0 0;
+  color: #9a9a9f;
+  font-size: clamp(.91rem, 1.04vw, 1.12rem);
+  font-weight: 450;
+  line-height: 1.42;
+  letter-spacing: -.015em;
+}
+
+@media (max-width: 1250px) {
+  .card {
+    width: min(34vw, 34rem);
+    min-width: 24rem;
+  }
+
+  .card p {
+    font-size: .92rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .section {
+    height: auto;
+    min-height: 100svh;
+    overflow: hidden;
+  }
+
+  .stage {
+    position: relative;
+    height: auto;
+    min-height: 100svh;
+    padding: 6.5rem 1rem 4.5rem;
+  }
+
+  .title {
+    position: relative;
+    top: auto;
+    left: auto;
+    display: block;
+    margin: 1.5rem auto 3.5rem;
+    transform: none !important;
+    font-size: clamp(8rem, 33vw, 14rem);
+    line-height: .82;
+    text-align: center;
+  }
+
+  .planet {
+    bottom: -12rem;
+    width: 165vw;
+    transform: translateX(-50%) !important;
+    opacity: .62;
+  }
+
+  .cardsLayer {
+    position: relative;
+    inset: auto;
+    display: grid;
+    gap: .85rem;
+  }
+
+  .card {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    min-width: 0;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .card:nth-child(2),
+  .card:nth-child(4) {
+    margin-left: 3%;
+    width: 97%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stars,
+  .title,
+  .planet,
+  .card {
+    will-change: auto;
+  }
+}
