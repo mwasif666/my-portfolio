@@ -25,7 +25,7 @@ export default function useWhyScrollMotion({ sectionRef, cardRefs, layout }) {
 
       section.style.setProperty("--why-title-y", "0px");
       section.style.setProperty("--why-title-scale", "1");
-      section.style.setProperty("--why-planet-y", "0px");
+      section.style.setProperty("--why-clouds-y", "0px");
       section.style.setProperty("--why-stars-y", "0px");
     };
 
@@ -68,7 +68,7 @@ export default function useWhyScrollMotion({ sectionRef, cardRefs, layout }) {
 
       section.style.setProperty("--why-title-y", `${lerp(110, 0, eased)}px`);
       section.style.setProperty("--why-title-scale", String(lerp(0.88, 1, eased)));
-      section.style.setProperty("--why-planet-y", `${lerp(190, 0, eased)}px`);
+      section.style.setProperty("--why-clouds-y", `${lerp(175, 0, eased)}px`);
       section.style.setProperty("--why-stars-y", `${lerp(16, -8, rawProgress)}px`);
     };
 
