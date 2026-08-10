@@ -17,12 +17,13 @@ const requests = [
 ];
 
 const capabilities = [
-  ["01", "Frontend systems", "Responsive React interfaces, reusable components and motion that stays smooth across devices."],
-  ["02", "Backend & APIs", "REST APIs, application logic, authentication and data flows designed for real production use."],
-  ["03", "CMS & commerce", "WordPress, WooCommerce and custom content systems built around practical editing workflows."],
-  ["04", "Integrations", "Third-party APIs, payments, automation and services connected without turning the codebase into a patchwork."],
-  ["05", "Performance", "Fast loading, image strategy, clean rendering and responsive behavior treated as part of the build."],
-  ["06", "Launch & support", "Deployment, QA, fixes and post-launch improvements so the product keeps working after handoff."],
+  ["01", "React interfaces", "Responsive, component-driven frontends."],
+  ["02", "Backend APIs", "Production-ready application logic and data flows."],
+  ["03", "WordPress", "Custom themes, content systems and integrations."],
+  ["04", "WooCommerce", "Commerce flows, checkout and store customization."],
+  ["05", "Integrations", "Payments, third-party APIs and automation."],
+  ["06", "Performance", "Fast rendering, responsive UX and optimization."],
+  ["07", "Launch support", "QA, deployment, fixes and post-launch iteration."],
 ];
 
 function RequestColumn({ item, index }) {
@@ -35,12 +36,19 @@ function RequestColumn({ item, index }) {
   );
 }
 
-function CapabilityCard({ number, title, copy }) {
+function CapabilityTile({ number, title, copy }) {
   return (
-    <article className={styles.capabilityCard}>
-      <span className={styles.capabilityNumber}>{number}</span>
-      <h3>{title}</h3>
-      <p>{copy}</p>
+    <article className={styles.capabilityTile}>
+      <span className={styles.tileNumber}>{number}</span>
+      <div className={styles.tileMark} aria-hidden="true">
+        <i />
+        <i />
+        <i />
+      </div>
+      <div>
+        <h3>{title}</h3>
+        <p>{copy}</p>
+      </div>
     </article>
   );
 }
@@ -56,7 +64,7 @@ export default function DeveloperSystemsSection() {
       ([entry]) => {
         node.dataset.active = entry.isIntersecting ? "true" : "false";
       },
-      { rootMargin: "20% 0px 20% 0px", threshold: 0.04 },
+      { rootMargin: "15% 0px 15% 0px", threshold: 0.03 },
     );
 
     observer.observe(node);
@@ -65,7 +73,7 @@ export default function DeveloperSystemsSection() {
 
   return (
     <section ref={sectionRef} className={styles.section} id="developer-systems" data-active="false">
-      <div className={styles.verticalRail} aria-hidden="true" />
+      <div className={styles.rail} aria-hidden="true" />
 
       <div className={styles.realtimeBlock}>
         <div className={styles.eyebrow}>
@@ -78,7 +86,7 @@ export default function DeveloperSystemsSection() {
           Real-time systems for <em>modern web products</em>
         </h2>
 
-        <div className={styles.scannerWrap} aria-hidden="true">
+        <div className={styles.scannerStage} aria-hidden="true">
           <img className={styles.scannerGlowOne} src={AIVORA_ASSETS.gradient} alt="" />
           <img className={styles.scannerGlowTwo} src={AIVORA_ASSETS.gradientAlt} alt="" />
 
@@ -94,17 +102,19 @@ export default function DeveloperSystemsSection() {
               ))}
             </div>
 
-            <div className={styles.scanLine} />
+            <div className={styles.scanBeam} />
           </div>
         </div>
       </div>
 
       <div className={styles.capabilitiesBlock}>
-        <div className={styles.networkVisual} aria-hidden="true">
-          <img src={AIVORA_ASSETS.network} alt="" />
-          <div className={styles.networkGlow} />
-          <div className={styles.chip}>
-            <div className={styles.chipInner}>W</div>
+        <div className={styles.networkStage} aria-hidden="true">
+          <img className={styles.networkShape} src={AIVORA_ASSETS.network} alt="" />
+          <div className={styles.networkAura} />
+          <div className={styles.chipShell}>
+            <div className={styles.chipMiddle}>
+              <div className={styles.chipInner}>W</div>
+            </div>
           </div>
         </div>
 
@@ -118,10 +128,12 @@ export default function DeveloperSystemsSection() {
           What I build <em>for the web</em>
         </h2>
 
-        <div className={styles.capabilityGrid}>
-          {capabilities.map(([number, title, copy]) => (
-            <CapabilityCard key={number} number={number} title={title} copy={copy} />
-          ))}
+        <div className={styles.capabilityViewport}>
+          <div className={styles.capabilityTrack}>
+            {capabilities.map(([number, title, copy]) => (
+              <CapabilityTile key={number} number={number} title={title} copy={copy} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
