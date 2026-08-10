@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import KontourBanner from "./components/KontourBanner";
 import StoktSections from "./components/stokt/StoktSections";
 import ProjectsSection from "./components/ProjectsSection";
+import WhySection from "./components/why/WhySection";
 import NavMenu from "./components/NavMenu";
 import RequestModal from "./components/RequestModal";
 
@@ -39,6 +40,7 @@ export default function App() {
         <KontourBanner id="home" theme="blue" onContact={openModal} />
         <StoktSections onContact={openModal} />
         <ProjectsSection />
+        <WhySection />
       </main>
 
       <NavMenu
