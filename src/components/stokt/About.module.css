@@ -1,0 +1,470 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  background: #050505;
+  color: #f2f2ef;
+  font-family: "Onest", sans-serif;
+}
+
+.anchor {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.inner {
+  width: min(calc(100% - 3rem), 96rem);
+  margin: 0 auto;
+  padding: 0 0 clamp(7rem, 11vw, 12rem);
+}
+
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: clamp(1rem, 2vw, 2rem);
+  margin-bottom: clamp(2rem, 4vw, 4rem);
+  color: #8f8f8f;
+  font-size: .72rem;
+  font-weight: 560;
+  letter-spacing: .04em;
+}
+
+.arrow {
+  display: grid;
+  width: 1.9rem;
+  height: 1.9rem;
+  place-items: center;
+  border: 1px solid #242424;
+  border-radius: 50%;
+  font-size: .8rem;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.bento {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: minmax(7rem, auto);
+  gap: .8rem;
+}
+
+.stats {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .8rem;
+}
+
+.statCard,
+.availabilityCard,
+.profileCard,
+.bioCard,
+.toolboxCard {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #252525;
+  border-radius: 10px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.015), transparent 45%),
+    #0a0a0a;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+.statCard {
+  min-height: clamp(9rem, 12vw, 11.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.15rem, 2vw, 1.7rem);
+}
+
+.statCard strong {
+  color: #f0f0ed;
+  font-size: clamp(2.6rem, 4vw, 4.2rem);
+  font-weight: 500;
+  line-height: .9;
+  letter-spacing: -.055em;
+}
+
+.statCard span {
+  color: #8d8d8d;
+  font-size: .76rem;
+  line-height: 1.2;
+}
+
+.availabilityCard {
+  grid-column: span 4;
+  min-height: 31rem;
+  padding: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.availabilityCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(108,255,131,.08), transparent 30%),
+    radial-gradient(circle at 50% 38%, rgba(255,255,255,.03), transparent 50%);
+  pointer-events: none;
+}
+
+.availabilityTop {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  left: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.mutedLabel,
+.status {
+  color: #8d8d8d;
+  font-size: .68rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+}
+
+.status i {
+  width: .48rem;
+  height: .48rem;
+  border-radius: 50%;
+  background: #31ee33;
+  box-shadow: 0 0 1rem rgba(49,238,51,.65);
+  animation: statusPulse 2.1s ease-in-out infinite;
+}
+
+.globe {
+  position: absolute;
+  top: 17%;
+  left: 50%;
+  width: min(19rem, 74%);
+  aspect-ratio: 1;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  opacity: .9;
+}
+
+.globe::before,
+.globe::after,
+.globe span {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 50%;
+}
+
+.globe::before { inset: 15% 38%; }
+.globe::after { inset: 38% 15%; }
+.globe span:nth-child(1) { inset: 0 22%; }
+.globe span:nth-child(2) { inset: 22% 0; }
+.globe span:nth-child(3) {
+  top: 50%;
+  right: -8%;
+  left: -8%;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid rgba(255,255,255,.07);
+  border-radius: 0;
+}
+
+.availabilityCard h3 {
+  position: relative;
+  margin: 0 0 .7rem;
+  color: #f1f1ee;
+  font-size: clamp(1.9rem, 3vw, 3.05rem);
+  font-weight: 500;
+  line-height: .95;
+  letter-spacing: -.05em;
+}
+
+.availabilityCard p {
+  position: relative;
+  max-width: 24rem;
+  margin: 0;
+  color: #868686;
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+.profileCard {
+  grid-column: span 4;
+  min-height: 31rem;
+  background:
+    radial-gradient(circle at 62% 35%, rgba(255,118,35,.32), transparent 35%),
+    linear-gradient(155deg, #281208 0%, #120c09 48%, #090909 100%);
+}
+
+.profileGlow {
+  position: absolute;
+  inset: 8% 5% 2%;
+  background: radial-gradient(circle at 54% 42%, rgba(255,120,36,.34), transparent 57%);
+  filter: blur(1rem);
+}
+
+.profileCard img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: saturate(.88) contrast(1.03);
+  transform: scale(1.01);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 78%, transparent 100%);
+}
+
+.profileMeta {
+  position: absolute;
+  right: 1.2rem;
+  bottom: 1.15rem;
+  left: 1.2rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.profileMeta strong {
+  color: #f3f3f0;
+  font-size: 1rem;
+  font-weight: 560;
+}
+
+.profileMeta span {
+  max-width: 11rem;
+  color: #8d8d8d;
+  font-size: .66rem;
+  line-height: 1.3;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.bioCard {
+  grid-column: span 4;
+  min-height: 31rem;
+  padding: 1.3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.bioHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #202020;
+  color: #d8d8d5;
+  font-size: .78rem;
+}
+
+.bioMark {
+  color: #656565;
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.bioCopy {
+  display: grid;
+  gap: 1rem;
+  margin: auto 0;
+}
+
+.bioCopy p {
+  margin: 0;
+  color: #9a9a9a;
+  font-size: clamp(.82rem, 1vw, .94rem);
+  line-height: 1.58;
+}
+
+.workButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  min-height: 3.2rem;
+  padding: .85rem 1rem;
+  border: 1px solid #292929;
+  border-radius: 8px;
+  background: #0e0e0e;
+  color: #e9e9e6;
+  font: inherit;
+  font-size: .76rem;
+  cursor: pointer;
+  transition: background-color 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+
+.workButton:hover {
+  transform: translateY(-2px);
+  border-color: #383838;
+  background: #141414;
+}
+
+.toolboxCard {
+  grid-column: 1 / -1;
+  min-height: 11rem;
+  display: grid;
+  grid-template-columns: minmax(13rem, .8fr) 2fr;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.2rem;
+}
+
+.toolboxHeader {
+  display: grid;
+  gap: .35rem;
+}
+
+.toolboxHeader span {
+  color: #efefec;
+  font-size: 1rem;
+  font-weight: 520;
+}
+
+.toolboxHeader small {
+  color: #757575;
+  font-size: .72rem;
+}
+
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.marqueeTrack {
+  display: flex;
+  width: max-content;
+  gap: .65rem;
+  animation: toolboxMarquee 23s linear infinite;
+}
+
+.tool {
+  display: grid;
+  min-width: 7.25rem;
+  height: 4.2rem;
+  place-items: center;
+  padding: 0 1rem;
+  border: 1px solid #282828;
+  border-radius: 8px;
+  background: #0d0d0d;
+  color: #adadad;
+  font-size: .72rem;
+  font-weight: 550;
+}
+
+@keyframes toolboxMarquee {
+  to { transform: translateX(-50%); }
+}
+
+@keyframes statusPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.45); opacity: .5; }
+}
+
+@supports (animation-timeline: view()) {
+  .stats,
+  .availabilityCard,
+  .profileCard,
+  .bioCard,
+  .toolboxCard {
+    animation: aboutReveal linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 35%;
+  }
+}
+
+@keyframes aboutReveal {
+  from { opacity: 0; transform: translateY(1.6rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 1050px) {
+  .availabilityCard,
+  .profileCard,
+  .bioCard {
+    grid-column: span 6;
+  }
+
+  .bioCard {
+    grid-column: 1 / -1;
+    min-height: auto;
+  }
+
+  .bioCopy {
+    margin: 2rem 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .inner {
+    width: min(calc(100% - 1.5rem), 96rem);
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .statCard {
+    min-height: 8.4rem;
+  }
+
+  .availabilityCard,
+  .profileCard,
+  .bioCard,
+  .toolboxCard {
+    grid-column: 1 / -1;
+  }
+
+  .availabilityCard,
+  .profileCard {
+    min-height: 29rem;
+  }
+
+  .bioCopy {
+    grid-template-columns: 1fr;
+  }
+
+  .toolboxCard {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status i,
+  .marqueeTrack,
+  .stats,
+  .availabilityCard,
+  .profileCard,
+  .bioCard,
+  .toolboxCard {
+    animation: none !important;
+  }
+}
