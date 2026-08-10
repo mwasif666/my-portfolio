@@ -59,17 +59,17 @@ export default function useWhyScrollMotion({ sectionRef, cardRefs, layout }) {
         const x = lerp(startX, target.x, eased) * vw;
         const y = lerp(startY, target.y, eased) * vh;
         const rotate = lerp(startRotate, target.rotate, eased);
-        const scale = lerp(0.91, 1, eased);
+        const scale = lerp(0.92, 1, eased);
         const fadeStart = target.primary ? 1 : clamp((rawProgress - 0.08) / 0.2);
 
         node.style.opacity = String(fadeStart);
         node.style.transform = `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0) rotate(${rotate}deg) scale(${scale})`;
       });
 
-      section.style.setProperty("--why-title-y", `${lerp(145, 0, eased)}px`);
-      section.style.setProperty("--why-title-scale", String(lerp(0.84, 1, eased)));
-      section.style.setProperty("--why-planet-y", `${lerp(210, 0, eased)}px`);
-      section.style.setProperty("--why-stars-y", `${lerp(18, -10, rawProgress)}px`);
+      section.style.setProperty("--why-title-y", `${lerp(110, 0, eased)}px`);
+      section.style.setProperty("--why-title-scale", String(lerp(0.88, 1, eased)));
+      section.style.setProperty("--why-planet-y", `${lerp(190, 0, eased)}px`);
+      section.style.setProperty("--why-stars-y", `${lerp(16, -8, rawProgress)}px`);
     };
 
     const schedule = () => {
