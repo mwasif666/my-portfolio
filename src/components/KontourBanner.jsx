@@ -2,7 +2,6 @@ import { useRef } from "react";
 import clsx from "clsx";
 import { useInView } from "../hooks/useInView";
 import HeroBackdrop from "./hero/HeroBackdrop";
-import HeroOrbitLines from "./hero/HeroOrbitLines";
 import HeroIntro from "./hero/HeroIntro";
 import HeroPortrait from "./hero/HeroPortrait";
 import HeroStats from "./hero/HeroStats";
@@ -32,7 +31,6 @@ export default function KontourBanner({
       )}
     >
       {isBlue && <HeroBackdrop />}
-      {isBlue && <HeroOrbitLines active={inView} />}
 
       {!isBlue && (
         <>
