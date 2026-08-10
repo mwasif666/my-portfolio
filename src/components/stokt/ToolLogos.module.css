@@ -5,12 +5,18 @@
   place-items: center;
   flex: none;
   overflow: hidden;
-  border: 1px solid #2a2a2a;
+  border: 1px solid rgba(126, 207, 243, .12);
   border-radius: 11px;
   background:
-    radial-gradient(circle at 50% 38%, rgba(255,255,255,.045), transparent 48%),
-    #0b0b0b;
-  transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+    radial-gradient(circle at 50% 34%, rgba(81, 184, 230, .075), transparent 48%),
+    linear-gradient(155deg, rgba(12, 63, 92, .12), transparent 52%),
+    #0a0c0e;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .logoWrap {
@@ -32,8 +38,11 @@
 
 .tool:hover {
   transform: translateY(-3px);
-  border-color: #3a3a3a;
-  background: #101010;
+  border-color: rgba(120, 216, 255, .3);
+  background: #0b1217;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.035),
+    0 .65rem 1.5rem rgba(0, 52, 82, .12);
 }
 
 .tool:hover .logo {
