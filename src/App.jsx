@@ -7,6 +7,7 @@ import StoktSections from "./components/stokt/StoktSections";
 import ProjectsSection from "./components/ProjectsSection";
 import WhySection from "./components/why/WhySection";
 import JourneySection from "./components/journey/JourneySection";
+import DeveloperSystemsSection from "./components/developerSystems/DeveloperSystemsSection";
 import NavMenu from "./components/NavMenu";
 import RequestModal from "./components/RequestModal";
 
@@ -43,6 +44,7 @@ export default function App() {
         <ProjectsSection />
         <WhySection />
         <JourneySection />
+        <DeveloperSystemsSection />
       </main>
 
       <NavMenu
