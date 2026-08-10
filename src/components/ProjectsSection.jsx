@@ -2,65 +2,83 @@ import { useEffect, useRef, useState } from "react";
 import { useScroll } from "../contexts/ScrollContext";
 import "./ProjectsPreview.module.css";
 
-const websiteShot = (url, height = 900) =>
-  `https://s.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=1600&h=${height}`;
-
-const projectWithShots = (project) => ({
-  ...project,
-  preview: websiteShot(project.site, 900),
-  scrollPreview: websiteShot(project.site, 5600),
-});
-
 const projects = [
   {
     number: "01",
-    title: "Vampire Tools",
+    title: "Offplan DXB",
     label: "WEB DEVELOPMENT",
-    brief: "E-commerce tool store developed using WordPress and WooCommerce.",
-    site: "https://vampiretools.com/",
-    platform: ["WordPress", "WooCommerce", "Responsive Development"],
+    brief: "Dubai real estate platform built with Laravel.",
+    detail:
+      "Offplan DXB is a real estate listing portal built in Laravel, offering property search, inquiry management, and agent dashboards. With SEO optimization for real estate keywords and smooth UX, the site serves as a robust platform for Dubai’s property market.",
+    site: "https://offplandxb.ae/",
+    image:
+      "https://res.cloudinary.com/dsjxs1umc/image/upload/v1760475443/wnmkvdi1ij9ga9gyyb6b.png",
+    platform: ["Laravel"],
+    client: "Offplan DXB",
+    startDate: "May 2023",
+    endDate: "July 2023",
   },
   {
     number: "02",
-    title: "Bridge Precision Tools",
-    label: "WEB DEVELOPMENT",
-    brief: "Industrial tools company website built with WordPress.",
-    site: "https://bridgeprecisiontools.com/",
-    platform: ["WordPress", "Web Development", "Responsive Development"],
+    title: "Petroc Energy",
+    label: "CORPORATE WEBSITE",
+    brief: "Energy sector website developed with HTML, CSS, and Bootstrap.",
+    detail:
+      "Petroc Energy’s website is a corporate digital presence built using HTML, CSS, and Bootstrap. Designed for the energy industry, it provides optimized navigation, cross-browser compatibility, and responsive performance. The lightweight code ensures fast loading times and improved SEO rankings for business visibility.",
+    site: "https://petrocenergy.com/",
+    image:
+      "https://res.cloudinary.com/dsjxs1umc/image/upload/v1760479830/gqv6hejxtb69zpzga5c3.png",
+    platform: ["HTML", "CSS", "Bootstrap"],
+    client: "Petroc Energy",
+    startDate: "April 2023",
+    endDate: "May 2023",
   },
   {
     number: "03",
-    title: "Roots BMD",
-    label: "WEB DEVELOPMENT",
-    brief: "Healthcare and supplements company website built with WordPress.",
-    site: "https://rootsbmd.com/",
-    platform: ["WordPress", "Web Development", "Responsive Development"],
+    title: "Pinnacle Design Agency",
+    label: "WEB APPLICATION",
+    brief: "Design agency website developed using PHP.",
+    detail:
+      "Pinnacle Design Agency is a creative web design company website developed with PHP and Bootstrap. The platform focuses on visual appeal, performance, and SEO optimization. It delivers high-quality user experiences that align with the agency’s design-first philosophy and branding goals.",
+    site: "https://www.pinnacledesignagency.com/",
+    image:
+      "https://res.cloudinary.com/dsjxs1umc/image/upload/v1760479676/hrui65r8hmzdoheegqgw.png",
+    platform: ["PHP", "Bootstrap"],
+    client: "Pinnacle Design Agency",
+    startDate: "September 2023",
+    endDate: "November 2023",
   },
   {
     number: "04",
-    title: "Secure Surve",
-    label: "WEB DEVELOPMENT",
-    brief: "Security and surveillance company website.",
-    site: "https://secure-surve.com/",
-    platform: ["WordPress", "Web Development", "Responsive Development"],
+    title: "ABET Global",
+    label: "CORPORATE WEBSITE",
+    brief: "Corporate business website developed in Laravel.",
+    detail:
+      "ABET Global is a Laravel-based corporate platform showcasing the company’s services and client network. The site features content modularity for easy CMS management and follows SEO best practices for indexing across multiple global regions.",
+    site: "https://abetglobal.com/",
+    image:
+      "https://res.cloudinary.com/dsjxs1umc/image/upload/v1760477365/fxoqhkisj6eemx0a8vxy.png",
+    platform: ["Laravel"],
+    client: "ABET Global",
+    startDate: "September 2023",
+    endDate: "November 2023",
   },
   {
     number: "05",
-    title: "Park Point 24",
+    title: "Vampire Tools",
     label: "WEB DEVELOPMENT",
-    brief: "Real estate and parking management website built with WordPress.",
-    site: "https://www.parkpoint24.de/",
-    platform: ["WordPress", "Web Development", "Responsive Development"],
+    brief: "E-commerce tool store developed using WordPress and WooCommerce.",
+    detail:
+      "Vampire Tools is a WooCommerce-powered online store developed with WordPress. It features a secure payment gateway, product filtering, and an optimized shopping experience for B2B and retail buyers. The site’s SEO structure and product schema enhance discoverability on Google, while its responsive design ensures seamless performance across devices.",
+    site: "https://vampiretools.com/",
+    image:
+      "https://res.cloudinary.com/dsjxs1umc/image/upload/v1760473074/ihvkr9eublhgfwxbksqy.png",
+    platform: ["WordPress", "WooCommerce"],
+    client: "Vampire Tools Inc.",
+    startDate: "October 2024",
+    endDate: "November 2024",
   },
-  {
-    number: "06",
-    title: "Tooth Shine",
-    label: "WEB DEVELOPMENT",
-    brief: "Dental clinic website built with WordPress.",
-    site: "https://toothshine.pk/",
-    platform: ["WordPress", "Web Development", "Responsive Development"],
-  },
-].map(projectWithShots);
+];
 
 export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -113,8 +131,8 @@ export default function ProjectsSection() {
               <em>projects.</em>
             </h2>
             <p className="projects-intro__copy">
-              WordPress builds, e-commerce experiences and business websites
-              selected from recent development work.
+              Laravel, PHP, WordPress and responsive frontend work selected from
+              production projects across real estate, energy, design and commerce.
             </p>
           </div>
 
@@ -159,7 +177,7 @@ export default function ProjectsSection() {
             <div className="project-row__preview" aria-hidden="true">
               <div className="project-row__preview-frame">
                 <img
-                  src={project.scrollPreview}
+                  src={project.image}
                   alt=""
                   loading="lazy"
                   decoding="async"
@@ -217,19 +235,19 @@ export default function ProjectsSection() {
             </header>
 
             <div className="project-case__hero">
-              <img src={selectedProject.preview} alt={`${selectedProject.title} website`} />
+              <img src={selectedProject.image} alt={`${selectedProject.title} website`} />
             </div>
 
             <div className="project-case__content">
               <div className="project-case__heading">
-                <span className="project-case__eyebrow">WEB DEVELOPMENT</span>
+                <span className="project-case__eyebrow">{selectedProject.label}</span>
                 <h3 id="project-case-title">{selectedProject.title}</h3>
               </div>
 
               <div className="project-case__details">
                 <div>
-                  <span className="project-case__label">PROJECT BRIEF</span>
-                  <p>{selectedProject.brief}</p>
+                  <span className="project-case__label">PROJECT OVERVIEW</span>
+                  <p>{selectedProject.detail}</p>
                 </div>
 
                 <div>
@@ -242,10 +260,10 @@ export default function ProjectsSection() {
                 </div>
 
                 <div>
-                  <span className="project-case__label">DELIVERY</span>
+                  <span className="project-case__label">CLIENT & TIMELINE</span>
                   <p>
-                    The case study stays inside this portfolio. The project
-                    preview, title and brief above match the selected work card.
+                    {selectedProject.client}<br />
+                    {selectedProject.startDate} — {selectedProject.endDate}
                   </p>
                 </div>
               </div>
