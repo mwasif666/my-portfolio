@@ -1,6 +1,7 @@
 import myImg from "../../../myimg.png";
 import AboutGlobe from "./AboutGlobe";
 import styles from "./About.module.css";
+import themeStyles from "./AboutBlueTheme.module.css";
 import logoStyles from "./ToolLogos.module.css";
 
 const stats = [
@@ -17,6 +18,10 @@ const tools = [
   {
     label: "JavaScript",
     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
+  },
+  {
+    label: "TypeScript",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
   },
   {
     label: "Node.js",
@@ -39,8 +44,40 @@ const tools = [
     logo: "https://cdn.simpleicons.org/woocommerce/96588A",
   },
   {
+    label: "HTML5",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg",
+  },
+  {
+    label: "CSS3",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
+  },
+  {
+    label: "Tailwind CSS",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+  },
+  {
+    label: "Bootstrap",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg",
+  },
+  {
+    label: "Vite",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg",
+  },
+  {
+    label: "Sass",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sass/sass-original.svg",
+  },
+  {
+    label: "Git",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
+  },
+  {
     label: "GitHub",
     logo: "https://cdn.simpleicons.org/github/FFFFFF",
+  },
+  {
+    label: "npm",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/npm/npm-original-wordmark.svg",
   },
 ];
 
@@ -92,10 +129,10 @@ export default function StoktAbout({ onContact }) {
         </div>
 
         <div className={styles.aboutBottom}>
-          <article className={styles.profileCard}>
-            <div className={styles.profileGlow} aria-hidden="true" />
+          <article className={`${styles.profileCard} ${themeStyles.blueProfile}`}>
+            <div className={`${styles.profileGlow} ${themeStyles.blueProfileGlow}`} aria-hidden="true" />
             <img src={myImg} alt="Muhammad Wasif" draggable="false" />
-            <div className={styles.profileMeta}>
+            <div className={`${styles.profileMeta} ${themeStyles.blueProfileMeta}`}>
               <strong>Muhammad Wasif</strong>
               <span>FULL-STACK WEB DEVELOPER</span>
             </div>
@@ -131,8 +168,8 @@ export default function StoktAbout({ onContact }) {
             </div>
           </article>
 
-          <article className={styles.toolboxCard}>
-            <div className={styles.toolboxHeader}>
+          <article className={`${styles.toolboxCard} ${themeStyles.blueToolbox}`}>
+            <div className={`${styles.toolboxHeader} ${themeStyles.blueToolboxHeader}`}>
               <span>Everyday&apos;s Toolbox</span>
               <small>Built for every project.</small>
             </div>
