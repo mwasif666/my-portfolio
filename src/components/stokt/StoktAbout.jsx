@@ -11,80 +11,60 @@ const stats = [
 ];
 
 const tools = [
-  {
-    label: "React",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-  },
-  {
-    label: "JavaScript",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
-  },
-  {
-    label: "TypeScript",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
-  },
-  {
-    label: "Node.js",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
-  },
-  {
-    label: "Express",
-    logo: "https://cdn.simpleicons.org/express/FFFFFF",
-  },
-  {
-    label: "MongoDB",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
-  },
-  {
-    label: "WordPress",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-plain.svg",
-  },
-  {
-    label: "WooCommerce",
-    logo: "https://cdn.simpleicons.org/woocommerce/96588A",
-  },
-  {
-    label: "HTML5",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg",
-  },
-  {
-    label: "CSS3",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
-  },
-  {
-    label: "Tailwind CSS",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
-  },
-  {
-    label: "Bootstrap",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg",
-  },
-  {
-    label: "Vite",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg",
-  },
-  {
-    label: "Sass",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sass/sass-original.svg",
-  },
-  {
-    label: "Git",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
-  },
-  {
-    label: "GitHub",
-    logo: "https://cdn.simpleicons.org/github/FFFFFF",
-  },
-  {
-    label: "npm",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/npm/npm-original-wordmark.svg",
-  },
+  { label: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+  { label: "JavaScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" },
+  { label: "TypeScript", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+  { label: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
+  { label: "Express", logo: "https://cdn.simpleicons.org/express/FFFFFF" },
+  { label: "MongoDB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" },
+  { label: "MySQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" },
+  { label: "PostgreSQL", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+  { label: "Firebase", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg" },
+  { label: "WordPress", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-plain.svg" },
+  { label: "WooCommerce", logo: "https://cdn.simpleicons.org/woocommerce/96588A" },
+  { label: "PHP", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" },
+  { label: "HTML5", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" },
+  { label: "CSS3", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" },
+  { label: "Tailwind CSS", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+  { label: "Bootstrap", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg" },
+  { label: "Sass", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sass/sass-original.svg" },
+  { label: "Vite", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" },
+  { label: "Next.js", logo: "https://cdn.simpleicons.org/nextdotjs/FFFFFF" },
+  { label: "Redux", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redux/redux-original.svg" },
+  { label: "Docker", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
+  { label: "Postman", logo: "https://cdn.simpleicons.org/postman/FF6C37" },
+  { label: "Git", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
+  { label: "GitHub", logo: "https://cdn.simpleicons.org/github/FFFFFF" },
+  { label: "npm", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/npm/npm-original-wordmark.svg" },
+  { label: "Linux", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" },
+  { label: "Figma", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" },
+  { label: "Nginx", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg" },
 ];
 
 const showcaseAsset =
   "https://framerusercontent.com/images/9MGIf21V2NJoMgEdygDwEv9OvRQ.png?width=2048&height=2080";
 const expertAsset =
   "https://framerusercontent.com/images/BadwPM7OoanjNQF5nvMYcYQvtQ.png?width=2048&height=2048";
+
+function ToolLogo({ tool, duplicate = false }) {
+  return (
+    <div
+      className={logoStyles.tool}
+      title={duplicate ? undefined : tool.label}
+      aria-hidden={duplicate || undefined}
+    >
+      <span className={logoStyles.logoWrap}>
+        <img
+          className={logoStyles.logo}
+          src={tool.logo}
+          alt={duplicate ? "" : `${tool.label} logo`}
+          loading="lazy"
+          decoding="async"
+        />
+      </span>
+    </div>
+  );
+}
 
 export default function StoktAbout({ onContact }) {
   return (
@@ -174,20 +154,19 @@ export default function StoktAbout({ onContact }) {
               <small>Built for every project.</small>
             </div>
 
-            <div className={styles.toolRow} aria-label="Everyday tools">
-              {tools.map((tool) => (
-                <div className={logoStyles.tool} key={tool.label} title={tool.label}>
-                  <span className={logoStyles.logoWrap}>
-                    <img
-                      className={logoStyles.logo}
-                      src={tool.logo}
-                      alt={`${tool.label} logo`}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </span>
+            <div className={logoStyles.carousel} aria-label="Everyday tools">
+              <div className={logoStyles.track}>
+                <div className={logoStyles.group}>
+                  {tools.map((tool) => (
+                    <ToolLogo key={`primary-${tool.label}`} tool={tool} />
+                  ))}
                 </div>
-              ))}
+                <div className={logoStyles.group} aria-hidden="true">
+                  {tools.map((tool) => (
+                    <ToolLogo key={`duplicate-${tool.label}`} tool={tool} duplicate />
+                  ))}
+                </div>
+              </div>
             </div>
           </article>
         </div>
