@@ -1,6 +1,7 @@
 import myImg from "../../../myimg.png";
 import AboutGlobe from "./AboutGlobe";
 import styles from "./About.module.css";
+import logoStyles from "./ToolLogos.module.css";
 
 const stats = [
   { value: "4+", label: "Years building" },
@@ -9,14 +10,38 @@ const stats = [
 ];
 
 const tools = [
-  { short: "Re", label: "React" },
-  { short: "JS", label: "JavaScript" },
-  { short: "No", label: "Node.js" },
-  { short: "Ex", label: "Express" },
-  { short: "Mo", label: "MongoDB" },
-  { short: "WP", label: "WordPress" },
-  { short: "WC", label: "WooCommerce" },
-  { short: "API", label: "REST APIs" },
+  {
+    label: "React",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+  },
+  {
+    label: "JavaScript",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
+  },
+  {
+    label: "Node.js",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
+  },
+  {
+    label: "Express",
+    logo: "https://cdn.simpleicons.org/express/FFFFFF",
+  },
+  {
+    label: "MongoDB",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
+  },
+  {
+    label: "WordPress",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-plain.svg",
+  },
+  {
+    label: "WooCommerce",
+    logo: "https://cdn.simpleicons.org/woocommerce/96588A",
+  },
+  {
+    label: "GitHub",
+    logo: "https://cdn.simpleicons.org/github/FFFFFF",
+  },
 ];
 
 const showcaseAsset =
@@ -114,9 +139,16 @@ export default function StoktAbout({ onContact }) {
 
             <div className={styles.toolRow} aria-label="Everyday tools">
               {tools.map((tool) => (
-                <div className={styles.tool} key={tool.label} title={tool.label}>
-                  <strong>{tool.short}</strong>
-                  <span>{tool.label}</span>
+                <div className={logoStyles.tool} key={tool.label} title={tool.label}>
+                  <span className={logoStyles.logoWrap}>
+                    <img
+                      className={logoStyles.logo}
+                      src={tool.logo}
+                      alt={`${tool.label} logo`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </span>
                 </div>
               ))}
             </div>
