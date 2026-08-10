@@ -1,8 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { useScroll } from "../contexts/ScrollContext";
+import "./ProjectsPreview.module.css";
 
-const websiteShot = (url) =>
-  `https://s.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=1600&h=900`;
+const websiteShot = (url, height = 900) =>
+  `https://s.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=1600&h=${height}`;
+
+const projectWithShots = (project) => ({
+  ...project,
+  preview: websiteShot(project.site, 900),
+  scrollPreview: websiteShot(project.site, 5600),
+});
 
 const projects = [
   {
@@ -11,7 +18,6 @@ const projects = [
     label: "WEB DEVELOPMENT",
     brief: "E-commerce tool store developed using WordPress and WooCommerce.",
     site: "https://vampiretools.com/",
-    preview: websiteShot("https://vampiretools.com/"),
     platform: ["WordPress", "WooCommerce", "Responsive Development"],
   },
   {
@@ -20,7 +26,6 @@ const projects = [
     label: "WEB DEVELOPMENT",
     brief: "Industrial tools company website built with WordPress.",
     site: "https://bridgeprecisiontools.com/",
-    preview: websiteShot("https://bridgeprecisiontools.com/"),
     platform: ["WordPress", "Web Development", "Responsive Development"],
   },
   {
@@ -29,7 +34,6 @@ const projects = [
     label: "WEB DEVELOPMENT",
     brief: "Healthcare and supplements company website built with WordPress.",
     site: "https://rootsbmd.com/",
-    preview: websiteShot("https://rootsbmd.com/"),
     platform: ["WordPress", "Web Development", "Responsive Development"],
   },
   {
@@ -38,7 +42,6 @@ const projects = [
     label: "WEB DEVELOPMENT",
     brief: "Security and surveillance company website.",
     site: "https://secure-surve.com/",
-    preview: websiteShot("https://secure-surve.com/"),
     platform: ["WordPress", "Web Development", "Responsive Development"],
   },
   {
@@ -47,7 +50,6 @@ const projects = [
     label: "WEB DEVELOPMENT",
     brief: "Real estate and parking management website built with WordPress.",
     site: "https://www.parkpoint24.de/",
-    preview: websiteShot("https://www.parkpoint24.de/"),
     platform: ["WordPress", "Web Development", "Responsive Development"],
   },
   {
@@ -56,10 +58,9 @@ const projects = [
     label: "WEB DEVELOPMENT",
     brief: "Dental clinic website built with WordPress.",
     site: "https://toothshine.pk/",
-    preview: websiteShot("https://toothshine.pk/"),
     platform: ["WordPress", "Web Development", "Responsive Development"],
   },
-];
+].map(projectWithShots);
 
 export default function ProjectsSection() {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -157,7 +158,12 @@ export default function ProjectsSection() {
 
             <div className="project-row__preview" aria-hidden="true">
               <div className="project-row__preview-frame">
-                <img src={project.preview} alt="" loading="lazy" />
+                <img
+                  src={project.scrollPreview}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
 
