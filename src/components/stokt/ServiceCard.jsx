@@ -10,11 +10,8 @@ export default function ServiceCard({ service }) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
       },
       { threshold: 0.18 },
     );
@@ -39,12 +36,10 @@ export default function ServiceCard({ service }) {
           aria-hidden="true"
         />
       </div>
-
       <div className={styles.cardFooter}>
-        <span className={styles.cardIndex}>{service.number}</span>
         <h3 className={styles.cardTitle}>
-          {service.title.map((word) => (
-            <span key={word}>{word}</span>
+          {service.title.map((word, index) => (
+            <span key={`${word}-${index}`}>{word}</span>
           ))}
         </h3>
       </div>
