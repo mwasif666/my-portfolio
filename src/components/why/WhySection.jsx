@@ -3,6 +3,8 @@ import WhyCard from "./WhyCard";
 import useWhyScrollMotion from "./useWhyScrollMotion";
 import styles from "./WhySection.module.css";
 
+const cloudsAsset = "https://hugo.ai/components/home/HomeWhy/clouds.webp";
+
 const cards = [
   {
     title: "Built to stay maintainable.",
@@ -64,7 +66,15 @@ export default function WhySection() {
       <div className={styles.stage}>
         <div className={styles.stars} aria-hidden="true" />
         <h2 className={styles.title} id="why-title">Why?</h2>
-        <div className={styles.planet} aria-hidden="true" />
+        <img
+          className={styles.clouds}
+          src={cloudsAsset}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
 
         <div className={styles.cardsLayer}>
           {cards.map((card, index) => (
