@@ -148,23 +148,25 @@ export default function StoktAbout({ onContact }) {
             </div>
           </article>
 
-          <article className={`${styles.toolboxCard} ${themeStyles.blueToolbox}`}>
-            <div className={`${styles.toolboxHeader} ${themeStyles.blueToolboxHeader}`}>
+          <article className={`${styles.toolboxCard} ${themeStyles.blueToolbox} ${logoStyles.toolboxDockCard}`}>
+            <div className={`${styles.toolboxHeader} ${themeStyles.blueToolboxHeader} ${logoStyles.dockHeader}`}>
               <span>Everyday&apos;s Toolbox</span>
               <small>Built for every project.</small>
             </div>
 
-            <div className={logoStyles.carousel} aria-label="Everyday tools">
-              <div className={logoStyles.track}>
-                <div className={logoStyles.group}>
-                  {tools.map((tool) => (
-                    <ToolLogo key={`primary-${tool.label}`} tool={tool} />
-                  ))}
-                </div>
-                <div className={logoStyles.group} aria-hidden="true">
-                  {tools.map((tool) => (
-                    <ToolLogo key={`duplicate-${tool.label}`} tool={tool} duplicate />
-                  ))}
+            <div className={logoStyles.dockStage}>
+              <div className={logoStyles.carousel} aria-label="Everyday tools">
+                <div className={logoStyles.track}>
+                  <div className={logoStyles.group}>
+                    {tools.map((tool) => (
+                      <ToolLogo key={`primary-${tool.label}`} tool={tool} />
+                    ))}
+                  </div>
+                  <div className={logoStyles.group} aria-hidden="true">
+                    {tools.map((tool) => (
+                      <ToolLogo key={`duplicate-${tool.label}`} tool={tool} duplicate />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
