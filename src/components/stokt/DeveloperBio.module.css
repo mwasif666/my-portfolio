@@ -1,3 +1,49 @@
+.aboutAmbient {
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 84% 16%, rgba(25, 121, 174, .18), transparent 30%),
+    radial-gradient(ellipse at 50% 101%, rgba(40, 133, 214, .24), transparent 42%),
+    linear-gradient(180deg, #03070b 0%, #04090e 58%, #03070b 100%) !important;
+}
+
+.aboutAmbient::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(83, 172, 215, .1) 1px, transparent 1px),
+    linear-gradient(90deg, transparent 0%, rgba(42, 143, 191, .055) 50%, transparent 100%);
+  background-size: 21px 21px, 100% 100%;
+  opacity: .4;
+  pointer-events: none;
+}
+
+.aboutAmbient::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 9%;
+  right: 9%;
+  bottom: -6.2rem;
+  height: 13rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(125, 201, 255, .52) 0%,
+    rgba(72, 160, 236, .28) 25%,
+    rgba(38, 112, 190, .12) 48%,
+    transparent 72%
+  );
+  filter: blur(34px);
+  pointer-events: none;
+}
+
+.aboutAmbient > * {
+  position: relative;
+  z-index: 1;
+}
+
 .editorialBio {
   position: relative;
   isolation: isolate;
@@ -6,12 +52,13 @@
   overflow: hidden !important;
   padding: clamp(2rem, 2.6vw, 2.8rem) !important;
   background:
-    radial-gradient(ellipse at 50% 116%, rgba(74, 159, 255, .24), transparent 34%),
-    radial-gradient(circle at 86% 42%, rgba(9, 86, 128, .14), transparent 34%),
+    radial-gradient(ellipse at 50% 116%, rgba(74, 159, 255, .37), transparent 40%),
+    radial-gradient(circle at 86% 42%, rgba(9, 86, 128, .18), transparent 35%),
     linear-gradient(120deg, rgba(3, 9, 14, .99), rgba(3, 12, 19, .98)) !important;
   box-shadow:
-    inset 0 -1px 0 rgba(130, 205, 255, .08),
-    inset 0 1px 0 rgba(255,255,255,.018);
+    inset 0 -1px 0 rgba(130, 205, 255, .16),
+    inset 0 1px 0 rgba(255,255,255,.018),
+    0 1.2rem 3.4rem rgba(28, 118, 176, .08);
 }
 
 .editorialBio::before {
@@ -33,11 +80,11 @@
   right: -11rem;
   width: clamp(29rem, 38vw, 43rem);
   aspect-ratio: 1;
-  border: 1px solid rgba(31, 140, 194, .11);
+  border: 1px solid rgba(31, 140, 194, .15);
   border-radius: 50%;
   box-shadow:
-    0 0 0 5.5rem rgba(5, 71, 108, .035),
-    0 0 0 11rem rgba(5, 71, 108, .018);
+    0 0 0 5.5rem rgba(5, 71, 108, .055),
+    0 0 0 11rem rgba(5, 71, 108, .03);
   pointer-events: none;
 }
 
@@ -150,6 +197,14 @@
 }
 
 @media (max-width: 720px) {
+  .aboutAmbient::after {
+    left: 2%;
+    right: 2%;
+    bottom: -5rem;
+    height: 10rem;
+    filter: blur(28px);
+  }
+
   .editorialBio {
     min-height: 28rem !important;
     padding: 1.55rem !important;
