@@ -64,7 +64,7 @@ function ToolLogo({ tool, duplicate = false }) {
   );
 }
 
-export default function StoktAbout({ onContact }) {
+export default function StoktAbout() {
   return (
     <section className={styles.section} id="about" aria-labelledby="stokt-about-title">
       <span id="about-us" className={styles.anchor} aria-hidden="true" />
@@ -117,26 +117,29 @@ export default function StoktAbout({ onContact }) {
           </article>
 
           <div className={logoStyles.developerTechPair}>
-            <article className={`${styles.bioCard} ${logoStyles.bioCompact}`}>
-              <div className={styles.bioHeader}>The Developer</div>
-              <div className={styles.bioCopy}>
-                <p>
-                  I build responsive web experiences from interface to backend,
-                  combining clean visual systems with reliable application logic.
-                </p>
-                <p>
-                  My work spans React interfaces, APIs, databases, WordPress and
-                  commerce builds, with a focus on performance and maintainable code.
-                </p>
-                <p>
-                  From small builds to complete products, I stay close to the full
-                  lifecycle—from first layout and interaction through deployment,
-                  QA and iteration.
-                </p>
+            <article className={`${styles.bioCard} ${logoStyles.bioCompact} ${logoStyles.editorialBio}`}>
+              <div className={logoStyles.editorialLabel}>
+                <span aria-hidden="true" />
+                About Me
               </div>
-              <button type="button" className={styles.workButton} onClick={onContact}>
-                Work with Wasif <span aria-hidden="true">→</span>
-              </button>
+
+              <div className={logoStyles.codeOrb} aria-hidden="true">&lt;/&gt;</div>
+
+              <p className={logoStyles.editorialStatement}>
+                Building <strong>digital products</strong> through thoughtful interfaces,
+                reliable systems, <strong>clean engineering</strong>, and performance-focused
+                experiences that <strong>work beautifully.</strong>
+              </p>
+
+              <div className={logoStyles.editorialAuthor}>
+                <span className={logoStyles.editorialAvatar}>
+                  <img src={myImg} alt="" aria-hidden="true" />
+                </span>
+                <span className={logoStyles.editorialAuthorCopy}>
+                  <strong>Muhammad Wasif</strong>
+                  <small>Full-Stack Web Developer</small>
+                </span>
+              </div>
             </article>
 
             <article className={`${styles.toolboxCard} ${themeStyles.blueToolbox} ${logoStyles.toolboxDockCard} ${logoStyles.toolboxHalf}`}>
