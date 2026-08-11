@@ -43,14 +43,12 @@ const tools = [
 
 const showcaseAsset =
   "https://framerusercontent.com/images/9MGIf21V2NJoMgEdygDwEv9OvRQ.png?width=2048&height=2080";
-const expertAsset =
-  "https://framerusercontent.com/images/BadwPM7OoanjNQF5nvMYcYQvtQ.png?width=2048&height=2048";
 
 function ToolLogo({ tool, duplicate = false }) {
   return (
     <div
       className={logoStyles.tool}
-      title={duplicate ? undefined : tool.label}
+      aria-label={duplicate ? undefined : tool.label}
       aria-hidden={duplicate || undefined}
     >
       <span className={logoStyles.logoWrap}>
@@ -108,7 +106,7 @@ export default function StoktAbout({ onContact }) {
           </article>
         </div>
 
-        <div className={styles.aboutBottom}>
+        <div className={`${styles.aboutBottom} ${logoStyles.aboutBottomTwoCol}`}>
           <article className={`${styles.profileCard} ${themeStyles.blueProfile}`}>
             <div className={`${styles.profileGlow} ${themeStyles.blueProfileGlow}`} aria-hidden="true" />
             <img src={myImg} alt="Muhammad Wasif" draggable="false" />
@@ -118,7 +116,7 @@ export default function StoktAbout({ onContact }) {
             </div>
           </article>
 
-          <article className={styles.bioCard}>
+          <article className={`${styles.bioCard} ${logoStyles.bioExpanded}`}>
             <div className={styles.bioHeader}>The Developer</div>
             <div className={styles.bioCopy}>
               <p>
@@ -138,14 +136,6 @@ export default function StoktAbout({ onContact }) {
             <button type="button" className={styles.workButton} onClick={onContact}>
               Work with Wasif <span aria-hidden="true">→</span>
             </button>
-          </article>
-
-          <article className={styles.expertCard}>
-            <img src={expertAsset} alt="" loading="lazy" decoding="async" />
-            <div className={styles.expertMeta}>
-              <strong>Interactive Systems</strong>
-              <span>Motion-ready product experiences</span>
-            </div>
           </article>
 
           <article className={`${styles.toolboxCard} ${themeStyles.blueToolbox} ${logoStyles.toolboxDockCard}`}>
