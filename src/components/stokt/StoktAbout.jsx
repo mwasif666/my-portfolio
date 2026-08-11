@@ -140,7 +140,7 @@ function ToolLogo({ tool, duplicate = false }) {
 export default function StoktAbout() {
   return (
     <section
-      className={styles.section}
+      className={`${styles.section} ${bioStyles.aboutAmbient}`}
       id="about"
       aria-labelledby="stokt-about-title"
     >
