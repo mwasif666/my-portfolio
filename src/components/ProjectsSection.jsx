@@ -72,6 +72,8 @@ const projects = [
   },
 ];
 
+const INITIAL_PROJECT_COUNT = 6;
+
 function LiveProjectPreview({ project }) {
   if (project.image) {
     return (
@@ -97,8 +99,41 @@ function LiveProjectPreview({ project }) {
   );
 }
 
+function ProjectRow({ project, index }) {
+  return (
+    <article className={styles.row}>
+      <div className={styles.identity}>
+        <span className={styles.number}>
+          ({String(index + 1).padStart(2, "0")})
+        </span>
+        <h3 className={styles.name}>{project.name}</h3>
+        <span className={styles.source}>{project.source}</span>
+      </div>
+
+      <div className={styles.services} aria-label={`${project.name} services`}>
+        {project.services.map((service) => (
+          <span key={service}>{service}</span>
+        ))}
+      </div>
+
+      <a
+        className={styles.visualLink}
+        href={project.url}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`Open ${project.name} website`}
+      >
+        <LiveProjectPreview project={project} />
+        <span className={styles.previewShade} aria-hidden="true" />
+      </a>
+    </article>
+  );
+}
+
 export default function ProjectsSection() {
   const [open, setOpen] = useState(false);
+  const visibleProjects = projects.slice(0, INITIAL_PROJECT_COUNT);
+  const remainingProjects = projects.slice(INITIAL_PROJECT_COUNT);
 
   return (
     <section className={styles.section} id="projects" aria-labelledby="projects-title">
@@ -116,53 +151,45 @@ export default function ProjectsSection() {
               Production websites, commerce builds and custom platforms across
               business, education, services and digital products.
             </p>
-            <button
-              className={styles.toggle}
-              type="button"
-              aria-expanded={open}
-              aria-controls="all-projects-list"
-              onClick={() => setOpen((value) => !value)}
-            >
-              <span>{open ? "Hide projects" : "View more projects"}</span>
-              <span className={styles.toggleIcon} aria-hidden="true">↓</span>
-            </button>
           </div>
         </header>
 
-        <div className={styles.listWrap} data-open={open ? "true" : "false"}>
-          <div className={styles.listClip}>
-            <div className={styles.list} id="all-projects-list">
-              {projects.map((project, index) => (
-                <article className={styles.row} key={project.name}>
-                  <div className={styles.identity}>
-                    <span className={styles.number}>
-                      ({String(index + 1).padStart(2, "0")})
-                    </span>
-                    <h3 className={styles.name}>{project.name}</h3>
-                    <span className={styles.source}>{project.source}</span>
-                  </div>
-
-                  <div className={styles.services} aria-label={`${project.name} services`}>
-                    {project.services.map((service) => (
-                      <span key={service}>{service}</span>
-                    ))}
-                  </div>
-
-                  <a
-                    className={styles.visualLink}
-                    href={project.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`Open ${project.name} website`}
-                  >
-                    <LiveProjectPreview project={project} />
-                    <span className={styles.previewShade} aria-hidden="true" />
-                  </a>
-                </article>
-              ))}
-            </div>
-          </div>
+        <div className={styles.list}>
+          {visibleProjects.map((project, index) => (
+            <ProjectRow project={project} index={index} key={project.name} />
+          ))}
         </div>
+
+        {remainingProjects.length ? (
+          <>
+            <div className={styles.moreToggleRow}>
+              <button
+                className={styles.toggle}
+                type="button"
+                aria-expanded={open}
+                aria-controls="remaining-projects-list"
+                onClick={() => setOpen((value) => !value)}
+              >
+                <span>{open ? "Hide projects" : "View more projects"}</span>
+                <span className={styles.toggleIcon} aria-hidden="true">↓</span>
+              </button>
+            </div>
+
+            <div className={styles.listWrap} data-open={open ? "true" : "false"}>
+              <div className={styles.listClip}>
+                <div className={`${styles.list} ${styles.moreList}`} id="remaining-projects-list">
+                  {remainingProjects.map((project, offset) => (
+                    <ProjectRow
+                      project={project}
+                      index={INITIAL_PROJECT_COUNT + offset}
+                      key={project.name}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </>
+        ) : null}
       </div>
     </section>
   );
