@@ -1,13 +1,35 @@
 .aboutBottomTwoCol {
   grid-template-columns: minmax(24rem, 1.05fr) minmax(0, 2.45fr) !important;
+  align-items: start;
 }
 
-.aboutBottomTwoCol > article:not(:last-child) {
+.aboutBottomTwoCol > article:first-child {
   min-height: clamp(29rem, 33vw, 33.5rem) !important;
 }
 
-.bioExpanded {
+.developerTechPair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: .75rem;
   min-width: 0;
+}
+
+.bioCompact {
+  min-width: 0;
+  min-height: clamp(29rem, 33vw, 33.5rem) !important;
+  padding: clamp(1.8rem, 2.4vw, 2.7rem) !important;
+}
+
+.bioCompact :global(p) {
+  max-width: 34rem;
+}
+
+.toolboxHalf {
+  grid-column: auto !important;
+  width: 100%;
+  margin-top: 0 !important;
+  align-self: start;
 }
 
 .toolboxDockCard {
@@ -214,17 +236,27 @@
   to { transform: translate3d(-50%, 0, 0); }
 }
 
+@media (max-width: 1180px) {
+  .developerTechPair {
+    grid-template-columns: 1fr;
+  }
+
+  .bioCompact {
+    min-height: 27rem !important;
+  }
+
+  .toolboxDockCard {
+    min-height: 14rem !important;
+  }
+}
+
 @media (max-width: 1020px) {
   .aboutBottomTwoCol {
     grid-template-columns: minmax(18rem, .9fr) minmax(0, 1.5fr) !important;
   }
 
-  .aboutBottomTwoCol > article:not(:last-child) {
+  .aboutBottomTwoCol > article:first-child {
     min-height: 31rem !important;
-  }
-
-  .toolboxDockCard {
-    min-height: 15rem !important;
   }
 
   .dockStage {
@@ -242,8 +274,13 @@
     grid-template-columns: 1fr !important;
   }
 
-  .aboutBottomTwoCol > article:not(:last-child) {
+  .aboutBottomTwoCol > article:first-child,
+  .bioCompact {
     min-height: 28rem !important;
+  }
+
+  .developerTechPair {
+    grid-template-columns: 1fr;
   }
 
   .toolboxDockCard {
