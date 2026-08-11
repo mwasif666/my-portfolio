@@ -1,16 +1,28 @@
+.aboutBottomTwoCol {
+  grid-template-columns: minmax(24rem, 1.05fr) minmax(0, 2.45fr) !important;
+}
+
+.aboutBottomTwoCol > article:not(:last-child) {
+  min-height: clamp(29rem, 33vw, 33.5rem) !important;
+}
+
+.bioExpanded {
+  min-width: 0;
+}
+
 .toolboxDockCard {
   display: block !important;
-  min-height: clamp(20rem, 24vw, 26rem) !important;
-  padding: clamp(1.35rem, 2vw, 2rem) !important;
+  min-height: clamp(14rem, 16vw, 17rem) !important;
+  padding: clamp(1rem, 1.5vw, 1.4rem) !important;
   overflow: hidden !important;
   border-color: rgba(117, 205, 244, .16) !important;
   background:
-    radial-gradient(ellipse at 50% 112%, rgba(74, 159, 255, .2), transparent 34%),
-    radial-gradient(circle at 50% 38%, rgba(32, 82, 129, .08), transparent 48%),
-    linear-gradient(180deg, rgba(8, 16, 26, .98) 0%, rgba(5, 12, 21, .99) 72%, rgba(4, 11, 19, 1) 100%) !important;
+    radial-gradient(ellipse at 50% 116%, rgba(74, 159, 255, .2), transparent 36%),
+    radial-gradient(circle at 50% 42%, rgba(32, 82, 129, .06), transparent 48%),
+    linear-gradient(180deg, rgba(8, 16, 26, .98) 0%, rgba(5, 12, 21, .99) 76%, rgba(4, 11, 19, 1) 100%) !important;
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.035),
-    0 2rem 5rem rgba(0, 12, 24, .24) !important;
+    0 1.4rem 3.2rem rgba(0, 12, 24, .2) !important;
 }
 
 .toolboxDockCard::before {
@@ -18,19 +30,19 @@
   position: absolute;
   z-index: 0;
   left: 50%;
-  bottom: -5.6rem;
-  width: min(72%, 62rem);
-  height: 10.5rem;
+  bottom: -4.9rem;
+  width: min(70%, 56rem);
+  height: 8.5rem;
   transform: translateX(-50%);
   border-radius: 50%;
   background: radial-gradient(
     ellipse at center,
-    rgba(142, 204, 255, .86) 0%,
-    rgba(82, 163, 255, .42) 28%,
-    rgba(43, 108, 202, .16) 48%,
+    rgba(142, 204, 255, .84) 0%,
+    rgba(82, 163, 255, .4) 28%,
+    rgba(43, 108, 202, .14) 50%,
     transparent 72%
   );
-  filter: blur(24px);
+  filter: blur(22px);
   pointer-events: none;
 }
 
@@ -38,12 +50,12 @@
   content: "";
   position: absolute;
   z-index: 1;
-  right: 7%;
+  right: 8%;
   bottom: 0;
-  left: 7%;
+  left: 8%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(146, 211, 255, .38), transparent);
-  box-shadow: 0 -1.2rem 3rem rgba(89, 172, 255, .1);
+  background: linear-gradient(90deg, transparent, rgba(146, 211, 255, .34), transparent);
+  box-shadow: 0 -1rem 2.4rem rgba(89, 172, 255, .09);
   pointer-events: none;
 }
 
@@ -51,39 +63,39 @@
   position: relative;
   z-index: 4;
   width: fit-content;
-  gap: .35rem !important;
+  gap: .3rem !important;
 }
 
 .dockHeader span {
-  font-size: .88rem !important;
+  font-size: .84rem !important;
   letter-spacing: -.02em;
 }
 
 .dockHeader small {
-  font-size: .75rem !important;
+  font-size: .72rem !important;
 }
 
 .dockStage {
   position: relative;
   z-index: 3;
   display: grid;
-  min-height: clamp(12rem, 15vw, 15.5rem);
+  min-height: clamp(8.2rem, 9.5vw, 10rem);
   place-items: center;
-  margin-top: clamp(.6rem, 1.6vw, 1.5rem);
-  padding: 1.5rem clamp(.5rem, 2vw, 2rem) 2.25rem;
+  margin-top: .15rem;
+  padding: .45rem clamp(.35rem, 1.5vw, 1.3rem) .9rem;
 }
 
 .dockStage::before {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: 1.2rem;
-  width: min(58%, 42rem);
-  height: 3rem;
+  bottom: .15rem;
+  width: min(55%, 38rem);
+  height: 2.4rem;
   transform: translateX(-50%);
   border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(82, 161, 255, .2), transparent 70%);
-  filter: blur(16px);
+  background: radial-gradient(ellipse, rgba(82, 161, 255, .18), transparent 70%);
+  filter: blur(14px);
   pointer-events: none;
 }
 
@@ -92,17 +104,17 @@
   width: min(100%, 72rem);
   min-width: 0;
   overflow: hidden;
-  padding: .82rem 1rem;
+  padding: 1.25rem .9rem .85rem;
   border: 1px solid rgba(205, 228, 248, .14);
-  border-radius: clamp(1.45rem, 2vw, 2rem);
+  border-radius: clamp(1.35rem, 1.8vw, 1.8rem);
   background:
     linear-gradient(180deg, rgba(48, 59, 76, .78), rgba(28, 38, 54, .72)),
     rgba(26, 35, 49, .72);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.1),
     inset 0 -1px 0 rgba(0,0,0,.28),
-    0 .7rem 1.5rem rgba(0,0,0,.34),
-    0 1.4rem 3.2rem rgba(0, 22, 44, .22);
+    0 .55rem 1.25rem rgba(0,0,0,.3),
+    0 1.1rem 2.5rem rgba(0, 22, 44, .2);
   -webkit-backdrop-filter: blur(24px) saturate(125%);
   backdrop-filter: blur(24px) saturate(125%);
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
@@ -113,7 +125,7 @@
   content: "";
   position: absolute;
   z-index: 2;
-  inset: 1px 1.15rem auto;
+  inset: 1px 1.1rem auto;
   height: 1px;
   pointer-events: none;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
@@ -137,16 +149,16 @@
   position: relative;
   display: flex;
   align-items: flex-end;
-  gap: clamp(.42rem, .75vw, .72rem);
+  gap: clamp(.4rem, .7vw, .68rem);
   flex: none;
-  padding-right: clamp(.42rem, .75vw, .72rem);
+  padding-right: clamp(.4rem, .7vw, .68rem);
 }
 
 .tool {
   display: grid;
-  width: clamp(3.9rem, 4.6vw, 5rem);
-  min-width: clamp(3.9rem, 4.6vw, 5rem);
-  height: clamp(3.9rem, 4.6vw, 5rem);
+  width: clamp(3.7rem, 4.25vw, 4.65rem);
+  min-width: clamp(3.7rem, 4.25vw, 4.65rem);
+  height: clamp(3.7rem, 4.25vw, 4.65rem);
   place-items: center;
   flex: none;
   overflow: visible;
@@ -177,7 +189,7 @@
   filter:
     saturate(1)
     brightness(1)
-    drop-shadow(0 .35rem .65rem rgba(0,0,0,.28));
+    drop-shadow(0 .3rem .55rem rgba(0,0,0,.26));
   transition:
     transform 220ms cubic-bezier(.22,1,.36,1),
     filter 180ms ease;
@@ -185,16 +197,16 @@
 
 .tool:hover {
   z-index: 4;
-  transform: translateY(-.5rem) scale(1.2);
-  filter: brightness(1.06);
+  transform: translateY(-.28rem) scale(1.12);
+  filter: brightness(1.05);
 }
 
 .tool:hover .logo {
-  transform: scale(1.04);
+  transform: scale(1.025);
   filter:
-    saturate(1.08)
-    brightness(1.08)
-    drop-shadow(0 .6rem .9rem rgba(0,0,0,.32));
+    saturate(1.06)
+    brightness(1.07)
+    drop-shadow(0 .5rem .8rem rgba(0,0,0,.3));
 }
 
 @keyframes toolCarousel {
@@ -202,14 +214,22 @@
   to { transform: translate3d(-50%, 0, 0); }
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1020px) {
+  .aboutBottomTwoCol {
+    grid-template-columns: minmax(18rem, .9fr) minmax(0, 1.5fr) !important;
+  }
+
+  .aboutBottomTwoCol > article:not(:last-child) {
+    min-height: 31rem !important;
+  }
+
   .toolboxDockCard {
-    min-height: 21rem !important;
+    min-height: 15rem !important;
   }
 
   .dockStage {
-    min-height: 13.5rem;
-    padding-inline: .25rem;
+    min-height: 8.8rem;
+    padding-inline: .15rem;
   }
 
   .carousel {
@@ -217,25 +237,29 @@
   }
 }
 
-@media (max-width: 760px) {
-  .toolboxDockCard {
-    min-height: 18rem !important;
-    padding: 1.2rem !important;
+@media (max-width: 720px) {
+  .aboutBottomTwoCol {
+    grid-template-columns: 1fr !important;
   }
 
-  .dockHeader {
-    margin-left: .15rem;
+  .aboutBottomTwoCol > article:not(:last-child) {
+    min-height: 28rem !important;
+  }
+
+  .toolboxDockCard {
+    min-height: 13rem !important;
+    padding: 1rem !important;
   }
 
   .dockStage {
-    min-height: 11.5rem;
-    margin-top: .25rem;
-    padding: 1rem 0 1.8rem;
+    min-height: 7.8rem;
+    margin-top: .1rem;
+    padding: .35rem 0 .7rem;
   }
 
   .carousel {
-    padding: .68rem .8rem;
-    border-radius: 1.5rem;
+    padding: 1rem .72rem .7rem;
+    border-radius: 1.35rem;
   }
 
   .track {
@@ -243,14 +267,14 @@
   }
 
   .group {
-    gap: .4rem;
-    padding-right: .4rem;
+    gap: .38rem;
+    padding-right: .38rem;
   }
 
   .tool {
-    width: 3.65rem;
-    min-width: 3.65rem;
-    height: 3.65rem;
+    width: 3.45rem;
+    min-width: 3.45rem;
+    height: 3.45rem;
   }
 
   .logoWrap {
@@ -259,8 +283,8 @@
   }
 
   .toolboxDockCard::before {
-    width: 92%;
-    bottom: -6rem;
+    width: 90%;
+    bottom: -5.2rem;
   }
 }
 
