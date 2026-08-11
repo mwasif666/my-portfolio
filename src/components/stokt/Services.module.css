@@ -1,12 +1,47 @@
 .section {
   position: relative;
+  isolation: isolate;
   overflow: hidden;
-  background: #050505;
+  background:
+    radial-gradient(circle at 84% 22%, rgba(25, 121, 174, .12), transparent 30%),
+    radial-gradient(ellipse at 50% 108%, rgba(40, 133, 214, .13), transparent 38%),
+    linear-gradient(180deg, #03070b 0%, #04090e 55%, #03070b 100%);
   color: #f4f4f2;
   font-family: "Onest", sans-serif;
 }
 
+.section::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(83, 172, 215, .08) 1px, transparent 1px),
+    linear-gradient(90deg, transparent 0%, rgba(42, 143, 191, .035) 50%, transparent 100%);
+  background-size: 21px 21px, 100% 100%;
+  opacity: .34;
+  pointer-events: none;
+}
+
+.section::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -18rem;
+  bottom: -20rem;
+  width: clamp(32rem, 48vw, 58rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(48, 163, 217, .08);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 7rem rgba(13, 92, 133, .026),
+    0 0 0 14rem rgba(13, 92, 133, .014);
+  pointer-events: none;
+}
+
 .inner {
+  position: relative;
+  z-index: 1;
   width: min(calc(100% - 3rem), 96rem);
   margin: 0 auto;
   padding: clamp(6rem, 10vw, 10rem) 0 clamp(5rem, 9vw, 9rem);
@@ -18,7 +53,7 @@
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: clamp(2.5rem, 5vw, 5rem);
-  color: #8f8f8f;
+  color: rgba(176, 205, 219, .62);
   font-size: .72rem;
   font-weight: 560;
   line-height: 1;
@@ -30,8 +65,10 @@
   width: 1.9rem;
   height: 1.9rem;
   place-items: center;
-  border: 1px solid #242424;
+  border: 1px solid rgba(89, 183, 227, .18);
   border-radius: 50%;
+  background: rgba(8, 19, 29, .55);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
   font-size: .8rem;
 }
 
@@ -46,17 +83,18 @@
 .heading {
   max-width: 13ch;
   margin: 0;
-  color: #f7f7f4;
+  color: #f7f9fa;
   font-size: clamp(3.2rem, 7.3vw, 7.8rem);
   font-weight: 470;
   line-height: .9;
   letter-spacing: -.065em;
+  text-shadow: 0 0 2.6rem rgba(62, 169, 218, .05);
 }
 
 .lead {
   max-width: 31rem;
   margin: 0;
-  color: #8e8e8e;
+  color: rgba(181, 201, 211, .68);
   font-size: clamp(.95rem, 1.15vw, 1.08rem);
   line-height: 1.6;
 }
@@ -72,10 +110,29 @@
   isolation: isolate;
   min-height: clamp(23rem, 34vw, 35rem);
   overflow: hidden;
-  border-radius: 10px;
-  background: #0a0a0a;
+  border-radius: clamp(.9rem, 1.2vw, 1.2rem);
+  background: #071019;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.018),
+    0 1.4rem 3.2rem rgba(0, 10, 20, .23),
+    0 0 0 1px rgba(71, 177, 224, .035);
   transform: translateZ(0);
-  transition: transform 420ms cubic-bezier(.22,1,.36,1);
+  transition:
+    transform 420ms cubic-bezier(.22,1,.36,1),
+    box-shadow 420ms ease;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: 7%;
+  bottom: 0;
+  left: 7%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(133, 211, 249, .28), transparent);
+  box-shadow: 0 -1.2rem 3rem rgba(54, 154, 220, .08);
+  pointer-events: none;
 }
 
 .card::after {
@@ -83,10 +140,11 @@
   position: absolute;
   inset: 1px;
   z-index: -1;
-  border-radius: 9px;
+  border-radius: calc(clamp(.9rem, 1.2vw, 1.2rem) - 1px);
   background:
-    radial-gradient(circle at 50% 45%, rgba(255,255,255,.035), transparent 45%),
-    #0a0a0a;
+    radial-gradient(circle at 50% 40%, rgba(43, 122, 167, .12), transparent 35%),
+    radial-gradient(ellipse at 50% 112%, rgba(46, 137, 213, .16), transparent 42%),
+    linear-gradient(180deg, rgba(8, 15, 22, .98), rgba(5, 12, 19, .99));
 }
 
 .cardBorder {
@@ -94,7 +152,13 @@
   inset: 0;
   z-index: -2;
   border-radius: inherit;
-  background: linear-gradient(126deg, #343434 0%, #141414 48%, #0c0c0c 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(105, 199, 242, .24) 0%,
+    rgba(39, 96, 126, .12) 38%,
+    rgba(15, 36, 52, .15) 67%,
+    rgba(89, 173, 216, .11) 100%
+  );
   transition: background 360ms ease;
 }
 
@@ -106,13 +170,29 @@
   overflow: hidden;
 }
 
+.media::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 72%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(47, 145, 202, .1), transparent 66%);
+  filter: blur(10px);
+  opacity: .8;
+  transition: opacity 360ms ease, transform 520ms cubic-bezier(.22,1,.36,1);
+}
+
 .video {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: center;
-  filter: saturate(.96) contrast(1.02);
+  filter:
+    saturate(.94)
+    contrast(1.03)
+    drop-shadow(0 1.2rem 2.4rem rgba(0,0,0,.26));
   transform: scale(.96);
   transition: transform 700ms cubic-bezier(.22,1,.36,1), filter 420ms ease;
 }
@@ -122,6 +202,18 @@
   right: clamp(1.15rem, 2vw, 1.8rem);
   bottom: clamp(1.1rem, 2vw, 1.65rem);
   left: clamp(1.15rem, 2vw, 1.8rem);
+  z-index: 2;
+  padding-top: clamp(.8rem, 1vw, 1rem);
+}
+
+.cardFooter::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(114, 204, 246, .12), rgba(114, 204, 246, .02));
 }
 
 .cardTitle {
@@ -130,12 +222,13 @@
   gap: 0 .35em;
   max-width: 88%;
   margin: 0;
-  color: #f3f3f0;
+  color: #f2f7f9;
   font-size: clamp(1.3rem, 2vw, 2.05rem);
   font-weight: 500;
   line-height: 1;
   letter-spacing: -.035em;
   text-align: left;
+  text-shadow: 0 0 1.4rem rgba(70, 173, 220, .05);
 }
 
 .cardTitle span {
@@ -145,15 +238,35 @@
 }
 
 .card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.025),
+    0 1.7rem 4rem rgba(0, 10, 20, .34),
+    0 0 2.8rem rgba(40, 144, 204, .08),
+    0 0 0 1px rgba(87, 192, 239, .055);
 }
 
 .card:hover .cardBorder {
-  background: linear-gradient(126deg, #4b4b4b 0%, #1e1e1e 48%, #101010 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(119, 217, 255, .38) 0%,
+    rgba(49, 135, 177, .18) 38%,
+    rgba(17, 42, 61, .17) 66%,
+    rgba(95, 188, 233, .2) 100%
+  );
+}
+
+.card:hover .media::before {
+  opacity: 1;
+  transform: scale(1.08);
 }
 
 .card:hover .video {
-  filter: saturate(1.04) contrast(1.04);
+  filter:
+    saturate(1.03)
+    contrast(1.05)
+    brightness(1.02)
+    drop-shadow(0 1.45rem 2.8rem rgba(0,0,0,.32));
   transform: scale(1.025);
 }
 
@@ -208,6 +321,7 @@
 
   .card {
     min-height: 29rem;
+    border-radius: .9rem;
   }
 
   .cardTitle {
@@ -219,6 +333,7 @@
 @media (prefers-reduced-motion: reduce) {
   .card,
   .video,
+  .media::before,
   .cardTitle span {
     transition: none;
   }
