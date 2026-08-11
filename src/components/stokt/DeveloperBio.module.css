@@ -155,8 +155,22 @@
   line-height: 1.2;
 }
 
+/* Keep these more specific than the legacy bioCompact typography rules. */
+.editorialBio > .editorialLabel {
+  font-size: clamp(.78rem, .88vw, .94rem) !important;
+  line-height: 1 !important;
+  letter-spacing: -.015em !important;
+}
+
+.editorialBio > .editorialStatement {
+  max-width: 66rem !important;
+  font-size: clamp(2rem, 2.75vw, 3.15rem) !important;
+  line-height: 1.18 !important;
+}
+
 @media (max-width: 1180px) {
-  .editorialStatement {
+  .editorialStatement,
+  .editorialBio > .editorialStatement {
     margin-left: clamp(4.7rem, 8vw, 7rem) !important;
     font-size: clamp(1.8rem, 3vw, 2.65rem) !important;
   }
@@ -190,7 +204,8 @@
     margin-top: 2.2rem;
   }
 
-  .editorialStatement {
+  .editorialStatement,
+  .editorialBio > .editorialStatement {
     margin: 1.35rem 0 0 !important;
     font-size: clamp(1.72rem, 7.6vw, 2.2rem) !important;
     line-height: 1.16 !important;
