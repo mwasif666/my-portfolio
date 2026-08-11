@@ -2,9 +2,9 @@
 :global(#about) {
   isolation: isolate;
   background:
-    radial-gradient(circle at 84% 16%, rgba(25, 121, 174, .18), transparent 30%),
-    radial-gradient(ellipse at 50% 101%, rgba(40, 133, 214, .24), transparent 42%),
-    linear-gradient(180deg, #03070b 0%, #04090e 58%, #03070b 100%) !important;
+    radial-gradient(ellipse at 50% -8%, rgba(40, 133, 214, .22), transparent 40%),
+    radial-gradient(circle at 84% 2%, rgba(25, 121, 174, .17), transparent 30%),
+    linear-gradient(180deg, #03070b 0%, #04090e 28%, #03070b 64%, #03070b 100%) !important;
 }
 
 .aboutAmbient::before,
@@ -17,7 +17,7 @@
     radial-gradient(circle, rgba(83, 172, 215, .1) 1px, transparent 1px),
     linear-gradient(90deg, transparent 0%, rgba(42, 143, 191, .055) 50%, transparent 100%);
   background-size: 21px 21px, 100% 100%;
-  opacity: .4;
+  opacity: .42;
   pointer-events: none;
 }
 
@@ -26,19 +26,15 @@
   content: "";
   position: absolute;
   z-index: 0;
-  left: 9%;
-  right: 9%;
-  bottom: -6.2rem;
-  height: 13rem;
+  top: -20rem;
+  right: -18rem;
+  width: clamp(32rem, 48vw, 58rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(48, 163, 217, .14);
   border-radius: 50%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(125, 201, 255, .52) 0%,
-    rgba(72, 160, 236, .28) 25%,
-    rgba(38, 112, 190, .12) 48%,
-    transparent 72%
-  );
-  filter: blur(34px);
+  box-shadow:
+    0 0 0 7rem rgba(13, 92, 133, .05),
+    0 0 0 14rem rgba(13, 92, 133, .028);
   pointer-events: none;
 }
 
@@ -203,11 +199,9 @@
 @media (max-width: 720px) {
   .aboutAmbient::after,
   :global(#about)::after {
-    left: 2%;
-    right: 2%;
-    bottom: -5rem;
-    height: 10rem;
-    filter: blur(28px);
+    top: -13rem;
+    right: -12rem;
+    width: 28rem;
   }
 
   .editorialBio {
