@@ -4,7 +4,6 @@ import gradient1 from "../../assets/developer-systems/gradient.png";
 import gradient2 from "../../assets/developer-systems/gradient02.png";
 import industryLogo from "../../assets/developer-systems/indus-logo.png";
 import networkShape from "../../assets/developer-systems/indus-shape.png";
-import cardsBackground from "../../assets/developer-systems/industries-bg02.png";
 import serviceIcon01 from "../../assets/developer-systems/service-icon01.svg";
 import serviceIcon02 from "../../assets/developer-systems/service-icon02.svg";
 import serviceIcon03 from "../../assets/developer-systems/service-icon03.svg";
@@ -142,7 +141,6 @@ export default function DeveloperSystemsSection() {
       <section
         className={styles.capabilitiesSection}
         aria-labelledby="developer-capabilities-title"
-        style={{ backgroundImage: `url(${cardsBackground})` }}
       >
         <div className={styles.container}>
           <header className={styles.sectionTitle}>
