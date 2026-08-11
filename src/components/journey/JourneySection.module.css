@@ -1,19 +1,15 @@
 .section {
   --journey-heading-opacity: 0;
-  --journey-heading-y: 32px;
+  --journey-heading-y: 30px;
   --journey-wide-opacity: 1;
   --journey-wide-scale: 1;
   --journey-panels-opacity: 0;
   --journey-panels-width: 82vw;
-  --journey-panels-height: 62vh;
+  --journey-panels-height: 61vh;
   --journey-gap: .15vw;
-  --journey-image-opacity: 1;
-  --journey-surface-opacity: 0;
-  --journey-copy-opacity: 0;
-  --journey-copy-y: 26px;
   --journey-grid-y: 18px;
   position: relative;
-  height: 285svh;
+  height: 315svh;
   overflow: clip;
   background: #010507;
   color: #edfaff;
@@ -27,7 +23,7 @@
   overflow: hidden;
   isolation: isolate;
   background:
-    radial-gradient(ellipse at 50% 45%, rgba(16, 92, 126, .12), transparent 42%),
+    radial-gradient(ellipse at 50% 47%, rgba(16, 92, 126, .12), transparent 42%),
     linear-gradient(180deg, #010405 0%, #01070a 58%, #000 100%);
 }
 
@@ -38,8 +34,7 @@
   transform: translate3d(0, var(--journey-grid-y), 0);
   opacity: .52;
   pointer-events: none;
-  background-image:
-    radial-gradient(circle, rgba(75, 151, 184, .24) 0 1.4px, transparent 1.6px);
+  background-image: radial-gradient(circle, rgba(75, 151, 184, .24) 0 1.4px, transparent 1.6px);
   background-size: 43px 43px;
   mask-image: radial-gradient(ellipse at 50% 50%, #000 32%, rgba(0,0,0,.68) 62%, transparent 92%);
   will-change: transform;
@@ -47,8 +42,8 @@
 
 .heading {
   position: absolute;
-  z-index: 6;
-  top: clamp(2.5rem, 6.5vh, 5.6rem);
+  z-index: 7;
+  top: clamp(8rem, 14vh, 10.5rem);
   left: 50%;
   width: min(92vw, 76rem);
   margin: 0;
@@ -56,7 +51,7 @@
   opacity: var(--journey-heading-opacity);
   color: #effcff;
   font-family: "Argesta Display", Georgia, "Times New Roman", serif;
-  font-size: clamp(3.5rem, 5.3vw, 6.9rem);
+  font-size: clamp(3.4rem, 5.15vw, 6.65rem);
   font-weight: 400;
   line-height: .98;
   letter-spacing: -.045em;
@@ -65,14 +60,12 @@
   will-change: transform, opacity;
 }
 
-.heading em {
-  font-weight: inherit;
-}
+.heading em { font-weight: inherit; }
 
 .wideVisual {
   position: absolute;
   z-index: 2;
-  top: 54%;
+  top: 58%;
   left: 50%;
   width: min(82vw, 94rem);
   aspect-ratio: 2.16 / 1;
@@ -81,9 +74,7 @@
   border: 1px solid rgba(105, 196, 232, .2);
   border-radius: 22px;
   opacity: var(--journey-wide-opacity);
-  box-shadow:
-    0 2.8rem 8rem rgba(0,0,0,.48),
-    0 0 0 1px rgba(255,255,255,.012) inset;
+  box-shadow: 0 2.8rem 8rem rgba(0,0,0,.48), 0 0 0 1px rgba(255,255,255,.012) inset;
   will-change: transform, opacity;
 }
 
@@ -116,7 +107,7 @@
 .panels {
   position: absolute;
   z-index: 4;
-  top: 57%;
+  top: 61%;
   left: 50%;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -125,49 +116,59 @@
   height: var(--journey-panels-height);
   transform: translate3d(-50%, -50%, 0);
   opacity: var(--journey-panels-opacity);
-  perspective: 1200px;
+  perspective: 1500px;
   will-change: width, height, opacity;
 }
 
 .card {
+  --card-flip: 0deg;
+  --card-copy-opacity: 0;
+  --card-copy-y: 24px;
   position: relative;
   min-width: 0;
+  transform-origin: center;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: rotateY(var(--card-flip));
+  transform-style: preserve-3d;
+  transition: box-shadow 240ms ease;
+  will-change: transform;
+}
+
+.cardFace {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
   border: 1px solid rgba(101, 191, 226, .24);
   border-radius: 20px;
   background: #061018;
-  box-shadow:
-    0 1.8rem 5rem rgba(0,0,0,.38),
-    inset 0 1px 0 rgba(255,255,255,.025);
-  transform-origin: center;
+  box-shadow: 0 1.8rem 5rem rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.025);
   backface-visibility: hidden;
-  will-change: transform;
+  -webkit-backface-visibility: hidden;
 }
+
+.cardFront { transform: rotateY(0deg); }
+.cardBack { transform: rotateY(180deg); }
 
 .panelImage {
   z-index: 1;
-  opacity: var(--journey-image-opacity);
   background-size: 300% 100%;
-  transition: filter 260ms ease;
 }
 
-.card:nth-child(1) .panelImage {
-  background-position: left center;
-}
-
-.card:nth-child(2) .panelImage {
-  background-position: center center;
-}
-
-.card:nth-child(3) .panelImage {
-  background-position: right center;
-}
+.card:nth-child(1) .panelImage { background-position: left center; }
+.card:nth-child(2) .panelImage { background-position: center center; }
+.card:nth-child(3) .panelImage { background-position: right center; }
 
 .surface {
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   inset: 0;
-  opacity: var(--journey-surface-opacity);
   pointer-events: none;
 }
 
@@ -196,28 +197,21 @@
   left: clamp(1.25rem, 2.1vw, 2rem);
   width: 2rem;
   height: 2rem;
-  opacity: var(--journey-copy-opacity);
-  transform: translateY(var(--journey-copy-y));
+  opacity: var(--card-copy-opacity);
+  transform: translateY(var(--card-copy-y));
   color: rgba(226, 248, 255, .82);
   will-change: transform, opacity;
 }
 
-.card:nth-child(1) .icon {
-  color: rgba(5, 33, 46, .74);
-}
-
-.icon svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
+.card:nth-child(1) .icon { color: rgba(5, 33, 46, .74); }
+.icon svg { display: block; width: 100%; height: 100%; }
 
 .copy {
   position: absolute;
   z-index: 4;
   inset: auto clamp(1.4rem, 2.2vw, 2.2rem) clamp(1.5rem, 2.45vw, 2.55rem);
-  opacity: var(--journey-copy-opacity);
-  transform: translateY(var(--journey-copy-y));
+  opacity: var(--card-copy-opacity);
+  transform: translateY(var(--card-copy-y));
   will-change: transform, opacity;
 }
 
@@ -240,33 +234,24 @@
 }
 
 .card:nth-child(1) .copy h3,
-.card:nth-child(1) .copy p {
-  color: #07151d;
-}
-
-.card:nth-child(1) .copy p {
-  color: rgba(7, 21, 29, .65);
-}
+.card:nth-child(1) .copy p { color: #07151d; }
+.card:nth-child(1) .copy p { color: rgba(7, 21, 29, .65); }
 
 @media (max-width: 1180px) {
   .heading {
-    font-size: clamp(3.4rem, 6vw, 5.8rem);
+    top: clamp(7.5rem, 13vh, 9.5rem);
+    font-size: clamp(3.25rem, 5.8vw, 5.5rem);
   }
 
-  .copy h3 {
-    font-size: clamp(1.55rem, 2.6vw, 2.7rem);
-  }
-
-  .copy p {
-    margin-top: 3.5rem;
-  }
+  .copy h3 { font-size: clamp(1.55rem, 2.6vw, 2.7rem); }
+  .copy p { margin-top: 3.5rem; }
 }
 
 @media (max-width: 820px) {
   .section {
     height: auto;
     min-height: 100svh;
-    padding: 5.5rem 1rem 4.5rem;
+    padding: 7.5rem 1rem 4.5rem;
   }
 
   .stage {
@@ -276,10 +261,7 @@
     background: transparent;
   }
 
-  .grid {
-    position: fixed;
-    opacity: .28;
-  }
+  .grid { position: fixed; opacity: .28; }
 
   .heading {
     position: relative;
@@ -289,12 +271,10 @@
     margin: 0 auto 2.8rem;
     transform: none !important;
     opacity: 1 !important;
-    font-size: clamp(3.3rem, 13vw, 5.6rem);
+    font-size: clamp(3.1rem, 12vw, 5.2rem);
   }
 
-  .wideVisual {
-    display: none;
-  }
+  .wideVisual { display: none; }
 
   .panels {
     position: relative;
@@ -314,29 +294,27 @@
     transform: none !important;
   }
 
-  .panelImage {
-    opacity: .14 !important;
-  }
-
-  .surface,
-  .icon,
-  .copy {
-    opacity: 1 !important;
-  }
-
-  .icon,
-  .copy {
+  .cardInner {
+    height: 100%;
     transform: none !important;
   }
 
-  .copy h3 {
-    font-size: clamp(2rem, 8vw, 3rem);
+  .cardFront { display: none; }
+
+  .cardBack {
+    position: relative;
+    min-height: 28rem;
+    transform: none;
   }
 
-  .copy p {
-    margin-top: 5rem;
-    font-size: .95rem;
+  .icon,
+  .copy {
+    opacity: 1 !important;
+    transform: none !important;
   }
+
+  .copy h3 { font-size: clamp(2rem, 8vw, 3rem); }
+  .copy p { margin-top: 5rem; font-size: .95rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -344,8 +322,7 @@
   .wideVisual,
   .panels,
   .card,
+  .cardInner,
   .icon,
-  .copy {
-    will-change: auto;
-  }
+  .copy { will-change: auto; }
 }

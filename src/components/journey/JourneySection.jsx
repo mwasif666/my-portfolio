@@ -80,16 +80,23 @@ export default function JourneySection() {
               }}
               className={styles.card}
             >
-              <div className={styles.panelImage} aria-hidden="true" />
-              <div className={styles.surface} aria-hidden="true" />
+              <div className={styles.cardInner}>
+                <div className={`${styles.cardFace} ${styles.cardFront}`} aria-hidden="true">
+                  <div className={styles.panelImage} />
+                </div>
 
-              <div className={styles.icon}>
-                <JourneyIcon type={option.icon} />
-              </div>
+                <div className={`${styles.cardFace} ${styles.cardBack}`}>
+                  <div className={styles.surface} aria-hidden="true" />
 
-              <div className={styles.copy}>
-                <h3>{option.title}</h3>
-                <p>{option.copy}</p>
+                  <div className={styles.icon}>
+                    <JourneyIcon type={option.icon} />
+                  </div>
+
+                  <div className={styles.copy}>
+                    <h3>{option.title}</h3>
+                    <p>{option.copy}</p>
+                  </div>
+                </div>
               </div>
             </article>
           ))}
