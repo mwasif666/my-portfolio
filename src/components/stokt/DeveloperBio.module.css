@@ -2,12 +2,16 @@
   position: relative;
   isolation: isolate;
   justify-content: flex-start !important;
-  min-height: clamp(24rem, 29vw, 30rem) !important;
+  min-height: clamp(31rem, 35vw, 37rem) !important;
   overflow: hidden !important;
-  padding: clamp(2rem, 3vw, 3.2rem) !important;
+  padding: clamp(2rem, 2.6vw, 2.8rem) !important;
   background:
-    radial-gradient(circle at 86% 44%, rgba(9, 86, 128, .14), transparent 34%),
+    radial-gradient(ellipse at 50% 116%, rgba(74, 159, 255, .24), transparent 34%),
+    radial-gradient(circle at 86% 42%, rgba(9, 86, 128, .14), transparent 34%),
     linear-gradient(120deg, rgba(3, 9, 14, .99), rgba(3, 12, 19, .98)) !important;
+  box-shadow:
+    inset 0 -1px 0 rgba(130, 205, 255, .08),
+    inset 0 1px 0 rgba(255,255,255,.018);
 }
 
 .editorialBio::before {
@@ -26,8 +30,8 @@
   position: absolute;
   z-index: -1;
   top: -12rem;
-  right: -12rem;
-  width: clamp(28rem, 38vw, 42rem);
+  right: -11rem;
+  width: clamp(29rem, 38vw, 43rem);
   aspect-ratio: 1;
   border: 1px solid rgba(31, 140, 194, .11);
   border-radius: 50%;
@@ -37,40 +41,13 @@
   pointer-events: none;
 }
 
-.editorialLabel {
-  position: relative;
-  z-index: 2;
-  display: inline-flex;
-  width: fit-content;
-  align-items: center;
-  gap: .72rem;
-  color: #f5f8fa;
-  font-size: clamp(.78rem, .88vw, .94rem) !important;
-  font-weight: 650;
-  line-height: 1 !important;
-  letter-spacing: -.015em !important;
-}
-
-.editorialLabel > span {
-  position: relative;
-  width: .46rem;
-  height: .46rem;
-  flex: none;
-  border-radius: 50%;
-  background: #dff8ff;
-  box-shadow:
-    0 0 .25rem rgba(224, 249, 255, .95),
-    0 0 1rem rgba(90, 196, 241, .75),
-    0 0 2.2rem rgba(54, 151, 210, .45);
-}
-
 .codeOrb {
   position: absolute;
   z-index: 3;
-  top: clamp(5.4rem, 7vw, 7.4rem);
-  left: clamp(2.6rem, 6.3vw, 6.8rem);
+  top: clamp(2rem, 2.8vw, 2.7rem);
+  left: clamp(1.8rem, 2.8vw, 2.7rem);
   display: grid;
-  width: clamp(3.65rem, 4.5vw, 4.7rem);
+  width: clamp(3.65rem, 4.4vw, 4.7rem);
   aspect-ratio: 1;
   place-items: center;
   border: 1px solid rgba(255,255,255,.09);
@@ -83,21 +60,25 @@
     0 .85rem 2rem rgba(0,0,0,.35);
   color: #eef8fd;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: clamp(.78rem, .95vw, 1rem);
+  font-size: clamp(.78rem, .95vw, 1rem) !important;
   font-weight: 700;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
   transform: rotate(-8deg);
 }
 
-.editorialStatement {
+.editorialStatement,
+.editorialBio > .editorialStatement {
   position: relative;
   z-index: 2;
-  max-width: 66rem !important;
-  margin: clamp(3.8rem, 5vw, 5.5rem) 0 0 clamp(6rem, 12vw, 12rem) !important;
+  width: auto;
+  max-width: none !important;
+  margin: clamp(2rem, 3vw, 3rem) clamp(.25rem, 1vw, 1rem) 0 clamp(5.3rem, 7.2vw, 7.6rem) !important;
   color: rgba(174, 182, 190, .58) !important;
-  font-size: clamp(2rem, 2.75vw, 3.15rem) !important;
+  font-size: clamp(2rem, 2.7vw, 3.15rem) !important;
   font-weight: 620;
-  line-height: 1.18 !important;
-  letter-spacing: -.045em;
+  line-height: 1.17 !important;
+  letter-spacing: -.045em !important;
   text-wrap: balance;
 }
 
@@ -112,7 +93,7 @@
   display: flex;
   align-items: center;
   gap: .8rem;
-  margin: clamp(1.8rem, 2.6vw, 2.7rem) 0 0 clamp(6rem, 12vw, 12rem);
+  margin: clamp(2rem, 2.7vw, 2.8rem) 0 0 clamp(5.3rem, 7.2vw, 7.6rem);
 }
 
 .editorialAvatar {
@@ -155,32 +136,16 @@
   line-height: 1.2;
 }
 
-/* Keep these more specific than the legacy bioCompact typography rules. */
-.editorialBio > .editorialLabel {
-  font-size: clamp(.78rem, .88vw, .94rem) !important;
-  line-height: 1 !important;
-  letter-spacing: -.015em !important;
-}
-
-.editorialBio > .editorialStatement {
-  max-width: 66rem !important;
-  font-size: clamp(2rem, 2.75vw, 3.15rem) !important;
-  line-height: 1.18 !important;
-}
-
 @media (max-width: 1180px) {
   .editorialStatement,
   .editorialBio > .editorialStatement {
-    margin-left: clamp(4.7rem, 8vw, 7rem) !important;
-    font-size: clamp(1.8rem, 3vw, 2.65rem) !important;
+    margin-left: clamp(4.8rem, 6vw, 6rem) !important;
+    margin-right: 0 !important;
+    font-size: clamp(1.8rem, 2.85vw, 2.65rem) !important;
   }
 
   .editorialAuthor {
-    margin-left: clamp(4.7rem, 8vw, 7rem);
-  }
-
-  .codeOrb {
-    left: 2.2rem;
+    margin-left: clamp(4.8rem, 6vw, 6rem);
   }
 }
 
@@ -201,12 +166,12 @@
     top: auto;
     left: auto;
     width: 3.35rem;
-    margin-top: 2.2rem;
+    margin-top: .2rem;
   }
 
   .editorialStatement,
   .editorialBio > .editorialStatement {
-    margin: 1.35rem 0 0 !important;
+    margin: 1.25rem 0 0 !important;
     font-size: clamp(1.72rem, 7.6vw, 2.2rem) !important;
     line-height: 1.16 !important;
   }
