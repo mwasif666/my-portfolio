@@ -77,10 +77,11 @@
 }
 
 .nav { justify-self: center; }
+
 .list {
   display: flex;
   align-items: center;
-  gap: .58rem;
+  gap: .95rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -94,17 +95,17 @@
 
 .link {
   display: inline-flex;
-  min-height: 2.4rem;
-  max-width: 8rem;
+  min-height: 2.55rem;
+  max-width: 9rem;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: .5rem .62rem;
+  padding: .55rem .8rem;
   border: 0;
   border-radius: 999px;
   background: transparent;
-  color: rgba(255,255,255,.8);
-  font-size: .78rem;
+  color: rgba(255,255,255,.82);
+  font-size: .92rem;
   font-weight: 600;
   line-height: 1;
   white-space: nowrap;
@@ -117,8 +118,13 @@
 }
 
 .link:hover,
-.link:focus-visible {
+.link:focus-visible,
+.activeLink {
   color: #fff;
+}
+
+.link:hover,
+.link:focus-visible {
   transform: translateY(-1px);
 }
 
@@ -139,7 +145,7 @@
 
 .label {
   display: block;
-  max-width: 8rem;
+  max-width: 9rem;
   overflow: hidden;
   opacity: 1;
   white-space: nowrap;
@@ -192,18 +198,19 @@
     backdrop-filter: blur(14px) saturate(122%);
   }
 
-  .compact .list { gap: .5rem; }
+  .compact .list { gap: .42rem; }
 
   .compact .link {
     min-height: 2.55rem;
-    max-width: 1.45rem;
+    max-width: 1.48rem;
     padding-inline: .48rem;
+    font-size: .86rem;
     transform: none;
   }
 
   .compact .dot {
-    width: .4rem;
-    height: .4rem;
+    width: .42rem;
+    height: .42rem;
     opacity: 1;
     transform: scale(1);
   }
@@ -213,10 +220,27 @@
     opacity: 0;
   }
 
+  .compact .activeLink {
+    max-width: 8.75rem;
+    padding-inline: .6rem;
+  }
+
+  .compact .activeLink .dot {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    transform: scale(.2);
+  }
+
+  .compact .activeLink .label {
+    max-width: 7.5rem;
+    opacity: 1;
+  }
+
   .compact .link:hover,
   .compact .link:focus-visible {
-    max-width: 8.5rem;
-    padding-inline: .45rem;
+    max-width: 8.75rem;
+    padding-inline: .6rem;
   }
 
   .compact .link:hover .dot,
@@ -229,7 +253,7 @@
 
   .compact .link:hover .label,
   .compact .link:focus-visible .label {
-    max-width: 7rem;
+    max-width: 7.5rem;
     opacity: 1;
   }
 }
