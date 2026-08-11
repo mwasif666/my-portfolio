@@ -1,0 +1,66 @@
+.blueGlow {
+  position: relative;
+  isolation: isolate;
+  background: #00020f;
+}
+
+.blueGlow::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: 4.5rem;
+  width: min(82rem, 92vw);
+  height: 34rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at center,
+      rgba(69, 145, 255, .34) 0%,
+      rgba(37, 104, 224, .22) 24%,
+      rgba(17, 57, 132, .12) 46%,
+      rgba(4, 12, 34, 0) 76%);
+  filter: blur(64px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.blueGlow::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  bottom: 1.5rem;
+  width: min(68rem, 78vw);
+  height: 14rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at center,
+      rgba(96, 173, 255, .28) 0%,
+      rgba(49, 126, 239, .16) 34%,
+      rgba(10, 35, 88, .08) 54%,
+      transparent 78%);
+  filter: blur(48px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.blueGlow > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 767px) {
+  .blueGlow::before {
+    top: 6rem;
+    width: 120vw;
+    height: 26rem;
+    filter: blur(52px);
+  }
+
+  .blueGlow::after {
+    bottom: .5rem;
+    width: 105vw;
+    height: 10rem;
+    filter: blur(38px);
+  }
+}
