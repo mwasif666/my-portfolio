@@ -31,7 +31,8 @@
 .marqueeSection {
   position: relative;
   z-index: 1;
-  padding: 145px 0 50px;
+  padding: 145px 0 0;
+  overflow: hidden;
   background: #00020f;
 }
 
@@ -42,7 +43,7 @@
   z-index: -2;
   pointer-events: none;
   background:
-    radial-gradient(circle at 50% 46%, rgba(0, 255, 151, .045), transparent 30%),
+    radial-gradient(circle at 50% 31%, rgba(0, 255, 151, .04), transparent 27%),
     linear-gradient(180deg, #00020f 0%, #00020f 100%);
 }
 
@@ -55,7 +56,7 @@
 
 .sectionTitle h2 {
   display: block;
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
   color: var(--heading);
   font-family: "AivoraSporting", "Onest", sans-serif;
@@ -97,7 +98,7 @@
 
 .industryWrapper {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   width: min(100%, 660px);
   margin: 0 auto;
 }
@@ -247,36 +248,43 @@
   height: auto;
 }
 
-.industryLogo {
+.networkBridge {
   position: relative;
-  z-index: 3;
-  width: 100%;
-  margin: -4px auto 0;
-  text-align: center;
-}
-
-.industryLogo img {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
+  z-index: 2;
+  width: min(100%, 1040px);
+  height: clamp(500px, 47vw, 630px);
+  margin: -16px auto 0;
+  overflow: hidden;
+  isolation: isolate;
 }
 
 .bottomShape {
   position: absolute;
   z-index: 0;
   left: 50%;
-  bottom: -13px;
-  width: min(100%, 1100px);
+  top: 0;
+  display: block;
+  width: min(96%, 980px);
+  max-width: none;
+  height: auto;
   transform: translateX(-50%);
   pointer-events: none;
+  user-select: none;
 }
 
-.bottomShape img {
+.industryLogo {
+  position: absolute;
+  z-index: 2;
+  top: clamp(56px, 5.5vw, 78px);
+  left: 50%;
   display: block;
-  width: 100%;
+  width: clamp(178px, 15vw, 246px);
+  max-width: none;
   height: auto;
+  transform: translateX(-50%);
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 0 34px rgba(0, 124, 255, .16));
 }
 
 .gradientLines span {
@@ -302,7 +310,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  padding: 82px 0 165px;
+  padding: 46px 0 165px;
   overflow: hidden;
   background-position: center center;
   background-size: cover;
@@ -315,7 +323,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, rgba(0, 2, 15, .1), rgba(0, 2, 15, .32));
+  background: linear-gradient(180deg, rgba(0, 2, 15, .12), rgba(0, 2, 15, .34));
   pointer-events: none;
 }
 
@@ -458,15 +466,16 @@
 @media (max-width: 1199px) {
   .sectionTitle h2 { font-size: 52px; }
 
-  .industryLogo {
-    max-width: 73%;
+  .networkBridge {
+    width: min(100%, 900px);
+    height: 560px;
   }
 
-  .bottomShape { bottom: -1px; }
+  .bottomShape { width: min(96%, 860px); }
 }
 
 @media (max-width: 1023px) {
-  .industryLogo { max-width: 75%; }
+  .networkBridge { height: 520px; }
 }
 
 @media (max-width: 991px) {
@@ -477,9 +486,17 @@
   .gradientShape,
   .gradientShapeTwo { left: 17.5%; }
 
-  .industryLogo { max-width: 52%; }
+  .networkBridge {
+    width: min(100%, 760px);
+    height: 470px;
+  }
 
-  .bottomShape { bottom: 12px; }
+  .bottomShape { width: min(100%, 760px); }
+
+  .industryLogo {
+    top: 52px;
+    width: 190px;
+  }
 
   .gradientLines span:nth-child(1) { top: 20%; left: 5%; }
   .gradientLines span:nth-child(2) { top: 35%; left: 14%; }
@@ -490,9 +507,10 @@
 @media (max-width: 767px) {
   .container { padding-inline: 15px; }
 
-  .marqueeSection { padding: 96px 0 42px; }
+  .marqueeSection { padding: 96px 0 0; }
 
   .sectionTitle { margin-bottom: 30px; }
+
   .sectionTitle h2 {
     font-size: 32px;
     line-height: 1.18;
@@ -503,10 +521,7 @@
 
   .apiMarquee { height: 420px; }
 
-  .apiMarqueeInner {
-    width: 420px;
-  }
-
+  .apiMarqueeInner,
   .apiRow { width: 420px; }
 
   .gradientShape {
@@ -519,23 +534,26 @@
     right: 0;
   }
 
-  .industryLogo {
-    max-width: 90%;
+  .networkBridge {
+    width: calc(100% + 30px);
+    height: 360px;
+    margin: -6px -15px 0;
   }
 
   .bottomShape {
-    left: 0;
-    bottom: 18px;
-    width: 100%;
-    transform: translateX(20px);
+    top: 10px;
+    width: 680px;
   }
 
-  .bottomShape img { max-width: 90%; }
+  .industryLogo {
+    top: 54px;
+    width: 148px;
+  }
 
   .gradientLines span { display: none; }
 
   .capabilitiesSection {
-    padding: 60px 0 96px;
+    padding: 36px 0 96px;
   }
 
   .capabilitiesSection .sectionTitle { margin-bottom: 36px; }
@@ -567,12 +585,14 @@
   .gradientShape,
   .gradientShapeTwo { left: 32px; }
 
-  .bottomShape {
-    bottom: 2px;
-    transform: translateX(40px);
-  }
+  .networkBridge { height: 430px; }
 
-  .bottomShape img { max-width: 86%; }
+  .bottomShape { width: 760px; }
+
+  .industryLogo {
+    top: 58px;
+    width: 170px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
