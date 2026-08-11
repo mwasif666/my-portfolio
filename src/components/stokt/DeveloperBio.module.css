@@ -1,4 +1,5 @@
-.aboutAmbient {
+.aboutAmbient,
+:global(#about) {
   isolation: isolate;
   background:
     radial-gradient(circle at 84% 16%, rgba(25, 121, 174, .18), transparent 30%),
@@ -6,7 +7,8 @@
     linear-gradient(180deg, #03070b 0%, #04090e 58%, #03070b 100%) !important;
 }
 
-.aboutAmbient::before {
+.aboutAmbient::before,
+:global(#about)::before {
   content: "";
   position: absolute;
   z-index: 0;
@@ -19,7 +21,8 @@
   pointer-events: none;
 }
 
-.aboutAmbient::after {
+.aboutAmbient::after,
+:global(#about)::after {
   content: "";
   position: absolute;
   z-index: 0;
@@ -39,7 +42,8 @@
   pointer-events: none;
 }
 
-.aboutAmbient > * {
+.aboutAmbient > *,
+:global(#about) > * {
   position: relative;
   z-index: 1;
 }
@@ -197,7 +201,8 @@
 }
 
 @media (max-width: 720px) {
-  .aboutAmbient::after {
+  .aboutAmbient::after,
+  :global(#about)::after {
     left: 2%;
     right: 2%;
     bottom: -5rem;
