@@ -14,12 +14,14 @@ export default function useJourneyScrollMotion({ sectionRef, cardRefs }) {
     if (!section) return undefined;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const rotations = [-10.5, 0, 9.5];
-    const xOffsets = [-1.7, 0, 1.7];
-    const yOffsets = [4.1, 0, 4.1];
+    const rotations = [-9.5, 0, 8.5];
+    const xOffsets = [-1.45, 0, 1.45];
+    const yOffsets = [3.8, 0, 3.8];
+    const flipStarts = [0.60, 0.64, 0.68];
+    const flipEnds = [0.82, 0.86, 0.90];
     let frame = 0;
 
-    const applyMobileState = () => {
+    const applyStaticState = () => {
       section.style.setProperty("--journey-heading-opacity", "1");
       section.style.setProperty("--journey-heading-y", "0px");
       section.style.setProperty("--journey-wide-opacity", "0");
@@ -27,15 +29,14 @@ export default function useJourneyScrollMotion({ sectionRef, cardRefs }) {
       section.style.setProperty("--journey-panels-width", "100%");
       section.style.setProperty("--journey-panels-height", "auto");
       section.style.setProperty("--journey-gap", "14px");
-      section.style.setProperty("--journey-image-opacity", ".16");
-      section.style.setProperty("--journey-surface-opacity", "1");
-      section.style.setProperty("--journey-copy-opacity", "1");
-      section.style.setProperty("--journey-copy-y", "0px");
       section.style.setProperty("--journey-grid-y", "0px");
 
       cardRefs.current.forEach((node) => {
         if (!node) return;
         node.style.transform = "none";
+        node.style.setProperty("--card-flip", "180deg");
+        node.style.setProperty("--card-copy-opacity", "1");
+        node.style.setProperty("--card-copy-y", "0px");
       });
     };
 
@@ -43,7 +44,7 @@ export default function useJourneyScrollMotion({ sectionRef, cardRefs }) {
       frame = 0;
 
       if (window.innerWidth <= 820 || reducedMotion.matches) {
-        applyMobileState();
+        applyStaticState();
         return;
       }
 
@@ -54,34 +55,37 @@ export default function useJourneyScrollMotion({ sectionRef, cardRefs }) {
 
       const travel = Math.max(section.offsetHeight - viewport, 1);
       const progress = clamp(-rect.top / travel);
-      const heading = smoothstep(0.08, 0.28, progress);
-      const split = smoothstep(0.22, 0.58, progress);
-      const cardTurn = smoothstep(0.58, 0.92, progress);
-      const copy = smoothstep(0.66, 0.9, progress);
-      const imageFade = smoothstep(0.62, 0.9, progress);
-      const wideFade = smoothstep(0.2, 0.46, progress);
+
+      const heading = smoothstep(0.05, 0.20, progress);
+      const wideFade = smoothstep(0.16, 0.36, progress);
+      const panelsIn = smoothstep(0.20, 0.34, progress);
+      const split = smoothstep(0.24, 0.52, progress);
+      const cardTurn = smoothstep(0.43, 0.64, progress);
 
       section.style.setProperty("--journey-heading-opacity", String(heading));
-      section.style.setProperty("--journey-heading-y", `${lerp(32, 0, heading)}px`);
+      section.style.setProperty("--journey-heading-y", `${lerp(30, 0, heading)}px`);
       section.style.setProperty("--journey-wide-opacity", String(1 - wideFade));
       section.style.setProperty("--journey-wide-scale", String(lerp(1, 0.975, wideFade)));
-      section.style.setProperty("--journey-panels-opacity", String(smoothstep(0.24, 0.43, progress)));
+      section.style.setProperty("--journey-panels-opacity", String(panelsIn));
       section.style.setProperty("--journey-panels-width", `${lerp(82, 70, split)}vw`);
-      section.style.setProperty("--journey-panels-height", `${lerp(62, 68, split)}vh`);
-      section.style.setProperty("--journey-gap", `${lerp(0.15, 2.1, split)}vw`);
-      section.style.setProperty("--journey-image-opacity", String(1 - imageFade * 0.92));
-      section.style.setProperty("--journey-surface-opacity", String(cardTurn));
-      section.style.setProperty("--journey-copy-opacity", String(copy));
-      section.style.setProperty("--journey-copy-y", `${lerp(26, 0, copy)}px`);
+      section.style.setProperty("--journey-panels-height", `${lerp(61, 67, split)}vh`);
+      section.style.setProperty("--journey-gap", `${lerp(0.15, 2.05, split)}vw`);
       section.style.setProperty("--journey-grid-y", `${lerp(18, -14, progress)}px`);
 
       cardRefs.current.forEach((node, index) => {
         if (!node) return;
+
         const rotation = rotations[index] * cardTurn;
         const x = xOffsets[index] * cardTurn;
         const y = yOffsets[index] * cardTurn;
-        const scale = lerp(1, index === 1 ? 1.015 : 0.99, cardTurn);
+        const scale = lerp(1, index === 1 ? 1.012 : 0.992, cardTurn);
+        const flip = smoothstep(flipStarts[index], flipEnds[index], progress);
+        const copy = smoothstep(0.50, 0.88, flip);
+
         node.style.transform = `translate3d(${x}vw, ${y}vh, 0) rotate(${rotation}deg) scale(${scale})`;
+        node.style.setProperty("--card-flip", `${lerp(0, 180, flip)}deg`);
+        node.style.setProperty("--card-copy-opacity", String(copy));
+        node.style.setProperty("--card-copy-y", `${lerp(24, 0, copy)}px`);
       });
     };
 
