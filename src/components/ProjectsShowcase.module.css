@@ -142,6 +142,13 @@
 
 .toggle[aria-expanded="true"] .toggleIcon { transform: rotate(180deg); }
 
+.moreToggleRow {
+  display: flex;
+  justify-content: center;
+  padding: clamp(2rem, 3vw, 3rem) 0;
+  border-bottom: 1px solid rgba(151, 189, 207, .16);
+}
+
 .listWrap {
   display: grid;
   grid-template-rows: 0fr;
@@ -160,6 +167,10 @@
 
 .list {
   border-top: 1px solid rgba(151, 189, 207, .18);
+}
+
+.moreList {
+  border-top: 0;
 }
 
 .row {
@@ -312,6 +323,7 @@
   .services { padding-top: 0; }
   .visualLink { grid-column: auto; min-height: 14.5rem; }
   .name { font-size: 2.1rem; }
+  .moreToggleRow { padding: 1.75rem 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
