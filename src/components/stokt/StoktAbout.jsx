@@ -116,51 +116,53 @@ export default function StoktAbout({ onContact }) {
             </div>
           </article>
 
-          <article className={`${styles.bioCard} ${logoStyles.bioExpanded}`}>
-            <div className={styles.bioHeader}>The Developer</div>
-            <div className={styles.bioCopy}>
-              <p>
-                I build responsive web experiences from interface to backend,
-                combining clean visual systems with reliable application logic.
-              </p>
-              <p>
-                My work spans React interfaces, APIs, databases, WordPress and
-                commerce builds, with a focus on performance and maintainable code.
-              </p>
-              <p>
-                From small builds to complete products, I stay close to the full
-                lifecycle—from first layout and interaction through deployment,
-                QA and iteration.
-              </p>
-            </div>
-            <button type="button" className={styles.workButton} onClick={onContact}>
-              Work with Wasif <span aria-hidden="true">→</span>
-            </button>
-          </article>
+          <div className={logoStyles.developerTechPair}>
+            <article className={`${styles.bioCard} ${logoStyles.bioCompact}`}>
+              <div className={styles.bioHeader}>The Developer</div>
+              <div className={styles.bioCopy}>
+                <p>
+                  I build responsive web experiences from interface to backend,
+                  combining clean visual systems with reliable application logic.
+                </p>
+                <p>
+                  My work spans React interfaces, APIs, databases, WordPress and
+                  commerce builds, with a focus on performance and maintainable code.
+                </p>
+                <p>
+                  From small builds to complete products, I stay close to the full
+                  lifecycle—from first layout and interaction through deployment,
+                  QA and iteration.
+                </p>
+              </div>
+              <button type="button" className={styles.workButton} onClick={onContact}>
+                Work with Wasif <span aria-hidden="true">→</span>
+              </button>
+            </article>
 
-          <article className={`${styles.toolboxCard} ${themeStyles.blueToolbox} ${logoStyles.toolboxDockCard}`}>
-            <div className={`${styles.toolboxHeader} ${themeStyles.blueToolboxHeader} ${logoStyles.dockHeader}`}>
-              <span>Everyday&apos;s Toolbox</span>
-              <small>Built for every project.</small>
-            </div>
+            <article className={`${styles.toolboxCard} ${themeStyles.blueToolbox} ${logoStyles.toolboxDockCard} ${logoStyles.toolboxHalf}`}>
+              <div className={`${styles.toolboxHeader} ${themeStyles.blueToolboxHeader} ${logoStyles.dockHeader}`}>
+                <span>Everyday&apos;s Toolbox</span>
+                <small>Built for every project.</small>
+              </div>
 
-            <div className={logoStyles.dockStage}>
-              <div className={logoStyles.carousel} aria-label="Everyday tools">
-                <div className={logoStyles.track}>
-                  <div className={logoStyles.group}>
-                    {tools.map((tool) => (
-                      <ToolLogo key={`primary-${tool.label}`} tool={tool} />
-                    ))}
-                  </div>
-                  <div className={logoStyles.group} aria-hidden="true">
-                    {tools.map((tool) => (
-                      <ToolLogo key={`duplicate-${tool.label}`} tool={tool} duplicate />
-                    ))}
+              <div className={logoStyles.dockStage}>
+                <div className={logoStyles.carousel} aria-label="Everyday tools">
+                  <div className={logoStyles.track}>
+                    <div className={logoStyles.group}>
+                      {tools.map((tool) => (
+                        <ToolLogo key={`primary-${tool.label}`} tool={tool} />
+                      ))}
+                    </div>
+                    <div className={logoStyles.group} aria-hidden="true">
+                      {tools.map((tool) => (
+                        <ToolLogo key={`duplicate-${tool.label}`} tool={tool} duplicate />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </article>
+            </article>
+          </div>
         </div>
       </div>
     </section>
