@@ -117,56 +117,49 @@ export default function StoktAbout() {
             </div>
           </article>
 
-          <div className={logoStyles.developerTechPair}>
-            <article className={`${styles.bioCard} ${logoStyles.bioCompact} ${bioStyles.editorialBio}`}>
-              <div className={bioStyles.editorialLabel}>
-                <span aria-hidden="true" />
-                About Me
-              </div>
+          <article className={`${styles.bioCard} ${logoStyles.bioCompact} ${bioStyles.editorialBio}`}>
+            <div className={bioStyles.codeOrb} aria-hidden="true">&lt;/&gt;</div>
 
-              <div className={bioStyles.codeOrb} aria-hidden="true">&lt;/&gt;</div>
+            <p className={bioStyles.editorialStatement}>
+              Building <strong>digital products</strong> through thoughtful interfaces,
+              reliable systems, <strong>clean engineering</strong>, and performance-focused
+              experiences that <strong>work beautifully.</strong>
+            </p>
 
-              <p className={bioStyles.editorialStatement}>
-                Building <strong>digital products</strong> through thoughtful interfaces,
-                reliable systems, <strong>clean engineering</strong>, and performance-focused
-                experiences that <strong>work beautifully.</strong>
-              </p>
+            <div className={bioStyles.editorialAuthor}>
+              <span className={bioStyles.editorialAvatar}>
+                <img src={myImg} alt="" aria-hidden="true" />
+              </span>
+              <span className={bioStyles.editorialAuthorCopy}>
+                <strong>Muhammad Wasif</strong>
+                <small>Full-Stack Web Developer</small>
+              </span>
+            </div>
+          </article>
 
-              <div className={bioStyles.editorialAuthor}>
-                <span className={bioStyles.editorialAvatar}>
-                  <img src={myImg} alt="" aria-hidden="true" />
-                </span>
-                <span className={bioStyles.editorialAuthorCopy}>
-                  <strong>Muhammad Wasif</strong>
-                  <small>Full-Stack Web Developer</small>
-                </span>
-              </div>
-            </article>
+          <article className={`${styles.toolboxCard} ${themeStyles.blueToolbox} ${logoStyles.toolboxDockCard} ${logoStyles.toolboxFullRow}`}>
+            <div className={`${styles.toolboxHeader} ${themeStyles.blueToolboxHeader} ${logoStyles.dockHeader}`}>
+              <span>Everyday&apos;s Toolbox</span>
+              <small>Built for every project.</small>
+            </div>
 
-            <article className={`${styles.toolboxCard} ${themeStyles.blueToolbox} ${logoStyles.toolboxDockCard} ${logoStyles.toolboxHalf}`}>
-              <div className={`${styles.toolboxHeader} ${themeStyles.blueToolboxHeader} ${logoStyles.dockHeader}`}>
-                <span>Everyday&apos;s Toolbox</span>
-                <small>Built for every project.</small>
-              </div>
-
-              <div className={logoStyles.dockStage}>
-                <div className={logoStyles.carousel} aria-label="Everyday tools">
-                  <div className={logoStyles.track}>
-                    <div className={logoStyles.group}>
-                      {tools.map((tool) => (
-                        <ToolLogo key={`primary-${tool.label}`} tool={tool} />
-                      ))}
-                    </div>
-                    <div className={logoStyles.group} aria-hidden="true">
-                      {tools.map((tool) => (
-                        <ToolLogo key={`duplicate-${tool.label}`} tool={tool} duplicate />
-                      ))}
-                    </div>
+            <div className={logoStyles.dockStage}>
+              <div className={logoStyles.carousel} aria-label="Everyday tools">
+                <div className={logoStyles.track}>
+                  <div className={logoStyles.group}>
+                    {tools.map((tool) => (
+                      <ToolLogo key={`primary-${tool.label}`} tool={tool} />
+                    ))}
+                  </div>
+                  <div className={logoStyles.group} aria-hidden="true">
+                    {tools.map((tool) => (
+                      <ToolLogo key={`duplicate-${tool.label}`} tool={tool} duplicate />
+                    ))}
                   </div>
                 </div>
               </div>
-            </article>
-          </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
