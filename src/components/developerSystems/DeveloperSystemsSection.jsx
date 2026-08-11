@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import styles from "./DeveloperSystemsSection.module.css";
+import glowStyles from "./DeveloperSystemsGlow.module.css";
 import gradient1 from "../../assets/developer-systems/gradient.png";
 import gradient2 from "../../assets/developer-systems/gradient02.png";
 import industryLogo from "../../assets/developer-systems/indus-logo.png";
@@ -145,7 +146,7 @@ export default function DeveloperSystemsSection() {
       </section>
 
       <section
-        className={styles.capabilitiesSection}
+        className={`${styles.capabilitiesSection} ${glowStyles.blueGlow}`}
         aria-labelledby="developer-capabilities-title"
       >
         <div className={styles.container}>
