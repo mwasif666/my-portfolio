@@ -77,10 +77,13 @@
 
 .title {
   position: absolute;
-  z-index: 2;
+  z-index: 4;
   top: 56%;
   left: 50%;
+  display: block;
   margin: 0;
+  padding: .05em .14em .18em;
+  overflow: visible;
   transform: translate3d(-50%, calc(-50% + var(--why-title-y)), 0) scale(var(--why-title-scale));
   transform-origin: center;
   color: transparent;
@@ -91,8 +94,8 @@
   font-family: "Argesta Display", Georgia, "Times New Roman", serif;
   font-size: clamp(10.5rem, 21vw, 27rem);
   font-weight: 400;
-  line-height: .73;
-  letter-spacing: -.075em;
+  line-height: .86;
+  letter-spacing: -.065em;
   text-shadow: 0 0 2.4rem rgba(52, 154, 201, .09);
   white-space: nowrap;
   will-change: transform;
@@ -220,13 +223,16 @@
 
   .title {
     position: relative;
+    z-index: 4;
     top: auto;
     left: auto;
     display: block;
     margin: 1.25rem auto 3.25rem;
+    padding: .04em .1em .16em;
     transform: none !important;
     font-size: clamp(7.5rem, 31vw, 12rem);
-    line-height: .82;
+    line-height: .9;
+    letter-spacing: -.055em;
     text-align: center;
   }
 
