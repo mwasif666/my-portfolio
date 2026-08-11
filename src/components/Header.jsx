@@ -14,6 +14,7 @@ export const NAV = [
 
 export default function Header({ ready, onMenu, onContact }) {
   const [shown, setShown] = useState(false);
+  const [activeTarget, setActiveTarget] = useState("home");
   const compact = useHeaderMorph(72);
   const { scrollToId } = useScroll();
 
@@ -22,6 +23,45 @@ export default function Header({ ready, onMenu, onContact }) {
     const timer = window.setTimeout(() => setShown(true), 120);
     return () => window.clearTimeout(timer);
   }, [ready]);
+
+  useEffect(() => {
+    let frame = 0;
+
+    const updateActiveSection = () => {
+      frame = 0;
+      const anchor = window.innerHeight * 0.3;
+      let current = NAV[0].target;
+
+      for (const item of NAV) {
+        const section = document.getElementById(item.target);
+        if (!section) continue;
+
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= anchor) current = item.target;
+        if (rect.top <= anchor && rect.bottom > anchor) {
+          current = item.target;
+          break;
+        }
+      }
+
+      setActiveTarget((previous) => (previous === current ? previous : current));
+    };
+
+    const schedule = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, []);
 
   return (
     <header
@@ -41,19 +81,24 @@ export default function Header({ ready, onMenu, onContact }) {
 
         <nav className={styles.nav} aria-label="Primary navigation">
           <ul className={styles.list}>
-            {NAV.map((item) => (
-              <li key={item.target} className={styles.item}>
-                <button
-                  type="button"
-                  onClick={() => scrollToId(item.target)}
-                  className={styles.link}
-                  aria-label={`Go to ${item.label}`}
-                >
-                  <span className={styles.dot} aria-hidden="true" />
-                  <span className={styles.label}>{item.label}</span>
-                </button>
-              </li>
-            ))}
+            {NAV.map((item) => {
+              const active = activeTarget === item.target;
+
+              return (
+                <li key={item.target} className={styles.item}>
+                  <button
+                    type="button"
+                    onClick={() => scrollToId(item.target)}
+                    className={clsx(styles.link, active && styles.activeLink)}
+                    aria-label={`Go to ${item.label}`}
+                    aria-current={active ? "page" : undefined}
+                  >
+                    <span className={styles.dot} aria-hidden="true" />
+                    <span className={styles.label}>{item.label}</span>
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
