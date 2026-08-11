@@ -1,8 +1,6 @@
 @font-face {
   font-family: "AivoraSporting";
-  src:
-    url("https://html.xpressbuddy.com/aivora/assets/fonts/SportingGrotesque-Regular.woff2") format("woff2"),
-    url("https://html.xpressbuddy.com/aivora/assets/fonts/SportingGrotesque-Regular.woff") format("woff");
+  src: url("../../assets/developer-systems/SportingGrotesque-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -25,14 +23,14 @@
   position: relative;
   width: min(100%, 1320px);
   margin: 0 auto;
-  padding-inline: 24px;
+  padding-inline: 15px;
 }
 
 .marqueeSection {
   position: relative;
   z-index: 1;
-  padding: 145px 0 0;
-  overflow: hidden;
+  padding: 145px 0 50px;
+  overflow: visible;
   background: #00020f;
 }
 
@@ -54,17 +52,35 @@
   text-align: center;
 }
 
+.marqueeSection .sectionTitle {
+  margin-bottom: 40px;
+  padding-bottom: 5px;
+}
+
 .sectionTitle h2 {
   display: block;
-  max-width: 1240px;
+  max-width: 1290px;
   margin: 0 auto;
   color: var(--heading);
   font-family: "AivoraSporting", "Onest", sans-serif;
   font-size: 62px;
   font-weight: 400;
-  line-height: 1.15;
+  line-height: 1.5;
   letter-spacing: -.08em;
   text-wrap: balance;
+}
+
+.marqueeSection .sectionTitle h2 {
+  display: flex;
+  font-size: 62px;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.marqueeSection .sectionTitle h2 span {
+  display: inline-block;
+  flex: 0 0 auto;
+  transform: scaleX(.76);
 }
 
 .subTitle {
@@ -99,7 +115,7 @@
 .industryWrapper {
   position: relative;
   z-index: 3;
-  width: min(100%, 660px);
+  width: min(100%, 633px);
   margin: 0 auto;
 }
 
@@ -110,43 +126,17 @@
   margin-bottom: 0;
 }
 
-.apiMarquee::before,
-.apiMarquee::after {
-  content: "";
-  position: absolute;
-  z-index: 4;
-  left: 0;
-  width: 100%;
-  height: 110px;
-  pointer-events: none;
-}
-
-.apiMarquee::before {
-  top: 0;
-  background: linear-gradient(180deg, #00020f 0%, rgba(0, 2, 15, .86) 42%, transparent 100%);
-}
-
-.apiMarquee::after {
-  bottom: 0;
-  background: linear-gradient(0deg, #00020f 0%, rgba(0, 2, 15, .84) 38%, transparent 100%);
-}
-
 .apiMarqueeInner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
   display: flex;
-  width: 590px;
   flex-direction: column;
   gap: 15px;
-  transform: translate(-50%, -50%) rotate(-90deg);
-  transform-origin: center;
+  transform: rotate(-90deg);
 }
 
 .apiRow {
   position: relative;
-  width: 590px;
-  height: 38px;
+  width: 100%;
+  height: 34px;
   overflow: hidden;
   flex: 0 0 auto;
 }
@@ -155,10 +145,17 @@
   display: flex;
   width: max-content;
   align-items: center;
-  gap: 10px;
   will-change: transform;
   animation: apiTicker var(--row-speed) linear infinite;
   animation-play-state: paused;
+}
+
+.apiGroup {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 10px;
+  padding-right: 10px;
 }
 
 .section[data-active="true"] .apiTrack {
@@ -248,43 +245,37 @@
   height: auto;
 }
 
-.networkBridge {
+.logoStage {
   position: relative;
   z-index: 2;
-  width: min(100%, 1040px);
-  height: clamp(500px, 47vw, 630px);
-  margin: -16px auto 0;
-  overflow: hidden;
-  isolation: isolate;
+  display: flex;
+  width: 100%;
+  height: 517px;
+  align-items: flex-start;
+  justify-content: center;
 }
 
-.bottomShape {
-  position: absolute;
-  z-index: 0;
-  left: 50%;
-  top: 0;
+.logoStage img {
   display: block;
-  width: min(96%, 980px);
+  width: min(100%, 613px);
+  max-width: none;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+.networkShape {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: -13px;
+  display: block;
+  width: 649px;
   max-width: none;
   height: auto;
   transform: translateX(-50%);
   pointer-events: none;
   user-select: none;
-}
-
-.industryLogo {
-  position: absolute;
-  z-index: 2;
-  top: clamp(56px, 5.5vw, 78px);
-  left: 50%;
-  display: block;
-  width: clamp(178px, 15vw, 246px);
-  max-width: none;
-  height: auto;
-  transform: translateX(-50%);
-  pointer-events: none;
-  user-select: none;
-  filter: drop-shadow(0 0 34px rgba(0, 124, 255, .16));
 }
 
 .gradientLines span {
@@ -310,7 +301,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  padding: 46px 0 165px;
+  padding: 0 0 165px;
   overflow: hidden;
   background-position: center center;
   background-size: cover;
@@ -345,11 +336,17 @@
   display: flex;
   width: max-content;
   align-items: stretch;
-  gap: 20px;
-  padding-left: 20px;
   will-change: transform;
   animation: capabilityTicker 32s linear infinite;
   animation-play-state: paused;
+}
+
+.capabilityGroup {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: stretch;
+  gap: 20px;
+  padding-right: 20px;
 }
 
 .section[data-active="true"] .capabilityTrack {
@@ -400,7 +397,7 @@
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-image: url("https://html.xpressbuddy.com/aivora/assets/img/service/noise.png");
+  background-image: url("../../assets/developer-systems/noise.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -466,37 +463,24 @@
 @media (max-width: 1199px) {
   .sectionTitle h2 { font-size: 52px; }
 
-  .networkBridge {
-    width: min(100%, 900px);
-    height: 560px;
+  .marqueeSection .sectionTitle h2 {
+    display: block;
+    font-size: 52px;
+    white-space: normal;
   }
 
-  .bottomShape { width: min(96%, 860px); }
-}
-
-@media (max-width: 1023px) {
-  .networkBridge { height: 520px; }
+  .marqueeSection .sectionTitle h2 span { transform: none; }
 }
 
 @media (max-width: 991px) {
   .sectionTitle h2 { font-size: 48px; }
 
-  .industryWrapper { width: min(100%, 620px); }
+  .marqueeSection .sectionTitle h2 { font-size: 48px; }
+
+  .industryWrapper { width: min(100%, 633px); }
 
   .gradientShape,
   .gradientShapeTwo { left: 17.5%; }
-
-  .networkBridge {
-    width: min(100%, 760px);
-    height: 470px;
-  }
-
-  .bottomShape { width: min(100%, 760px); }
-
-  .industryLogo {
-    top: 52px;
-    width: 190px;
-  }
 
   .gradientLines span:nth-child(1) { top: 20%; left: 5%; }
   .gradientLines span:nth-child(2) { top: 35%; left: 14%; }
@@ -505,24 +489,25 @@
 }
 
 @media (max-width: 767px) {
-  .container { padding-inline: 15px; }
+  .container { padding-inline: 12px; }
 
-  .marqueeSection { padding: 96px 0 0; }
+  .marqueeSection { padding: 96px 0 50px; }
 
   .sectionTitle { margin-bottom: 30px; }
 
+  .marqueeSection .sectionTitle { margin-bottom: 40px; }
+
   .sectionTitle h2 {
     font-size: 32px;
-    line-height: 1.18;
+    line-height: 1.5;
     letter-spacing: -.065em;
   }
+
+  .marqueeSection .sectionTitle h2 { font-size: 32px; }
 
   .subTitle { font-size: 13px; }
 
   .apiMarquee { height: 420px; }
-
-  .apiMarqueeInner,
-  .apiRow { width: 420px; }
 
   .gradientShape {
     left: 15px;
@@ -534,26 +519,24 @@
     right: 0;
   }
 
-  .networkBridge {
-    width: calc(100% + 30px);
-    height: 360px;
-    margin: -6px -15px 0;
+  .logoStage {
+    width: 90%;
+    height: auto;
+    aspect-ratio: 613 / 517;
+    margin: 0 auto;
   }
 
-  .bottomShape {
-    top: 10px;
-    width: 680px;
-  }
-
-  .industryLogo {
-    top: 54px;
-    width: 148px;
+  .networkShape {
+    left: 20px;
+    bottom: 18px;
+    width: 90%;
+    transform: none;
   }
 
   .gradientLines span { display: none; }
 
   .capabilitiesSection {
-    padding: 36px 0 96px;
+    padding: 0 0 96px;
   }
 
   .capabilitiesSection .sectionTitle { margin-bottom: 36px; }
@@ -579,20 +562,10 @@
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .apiMarquee { height: 590px; }
 
-  .apiMarqueeInner,
-  .apiRow { width: 590px; }
-
   .gradientShape,
   .gradientShapeTwo { left: 32px; }
 
-  .networkBridge { height: 430px; }
-
-  .bottomShape { width: 760px; }
-
-  .industryLogo {
-    top: 58px;
-    width: 170px;
-  }
+  .logoStage { width: 90%; }
 }
 
 @media (prefers-reduced-motion: reduce) {

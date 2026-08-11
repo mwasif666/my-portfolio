@@ -1,18 +1,17 @@
 import { useEffect, useRef } from "react";
 import styles from "./DeveloperSystemsSection.module.css";
-
-const AIVORA_ASSETS = {
-  gradient1: "https://html.xpressbuddy.com/aivora/assets/img/industries/gradient.png",
-  gradient2: "https://html.xpressbuddy.com/aivora/assets/img/industries/gradient02.png",
-  indusLogo: "https://html.xpressbuddy.com/aivora/assets/img/industries/indus-logo.png",
-  shape: "https://html.xpressbuddy.com/aivora/assets/img/shape/indus-shape.png",
-  cardsBg: "https://html.xpressbuddy.com/aivora/assets/img/bg/industries-bg02.png",
-  serviceIcons: Array.from(
-    { length: 7 },
-    (_, index) =>
-      `https://html.xpressbuddy.com/aivora/assets/img/icon/service-icon0${index + 1}.svg`,
-  ),
-};
+import gradient1 from "../../assets/developer-systems/gradient.png";
+import gradient2 from "../../assets/developer-systems/gradient02.png";
+import industryLogo from "../../assets/developer-systems/indus-logo.png";
+import networkShape from "../../assets/developer-systems/indus-shape.png";
+import cardsBackground from "../../assets/developer-systems/industries-bg02.png";
+import serviceIcon01 from "../../assets/developer-systems/service-icon01.svg";
+import serviceIcon02 from "../../assets/developer-systems/service-icon02.svg";
+import serviceIcon03 from "../../assets/developer-systems/service-icon03.svg";
+import serviceIcon04 from "../../assets/developer-systems/service-icon04.svg";
+import serviceIcon05 from "../../assets/developer-systems/service-icon05.svg";
+import serviceIcon06 from "../../assets/developer-systems/service-icon06.svg";
+import serviceIcon07 from "../../assets/developer-systems/service-icon07.svg";
 
 const marqueeData = [
   { tag: "POST", number: "201", text: "/api/contact/submit" },
@@ -25,13 +24,13 @@ const marqueeData = [
 const ROW_SPEEDS = [10, 15, 10, 15, 10, 15];
 
 const capabilities = [
-  { icon: AIVORA_ASSETS.serviceIcons[0], title: "React Interfaces" },
-  { icon: AIVORA_ASSETS.serviceIcons[1], title: "Backend APIs" },
-  { icon: AIVORA_ASSETS.serviceIcons[2], title: "WordPress" },
-  { icon: AIVORA_ASSETS.serviceIcons[3], title: "WooCommerce" },
-  { icon: AIVORA_ASSETS.serviceIcons[4], title: "Integrations" },
-  { icon: AIVORA_ASSETS.serviceIcons[5], title: "Performance" },
-  { icon: AIVORA_ASSETS.serviceIcons[6], title: "Launch Support" },
+  { icon: serviceIcon01, title: "React Interfaces" },
+  { icon: serviceIcon02, title: "Backend APIs" },
+  { icon: serviceIcon03, title: "WordPress" },
+  { icon: serviceIcon04, title: "WooCommerce" },
+  { icon: serviceIcon05, title: "Integrations" },
+  { icon: serviceIcon06, title: "Performance" },
+  { icon: serviceIcon07, title: "Launch Support" },
 ];
 
 function ApiItem({ item, repeatIndex }) {
@@ -49,17 +48,19 @@ function ApiItem({ item, repeatIndex }) {
 }
 
 function ApiMarqueeRow({ speed, index }) {
-  const repeatedItems = [...marqueeData, ...marqueeData, ...marqueeData];
-
   return (
     <div className={styles.apiRow} style={{ "--row-speed": `${speed}s`, "--row-index": index }}>
       <div className={styles.apiTrack}>
-        {repeatedItems.map((item, itemIndex) => (
-          <ApiItem
-            key={`${item.tag}-${item.text}-${itemIndex}`}
-            item={item}
-            repeatIndex={Math.floor(itemIndex / marqueeData.length)}
-          />
+        {[0, 1, 2].map((repeatIndex) => (
+          <div className={styles.apiGroup} key={repeatIndex}>
+            {marqueeData.map((item) => (
+              <ApiItem
+                key={`${item.tag}-${item.text}`}
+                item={item}
+                repeatIndex={repeatIndex}
+              />
+            ))}
+          </div>
         ))}
       </div>
     </div>
@@ -101,7 +102,9 @@ export default function DeveloperSystemsSection() {
         <div className={styles.container}>
           <header className={styles.sectionTitle}>
             <span className={styles.subTitle}>Production-ready development</span>
-            <h2 id="developer-realtime-title">Real-time systems for smarter web products</h2>
+            <h2 id="developer-realtime-title">
+              <span>Real-time systems for smarter web products</span>
+            </h2>
           </header>
 
           <div className={styles.industryWrapper}>
@@ -113,31 +116,20 @@ export default function DeveloperSystemsSection() {
               </div>
 
               <div className={styles.gradientShape} aria-hidden="true">
-                <img src={AIVORA_ASSETS.gradient1} alt="" />
+                <img src={gradient1} alt="" />
               </div>
               <div className={styles.gradientShapeTwo} aria-hidden="true">
-                <img src={AIVORA_ASSETS.gradient2} alt="" />
+                <img src={gradient2} alt="" />
               </div>
             </div>
-          </div>
 
-          <div className={styles.networkBridge} aria-hidden="true">
-            <img
-              className={styles.bottomShape}
-              src={AIVORA_ASSETS.shape}
-              alt=""
-              loading="lazy"
-              decoding="async"
-            />
-            <img
-              className={styles.industryLogo}
-              src={AIVORA_ASSETS.indusLogo}
-              alt=""
-              loading="lazy"
-              decoding="async"
-            />
+            <div className={styles.logoStage} aria-hidden="true">
+              <img src={industryLogo} alt="" />
+            </div>
           </div>
         </div>
+
+        <img className={styles.networkShape} src={networkShape} alt="" aria-hidden="true" />
 
         <div className={styles.gradientLines} aria-hidden="true">
           <span />
@@ -150,23 +142,25 @@ export default function DeveloperSystemsSection() {
       <section
         className={styles.capabilitiesSection}
         aria-labelledby="developer-capabilities-title"
-        style={{ backgroundImage: `url(${AIVORA_ASSETS.cardsBg})` }}
+        style={{ backgroundImage: `url(${cardsBackground})` }}
       >
         <div className={styles.container}>
           <header className={styles.sectionTitle}>
             <span className={styles.subTitle}>Developer capabilities</span>
-            <h2 id="developer-capabilities-title">What I build for the web</h2>
+            <h2 id="developer-capabilities-title">
+              <span>What I build for the web</span>
+            </h2>
           </header>
         </div>
 
         <div className={styles.capabilityMarquee}>
           <div className={styles.capabilityTrack}>
-            {[...capabilities, ...capabilities].map((item, index) => (
-              <CapabilityCard
-                key={`${item.title}-${index}`}
-                item={item}
-                duplicate={index >= capabilities.length}
-              />
+            {[false, true].map((duplicate) => (
+              <div className={styles.capabilityGroup} key={duplicate ? "copy" : "original"}>
+                {capabilities.map((item) => (
+                  <CapabilityCard key={item.title} item={item} duplicate={duplicate} />
+                ))}
+              </div>
             ))}
           </div>
         </div>
