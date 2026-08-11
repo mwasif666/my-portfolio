@@ -3,6 +3,7 @@ import AboutGlobe from "./AboutGlobe";
 import styles from "./About.module.css";
 import themeStyles from "./AboutBlueTheme.module.css";
 import logoStyles from "./ToolLogos.module.css";
+import bioStyles from "./DeveloperBio.module.css";
 
 const stats = [
   { value: "4+", label: "Years building" },
@@ -117,25 +118,25 @@ export default function StoktAbout() {
           </article>
 
           <div className={logoStyles.developerTechPair}>
-            <article className={`${styles.bioCard} ${logoStyles.bioCompact} ${logoStyles.editorialBio}`}>
-              <div className={logoStyles.editorialLabel}>
+            <article className={`${styles.bioCard} ${logoStyles.bioCompact} ${bioStyles.editorialBio}`}>
+              <div className={bioStyles.editorialLabel}>
                 <span aria-hidden="true" />
                 About Me
               </div>
 
-              <div className={logoStyles.codeOrb} aria-hidden="true">&lt;/&gt;</div>
+              <div className={bioStyles.codeOrb} aria-hidden="true">&lt;/&gt;</div>
 
-              <p className={logoStyles.editorialStatement}>
+              <p className={bioStyles.editorialStatement}>
                 Building <strong>digital products</strong> through thoughtful interfaces,
                 reliable systems, <strong>clean engineering</strong>, and performance-focused
                 experiences that <strong>work beautifully.</strong>
               </p>
 
-              <div className={logoStyles.editorialAuthor}>
-                <span className={logoStyles.editorialAvatar}>
+              <div className={bioStyles.editorialAuthor}>
+                <span className={bioStyles.editorialAvatar}>
                   <img src={myImg} alt="" aria-hidden="true" />
                 </span>
-                <span className={logoStyles.editorialAuthorCopy}>
+                <span className={bioStyles.editorialAuthorCopy}>
                   <strong>Muhammad Wasif</strong>
                   <small>Full-Stack Web Developer</small>
                 </span>
