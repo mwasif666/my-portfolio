@@ -72,7 +72,7 @@ function CapabilityCard({ item, duplicate = false }) {
       <div className={styles.capabilityIcon}>
         <img src={item.icon} alt="" loading="lazy" decoding="async" />
       </div>
-      <h3>{item.title}</h3>
+      <h3 style={{ fontFamily: "inherit" }}>{item.title}</h3>
     </article>
   );
 }
@@ -96,12 +96,18 @@ export default function DeveloperSystemsSection() {
   }, []);
 
   return (
-    <div ref={sectionRef} className={styles.section} id="developer-systems" data-active="false">
+    <div
+      ref={sectionRef}
+      className={styles.section}
+      id="developer-systems"
+      data-active="false"
+      style={{ fontFamily: "inherit" }}
+    >
       <section className={styles.marqueeSection} aria-labelledby="developer-realtime-title">
         <div className={styles.container}>
           <header className={styles.sectionTitle}>
             <span className={styles.subTitle}>Production-ready development</span>
-            <h2 id="developer-realtime-title">
+            <h2 id="developer-realtime-title" style={{ fontFamily: "inherit" }}>
               <span>Real-time systems for smarter web products</span>
             </h2>
           </header>
@@ -145,7 +151,7 @@ export default function DeveloperSystemsSection() {
         <div className={styles.container}>
           <header className={styles.sectionTitle}>
             <span className={styles.subTitle}>Developer capabilities</span>
-            <h2 id="developer-capabilities-title">
+            <h2 id="developer-capabilities-title" style={{ fontFamily: "inherit" }}>
               <span>What I build for the web</span>
             </h2>
           </header>
