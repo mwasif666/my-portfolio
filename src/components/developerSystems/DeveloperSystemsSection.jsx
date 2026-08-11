@@ -7,7 +7,6 @@ const AIVORA_ASSETS = {
   indusLogo: "https://html.xpressbuddy.com/aivora/assets/img/industries/indus-logo.png",
   shape: "https://html.xpressbuddy.com/aivora/assets/img/shape/indus-shape.png",
   cardsBg: "https://html.xpressbuddy.com/aivora/assets/img/bg/industries-bg02.png",
-  noise: "https://html.xpressbuddy.com/aivora/assets/img/service/noise.png",
   serviceIcons: Array.from(
     { length: 7 },
     (_, index) =>
@@ -120,14 +119,23 @@ export default function DeveloperSystemsSection() {
                 <img src={AIVORA_ASSETS.gradient2} alt="" />
               </div>
             </div>
-
-            <div className={styles.industryLogo} aria-hidden="true">
-              <img src={AIVORA_ASSETS.indusLogo} alt="" loading="lazy" decoding="async" />
-            </div>
           </div>
 
-          <div className={styles.bottomShape} aria-hidden="true">
-            <img src={AIVORA_ASSETS.shape} alt="" loading="lazy" decoding="async" />
+          <div className={styles.networkBridge} aria-hidden="true">
+            <img
+              className={styles.bottomShape}
+              src={AIVORA_ASSETS.shape}
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              className={styles.industryLogo}
+              src={AIVORA_ASSETS.indusLogo}
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
 
