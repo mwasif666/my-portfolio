@@ -77,8 +77,8 @@ const brandVisualRows = [
   ],
 ];
 
-// Keep the same source order as Outcrowd: the first three cards form the
-// left column and the last three form the right column.
+// Same source order as Outcrowd: first three cards are the left column,
+// last three cards are the right column.
 const services = [
   {
     key: "strategy",
@@ -253,24 +253,27 @@ function BrandVisualArt() {
     <div className={styles.brandVisualArt} aria-hidden="true">
       {brandVisualRows.map((row, rowIndex) => (
         <div className={styles.brandVisualRow} key={`brand-row-${rowIndex}`}>
-          {row.map((item, itemIndex) => (
-            <span
-              className={styles.brandVisualItem}
-              style={{ "--item-index": rowIndex * 4 + itemIndex }}
-              key={`${rowIndex}-${itemIndex}`}
-            >
-              <img src={item.base} alt="" loading="lazy" decoding="async" />
-              {item.overlay ? (
-                <img
-                  className={styles.brandVisualOverlay}
-                  src={item.overlay}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                />
-              ) : null}
-            </span>
-          ))}
+          {row.map((item, itemIndex) => {
+            const sequenceIndex = rowIndex * 4 + itemIndex;
+            return (
+              <span
+                className={styles.brandVisualItem}
+                style={{ "--overlay-delay": `${sequenceIndex * -0.44}s` }}
+                key={`${rowIndex}-${itemIndex}`}
+              >
+                <img src={item.base} alt="" loading="lazy" decoding="async" />
+                {item.overlay ? (
+                  <img
+                    className={styles.brandVisualOverlay}
+                    src={item.overlay}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : null}
+              </span>
+            );
+          })}
         </div>
       ))}
     </div>
