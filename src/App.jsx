@@ -10,6 +10,7 @@ import JourneySection from "./components/journey/JourneySection";
 import DeveloperSystemsSection from "./components/developerSystems/DeveloperSystemsSection";
 import NavMenu from "./components/NavMenu";
 import RequestModal from "./components/RequestModal";
+import "./services-screenshot-target.css";
 
 export default function App() {
   const [ready, setReady] = useState(false);
