@@ -154,9 +154,23 @@
   opacity: 0;
   transform: translate3d(-50%, -50%, 0) translate3d(0, 17vh, 0) scale(.91);
   transform-origin: center;
+  cursor: grab;
   pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: box-shadow 200ms ease, border-color 200ms ease;
   will-change: transform, opacity;
   backface-visibility: hidden;
+}
+
+.card[data-dragging] {
+  cursor: grabbing;
+  border-color: rgba(129, 210, 242, .44);
+  box-shadow:
+    0 2.4rem 6rem rgba(0,0,0,.58),
+    0 .6rem 2.6rem rgba(0, 96, 138, .24),
+    inset 0 1px 0 rgba(197,237,253,.07);
 }
 
 .card::after {
@@ -258,6 +272,10 @@
     min-width: 0;
     transform: none !important;
     opacity: 1 !important;
+    cursor: auto;
+    touch-action: auto;
+    user-select: auto;
+    -webkit-user-select: auto;
   }
 
   .card:nth-child(2),

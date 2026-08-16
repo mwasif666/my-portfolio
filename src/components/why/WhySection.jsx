@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import WhyCard from "./WhyCard";
+import useWhyCardDrag from "./useWhyCardDrag";
 import useWhyScrollMotion from "./useWhyScrollMotion";
 import styles from "./WhySection.module.css";
 
@@ -58,6 +59,7 @@ export default function WhySection() {
   const cardRefs = useRef([]);
 
   useWhyScrollMotion({ sectionRef, cardRefs, layout: cards });
+  useWhyCardDrag({ cardRefs });
 
   return (
     <section ref={sectionRef} className={styles.section} id="why" aria-labelledby="why-title">

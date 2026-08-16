@@ -14,21 +14,23 @@ export default function useJourneyScrollMotion({ sectionRef, cardRefs }) {
     if (!section) return undefined;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const rotations = [-9.5, 0, 8.5];
-    const xOffsets = [-1.45, 0, 1.45];
-    const yOffsets = [3.8, 0, 3.8];
-    const flipStarts = [0.60, 0.64, 0.68];
-    const flipEnds = [0.82, 0.86, 0.90];
+    // Slices drift apart once the photo has been cut, they never cross-fade.
+    const rotations = [-3.4, 0, 3.4];
+    const xOffsets = [-0.5, 0, 0.5];
+    const yOffsets = [1.6, -1, 1.6];
+    const flipStarts = [0.58, 0.63, 0.68];
+    const flipEnds = [0.78, 0.83, 0.88];
     let frame = 0;
 
     const applyStaticState = () => {
       section.style.setProperty("--journey-heading-opacity", "1");
       section.style.setProperty("--journey-heading-y", "0px");
-      section.style.setProperty("--journey-wide-opacity", "0");
-      section.style.setProperty("--journey-panels-opacity", "1");
-      section.style.setProperty("--journey-panels-width", "100%");
-      section.style.setProperty("--journey-panels-height", "auto");
-      section.style.setProperty("--journey-gap", "14px");
+      section.style.setProperty("--journey-visual-scale", "1");
+      section.style.setProperty("--journey-gap", "1.55vw");
+      section.style.setProperty("--journey-seam", "20px");
+      section.style.setProperty("--journey-edge", "0.26");
+      section.style.setProperty("--journey-shadow", "0.42");
+      section.style.setProperty("--journey-split", "1");
       section.style.setProperty("--journey-grid-y", "0px");
 
       cardRefs.current.forEach((node) => {
@@ -56,31 +58,33 @@ export default function useJourneyScrollMotion({ sectionRef, cardRefs }) {
       const travel = Math.max(section.offsetHeight - viewport, 1);
       const progress = clamp(-rect.top / travel);
 
-      const heading = smoothstep(0.05, 0.20, progress);
-      const wideFade = smoothstep(0.16, 0.36, progress);
-      const panelsIn = smoothstep(0.20, 0.34, progress);
-      const split = smoothstep(0.24, 0.52, progress);
-      const cardTurn = smoothstep(0.43, 0.64, progress);
+      const heading = smoothstep(0.04, 0.18, progress);
+      const settle = smoothstep(0, 0.16, progress);
+      const split = smoothstep(0.26, 0.52, progress);
+      const drift = smoothstep(0.34, 0.62, progress);
 
       section.style.setProperty("--journey-heading-opacity", String(heading));
-      section.style.setProperty("--journey-heading-y", `${lerp(30, 0, heading)}px`);
-      section.style.setProperty("--journey-wide-opacity", String(1 - wideFade));
-      section.style.setProperty("--journey-wide-scale", String(lerp(1, 0.975, wideFade)));
-      section.style.setProperty("--journey-panels-opacity", String(panelsIn));
-      section.style.setProperty("--journey-panels-width", `${lerp(82, 70, split)}vw`);
-      section.style.setProperty("--journey-panels-height", `${lerp(61, 67, split)}vh`);
-      section.style.setProperty("--journey-gap", `${lerp(0.15, 2.05, split)}vw`);
+      section.style.setProperty("--journey-heading-y", `${lerp(26, 0, heading)}px`);
+      section.style.setProperty(
+        "--journey-visual-scale",
+        String(lerp(1.02, 1, settle) * lerp(1, 0.985, split)),
+      );
+      section.style.setProperty("--journey-gap", `${lerp(0, 1.55, split)}vw`);
+      section.style.setProperty("--journey-seam", `${lerp(0, 20, split)}px`);
+      section.style.setProperty("--journey-edge", String(lerp(0, 0.26, split)));
+      section.style.setProperty("--journey-shadow", String(lerp(0, 0.42, split)));
+      section.style.setProperty("--journey-split", String(split));
       section.style.setProperty("--journey-grid-y", `${lerp(18, -14, progress)}px`);
 
       cardRefs.current.forEach((node, index) => {
         if (!node) return;
 
-        const rotation = rotations[index] * cardTurn;
-        const x = xOffsets[index] * cardTurn;
-        const y = yOffsets[index] * cardTurn;
-        const scale = lerp(1, index === 1 ? 1.012 : 0.992, cardTurn);
+        const rotation = rotations[index] * drift;
+        const x = xOffsets[index] * drift;
+        const y = yOffsets[index] * drift;
+        const scale = lerp(1, index === 1 ? 1.015 : 0.99, drift);
         const flip = smoothstep(flipStarts[index], flipEnds[index], progress);
-        const copy = smoothstep(0.50, 0.88, flip);
+        const copy = smoothstep(0.5, 0.88, flip);
 
         node.style.transform = `translate3d(${x}vw, ${y}vh, 0) rotate(${rotation}deg) scale(${scale})`;
         node.style.setProperty("--card-flip", `${lerp(0, 180, flip)}deg`);

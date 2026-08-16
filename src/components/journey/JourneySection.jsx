@@ -67,39 +67,39 @@ export default function JourneySection() {
           Where are you <em>in your build?</em>
         </h2>
 
-        <div className={styles.wideVisual} aria-hidden="true">
-          <div className={styles.mountainFull} />
-        </div>
-
-        <div className={styles.panels}>
-          {options.map((option, index) => (
-            <article
-              key={option.title}
-              ref={(node) => {
-                cardRefs.current[index] = node;
-              }}
-              className={styles.card}
-            >
-              <div className={styles.cardInner}>
-                <div className={`${styles.cardFace} ${styles.cardFront}`} aria-hidden="true">
-                  <div className={styles.panelImage} />
-                </div>
-
-                <div className={`${styles.cardFace} ${styles.cardBack}`}>
-                  <div className={styles.surface} aria-hidden="true" />
-
-                  <div className={styles.icon}>
-                    <JourneyIcon type={option.icon} />
+        <div className={styles.frame}>
+          <div className={styles.panels}>
+            {options.map((option, index) => (
+              <article
+                key={option.title}
+                ref={(node) => {
+                  cardRefs.current[index] = node;
+                }}
+                className={styles.card}
+              >
+                <div className={styles.cardInner}>
+                  <div className={`${styles.cardFace} ${styles.cardFront}`} aria-hidden="true">
+                    <div className={styles.panelImage} />
                   </div>
 
-                  <div className={styles.copy}>
-                    <h3>{option.title}</h3>
-                    <p>{option.copy}</p>
+                  <div className={`${styles.cardFace} ${styles.cardBack}`}>
+                    <div className={styles.surface} aria-hidden="true" />
+
+                    <div className={styles.icon}>
+                      <JourneyIcon type={option.icon} />
+                    </div>
+
+                    <div className={styles.copy}>
+                      <h3>{option.title}</h3>
+                      <p>{option.copy}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            ))}
+
+            <div className={styles.shine} aria-hidden="true" />
+          </div>
         </div>
       </div>
     </section>

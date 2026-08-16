@@ -4,6 +4,11 @@ const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
 const lerp = (from, to, progress) => from + (to - from) * progress;
 const easeOutCubic = (value) => 1 - Math.pow(1 - value, 3);
 
+// The drag offset lives in custom properties so pointer dragging and this
+// scroll-driven layout can write to the same transform without racing.
+const place = (x, y, rotate, scale) =>
+  `translate3d(-50%, -50%, 0) translate3d(calc(${x}px + var(--drag-x, 0px)), calc(${y}px + var(--drag-y, 0px)), 0) rotate(${rotate}deg) scale(calc(${scale} * var(--drag-lift, 1)))`;
+
 export default function useWhyScrollMotion({ sectionRef, cardRefs, layout }) {
   useEffect(() => {
     const section = sectionRef.current;
@@ -20,7 +25,7 @@ export default function useWhyScrollMotion({ sectionRef, cardRefs, layout }) {
         if (!node) return;
         const target = layout[index];
         node.style.opacity = "1";
-        node.style.transform = `translate3d(-50%, -50%, 0) translate3d(${target.x * vw}px, ${target.y * vh}px, 0) rotate(${target.rotate}deg) scale(1)`;
+        node.style.transform = place(target.x * vw, target.y * vh, target.rotate, 1);
       });
 
       section.style.setProperty("--why-title-y", "0px");
@@ -63,7 +68,7 @@ export default function useWhyScrollMotion({ sectionRef, cardRefs, layout }) {
         const fadeStart = target.primary ? 1 : clamp((rawProgress - 0.08) / 0.2);
 
         node.style.opacity = String(fadeStart);
-        node.style.transform = `translate3d(-50%, -50%, 0) translate3d(${x}px, ${y}px, 0) rotate(${rotate}deg) scale(${scale})`;
+        node.style.transform = place(x, y, rotate, scale);
       });
 
       section.style.setProperty("--why-title-y", `${lerp(110, 0, eased)}px`);
