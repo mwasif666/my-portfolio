@@ -1,10 +1,9 @@
 /*
- * Screenshot-targeted responsive override for the Outcrowd-inspired Services section.
- * The 915px reference uses a narrow centered composition even though it remains
- * a two-column layout. Keep that same composition through normal laptop widths
- * so 1260px screens do not jump back to the wide desktop treatment.
+ * Screenshot-targeted override for the Outcrowd-inspired Services section.
+ * Keep the supplied narrow/centered two-column composition on every desktop
+ * width so large CSS viewports never fall back to the old wide layout.
  */
-@media (min-width: 641px) and (max-width: 1499px) {
+@media (min-width: 641px) {
   #services > div {
     width: min(72.6vw, 664px) !important;
     margin-inline: auto !important;
@@ -84,7 +83,6 @@
     letter-spacing: -0.033em !important;
   }
 
-  /* cards wrapper + the two masonry columns */
   #services > div > div:last-child {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -111,7 +109,6 @@
       0 16px 34px rgba(0, 0, 0, 0.22) !important;
   }
 
-  /* Exact measured proportions from the supplied 915px reference. */
   #services > div > div:last-child > div:first-child > article:nth-child(1) {
     aspect-ratio: 0.828 / 1 !important;
   }
@@ -169,7 +166,6 @@
     max-width: 260px !important;
   }
 
-  /* Art stages. Existing Lottie/video playback and hover behavior stay intact. */
   #services article > div:last-child {
     inset: clamp(101px, 14.2vw, 121px) 0 0 !important;
   }
@@ -199,21 +195,18 @@
     inset: clamp(112px, 15.8vw, 134px) 0 0 !important;
   }
 
-  /* Brand Strategy Lottie */
   #services > div > div:last-child > div:first-child > article:nth-child(1) > div:last-child > div {
     width: 91% !important;
     height: 101% !important;
     margin: 0 auto -6% !important;
   }
 
-  /* Platforms Lottie */
   #services > div > div:last-child > div:first-child > article:nth-child(2) > div:last-child > div {
     width: 106% !important;
     height: 106% !important;
     margin: 0 auto -14% !important;
   }
 
-  /* Brand Visual asset grid */
   #services > div > div:last-child > div:last-child > article:nth-child(1) > div:last-child > div {
     width: 111% !important;
     margin-top: 17% !important;
@@ -224,21 +217,18 @@
     transform: translateX(2%) rotate(0deg) scale(1) !important;
   }
 
-  /* Website Lottie */
   #services > div > div:last-child > div:last-child > article:nth-child(2) > div:last-child > div {
     width: 100% !important;
     height: 103% !important;
     margin: 0 auto -10% !important;
   }
 
-  /* Mobile video */
   #services > div > div:last-child > div:first-child > article:nth-child(3) video {
     width: 116% !important;
     height: 104% !important;
     transform: translateY(7%) !important;
   }
 
-  /* Development Lottie */
   #services > div > div:last-child > div:last-child > article:nth-child(3) > div:last-child > div {
     width: 103% !important;
     height: 104% !important;
