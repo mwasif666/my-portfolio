@@ -72,7 +72,7 @@
 .headingShadow {
   position: absolute;
   top: 1px;
-  right: calc(clamp(38px, 5.4vw, 92px) * -0.5);
+  right: clamp(-46px, -2.7vw, -19px);
   width: 1px;
   height: clamp(105px, 10vw, 176px);
   overflow: hidden;
@@ -171,7 +171,7 @@
   justify-self: end;
   width: 1px;
   height: 100%;
-  margin-right: calc(clamp(38px, 5.4vw, 92px) * -0.5);
+  margin-right: clamp(-46px, -2.7vw, -19px);
   overflow: hidden;
   background: rgba(255, 255, 255, 0.055);
 }
@@ -453,7 +453,7 @@
   inset: 0;
   opacity: 0.02;
   animation: brandOverlay 5.6s ease-in-out infinite;
-  animation-delay: calc(var(--item-index) * -0.44s);
+  animation-delay: var(--overlay-delay, 0s);
 }
 
 .mobile .artStage {
@@ -565,8 +565,6 @@
   }
 }
 
-/* Outcrowd switches from the split editorial heading to a centered heading
-   before the cards collapse. Keep the two independent card columns here. */
 @media (max-width: 1099px) {
   .inner {
     width: min(74vw, 760px);
