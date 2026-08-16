@@ -15,6 +15,10 @@ function loadLottieRuntime() {
     const existing = document.querySelector("script[data-outcrowd-lottie]");
 
     if (existing) {
+      if (window.lottie) {
+        resolve(window.lottie);
+        return;
+      }
       existing.addEventListener("load", () => resolve(window.lottie), {
         once: true,
       });
@@ -73,44 +77,35 @@ const brandVisualRows = [
   ],
 ];
 
+// Keep the same source order as Outcrowd: the first three cards form the
+// left column and the last three form the right column.
 const services = [
   {
+    key: "strategy",
     title: "Brand Strategy",
     description:
       "We establish comprehensive product-market fit hypotheses, validate them, and visualise in the most creative ways.",
     art: {
       type: "lottie",
       src: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66c5f3ef1571f03e6a8ea9bd_BrandStrategy%20ver2%206.json",
-      className: "strategyArt",
+      loop: false,
+      autoplay: false,
     },
   },
   {
-    title: "Brand Visual",
-    description:
-      "We create brand materials that speak of your values non-verbally and complement your offering to the market.",
-    art: { type: "brandVisual" },
-  },
-  {
+    key: "platforms",
     title: "Platforms",
     description:
       "We think about the big picture and focus primarily on your app's business success. We research deeply, validate thoroughly, and launch confidently.",
     art: {
       type: "lottie",
       src: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/667a7576e7e7ef3ba89b3f87_Platform.json",
-      className: "platformArt",
+      loop: true,
+      autoplay: false,
     },
   },
   {
-    title: "Website",
-    description:
-      "We don’t just design websites. We build reliable sales & marketing tools that drive predictably good metrics.",
-    art: {
-      type: "lottie",
-      src: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/667a7576e7e7ef3ba89b3f85_Webst.json",
-      className: "websiteArt",
-    },
-  },
-  {
+    key: "mobile",
     title: "Mobile Apps",
     description:
       "We're masters of UX gamification and user engagement. In a world where any app competes with Instagram we make usable products that attract and retain.",
@@ -120,18 +115,39 @@ const services = [
     },
   },
   {
+    key: "visual",
+    title: "Brand Visual",
+    description:
+      "We create brand materials that speak of your values non-verbally and complement your offering to the market.",
+    art: { type: "brandVisual" },
+  },
+  {
+    key: "website",
+    title: "Website",
+    description:
+      "We don’t just design websites. We build reliable sales & marketing tools that drive predictably good metrics.",
+    art: {
+      type: "lottie",
+      src: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/667a7576e7e7ef3ba89b3f85_Webst.json",
+      loop: true,
+      autoplay: false,
+    },
+  },
+  {
+    key: "development",
     title: "Development",
     description:
       "We can take care of your product’s implementation, assuring the most efficient usage of time & resources in every decision & each line of code while maintaining seamless operation.",
     art: {
       type: "lottie",
       src: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66ab8b10eaf1ec4297b4c7e2_Developmnt22.json",
-      className: "developmentArt",
+      loop: false,
+      autoplay: true,
     },
   },
 ];
 
-function LottieArt({ src, className }) {
+function LottieArt({ art, serviceKey }) {
   const hostRef = useRef(null);
   const animationRef = useRef(null);
 
@@ -141,6 +157,7 @@ function LottieArt({ src, className }) {
 
     let cancelled = false;
     let observer;
+    let playedOnce = false;
 
     loadLottieRuntime()
       .then((lottie) => {
@@ -149,9 +166,9 @@ function LottieArt({ src, className }) {
         const animation = lottie.loadAnimation({
           container: hostRef.current,
           renderer: "svg",
-          loop: false,
+          loop: Boolean(art.loop),
           autoplay: false,
-          path: src,
+          path: art.src,
           rendererSettings: {
             progressiveLoad: true,
             preserveAspectRatio: "xMidYMid meet",
@@ -174,20 +191,33 @@ function LottieArt({ src, className }) {
           return;
         }
 
-        if (typeof IntersectionObserver !== "undefined") {
-          observer = new IntersectionObserver(
-            ([entry]) => {
-              if (entry.isIntersecting) {
-                animation.goToAndPlay(0, true);
-                observer?.disconnect();
-              }
-            },
-            { threshold: 0.34 },
-          );
-          observer.observe(hostRef.current);
-        } else {
-          animation.play();
+        const playVisible = () => {
+          if (art.loop) {
+            animation.play();
+            return;
+          }
+          if (!playedOnce || art.autoplay) {
+            animation.goToAndPlay(0, true);
+            playedOnce = true;
+          }
+        };
+
+        if (typeof IntersectionObserver === "undefined") {
+          playVisible();
+          return;
         }
+
+        observer = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              playVisible();
+            } else if (art.loop) {
+              animation.pause();
+            }
+          },
+          { threshold: 0.26, rootMargin: "5% 0px 5% 0px" },
+        );
+        observer.observe(hostRef.current);
       })
       .catch(() => {});
 
@@ -197,7 +227,7 @@ function LottieArt({ src, className }) {
       animationRef.current?.destroy();
       animationRef.current = null;
     };
-  }, [src]);
+  }, [art]);
 
   const replay = () => {
     if (
@@ -211,7 +241,7 @@ function LottieArt({ src, className }) {
   return (
     <div
       ref={hostRef}
-      className={`${styles.lottieArt} ${styles[className] || ""}`}
+      className={`${styles.lottieArt} ${styles[`${serviceKey}Art`] || ""}`}
       onPointerEnter={replay}
       aria-hidden="true"
     />
@@ -226,6 +256,7 @@ function BrandVisualArt() {
           {row.map((item, itemIndex) => (
             <span
               className={styles.brandVisualItem}
+              style={{ "--item-index": rowIndex * 4 + itemIndex }}
               key={`${rowIndex}-${itemIndex}`}
             >
               <img src={item.base} alt="" loading="lazy" decoding="async" />
@@ -246,9 +277,11 @@ function BrandVisualArt() {
   );
 }
 
-function ServiceArt({ art }) {
+function ServiceArt({ service }) {
+  const { art } = service;
+
   if (art.type === "lottie") {
-    return <LottieArt src={art.src} className={art.className} />;
+    return <LottieArt art={art} serviceKey={service.key} />;
   }
 
   if (art.type === "brandVisual") {
@@ -270,12 +303,13 @@ function ServiceArt({ art }) {
   );
 }
 
-function ServiceCard({ service, index }) {
+function ServiceCard({ service, delay }) {
   const cardRef = useRef(null);
 
   useEffect(() => {
     const card = cardRef.current;
     if (!card) return undefined;
+
     if (typeof IntersectionObserver === "undefined") {
       card.dataset.visible = "true";
       return undefined;
@@ -288,7 +322,7 @@ function ServiceCard({ service, index }) {
           observer.disconnect();
         }
       },
-      { threshold: 0.12 },
+      { threshold: 0.14, rootMargin: "0px 0px -4% 0px" },
     );
 
     observer.observe(card);
@@ -298,7 +332,8 @@ function ServiceCard({ service, index }) {
   return (
     <article
       ref={cardRef}
-      className={`${styles.card} ${styles[`card${index + 1}`] || ""}`}
+      className={`${styles.card} ${styles[service.key]}`}
+      style={{ "--reveal-delay": `${delay}ms` }}
       data-service-card
     >
       <div className={styles.cardCopy}>
@@ -306,7 +341,7 @@ function ServiceCard({ service, index }) {
         <p>{service.description}</p>
       </div>
       <div className={styles.artStage}>
-        <ServiceArt art={service.art} />
+        <ServiceArt service={service} />
       </div>
     </article>
   );
@@ -333,7 +368,7 @@ export default function StoktServices() {
           observer.disconnect();
         }
       },
-      { threshold: 0.06 },
+      { threshold: 0.08, rootMargin: "0px 0px -5% 0px" },
     );
 
     observer.observe(section);
@@ -342,27 +377,28 @@ export default function StoktServices() {
 
   const updatePointerEffects = (event) => {
     const wrap = cardsRef.current;
-    if (!wrap) return;
-
-    for (const card of wrap.querySelectorAll("[data-service-card]")) {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty("--mouse-x", `${event.clientX - rect.left}px`);
-      card.style.setProperty("--mouse-y", `${event.clientY - rect.top}px`);
+    if (wrap) {
+      for (const card of wrap.querySelectorAll("[data-service-card]")) {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--mouse-x", `${event.clientX - rect.left}px`);
+        card.style.setProperty("--mouse-y", `${event.clientY - rect.top}px`);
+      }
     }
 
     const cursor = cursorRef.current;
     if (cursor) {
-      const wrapRect = wrap.getBoundingClientRect();
-      cursor.style.setProperty("--cursor-x", `${event.clientX - wrapRect.left}px`);
-      cursor.style.setProperty("--cursor-y", `${event.clientY - wrapRect.top}px`);
+      cursor.style.setProperty("--cursor-x", `${event.clientX}px`);
+      cursor.style.setProperty("--cursor-y", `${event.clientY}px`);
+      cursor.dataset.visible = "true";
     }
   };
 
-  const setCursorVisible = (visible) => {
-    if (cursorRef.current) {
-      cursorRef.current.dataset.visible = visible ? "true" : "false";
-    }
+  const hideCursor = () => {
+    if (cursorRef.current) cursorRef.current.dataset.visible = "false";
   };
+
+  const leftColumn = services.slice(0, 3);
+  const rightColumn = services.slice(3);
 
   return (
     <section
@@ -370,7 +406,14 @@ export default function StoktServices() {
       className={styles.section}
       id="services"
       aria-labelledby="outcrowd-services-title"
+      onPointerMove={updatePointerEffects}
+      onPointerEnter={updatePointerEffects}
+      onPointerLeave={hideCursor}
     >
+      <span ref={cursorRef} className={styles.customCursor} aria-hidden="true">
+        <i />
+      </span>
+
       <div className={styles.inner}>
         <header className={styles.header}>
           <div className={styles.headingBlock}>
@@ -399,20 +442,26 @@ export default function StoktServices() {
           </div>
         </header>
 
-        <div
-          ref={cardsRef}
-          className={styles.cards}
-          onPointerMove={updatePointerEffects}
-          onPointerEnter={() => setCursorVisible(true)}
-          onPointerLeave={() => setCursorVisible(false)}
-        >
-          <span ref={cursorRef} className={styles.customCursor} aria-hidden="true">
-            <i />
-          </span>
+        <div ref={cardsRef} className={styles.cards}>
+          <div className={`${styles.column} ${styles.leftColumn}`}>
+            {leftColumn.map((service, index) => (
+              <ServiceCard
+                key={service.key}
+                service={service}
+                delay={index * 70}
+              />
+            ))}
+          </div>
 
-          {services.map((service, index) => (
-            <ServiceCard key={service.title} service={service} index={index} />
-          ))}
+          <div className={`${styles.column} ${styles.rightColumn}`}>
+            {rightColumn.map((service, index) => (
+              <ServiceCard
+                key={service.key}
+                service={service}
+                delay={index * 70 + 35}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
