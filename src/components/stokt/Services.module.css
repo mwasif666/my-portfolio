@@ -522,25 +522,13 @@
   backdrop-filter: blur(6px);
   opacity: 0;
   pointer-events: none;
-  transform: translate3d(
-      calc(var(--cursor-x) - 50%),
-      calc(var(--cursor-y) - 50%),
-      0
-    )
-    scale(0.72);
-  transition:
-    opacity 180ms ease,
-    transform 90ms linear;
+  transform: translate3d(calc(var(--cursor-x) - 50%), calc(var(--cursor-y) - 50%), 0) scale(0.72);
+  transition: opacity 180ms ease, transform 90ms linear;
 }
 
 .customCursor[data-visible="true"] {
   opacity: 1;
-  transform: translate3d(
-      calc(var(--cursor-x) - 50%),
-      calc(var(--cursor-y) - 50%),
-      0
-    )
-    scale(1);
+  transform: translate3d(calc(var(--cursor-x) - 50%), calc(var(--cursor-y) - 50%), 0) scale(1);
 }
 
 .customCursor i {
@@ -551,36 +539,22 @@
 }
 
 @keyframes brandOverlay {
-  0%,
-  20%,
-  100% {
-    opacity: 0.02;
-  }
-  43%,
-  66% {
-    opacity: 0.98;
-  }
+  0%, 20%, 100% { opacity: 0.02; }
+  43%, 66% { opacity: 0.98; }
 }
 
 @media (hover: none), (pointer: coarse) {
-  .customCursor {
-    display: none;
-  }
-
+  .customCursor { display: none; }
   .card::after {
     opacity: 0.24;
-    background: radial-gradient(
-      520px circle at 62% 84%,
-      rgba(255, 255, 255, 0.035),
-      transparent 30%
-    );
+    background: radial-gradient(520px circle at 62% 84%, rgba(255, 255, 255, 0.035), transparent 30%);
   }
 }
 
 /* ---------- exact supplied screenshot layout ---------- */
 @media (min-width: 641px) and (max-width: 1099px) {
   .inner {
-    width: min(74vw, 760px);
+    width: min(73vw, 760px);
     padding-top: clamp(176px, 23vw, 228px);
     padding-bottom: clamp(78px, 10vw, 112px);
   }
@@ -605,9 +579,7 @@
     letter-spacing: -0.065em;
   }
 
-  .headingShadow {
-    display: none;
-  }
+  .headingShadow { display: none; }
 
   .primaryIntro {
     align-items: center;
@@ -657,12 +629,10 @@
 
   .cards,
   .column {
-    gap: clamp(12px, 1.55vw, 15px);
+    gap: clamp(14px, 2.4vw, 20px);
   }
 
-  .rightColumn {
-    padding-top: 0;
-  }
+  .rightColumn { padding-top: 0; }
 
   .card {
     border-color: rgba(255, 255, 255, 0.055);
@@ -675,51 +645,24 @@
       0 16px 34px rgba(0, 0, 0, 0.22);
   }
 
-  .strategy {
-    aspect-ratio: 0.822 / 1;
-  }
-
-  .visual {
-    aspect-ratio: 0.923 / 1;
-  }
-
-  .platforms {
-    aspect-ratio: 0.957 / 1;
-  }
-
-  .website {
-    aspect-ratio: 0.918 / 1;
-  }
-
-  .mobile {
-    aspect-ratio: 0.86 / 1;
-  }
-
-  .development {
-    aspect-ratio: 0.76 / 1;
-  }
+  .strategy { aspect-ratio: 0.822 / 1; }
+  .visual { aspect-ratio: 0.923 / 1; }
+  .platforms { aspect-ratio: 0.957 / 1; }
+  .website { aspect-ratio: 0.918 / 1; }
+  .mobile { aspect-ratio: 0.86 / 1; }
+  .development { aspect-ratio: 0.76 / 1; }
 
   .cardCopy,
   .visual .cardCopy,
   .development .cardCopy {
     width: 100%;
     margin: 0 auto;
-    padding: clamp(30px, 4.6vw, 40px) clamp(18px, 2.9vw, 26px) 0;
+    padding: clamp(34px, 5vw, 42px) clamp(18px, 2.9vw, 26px) 0;
     text-align: center;
   }
 
-  .visual .cardCopy,
-  .website .cardCopy {
-    padding-top: clamp(30px, 4.4vw, 38px);
-  }
-
-  .platforms .cardCopy {
-    padding-top: clamp(32px, 4.7vw, 40px);
-  }
-
-  .mobile .cardCopy,
   .development .cardCopy {
-    padding-top: clamp(32px, 4.7vw, 41px);
+    padding-top: clamp(32px, 4.8vw, 40px);
   }
 
   .cardCopy h3 {
@@ -740,38 +683,18 @@
   }
 
   .visual .cardCopy p,
-  .development .cardCopy p {
-    max-width: 260px;
-  }
+  .development .cardCopy p { max-width: 260px; }
 
-  .artStage {
-    inset: clamp(101px, 14.2vw, 121px) 0 0;
-  }
-
-  .strategy .artStage {
-    inset: clamp(108px, 15.3vw, 131px) 0 0;
-  }
-
+  .artStage { inset: clamp(101px, 14.2vw, 121px) 0 0; }
+  .strategy .artStage { inset: clamp(108px, 15.3vw, 131px) 0 0; }
   .visual .artStage {
     inset: clamp(104px, 14.7vw, 124px) 0 0;
     place-items: center;
   }
-
-  .platforms .artStage {
-    inset: clamp(108px, 15.2vw, 129px) 0 0;
-  }
-
-  .website .artStage {
-    inset: clamp(106px, 14.9vw, 126px) 0 0;
-  }
-
-  .mobile .artStage {
-    inset: clamp(111px, 15.6vw, 132px) 0 0;
-  }
-
-  .development .artStage {
-    inset: clamp(112px, 15.8vw, 134px) 0 0;
-  }
+  .platforms .artStage { inset: clamp(108px, 15.2vw, 129px) 0 0; }
+  .website .artStage { inset: clamp(106px, 14.9vw, 126px) 0 0; }
+  .mobile .artStage { inset: clamp(111px, 15.6vw, 132px) 0 0; }
+  .development .artStage { inset: clamp(112px, 15.8vw, 134px) 0 0; }
 
   .strategyArt {
     width: 91%;
@@ -807,17 +730,9 @@
     transform: translateX(2%) rotate(0deg) scale(1);
   }
 
-  .brandVisualRow {
-    gap: clamp(5px, 0.75vw, 7px);
-  }
-
-  .brandVisualRow + .brandVisualRow {
-    margin-top: clamp(5px, 0.75vw, 7px);
-  }
-
-  .brandVisualItem {
-    border-radius: 8px;
-  }
+  .brandVisualRow { gap: clamp(5px, 0.75vw, 7px); }
+  .brandVisualRow + .brandVisualRow { margin-top: clamp(5px, 0.75vw, 7px); }
+  .brandVisualItem { border-radius: 8px; }
 
   .mobileVideo {
     width: 116%;
@@ -826,7 +741,7 @@
   }
 }
 
-/* ---------- small screens: keep the same visual language in one column ---------- */
+/* ---------- small screens ---------- */
 @media (max-width: 640px) {
   .inner {
     width: min(calc(100% - 28px), 520px);
@@ -852,9 +767,7 @@
     line-height: 0.86;
   }
 
-  .headingShadow {
-    display: none;
-  }
+  .headingShadow { display: none; }
 
   .primaryIntro {
     align-items: center;
@@ -862,14 +775,10 @@
     margin-top: 24px;
   }
 
-  .primaryIntro p {
-    max-width: 325px;
-  }
+  .primaryIntro p { max-width: 325px; }
 
   .primaryIntro p,
-  .secondaryIntro p {
-    font-size: 12px;
-  }
+  .secondaryIntro p { font-size: 12px; }
 
   .secondaryIntro {
     display: flex;
@@ -894,13 +803,8 @@
     line-height: 1.42;
   }
 
-  .cards {
-    display: block;
-  }
-
-  .column {
-    display: contents;
-  }
+  .cards { display: block; }
+  .column { display: contents; }
 
   .card {
     min-height: 410px;
@@ -914,9 +818,7 @@
   .mobile,
   .visual,
   .website,
-  .development {
-    aspect-ratio: auto;
-  }
+  .development { aspect-ratio: auto; }
 
   .cardCopy,
   .visual .cardCopy,
@@ -926,9 +828,7 @@
     text-align: center;
   }
 
-  .cardCopy h3 {
-    font-size: 25px;
-  }
+  .cardCopy h3 { font-size: 25px; }
 
   .cardCopy p {
     max-width: 290px;
@@ -938,9 +838,7 @@
 
   .artStage,
   .visual .artStage,
-  .mobile .artStage {
-    inset: 116px 0 0;
-  }
+  .mobile .artStage { inset: 116px 0 0; }
 
   .strategyArt {
     width: 90%;
@@ -989,11 +887,6 @@
   }
 
   .headingShadow::after,
-  .verticalLine i {
-    transform: none;
-  }
-
-  .brandVisualOverlay {
-    opacity: 0.34;
-  }
+  .verticalLine i { transform: none; }
+  .brandVisualOverlay { opacity: 0.34; }
 }
