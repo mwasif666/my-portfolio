@@ -1,9 +1,23 @@
 import { createContext, useCallback, useContext, useEffect, useRef } from 'react';
-import Lenis from 'lenis';
+import LocomotiveScroll from 'locomotive-scroll';
 
 const ScrollCtx = createContext(null);
 
+// Locomotive Scroll v5 runs on Lenis and keeps the page on native scroll, so
+// `position: sticky` and every `window.scrollY` measurement in this codebase
+// keep working. It adds the declarative `[data-scroll]` effects layer on top:
+// data-scroll-speed (parallax), data-scroll-class (in-view class),
+// data-scroll-css-progress (--progress 0→1) and data-scroll-call (events).
+const LENIS_OPTIONS = {
+  smoothWheel: true,
+  lerp: 0.075,
+  wheelMultiplier: 0.9,
+  touchMultiplier: 1.05,
+  syncTouch: false,
+};
+
 export function ScrollProvider({ children }) {
+  const locoRef = useRef(null);
   const lenisRef = useRef(null);
   const enabledRef = useRef(true);
 
@@ -12,56 +26,45 @@ export function ScrollProvider({ children }) {
     window.history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
 
-    const lenis = new Lenis({
-      smoothWheel: true,
-      lerp: 0.075,
-      wheelMultiplier: 0.9,
-      touchMultiplier: 1.05,
-      syncTouch: false,
-    });
-    lenisRef.current = lenis;
-    lenis.scrollTo(0, { immediate: true });
-
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const gsap = window.gsap;
     const ScrollTrigger = window.ScrollTrigger;
-    let raf = 0;
+    const useGsapTicker = Boolean(gsap && ScrollTrigger);
+
+    if (useGsapTicker) {
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.ticker.lagSmoothing(0);
+    }
+
+    // Drive Locomotive's render from GSAP's ticker so ScrollTrigger and the
+    // smooth scroll share one clock instead of two competing rAF loops.
+    const loco = new LocomotiveScroll({
+      lenisOptions: {
+        ...LENIS_OPTIONS,
+        smoothWheel: !reducedMotion.matches,
+      },
+      scrollCallback: useGsapTicker ? ScrollTrigger.update : undefined,
+      initCustomTicker: useGsapTicker ? (render) => gsap.ticker.add(render) : undefined,
+      destroyCustomTicker: useGsapTicker ? (render) => gsap.ticker.remove(render) : undefined,
+    });
+
+    locoRef.current = loco;
+    lenisRef.current = loco.lenisInstance;
+    loco.scrollTo(0, { immediate: true });
 
     const resetOnPageShow = () => {
       window.scrollTo(0, 0);
-      lenis.scrollTo(0, { immediate: true });
+      loco.scrollTo(0, { immediate: true });
     };
 
     window.addEventListener('pageshow', resetOnPageShow);
-
-    if (gsap && ScrollTrigger) {
-      gsap.registerPlugin(ScrollTrigger);
-      lenis.on('scroll', ScrollTrigger.update);
-
-      const update = (time) => lenis.raf(time * 1000);
-      gsap.ticker.add(update);
-      gsap.ticker.lagSmoothing(0);
-      ScrollTrigger.refresh();
-
-      return () => {
-        window.removeEventListener('pageshow', resetOnPageShow);
-        window.history.scrollRestoration = previousRestoration;
-        gsap.ticker.remove(update);
-        lenis.destroy();
-        lenisRef.current = null;
-      };
-    }
-
-    const loop = (time) => {
-      lenis.raf(time);
-      raf = requestAnimationFrame(loop);
-    };
-    raf = requestAnimationFrame(loop);
+    if (useGsapTicker) ScrollTrigger.refresh();
 
     return () => {
       window.removeEventListener('pageshow', resetOnPageShow);
       window.history.scrollRestoration = previousRestoration;
-      cancelAnimationFrame(raf);
-      lenis.destroy();
+      loco.destroy();
+      locoRef.current = null;
       lenisRef.current = null;
     };
   }, []);
@@ -82,7 +85,7 @@ export function ScrollProvider({ children }) {
 
   const stopScroll = useCallback(() => {
     enabledRef.current = false;
-    lenisRef.current?.stop();
+    locoRef.current?.stop();
     const h = document.documentElement;
     h.style.position = 'relative';
     h.style.overflow = 'hidden';
@@ -91,7 +94,7 @@ export function ScrollProvider({ children }) {
 
   const startScroll = useCallback(() => {
     enabledRef.current = true;
-    lenisRef.current?.start();
+    locoRef.current?.start();
     const h = document.documentElement;
     h.style.removeProperty('position');
     h.style.removeProperty('overflow');
@@ -99,14 +102,11 @@ export function ScrollProvider({ children }) {
   }, []);
 
   const scrollToTop = useCallback((immediate = true) => {
-    const lenis = lenisRef.current;
-    if (lenis) {
-      lenis.scrollTo(0, {
-        immediate,
-        duration: immediate ? 0 : 0.9,
-        easing: (t) => 1 - Math.pow(1 - t, 4),
-      });
-    }
+    locoRef.current?.scrollTo(0, {
+      immediate,
+      duration: immediate ? 0 : 0.9,
+      easing: (t) => 1 - Math.pow(1 - t, 4),
+    });
     window.scrollTo(0, 0);
   }, []);
 
@@ -114,9 +114,9 @@ export function ScrollProvider({ children }) {
     const el = document.getElementById(id);
     if (!el) return;
 
-    const lenis = lenisRef.current;
-    if (lenis) {
-      lenis.scrollTo(el, {
+    const loco = locoRef.current;
+    if (loco) {
+      loco.scrollTo(el, {
         duration: 1.25,
         easing: (t) => 1 - Math.pow(1 - t, 4),
       });
@@ -126,8 +126,17 @@ export function ScrollProvider({ children }) {
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, []);
 
+  // `refresh` re-measures every [data-scroll] element — call it after layout
+  // changes that Locomotive's resize observers cannot see (route/content swaps).
+  const refreshScroll = useCallback(() => {
+    locoRef.current?.resize();
+    window.ScrollTrigger?.refresh();
+  }, []);
+
   return (
-    <ScrollCtx.Provider value={{ stopScroll, startScroll, scrollToId, scrollToTop }}>
+    <ScrollCtx.Provider
+      value={{ stopScroll, startScroll, scrollToId, scrollToTop, refreshScroll }}
+    >
       {children}
     </ScrollCtx.Provider>
   );

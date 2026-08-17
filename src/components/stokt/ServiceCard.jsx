@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import styles from "./Services.module.css";
+import styles from "./Expertise.module.css";
 
-export default function ServiceCard({ service }) {
+export default function ServiceCard({ service, speed = 0 }) {
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -23,7 +23,9 @@ export default function ServiceCard({ service }) {
   return (
     <article className={styles.card}>
       <div className={styles.cardBorder} aria-hidden="true" />
-      <div className={styles.media}>
+      {/* Parallax rides the media box, never the video: `.video` owns a scale
+          transform for the hover state and Locomotive writes inline transforms. */}
+      <div className={styles.media} data-scroll data-scroll-speed={speed}>
         <video
           ref={videoRef}
           className={styles.video}

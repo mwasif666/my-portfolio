@@ -1,20 +1,28 @@
-html.lenis,
-html.lenis body {
-  height: auto;
+/* Locomotive Scroll v5 ships the Lenis helper styles it needs; import them
+   from the package so they stay in step with the installed version instead of
+   drifting from a hand-copied snapshot. */
+@import "locomotive-scroll/locomotive-scroll.css";
+
+/* Parallax and reveal effects are opt-in per element via [data-scroll]. Give
+   them a compositor layer and a sane starting state so nothing flashes at the
+   wrong offset before Locomotive takes its first measurement. */
+[data-scroll-speed] {
+  will-change: transform;
 }
 
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
+[data-scroll-class] {
+  transition:
+    opacity 900ms cubic-bezier(.22, 1, .36, 1),
+    transform 900ms cubic-bezier(.22, 1, .36, 1);
 }
 
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll-speed] {
+    transform: none !important;
+    will-change: auto;
+  }
 
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
+  [data-scroll-class] {
+    transition: none;
+  }
 }

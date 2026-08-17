@@ -38,65 +38,26 @@ function loadLottieRuntime() {
   return lottiePromise;
 }
 
-const brandVisualRows = [
-  [
-    {
-      base: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66b07d4f2bec93cba5a3d384_brand-line-2-1.svg",
-      overlay:
-        "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66b07e4f4bec20016bbe1124_brand-line-1-color.svg",
-    },
-    {
-      base: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66c366f7d9ef5f478c9202b1_Group%20427320477.webp",
-    },
-    {
-      base: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66b07d4f0961f661081c4f87_brand-line-2-3.svg",
-      overlay:
-        "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66c366f712b8e5005065e2f7_Group%20427320478.webp",
-    },
-    {
-      base: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66b07dc410edead2c1e14b9f_Group%20427320476.webp",
-    },
-  ],
-  [
-    {
-      base: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66b07d1c441fc462e761d231_brand-line-1-3.svg",
-    },
-    {
-      base: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66b07d1c8064490bd29b4efa_brand-line-1-2.svg",
-      overlay:
-        "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66b07e4f2ced01bc0bfbd3f8_brand-line-1-color3.svg",
-    },
-    {
-      base: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66b07d1c423eba907f44c5c8_brand-line-1-1.svg",
-    },
-    {
-      base: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66b07d1c8d9dac749b2813a9_brand-line-1-4.svg",
-      overlay:
-        "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66b07e4fbba83b5f8b2c5ac2_brand-line-1-color4.svg",
-    },
-  ],
-];
-
-// Same source order as Outcrowd: first three cards are the left column,
-// last three cards are the right column.
+// First three cards fill the left column, last three the right column.
 const services = [
   {
-    key: "strategy",
-    title: "Brand Strategy",
+    key: "design",
+    title: "Design & Frontend",
     description:
-      "We establish comprehensive product-market fit hypotheses, validate them, and visualise in the most creative ways.",
+      "I design the interface and then build it — responsive layouts, a consistent design system, and interactions that hold up on a mid-range phone.",
     art: {
-      type: "lottie",
-      src: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66c5f3ef1571f03e6a8ea9bd_BrandStrategy%20ver2%206.json",
-      loop: false,
-      autoplay: false,
+      type: "video",
+      src: "https://stokt.b-cdn.net/KEYCAPS-loop-01-.webm",
+      poster:
+        "https://framerusercontent.com/images/fsnxfPl4xnUJdyQSiOcHEYxg.png?width=1080&height=1080",
+      fit: "center",
     },
   },
   {
-    key: "platforms",
-    title: "Platforms",
+    key: "apps",
+    title: "Web Applications",
     description:
-      "We think about the big picture and focus primarily on your app's business success. We research deeply, validate thoroughly, and launch confidently.",
+      "Dashboards, admin panels and internal tools — real product surfaces with data, state and permissions, not static pages dressed up as an app.",
     art: {
       type: "lottie",
       src: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/667a7576e7e7ef3ba89b3f87_Platform.json",
@@ -106,26 +67,33 @@ const services = [
   },
   {
     key: "mobile",
-    title: "Mobile Apps",
+    title: "Mobile-First Builds",
     description:
-      "We're masters of UX gamification and user engagement. In a world where any app competes with Instagram we make usable products that attract and retain.",
+      "Every layout starts at 360px and works up. Touch targets, loading states and load budgets get decided before the desktop view exists.",
     art: {
       type: "video",
       src: "https://dl.dropboxusercontent.com/scl/fi/jy5cqifucxea6mo5tx2id/taxi-app-main-v2_XdXjXRKv.mp4?rlkey=7ibn8inbyq804uxjjmhhml5q4&st=tlh7klec&dl=0",
+      fit: "bottom",
     },
   },
   {
-    key: "visual",
-    title: "Brand Visual",
+    key: "fullstack",
+    title: "Full-Stack Systems",
     description:
-      "We create brand materials that speak of your values non-verbally and complement your offering to the market.",
-    art: { type: "brandVisual" },
+      "APIs, databases, auth and deployment designed together with the interface, so the product behaves in production the way it did in the demo.",
+    art: {
+      type: "video",
+      src: "https://stokt.b-cdn.net/robot-hand-v1-%203-alpha%20(1).webm",
+      poster:
+        "https://framerusercontent.com/images/o5rue2juXI7jXmJGLCQ0tEIHzw.png?width=1000&height=1000",
+      fit: "center",
+    },
   },
   {
-    key: "website",
-    title: "Website",
+    key: "commerce",
+    title: "WordPress Builds",
     description:
-      "We don’t just design websites. We build reliable sales & marketing tools that drive predictably good metrics.",
+      "Custom themes and plugins for teams that need real content control, plus commerce flows built to convert instead of just to render.",
     art: {
       type: "lottie",
       src: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/667a7576e7e7ef3ba89b3f85_Webst.json",
@@ -134,15 +102,15 @@ const services = [
     },
   },
   {
-    key: "development",
-    title: "Development",
+    key: "integrations",
+    title: "APIs & Integrations",
     description:
-      "We can take care of your product’s implementation, assuring the most efficient usage of time & resources in every decision & each line of code while maintaining seamless operation.",
+      "Payments, third-party services and legacy systems wired in cleanly, with the error handling and retries that keep a live product dependable.",
     art: {
       type: "lottie",
       src: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66ab8b10eaf1ec4297b4c7e2_Developmnt22.json",
-      loop: false,
-      autoplay: true,
+      loop: true,
+      autoplay: false,
     },
   },
 ];
@@ -248,38 +216,6 @@ function LottieArt({ art, serviceKey }) {
   );
 }
 
-function BrandVisualArt() {
-  return (
-    <div className={styles.brandVisualArt} aria-hidden="true">
-      {brandVisualRows.map((row, rowIndex) => (
-        <div className={styles.brandVisualRow} key={`brand-row-${rowIndex}`}>
-          {row.map((item, itemIndex) => {
-            const sequenceIndex = rowIndex * 4 + itemIndex;
-            return (
-              <span
-                className={styles.brandVisualItem}
-                style={{ "--overlay-delay": `${sequenceIndex * -0.44}s` }}
-                key={`${rowIndex}-${itemIndex}`}
-              >
-                <img src={item.base} alt="" loading="lazy" decoding="async" />
-                {item.overlay ? (
-                  <img
-                    className={styles.brandVisualOverlay}
-                    src={item.overlay}
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                  />
-                ) : null}
-              </span>
-            );
-          })}
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function ServiceArt({ service }) {
   const { art } = service;
 
@@ -287,15 +223,12 @@ function ServiceArt({ service }) {
     return <LottieArt art={art} serviceKey={service.key} />;
   }
 
-  if (art.type === "brandVisual") {
-    return <BrandVisualArt />;
-  }
-
   return (
-    <div className={styles.mobileVideoWrap} aria-hidden="true">
+    <div className={styles.mobileVideoWrap} data-fit={art.fit ?? "bottom"} aria-hidden="true">
       <video
         className={styles.mobileVideo}
         src={art.src}
+        poster={art.poster}
         autoPlay
         muted
         loop
@@ -407,7 +340,7 @@ export default function StoktServices() {
     <section
       ref={sectionRef}
       className={styles.section}
-      id="services"
+      id="capabilities"
       aria-labelledby="outcrowd-services-title"
       onPointerMove={updatePointerEffects}
       onPointerEnter={updatePointerEffects}
