@@ -1,0 +1,297 @@
+/*
+ * GSAP scrub sequence for the Services section:
+ * 1) pin title + intro,
+ * 2) bring the glass paragraph up and fill its words with scroll,
+ * 3) release the intro,
+ * 4) pin the cards and scrub them from right to left.
+ */
+
+/* Remove the vertical line from the supplied reference section. */
+#services header > div:nth-child(3) > span {
+  display: none !important;
+}
+
+.services-gsap-active#services {
+  position: relative;
+  overflow: hidden !important;
+  background: #050505 !important;
+}
+
+.services-gsap-active#services > div {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.services-gsap-active#services header {
+  position: relative !important;
+  display: flex !important;
+  min-height: 100svh !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: clamp(150px, 18vh, 210px) 5vw 72px !important;
+  overflow: hidden !important;
+  text-align: center !important;
+  background:
+    radial-gradient(62% 24% at 50% 8%, rgba(255, 255, 255, 0.026), transparent 72%),
+    radial-gradient(48% 34% at 50% 70%, rgba(15, 66, 84, 0.06), transparent 76%),
+    #050505 !important;
+}
+
+.services-gsap-active#services header > div:first-child {
+  width: min(1180px, 90vw) !important;
+  min-height: 0 !important;
+}
+
+.services-gsap-active#services #outcrowd-services-title {
+  margin: 0 !important;
+  color: #f7f5f2 !important;
+  font-size: clamp(96px, 11.1vw, 184px) !important;
+  font-weight: 430 !important;
+  line-height: 0.83 !important;
+  letter-spacing: -0.072em !important;
+}
+
+.services-gsap-active#services header > div:first-child > span {
+  display: none !important;
+}
+
+.services-gsap-active#services header > div:nth-child(2) {
+  display: flex !important;
+  align-items: center !important;
+  width: min(720px, 80vw) !important;
+  margin-top: clamp(52px, 6vh, 76px) !important;
+  gap: clamp(28px, 3.4vh, 42px) !important;
+  will-change: transform, opacity !important;
+}
+
+.services-gsap-active#services header > div:nth-child(2) p {
+  max-width: 700px !important;
+  margin: 0 !important;
+  color: rgba(242, 239, 235, 0.57) !important;
+  font-size: clamp(19px, 1.62vw, 31px) !important;
+  line-height: 1.36 !important;
+  letter-spacing: -0.035em !important;
+}
+
+.services-gsap-active#services header > div:nth-child(2) > span {
+  min-height: 46px !important;
+  padding: 0 28px !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background:
+    radial-gradient(110% 130% at 50% 120%, rgba(255, 255, 255, 0.1), transparent 48%),
+    rgba(27, 24, 24, 0.72) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    0 14px 40px rgba(0, 0, 0, 0.22) !important;
+  color: rgba(255, 255, 255, 0.82) !important;
+  font-size: clamp(13px, 0.94vw, 17px) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+.services-gsap-active#services header > div:nth-child(3) {
+  position: absolute !important;
+  top: 58% !important;
+  left: 50% !important;
+  display: block !important;
+  width: min(900px, 82vw) !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: clamp(34px, 4vw, 60px) clamp(34px, 4.6vw, 70px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.11) !important;
+  border-radius: clamp(26px, 2.2vw, 38px) !important;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025) 54%, rgba(2, 25, 34, 0.12)),
+    rgba(15, 15, 15, 0.42) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.025),
+    0 34px 100px rgba(0, 0, 0, 0.38),
+    0 0 90px rgba(18, 66, 82, 0.06) !important;
+  opacity: 0;
+  transform: translateX(-50%);
+  backdrop-filter: blur(28px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(130%) !important;
+  will-change: transform, opacity, filter !important;
+}
+
+.services-gsap-active#services header > div:nth-child(3)::before {
+  content: "";
+  position: absolute;
+  inset: -34% 14% auto;
+  height: 70%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.09);
+  filter: blur(58px);
+  pointer-events: none;
+}
+
+.services-gsap-active#services header > div:nth-child(3) p {
+  position: relative !important;
+  z-index: 1 !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: rgba(255, 255, 255, 0.16) !important;
+  font-size: clamp(25px, 2.35vw, 43px) !important;
+  font-weight: 430 !important;
+  line-height: 1.27 !important;
+  letter-spacing: -0.046em !important;
+  text-align: center !important;
+}
+
+.services-gsap-active#services .service-fill-word {
+  color: rgba(255, 255, 255, 0.16);
+  will-change: color, text-shadow;
+}
+
+.services-cards-viewport {
+  position: relative;
+  display: flex;
+  min-height: 100svh;
+  align-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(64% 40% at 50% 55%, rgba(255, 255, 255, 0.022), transparent 72%),
+    #050505;
+}
+
+.services-gsap-active#services .services-cards-viewport > div {
+  display: flex !important;
+  width: max-content !important;
+  min-width: max-content !important;
+  grid-template-columns: none !important;
+  align-items: stretch !important;
+  gap: clamp(18px, 1.35vw, 28px) !important;
+  padding: 0 7vw !important;
+  will-change: transform !important;
+}
+
+.services-gsap-active#services .services-cards-viewport > div > div {
+  display: contents !important;
+}
+
+.services-gsap-active#services article[data-service-card] {
+  flex: 0 0 clamp(410px, 43vw, 720px) !important;
+  width: clamp(410px, 43vw, 720px) !important;
+  height: clamp(560px, 72vh, 770px) !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  border: 1px solid rgba(255, 255, 255, 0.085) !important;
+  border-radius: clamp(22px, 1.8vw, 32px) !important;
+  background:
+    radial-gradient(70% 52% at 50% 84%, rgba(255, 255, 255, 0.035), transparent 68%),
+    linear-gradient(180deg, rgba(21, 21, 21, 0.98), rgba(12, 12, 12, 0.99)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 28px 70px rgba(0, 0, 0, 0.31) !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.services-gsap-active#services article[data-service-card] > div:first-child {
+  width: min(82%, 560px) !important;
+  margin: 0 auto !important;
+  padding: clamp(42px, 4.2vw, 68px) 20px 0 !important;
+  text-align: center !important;
+}
+
+.services-gsap-active#services article[data-service-card] h3 {
+  margin: 0 0 clamp(18px, 1.8vw, 28px) !important;
+  color: #f7f4ef !important;
+  font-size: clamp(36px, 3.1vw, 58px) !important;
+  font-weight: 430 !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.058em !important;
+}
+
+.services-gsap-active#services article[data-service-card] p {
+  max-width: 520px !important;
+  margin: 0 auto !important;
+  color: rgba(239, 236, 232, 0.49) !important;
+  font-size: clamp(15px, 1.18vw, 22px) !important;
+  line-height: 1.45 !important;
+  letter-spacing: -0.023em !important;
+}
+
+.services-gsap-active#services article[data-service-card] > div:last-child {
+  inset: clamp(210px, 24vh, 280px) 0 0 !important;
+}
+
+.services-gsap-static#services header > div:nth-child(3) {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+.services-gsap-static#services .service-fill-word {
+  color: rgba(255, 255, 255, 0.96) !important;
+}
+
+@media (max-width: 1100px) and (min-width: 769px) {
+  .services-gsap-active#services header {
+    padding-top: 132px !important;
+  }
+
+  .services-gsap-active#services header > div:nth-child(3) {
+    top: 60% !important;
+    width: min(760px, 84vw) !important;
+  }
+
+  .services-gsap-active#services article[data-service-card] {
+    flex-basis: clamp(390px, 58vw, 620px) !important;
+    width: clamp(390px, 58vw, 620px) !important;
+    height: clamp(540px, 68vh, 700px) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-gsap-active#services > div {
+    width: min(92vw, 680px) !important;
+    margin-inline: auto !important;
+    padding: 88px 0 !important;
+  }
+
+  .services-gsap-active#services header {
+    position: relative !important;
+    min-height: auto !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .services-gsap-active#services #outcrowd-services-title {
+    font-size: clamp(76px, 24vw, 126px) !important;
+  }
+
+  .services-gsap-active#services header > div:nth-child(2) {
+    width: 100% !important;
+    margin-top: 42px !important;
+  }
+
+  .services-gsap-active#services header > div:nth-child(2) p {
+    font-size: clamp(17px, 4.7vw, 24px) !important;
+  }
+
+  .services-gsap-active#services header > div:nth-child(3) {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    margin-top: 58px !important;
+    padding: 30px 24px !important;
+    border-radius: 24px !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .services-gsap-active#services header > div:nth-child(3) p {
+    font-size: clamp(22px, 6vw, 30px) !important;
+    line-height: 1.32 !important;
+  }
+}
