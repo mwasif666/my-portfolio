@@ -164,7 +164,7 @@
   border-radius: var(--journey-outer);
   background-image:
     linear-gradient(180deg, rgba(2, 13, 18, .02), rgba(0, 18, 28, .16)),
-    url("/assets/journey-visual.png");
+    url("https://res.cloudinary.com/agymx2xx/image/upload/f_auto,q_auto/wasif-portfolio/journey-visual");
   background-repeat: no-repeat;
   background-position: center, center;
   background-size: 100% 100%, 100% auto;
@@ -235,7 +235,7 @@
   position: absolute;
   z-index: 1;
   inset: 0;
-  background-image: url("/assets/journey-visual.png");
+  background-image: url("https://res.cloudinary.com/agymx2xx/image/upload/f_auto,q_auto/wasif-portfolio/journey-visual");
   background-repeat: no-repeat;
   background-size: 300% auto;
 }

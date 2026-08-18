@@ -110,6 +110,24 @@ export function ScrollProvider({ children }) {
     window.scrollTo(0, 0);
   }, []);
 
+  // Jump to an absolute offset. Native `window.scrollTo` is not enough here:
+  // Lenis writes its own position every frame, so an external scroll is undone
+  // before the next paint. Going through Locomotive updates the value Lenis is
+  // animating towards, which is what actually sticks.
+  const scrollToY = useCallback((y, immediate = true) => {
+    const loco = locoRef.current;
+    if (loco) {
+      loco.scrollTo(y, {
+        immediate,
+        duration: immediate ? 0 : 0.6,
+        easing: (t) => 1 - Math.pow(1 - t, 4),
+      });
+      return;
+    }
+
+    window.scrollTo(0, y);
+  }, []);
+
   const scrollToId = useCallback((id) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -135,7 +153,7 @@ export function ScrollProvider({ children }) {
 
   return (
     <ScrollCtx.Provider
-      value={{ stopScroll, startScroll, scrollToId, scrollToTop, refreshScroll }}
+      value={{ stopScroll, startScroll, scrollToId, scrollToTop, scrollToY, refreshScroll }}
     >
       {children}
     </ScrollCtx.Provider>

@@ -1,10 +1,12 @@
 import { useEffect, useRef } from "react";
 import styles from "./DeveloperSystemsSection.module.css";
 import glowStyles from "./DeveloperSystemsGlow.module.css";
-import gradient1 from "../../assets/developer-systems/gradient.png";
-import gradient2 from "../../assets/developer-systems/gradient02.png";
-import industryLogo from "../../assets/developer-systems/indus-logo.png";
-import networkShape from "../../assets/developer-systems/indus-shape.png";
+import { cldUrl } from "../../lib/cloudinary";
+
+const gradient1 = cldUrl("gradient");
+const gradient2 = cldUrl("gradient02");
+const industryLogo = cldUrl("indus-logo");
+const networkShape = cldUrl("indus-shape");
 import serviceIcon01 from "../../assets/developer-systems/service-icon01.svg";
 import serviceIcon02 from "../../assets/developer-systems/service-icon02.svg";
 import serviceIcon03 from "../../assets/developer-systems/service-icon03.svg";

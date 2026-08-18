@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
+import useServicesTimeline from "./useServicesTimeline";
 import styles from "./Services.module.css";
 
 const LOTTIE_SCRIPT =
@@ -239,43 +240,18 @@ function ServiceArt({ service }) {
   );
 }
 
-function ServiceCard({ service, delay }) {
-  const cardRef = useRef(null);
-
-  useEffect(() => {
-    const card = cardRef.current;
-    if (!card) return undefined;
-
-    if (typeof IntersectionObserver === "undefined") {
-      card.dataset.visible = "true";
-      return undefined;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          card.dataset.visible = "true";
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.14, rootMargin: "0px 0px -4% 0px" },
-    );
-
-    observer.observe(card);
-    return () => observer.disconnect();
-  }, []);
-
+function ServiceCard({ service, index }) {
   return (
-    <article
-      ref={cardRef}
-      className={`${styles.card} ${styles[service.key]}`}
-      style={{ "--reveal-delay": `${delay}ms` }}
-      data-service-card
-    >
+    <article className={`${styles.card} ${styles[service.key]}`} data-service-card>
+      <span className={styles.cardIndex} aria-hidden="true">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+
       <div className={styles.cardCopy}>
         <h3>{service.title}</h3>
         <p>{service.description}</p>
       </div>
+
       <div className={styles.artStage}>
         <ServiceArt service={service} />
       </div>
@@ -283,38 +259,23 @@ function ServiceCard({ service, delay }) {
   );
 }
 
-export default function StoktServices() {
+const QUOTE = `Instead of a request which sounds like “I need a website”, I'd rather hear “I want this thing to load fast and actually convert” — then work out what to build, and ship the approved plan end to end.`;
+
+export default function StoktServices({ onContact }) {
   const sectionRef = useRef(null);
-  const cardsRef = useRef(null);
+  const heroRef = useRef(null);
+  const quoteRef = useRef(null);
+  const railRef = useRef(null);
+  const trackRef = useRef(null);
   const cursorRef = useRef(null);
+  const wordsRef = useRef([]);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return undefined;
-
-    if (typeof IntersectionObserver === "undefined") {
-      section.dataset.revealed = "true";
-      return undefined;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          section.dataset.revealed = "true";
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.08, rootMargin: "0px 0px -5% 0px" },
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
+  useServicesTimeline({ sectionRef, heroRef, quoteRef, wordsRef, railRef, trackRef });
 
   const updatePointerEffects = (event) => {
-    const wrap = cardsRef.current;
-    if (wrap) {
-      for (const card of wrap.querySelectorAll("[data-service-card]")) {
+    const track = trackRef.current;
+    if (track) {
+      for (const card of track.querySelectorAll("[data-service-card]")) {
         const rect = card.getBoundingClientRect();
         card.style.setProperty("--mouse-x", `${event.clientX - rect.left}px`);
         card.style.setProperty("--mouse-y", `${event.clientY - rect.top}px`);
@@ -333,14 +294,11 @@ export default function StoktServices() {
     if (cursorRef.current) cursorRef.current.dataset.visible = "false";
   };
 
-  const leftColumn = services.slice(0, 3);
-  const rightColumn = services.slice(3);
-
   return (
     <section
       ref={sectionRef}
       className={styles.section}
-      id="capabilities"
+      id="services"
       aria-labelledby="outcrowd-services-title"
       onPointerMove={updatePointerEffects}
       onPointerEnter={updatePointerEffects}
@@ -350,52 +308,46 @@ export default function StoktServices() {
         <i />
       </span>
 
-      <div className={styles.inner}>
-        <header className={styles.header}>
-          <div className={styles.headingBlock}>
-            <h2 id="outcrowd-services-title">Services</h2>
-            <span className={styles.headingShadow} aria-hidden="true" />
-          </div>
+      <div className={styles.viewport}>
+        {/* Act 1 */}
+        <div ref={heroRef} className={styles.hero}>
+          <h2 id="outcrowd-services-title">Services</h2>
+          <p>
+            Whether you need a full-scale IT partner to define the roadmap or a
+            vendor for particular tasks, we got you
+          </p>
+          <button type="button" className={styles.tag} onClick={onContact}>
+            Complex solution
+          </button>
+        </div>
 
-          <div className={styles.primaryIntro}>
-            <p>
-              Whether you need a full-scale IT partner to define the roadmap or
-              a vendor for particular tasks, we got you
+        {/* Act 2 — glass panel, copy fills word by word on scrub */}
+        <div ref={quoteRef} className={styles.quote}>
+          <div className={styles.quoteGlow} aria-hidden="true" />
+          <div className={styles.quotePanel}>
+            <p className={styles.quoteText}>
+              {QUOTE.split(" ").map((word, index) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <Fragment key={`${word}-${index}`}>
+                  <span
+                    ref={(node) => {
+                      wordsRef.current[index] = node;
+                    }}
+                    className={styles.word}
+                  >
+                    {word}
+                  </span>{" "}
+                </Fragment>
+              ))}
             </p>
-            <span className={styles.tag}>Complex solution</span>
           </div>
+        </div>
 
-          <div className={styles.secondaryIntro}>
-            <span className={styles.verticalLine} aria-hidden="true">
-              <i />
-            </span>
-            <p>
-              Instead of a request which sounds like “I need a website”, we
-              embrace - “I want to market my product to get first organic
-              users”, where we can suggest what to do, and execute the approved
-              plan from A to Z.
-            </p>
-          </div>
-        </header>
-
-        <div ref={cardsRef} className={styles.cards}>
-          <div className={`${styles.column} ${styles.leftColumn}`}>
-            {leftColumn.map((service, index) => (
-              <ServiceCard
-                key={service.key}
-                service={service}
-                delay={index * 70}
-              />
-            ))}
-          </div>
-
-          <div className={`${styles.column} ${styles.rightColumn}`}>
-            {rightColumn.map((service, index) => (
-              <ServiceCard
-                key={service.key}
-                service={service}
-                delay={index * 70 + 35}
-              />
+        {/* Act 3 — carousel */}
+        <div ref={railRef} className={styles.rail}>
+          <div ref={trackRef} className={styles.track}>
+            {services.map((service, index) => (
+              <ServiceCard key={service.key} service={service} index={index} />
             ))}
           </div>
         </div>

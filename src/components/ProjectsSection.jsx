@@ -1,80 +1,120 @@
-import { useState } from "react";
+import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useScroll } from "../contexts/ScrollContext";
+import { cldUrl, cldVideoSources } from "../lib/cloudinary";
 import styles from "./ProjectsShowcase.module.css";
+
+// Screen recordings play at this rate — the capture is a slow scroll-through
+// and reads as sluggish at 1x inside a small card.
+const PREVIEW_PLAYBACK_RATE = 1.5;
 
 const projects = [
   {
+    name: "Hierys",
+    url: "https://hierys.com/",
+    video: cldVideoSources("projects/hierys"),
+    // Read off the site's own bundle rather than guessed: react-dom + 53
+    // useState calls, 206 `--tw-` custom properties in the stylesheet, 55 gsap
+    // references with ScrollTrigger, and react-router in the chunk.
+    services: ["React & Vite", "Tailwind CSS", "GSAP ScrollTrigger", "Agency Website", "Responsive UI"],
+  },
+  {
     name: "Offplan DXB",
     url: "https://offplandxb.ae/",
-    image:
-      "https://res.cloudinary.com/dsjxs1umc/image/upload/v1760475443/wnmkvdi1ij9ga9gyyb6b.png",
+    image: cldUrl("projects/offplan-dxb"),
     services: ["Laravel Development", "Property Search", "Inquiry Management", "Responsive Frontend", "SEO Structure"],
-    source: "InnovationPixel portfolio record",
   },
   {
     name: "Petroc Energy",
     url: "https://petrocenergy.com/",
-    image:
-      "https://res.cloudinary.com/dsjxs1umc/image/upload/v1760479830/gqv6hejxtb69zpzga5c3.png",
+    image: cldUrl("projects/petroc-energy"),
     services: ["Corporate Website", "HTML / CSS", "Bootstrap", "Responsive Development", "Performance"],
-    source: "InnovationPixel portfolio record",
   },
   {
     name: "Pinnacle Design Agency",
     url: "https://www.pinnacledesignagency.com/",
-    image:
-      "https://res.cloudinary.com/dsjxs1umc/image/upload/v1760479676/hrui65r8hmzdoheegqgw.png",
+    image: cldUrl("projects/pinnacle"),
     services: ["PHP Development", "Agency Website", "Bootstrap", "Responsive UI", "SEO"],
-    source: "InnovationPixel portfolio record",
   },
   {
     name: "ABET Global",
     url: "https://abetglobal.com/",
-    image:
-      "https://res.cloudinary.com/dsjxs1umc/image/upload/v1760477365/fxoqhkisj6eemx0a8vxy.png",
+    image: cldUrl("projects/abet-global"),
     services: ["Laravel Development", "Corporate Platform", "CMS Structure", "Responsive UI", "Regional SEO"],
-    source: "InnovationPixel portfolio record",
   },
   {
     name: "Vampire Tools",
     url: "https://vampiretools.com/",
-    image:
-      "https://res.cloudinary.com/dsjxs1umc/image/upload/v1760473074/ihvkr9eublhgfwxbksqy.png",
+    image: cldUrl("projects/vampire-tools"),
     services: ["WordPress", "WooCommerce", "E-commerce Development", "Product UX", "SEO Schema"],
-    source: "InnovationPixel portfolio record",
-  },
-  {
-    name: "Jobee",
-    url: "https://jobee.innovationpixel.com/",
-    services: ["Job Board", "Web Development", "Search Experience", "Listings", "Responsive UI"],
-    source: "InnovationPixel hosted build",
-    livePreview: true,
   },
   {
     name: "Oxford Ghostwriting",
     url: "https://oxford.innovationpixel.com/",
     services: ["Service Website", "Publishing Services", "Lead Generation", "Responsive Development", "Content Architecture"],
-    source: "InnovationPixel hosted build",
     livePreview: true,
   },
   {
     name: "Dissertation Lord",
     url: "https://www.disser.innovationpixel.com/",
     services: ["Academic Services", "Lead Generation", "Responsive Website", "Forms", "Content-led UX"],
-    source: "InnovationPixel hosted build",
     livePreview: true,
   },
   {
     name: "Dynamic Fascia",
     url: "https://fasciau.innovationpixel.com/",
     services: ["Education Platform", "Course Content", "Enquiry Flows", "Responsive Development", "Content System"],
-    source: "InnovationPixel hosted build",
     livePreview: true,
   },
 ];
 
 const INITIAL_PROJECT_COUNT = 6;
 
+/*
+ * `playbackRate` is a property of the media element, not an attribute, so it
+ * cannot be set in JSX — and it is reset every time the element loads a source,
+ * which for a `<source>` list happens after mount. Hence setting it on
+ * loadedmetadata rather than once in an effect.
+ */
+function ProjectVideo({ project }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return undefined;
+
+    const applyRate = () => {
+      video.playbackRate = PREVIEW_PLAYBACK_RATE;
+    };
+
+    applyRate();
+    video.addEventListener("loadedmetadata", applyRate);
+    return () => video.removeEventListener("loadedmetadata", applyRate);
+  }, []);
+
+  return (
+    <video
+      ref={ref}
+      className={styles.previewVideo}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      tabIndex={-1}
+      aria-label={`${project.name} website preview`}
+    >
+      {project.video.map((source) => (
+        <source key={source.type} src={source.src} type={source.type} />
+      ))}
+    </video>
+  );
+}
+
 function LiveProjectPreview({ project }) {
+  if (project.video) {
+    return <ProjectVideo project={project} />;
+  }
+
   if (project.image) {
     return (
       <img
@@ -99,15 +139,30 @@ function LiveProjectPreview({ project }) {
   );
 }
 
-function ProjectRow({ project, index }) {
+function ProjectRow({ project, index, revealed }) {
   return (
-    <article className={styles.row}>
+    <article
+      className={`${styles.row}${revealed ? ` ${styles.revealed}` : ""}`}
+      // Each card sticks a little lower than the one before it, so the stack
+      // keeps a visible edge of everything already passed.
+      style={{ "--i": index }}
+    >
       <div className={styles.identity}>
         <span className={styles.number}>
           ({String(index + 1).padStart(2, "0")})
         </span>
-        <h3 className={styles.name}>{project.name}</h3>
-        <span className={styles.source}>{project.source}</span>
+        {/* One word per line — a plain wrap would break wherever the column
+            happens to run out, which is not the same thing. The spaces are kept
+            as real text nodes so the heading still reads as a sentence to a
+            screen reader; between block spans they collapse to nothing. */}
+        <h3 className={styles.name}>
+          {project.name.split(" ").map((word, wordIndex) => (
+            <Fragment key={word}>
+              {wordIndex > 0 ? " " : null}
+              <span>{word}</span>
+            </Fragment>
+          ))}
+        </h3>
       </div>
 
       <div className={styles.services} aria-label={`${project.name} services`}>
@@ -132,8 +187,34 @@ function ProjectRow({ project, index }) {
 
 export default function ProjectsSection() {
   const [open, setOpen] = useState(false);
-  const visibleProjects = projects.slice(0, INITIAL_PROJECT_COUNT);
-  const remainingProjects = projects.slice(INITIAL_PROJECT_COUNT);
+  const { scrollToY } = useScroll();
+  const toggleRef = useRef(null);
+  const anchorTopRef = useRef(null);
+  const visibleProjects = open ? projects : projects.slice(0, INITIAL_PROJECT_COUNT);
+  const hasMore = projects.length > INITIAL_PROJECT_COUNT;
+
+  const handleToggle = () => {
+    // Only collapsing needs pinning. Expanding inserts the new rows directly
+    // below what the visitor is already looking at and pushes the button down
+    // past them, which is the point of pressing it.
+    anchorTopRef.current = open
+      ? toggleRef.current?.getBoundingClientRect().top ?? null
+      : null;
+    setOpen((value) => !value);
+  };
+
+  // Collapsing takes rows out from *above* the button, so everything below
+  // jumps up by their height and the visitor is left somewhere they never
+  // scrolled to. Put the button back on the spot it already occupied.
+  useLayoutEffect(() => {
+    const before = anchorTopRef.current;
+    if (before === null) return;
+    anchorTopRef.current = null;
+
+    const after = toggleRef.current?.getBoundingClientRect().top;
+    if (after === undefined || after === before) return;
+    scrollToY(window.scrollY + (after - before));
+  }, [open, scrollToY]);
 
   return (
     <section className={styles.section} id="projects" aria-labelledby="projects-title">
@@ -154,41 +235,33 @@ export default function ProjectsSection() {
           </div>
         </header>
 
-        <div className={styles.list}>
+        {/* One list, always. The extra projects join the stack in place rather
+            than opening in a drawer underneath the button. */}
+        <div className={styles.list} id="projects-list">
           {visibleProjects.map((project, index) => (
-            <ProjectRow project={project} index={index} key={project.name} />
+            <ProjectRow
+              project={project}
+              index={index}
+              revealed={index >= INITIAL_PROJECT_COUNT}
+              key={project.name}
+            />
           ))}
         </div>
 
-        {remainingProjects.length ? (
-          <>
-            <div className={styles.moreToggleRow}>
-              <button
-                className={styles.toggle}
-                type="button"
-                aria-expanded={open}
-                aria-controls="remaining-projects-list"
-                onClick={() => setOpen((value) => !value)}
-              >
-                <span>{open ? "Hide projects" : "View more projects"}</span>
-                <span className={styles.toggleIcon} aria-hidden="true">↓</span>
-              </button>
-            </div>
-
-            <div className={styles.listWrap} data-open={open ? "true" : "false"}>
-              <div className={styles.listClip}>
-                <div className={`${styles.list} ${styles.moreList}`} id="remaining-projects-list">
-                  {remainingProjects.map((project, offset) => (
-                    <ProjectRow
-                      project={project}
-                      index={INITIAL_PROJECT_COUNT + offset}
-                      key={project.name}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </>
+        {hasMore ? (
+          <div className={styles.moreToggleRow}>
+            <button
+              ref={toggleRef}
+              className={styles.toggle}
+              type="button"
+              aria-expanded={open}
+              aria-controls="projects-list"
+              onClick={handleToggle}
+            >
+              <span>{open ? "Show fewer projects" : "View more projects"}</span>
+              <span className={styles.toggleIcon} aria-hidden="true">↓</span>
+            </button>
+          </div>
         ) : null}
       </div>
     </section>

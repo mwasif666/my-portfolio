@@ -1,8 +1,10 @@
 import clsx from "clsx";
-import myImg from "../../../myimg.png";
+import { cldUrl } from "../../lib/cloudinary";
 import bannerStyles from "../KontourBanner.module.css";
 import styles from "./HeroPortrait.module.css";
 import { heroReveal } from "./heroMotion";
+
+const PORTRAIT = cldUrl("portrait");
 
 export default function HeroPortrait() {
   return (
@@ -10,7 +12,7 @@ export default function HeroPortrait() {
       <div className={styles.glow} aria-hidden="true" />
       <div className={styles.rim} aria-hidden="true" />
       <img
-        src={myImg}
+        src={PORTRAIT}
         alt="Muhammad Wasif, full-stack web developer"
         draggable="false"
         decoding="async"

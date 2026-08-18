@@ -397,7 +397,7 @@
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-image: url("../../assets/developer-systems/noise.png");
+  background-image: url("https://res.cloudinary.com/agymx2xx/image/upload/f_auto,q_auto/wasif-portfolio/noise");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

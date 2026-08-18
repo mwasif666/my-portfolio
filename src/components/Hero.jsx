@@ -6,8 +6,10 @@ import PillButton from './PillButton';
 import { Logo, StackIcon } from './Icons';
 import { useScroll } from '../contexts/ScrollContext';
 import BackgroundGradient from '@/components/ui/background-gradient-snippet';
-import whiteGlasses from '../../1.png';
-import blackGlasses from '../../2.png';
+import { cldUrl } from "../lib/cloudinary";
+
+const whiteGlasses = cldUrl("glasses-white");
+const blackGlasses = cldUrl("glasses-black");
 
 const STACK = [
   { name: 'React', key: 'react', tone: '#61dafb', strongest: true },

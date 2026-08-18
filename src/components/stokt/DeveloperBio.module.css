@@ -1,10 +1,9 @@
+/* No blue bloom on this section any more — it used to wash the top edge, was
+   moved to the foot, and is now gone entirely. Just the flat dark ramp. */
 .aboutAmbient,
 :global(#about) {
   isolation: isolate;
-  background:
-    radial-gradient(ellipse at 50% -8%, rgba(40, 133, 214, .22), transparent 40%),
-    radial-gradient(circle at 84% 2%, rgba(25, 121, 174, .17), transparent 30%),
-    linear-gradient(180deg, #03070b 0%, #04090e 28%, #03070b 64%, #03070b 100%) !important;
+  background: linear-gradient(180deg, #03070b 0%, #04090e 34%, #03070b 100%) !important;
 }
 
 .aboutAmbient::before,
@@ -51,8 +50,9 @@
   min-height: clamp(31rem, 35vw, 37rem) !important;
   overflow: hidden !important;
   padding: clamp(2rem, 2.6vw, 2.8rem) !important;
+  /* The blue bloom that used to sit under the foot of this card is gone; the
+     faint off-centre wash stays so the panel is not flat. */
   background:
-    radial-gradient(ellipse at 50% 116%, rgba(74, 159, 255, .37), transparent 40%),
     radial-gradient(circle at 86% 42%, rgba(9, 86, 128, .18), transparent 35%),
     linear-gradient(120deg, rgba(3, 9, 14, .99), rgba(3, 12, 19, .98)) !important;
   box-shadow:

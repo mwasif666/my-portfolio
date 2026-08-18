@@ -1,9 +1,11 @@
-import myImg from "../../../myimg.png";
+import { cldUrl } from "../../lib/cloudinary";
 import AboutGlobe from "./AboutGlobe";
 import styles from "./About.module.css";
 import themeStyles from "./AboutBlueTheme.module.css";
 import logoStyles from "./ToolLogos.module.css";
 import bioStyles from "./DeveloperBio.module.css";
+
+const PORTRAIT = cldUrl("portrait");
 
 const stats = [
   { value: "4+", label: "Years building" },
@@ -200,7 +202,7 @@ export default function StoktAbout() {
               className={`${styles.profileGlow} ${themeStyles.blueProfileGlow}`}
               aria-hidden="true"
             />
-            <img src={myImg} alt="Muhammad Wasif" draggable="false" />
+            <img src={PORTRAIT} alt="Muhammad Wasif" draggable="false" />
             <div
               className={`${styles.profileMeta} ${themeStyles.blueProfileMeta}`}
             >
@@ -225,7 +227,7 @@ export default function StoktAbout() {
 
             <div className={bioStyles.editorialAuthor}>
               <span className={bioStyles.editorialAvatar}>
-                <img src={myImg} alt="" aria-hidden="true" />
+                <img src={PORTRAIT} alt="" aria-hidden="true" />
               </span>
               <span className={bioStyles.editorialAuthorCopy}>
                 <strong>Muhammad Wasif</strong>

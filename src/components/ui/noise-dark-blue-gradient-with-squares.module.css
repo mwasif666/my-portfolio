@@ -12,16 +12,26 @@
   background: radial-gradient(circle 620px at 50% 200px, rgba(37,99,235,.35), transparent 70%);
 }
 
+/*
+ * The lines carry a sub-pixel falloff rather than a hard 1px cut. A hairline
+ * with a hard edge flickers as the compositor resamples it across pixel
+ * boundaries; the soft shoulder makes that crossing invisible.
+ *
+ * Travel is exactly one tile, so the pattern lands back on itself and the loop
+ * has no seam — the -1 tile inset covers the strip it vacates.
+ */
 .grid {
   position: absolute;
   inset: var(--grid-offset);
   background-image:
-    linear-gradient(var(--grid-color) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    linear-gradient(180deg, var(--grid-color) 0, var(--grid-color) 1px, transparent 1.8px),
+    linear-gradient(90deg, var(--grid-color) 0, var(--grid-color) 1px, transparent 1.8px);
   background-size: var(--grid-size) var(--grid-size);
   animation-duration: var(--grid-duration);
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
   will-change: transform;
 }
 
@@ -49,19 +59,26 @@
     linear-gradient(to bottom, transparent 0 55%, rgba(0,0,0,.54) 100%);
 }
 
+/* Each keyframe states its own `from` so the run never inherits a half-applied
+   transform when the animation restarts. */
 @keyframes gridDiagonal {
+  from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(var(--grid-size), var(--grid-size), 0); }
 }
 @keyframes gridRight {
+  from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(var(--grid-size), 0, 0); }
 }
 @keyframes gridLeft {
+  from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(var(--grid-offset), 0, 0); }
 }
 @keyframes gridUp {
+  from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(0, var(--grid-offset), 0); }
 }
 @keyframes gridDown {
+  from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(0, var(--grid-size), 0); }
 }
 

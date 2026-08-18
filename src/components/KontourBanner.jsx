@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import clsx from "clsx";
 import { useInView } from "../hooks/useInView";
-import HeroBackdrop from "./hero/HeroBackdrop";
+import NoiseDarkBlueGradientWithSquares from "./ui/noise-dark-blue-gradient-with-squares";
 import HeroIntro from "./hero/HeroIntro";
 import HeroPortrait from "./hero/HeroPortrait";
 import HeroStats from "./hero/HeroStats";
@@ -30,7 +30,18 @@ export default function KontourBanner({
         "min-[901px]:min-h-[100svh]",
       )}
     >
-      {isBlue && <HeroBackdrop />}
+      {/* Same backdrop the loader runs, with the same props, so the curtain
+          lifts onto a field the visitor has already been looking at. */}
+      {isBlue && (
+        <NoiseDarkBlueGradientWithSquares
+          className="z-0"
+          direction="diagonal"
+          speed={0.6}
+          squareSize={44}
+          borderColor="rgba(255,255,255,0.12)"
+          vignette
+        />
+      )}
 
       {!isBlue && (
         <>

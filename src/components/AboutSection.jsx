@@ -1,5 +1,7 @@
 import { Code2 } from "lucide-react";
-import myImg from "../../myimg.png";
+import { cldUrl } from "../lib/cloudinary";
+
+const PORTRAIT = cldUrl("portrait");
 
 // Keep the original code icon while preserving the current About layout alignment.
 export default function AboutSection({ id = "about", className = "" }) {
@@ -29,7 +31,7 @@ export default function AboutSection({ id = "about", className = "" }) {
 
           <div className="about-story__profile">
             <div className="about-story__avatar">
-              <img src={myImg} alt="Muhammad Wasif" draggable="false" />
+              <img src={PORTRAIT} alt="Muhammad Wasif" draggable="false" />
             </div>
 
             <div className="about-story__profile-copy">

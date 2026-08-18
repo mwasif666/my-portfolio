@@ -9,8 +9,8 @@ import WhySection from "./components/why/WhySection";
 import JourneySection from "./components/journey/JourneySection";
 import DeveloperSystemsSection from "./components/developerSystems/DeveloperSystemsSection";
 import NavMenu from "./components/NavMenu";
+import Footer from "./components/Footer";
 import RequestModal from "./components/RequestModal";
-import "./services-screenshot-target.css";
 
 export default function App() {
   const [ready, setReady] = useState(false);
@@ -47,6 +47,8 @@ export default function App() {
         <JourneySection />
         <DeveloperSystemsSection />
       </main>
+
+      <Footer onContact={openModal} />
 
       <NavMenu
         open={menuOpen}

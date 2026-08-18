@@ -1,7 +1,10 @@
+/* `clip` rather than `hidden`: it still trims the oversized ::after ring, but
+   unlike `hidden` it does not turn this section into a scroll container, which
+   would stop the rows below from sticking to the viewport. */
 .section {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  overflow: clip;
   background:
     radial-gradient(circle at 82% 14%, rgba(31, 126, 176, .12), transparent 30%),
     radial-gradient(ellipse at 50% 102%, rgba(43, 134, 210, .11), transparent 36%),
@@ -145,52 +148,83 @@
 .moreToggleRow {
   display: flex;
   justify-content: center;
-  padding: clamp(2rem, 3vw, 3rem) 0;
-  border-bottom: 1px solid rgba(151, 189, 207, .16);
+  padding: clamp(2.6rem, 4vw, 4rem) 0 0;
 }
 
-.listWrap {
-  display: grid;
-  grid-template-rows: 0fr;
-  opacity: 0;
-  transition:
-    grid-template-rows 700ms cubic-bezier(.22,1,.36,1),
-    opacity 300ms ease;
-}
-
-.listWrap[data-open="true"] {
-  grid-template-rows: 1fr;
-  opacity: 1;
-}
-
-.listClip { overflow: hidden; }
-
+/*
+ * The rows stack as you scroll: each one is sticky, parked a notch lower than
+ * the one before it, so the card arriving slides up over the card already
+ * parked and leaves a thin edge of it showing. The gap sets how much of the
+ * next card you see before it catches.
+ */
 .list {
-  border-top: 1px solid rgba(151, 189, 207, .18);
-}
-
-.moreList {
-  border-top: 0;
+  --stack-top: clamp(5.5rem, 10vh, 7.5rem);
+  --stack-step: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.1rem, 1.8vw, 1.9rem);
 }
 
 .row {
+  --i: 0;
+  position: sticky;
+  top: calc(var(--stack-top) + var(--i) * var(--stack-step));
   display: grid;
-  grid-template-columns: minmax(12rem, .9fr) minmax(15rem, 1fr) minmax(22rem, 1.25fr);
-  gap: clamp(1.5rem, 4vw, 5rem);
-  align-items: center;
-  min-height: clamp(18rem, 25vw, 26rem);
-  padding: clamp(2.2rem, 4vw, 4.4rem) 0;
-  border-bottom: 1px solid rgba(151, 189, 207, .16);
+  grid-template-columns: minmax(11rem, .85fr) minmax(14rem, 1fr) minmax(22rem, 1.3fr);
+  gap: clamp(1.5rem, 3.4vw, 4rem);
+  /* Stretch, not centre: on a card this tall centring leaves a hollow band
+     down the middle of both text columns. */
+  align-items: stretch;
+  min-height: clamp(22rem, 30vw, 31rem);
+  padding: clamp(1.9rem, 3vw, 3.1rem);
+  border: 1px solid rgba(108, 195, 235, .16);
+  border-radius: clamp(16px, 1.5vw, 26px);
+  /* Opaque enough to actually cover the card it lands on, with the blur just
+     softening whatever edge still shows through. */
+  background: linear-gradient(180deg, rgba(11, 28, 43, .9), rgba(4, 12, 20, .93));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .05),
+    0 1.4rem 3.4rem rgba(0, 6, 12, .5);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  backdrop-filter: blur(20px) saturate(140%);
 }
 
+/* Rows that arrive when the list is expanded, rather than on first paint. */
+.revealed {
+  animation: rowIn 620ms cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@keyframes rowIn {
+  from { opacity: 0; transform: translateY(1.6rem); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Name at the top of the card, provenance line pinned to the bottom, so the
+   left column reads as one column of the card rather than a floating block. */
+/* Centred horizontally in the column, but the text inside it is not:
+   `fit-content` shrinks the group to its widest line and `justify-self` centres
+   that group, so the number and every line of the title share one left edge.
+   Vertically the number stays at the top and only the title centres — see the
+   auto margins on `.name`. */
 .identity {
-  align-self: start;
-  padding-top: .25rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  justify-self: center;
+  width: fit-content;
+  max-width: 100%;
+  text-align: left;
 }
 
+/* Out of flow, so it holds the top corner without shifting the title off the
+   card's centre line. It still shares the title's left edge. */
 .number {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: block;
-  margin-bottom: .65rem;
   color: #7ddcff;
   font-size: clamp(.78rem, .9vw, .95rem);
 }
@@ -205,23 +239,22 @@
   text-shadow: 0 0 1.4rem rgba(110, 199, 241, .11);
 }
 
-.source {
-  display: inline-flex;
-  margin-top: 1rem;
-  color: rgba(159, 188, 202, .55);
-  font-size: .72rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
+.name span {
+  display: block;
 }
 
+/* Same again: centred as a block on both axes, left-aligned line to line. */
 .services {
   display: grid;
   gap: .48rem;
-  align-self: start;
-  padding-top: .3rem;
+  align-self: center;
+  justify-self: center;
+  width: fit-content;
+  max-width: 100%;
   color: rgba(190, 201, 207, .65);
   font-size: clamp(.92rem, 1.12vw, 1.08rem);
   line-height: 1.3;
+  text-align: left;
 }
 
 .services span { display: block; }
@@ -229,7 +262,8 @@
 .visualLink {
   position: relative;
   display: block;
-  min-height: clamp(13rem, 17vw, 18rem);
+  height: 100%;
+  min-height: clamp(15rem, 20vw, 21.5rem);
   overflow: hidden;
   border: 1px solid rgba(108, 195, 235, .2);
   border-radius: 10px;
@@ -269,6 +303,7 @@
 }
 
 .previewImage,
+.previewVideo,
 .previewFrame {
   display: block;
   width: 100%;
@@ -291,6 +326,17 @@
   transform: scale(1.012);
 }
 
+.previewVideo {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  object-position: center top;
+  pointer-events: none;
+  transition: transform 650ms cubic-bezier(.16,1,.3,1);
+}
+
+.visualLink:hover .previewVideo { transform: scale(1.012); }
+
 .previewFrame {
   position: absolute;
   inset: 0;
@@ -305,31 +351,46 @@
   pointer-events: none;
 }
 
+/* Below this the cards go two- then one-column and grow taller than the screen,
+   so a stuck card would sit over the viewport with nowhere to go. They scroll
+   normally instead. */
 @media (max-width: 980px) {
   .header { grid-template-columns: 1fr; gap: 2rem; }
   .title { max-width: 12ch; }
   .headerSide { max-width: 38rem; }
   .row {
+    position: static;
     grid-template-columns: minmax(12rem, .72fr) minmax(0, 1fr);
     min-height: auto;
   }
   .visualLink { grid-column: 1 / -1; min-height: min(48vw, 24rem); }
+
+  /* No tall card to centre the title inside any more, and nothing guaranteeing
+     the column is deep enough to clear a floated number — so it goes back into
+     the flow above the title. */
+  .identity { justify-content: flex-start; }
+
+  .number {
+    position: static;
+    margin-bottom: .65rem;
+  }
 }
 
 @media (max-width: 640px) {
   .inner { width: min(calc(100% - 1.5rem), 96rem); padding-top: 5rem; }
   .title { font-size: clamp(3rem, 15vw, 4.8rem); }
-  .row { grid-template-columns: 1fr; gap: 1.5rem; padding: 2.6rem 0; }
+  .row { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; }
   .services { padding-top: 0; }
-  .visualLink { grid-column: auto; min-height: 14.5rem; }
+  .visualLink { grid-column: auto; min-height: 15.5rem; }
   .name { font-size: 2.1rem; }
-  .moreToggleRow { padding: 1.75rem 0; }
+  .moreToggleRow { padding: 2rem 0 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .listWrap,
   .toggle,
   .toggleIcon,
   .visualLink,
   .previewImage { transition: none; }
+
+  .revealed { animation: none; }
 }

@@ -2,8 +2,10 @@ import LiquidReveal from './LiquidReveal';
 import Reveal from './Reveal';
 import LineReveal from './LineReveal';
 import { Logo, ArrowRight, ArrowUpRight } from './Icons';
-import whiteGlasses from '../../whiteglass.png';
-import blackGlasses from '../../sunglasses.png';
+import { cldUrl } from "../lib/cloudinary";
+
+const whiteGlasses = cldUrl("whiteglass");
+const blackGlasses = cldUrl("sunglasses");
 
 const NAV = ['Home', 'About Me', 'Services', 'Project', 'Blog'];
 

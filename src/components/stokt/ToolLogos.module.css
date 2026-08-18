@@ -26,8 +26,8 @@
   padding: clamp(.85rem, 1.1vw, 1.1rem) !important;
   overflow: hidden !important;
   border-color: rgba(117, 205, 244, .16) !important;
+  /* Matching removal to the bio card above — no blue bloom along the bottom. */
   background:
-    radial-gradient(ellipse at 50% 122%, rgba(74, 159, 255, .22), transparent 39%),
     radial-gradient(circle at 50% 42%, rgba(32, 82, 129, .055), transparent 48%),
     linear-gradient(180deg, rgba(8, 16, 26, .98) 0%, rgba(5, 12, 21, .99) 78%, rgba(4, 11, 19, 1) 100%) !important;
   box-shadow:

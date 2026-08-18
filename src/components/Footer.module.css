@@ -1,0 +1,321 @@
+/*
+ * Page bookend. The backdrop is the loader/hero field again, so the site opens
+ * and closes on the same surface; everything above it is plain flow layout that
+ * collapses to a single column on narrow screens.
+ */
+
+.footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #00020f;
+  color: #eaf4ff;
+  font-family: "Onest", "DM Sans", sans-serif;
+}
+
+.backdrop {
+  z-index: 0;
+}
+
+/* The last section above ends on near-black, so the field fades in rather than
+   starting at a hard seam. */
+.footer::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 auto;
+  height: clamp(6rem, 14vh, 11rem);
+  background: linear-gradient(180deg, #00020f, transparent);
+  pointer-events: none;
+}
+
+.shell {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 140rem);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5.5vw, 7.5rem);
+}
+
+/* ------------------------------------------------------------- callout -- */
+
+.callout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: clamp(4.5rem, 12vh, 9rem);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0.4rem 0.85rem 0.4rem 0.6rem;
+  border: 1px solid rgba(140, 205, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(6, 40, 68, 0.42);
+  color: rgba(206, 234, 255, 0.82);
+  font-size: 0.66rem;
+  font-weight: 650;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.pulse {
+  width: 0.45rem;
+  height: 0.45rem;
+  flex: none;
+  border-radius: 50%;
+  background: #48c2f2;
+  box-shadow: 0 0 0 0 rgba(72, 194, 242, 0.55);
+  animation: pulse 2.4s ease-out infinite;
+}
+
+@keyframes pulse {
+  70% { box-shadow: 0 0 0 0.55rem rgba(72, 194, 242, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(72, 194, 242, 0); }
+}
+
+/* `balance` keeps the two lines even instead of stranding a word — the copy is
+   short enough for it to apply. */
+.title {
+  max-width: 19ch;
+  margin: clamp(1.4rem, 3vh, 2.2rem) 0 0;
+  color: #fff;
+  font-size: clamp(2rem, 4.6vw, 4.2rem);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.042em;
+  text-wrap: balance;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: clamp(1.8rem, 4vh, 2.8rem);
+  padding: clamp(0.85rem, 1.2vw, 1.1rem) clamp(1.5rem, 2.2vw, 2rem);
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: #07223a;
+  font: inherit;
+  font-size: clamp(0.88rem, 1vw, 1rem);
+  font-weight: 650;
+  cursor: pointer;
+  transition: transform 240ms cubic-bezier(.22,1,.36,1), box-shadow 240ms ease;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1rem 2.4rem rgba(0, 152, 241, 0.28);
+}
+
+.ctaIcon {
+  width: 1.05em;
+  height: 1.05em;
+  transition: transform 240ms cubic-bezier(.22,1,.36,1);
+}
+
+.cta:hover .ctaIcon { transform: translate3d(2px, -2px, 0); }
+
+/* ------------------------------------------------------------- columns -- */
+
+.columns {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: clamp(3.5rem, 9vh, 6.5rem);
+  padding-bottom: clamp(3rem, 7vh, 5rem);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.columnTitle {
+  margin: 0;
+  color: rgba(173, 209, 236, 0.55);
+  font-size: 0.66rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Buttons (in-page scroll) and anchors (off-site) sit in the same lists, so
+   the reset has to cover both. */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(232, 244, 255, 0.72);
+  font: inherit;
+  font-size: clamp(0.95rem, 1.15vw, 1.1rem);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 200ms ease, transform 200ms ease;
+}
+
+.link:hover {
+  color: #fff;
+  transform: translateX(3px);
+}
+
+.linkIcon {
+  width: 0.85em;
+  height: 0.85em;
+  opacity: 0.6;
+}
+
+.clock {
+  margin: 0;
+  color: rgba(232, 244, 255, 0.72);
+  font-size: clamp(0.95rem, 1.15vw, 1.1rem);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------ baseline -- */
+
+.baseline {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.baselineRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  padding: clamp(1.2rem, 3vh, 1.8rem) 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.brandMark {
+  display: grid;
+  width: 1.7rem;
+  height: 1.7rem;
+  flex: none;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  color: #07466f;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.copyright {
+  margin: 0;
+  color: rgba(198, 222, 240, 0.5);
+  font-size: 0.82rem;
+}
+
+.toTop {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(232, 244, 255, 0.8);
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 220ms ease, border-color 220ms ease, color 220ms ease;
+}
+
+.toTop:hover {
+  border-color: rgba(140, 205, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.toTopIcon { transition: transform 220ms cubic-bezier(.22,1,.36,1); }
+.toTop:hover .toTopIcon { transform: translateY(-2px); }
+
+/* --------------------------------------------------------------- entry -- */
+
+.callout > *,
+.columns > * {
+  opacity: 0;
+  transform: translateY(1.2rem);
+  transition:
+    opacity 700ms cubic-bezier(.22,1,.36,1),
+    transform 700ms cubic-bezier(.22,1,.36,1);
+}
+
+.in .callout > *,
+.in .columns > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.in .callout > *:nth-child(2) { transition-delay: 80ms; }
+.in .callout > *:nth-child(3) { transition-delay: 160ms; }
+.in .columns > *:nth-child(1) { transition-delay: 120ms; }
+.in .columns > *:nth-child(2) { transition-delay: 190ms; }
+.in .columns > *:nth-child(3) { transition-delay: 260ms; }
+
+/* ---------------------------------------------------------- responsive -- */
+
+@media (max-width: 900px) {
+  .columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 2.4rem;
+  }
+
+  .title { max-width: none; }
+}
+
+@media (max-width: 560px) {
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.9rem;
+    margin-top: clamp(2.6rem, 7vh, 3.4rem);
+  }
+
+  .cta { align-self: stretch; justify-content: center; }
+
+  .baselineRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse { animation: none; }
+
+  .callout > *,
+  .columns > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
