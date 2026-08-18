@@ -4,13 +4,7 @@ dist-ssr
 *.local
 .DS_Store
 
-# Cloudinary API secret lives here — never commit it.
+# Local environment values are never committed.
 .env
 .env.*
 !.env.example
-
-# Staging copies of the project screenshots pulled off the old cloud before
-# re-upload. ~18 MB, and the canonical copies now live on Cloudinary, so they
-# are not worth carrying in git. Only `upload-to-cloudinary.mjs --force` needs
-# them back.
-project-shots/

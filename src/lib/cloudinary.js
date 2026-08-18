@@ -3,11 +3,9 @@ import { Cloudinary } from "@cloudinary/url-gen";
 /*
  * Delivery-side Cloudinary setup.
  *
- * Only the cloud name lives here, and that is fine — it is in every delivery
- * URL the browser fetches anyway. The API key and secret are NOT here and must
- * never be: this module is bundled and shipped to the browser, so anything it
- * imports is public. Those two are read from .env by
- * scripts/upload-to-cloudinary.mjs, which runs on your machine only.
+ * Only the cloud name lives here, and that is fine because it is present in
+ * every delivery URL the browser fetches. No API credentials belong in this
+ * client-side module.
  *
  * The fallback matters because .env is gitignored, so a fresh clone has no
  * VITE_CLOUDINARY_CLOUD_NAME and would otherwise build with an empty cloud.
