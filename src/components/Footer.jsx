@@ -4,6 +4,7 @@ import { ArrowUpRight } from "./Icons";
 import { FlowButton } from "@/components/ui/flow-button";
 import { NAV } from "./Header";
 import NoiseDarkBlueGradientWithSquares from "./ui/noise-dark-blue-gradient-with-squares";
+import { CONTACT } from "../lib/contact";
 import { useScroll } from "../contexts/ScrollContext";
 import { useInView } from "../hooks/useInView";
 import { useClock } from "../hooks/useClock";
@@ -11,7 +12,7 @@ import styles from "./Footer.module.css";
 
 const GITHUB_USER = "mwasif666";
 
-export default function Footer({ onContact }) {
+export default function Footer() {
   const ref = useRef(null);
   const inView = useInView(ref, { threshold: 0.12 });
   const { scrollToId, scrollToTop } = useScroll();
@@ -46,9 +47,12 @@ export default function Footer({ onContact }) {
           </h2>
 
           <FlowButton
-            text="Start a project"
+            text="Let's connect"
             tone="light"
-            onClick={onContact}
+            href={CONTACT.whatsappUrl}
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label={`Let's connect on WhatsApp at ${CONTACT.phoneDisplay}`}
             className="mt-[clamp(1.8rem,4vh,2.8rem)] max-[560px]:w-full"
           />
         </div>
@@ -72,8 +76,25 @@ export default function Footer({ onContact }) {
           </nav>
 
           <div className={styles.column}>
-            <h3 className={styles.columnTitle}>Elsewhere</h3>
+            <h3 className={styles.columnTitle}>Contact</h3>
             <ul className={styles.list}>
+              <li>
+                <a href={`mailto:${CONTACT.email}`} className={styles.link}>
+                  {CONTACT.email}
+                  <ArrowUpRight className={styles.linkIcon} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href={CONTACT.whatsappUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className={styles.link}
+                >
+                  {CONTACT.phoneDisplay}
+                  <ArrowUpRight className={styles.linkIcon} />
+                </a>
+              </li>
               <li>
                 <a
                   href={`https://github.com/${GITHUB_USER}`}
