@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { FlowButton } from "@/components/ui/flow-button";
 import { useScroll } from "../contexts/ScrollContext";
 import { cldUrl, cldVideoSources } from "../lib/cloudinary";
 import styles from "./ProjectsShowcase.module.css";
@@ -173,18 +174,12 @@ function ProjectRow({ project, index, revealed }) {
   return (
     <article
       className={`${styles.row}${revealed ? ` ${styles.revealed}` : ""}`}
-      // Each card sticks a little lower than the one before it, so the stack
-      // keeps a visible edge of everything already passed.
       style={{ "--i": index }}
     >
       <div className={styles.identity}>
         <span className={styles.number}>
           ({String(index + 1).padStart(2, "0")})
         </span>
-        {/* One word per line — a plain wrap would break wherever the column
-            happens to run out, which is not the same thing. The spaces are kept
-            as real text nodes so the heading still reads as a sentence to a
-            screen reader; between block spans they collapse to nothing. */}
         <h3 className={styles.name}>
           {project.name.split(" ").map((word, wordIndex) => (
             <Fragment key={word}>
@@ -224,18 +219,12 @@ export default function ProjectsSection() {
   const hasMore = projects.length > INITIAL_PROJECT_COUNT;
 
   const handleToggle = () => {
-    // Only collapsing needs pinning. Expanding inserts the new rows directly
-    // below what the visitor is already looking at and pushes the button down
-    // past them, which is the point of pressing it.
     anchorTopRef.current = open
       ? toggleRef.current?.getBoundingClientRect().top ?? null
       : null;
     setOpen((value) => !value);
   };
 
-  // Collapsing takes rows out from *above* the button, so everything below
-  // jumps up by their height and the visitor is left somewhere they never
-  // scrolled to. Put the button back on the spot it already occupied.
   useLayoutEffect(() => {
     const before = anchorTopRef.current;
     if (before === null) return;
@@ -265,8 +254,6 @@ export default function ProjectsSection() {
           </div>
         </header>
 
-        {/* One list, always. The extra projects join the stack in place rather
-            than opening in a drawer underneath the button. */}
         <div className={styles.list} id="projects-list">
           {visibleProjects.map((project, index) => (
             <ProjectRow
@@ -280,17 +267,16 @@ export default function ProjectsSection() {
 
         {hasMore ? (
           <div className={styles.moreToggleRow}>
-            <button
+            <FlowButton
               ref={toggleRef}
-              className={styles.toggle}
+              text={open ? "Show fewer projects" : "View more projects"}
+              tone="light"
               type="button"
               aria-expanded={open}
               aria-controls="projects-list"
               onClick={handleToggle}
-            >
-              <span>{open ? "Show fewer projects" : "View more projects"}</span>
-              <span className={styles.toggleIcon} aria-hidden="true">↓</span>
-            </button>
+              className="min-w-[13rem] max-[420px]:w-full"
+            />
           </div>
         ) : null}
       </div>
