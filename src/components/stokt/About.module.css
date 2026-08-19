@@ -575,12 +575,17 @@
 
 @media (max-width: 500px) {
   .stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .45rem;
   }
 
   .statCard {
-    min-height: 7.6rem;
+    min-height: 7.2rem;
+    padding-inline: .45rem;
   }
+
+  .statCard strong { font-size: clamp(1.85rem, 9vw, 2.4rem); }
+  .statCard span { margin-top: .65rem; font-size: .58rem; }
 
   .showcaseCard,
   .locationCard,

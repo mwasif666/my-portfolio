@@ -39,13 +39,12 @@ function loadLottieRuntime() {
   return lottiePromise;
 }
 
-// First three cards fill the left column, last three the right column.
 const services = [
   {
     key: "design",
     title: "Design & Frontend",
     description:
-      "I design the interface and then build it — responsive layouts, a consistent design system, and interactions that hold up on a mid-range phone.",
+      "I design and build clear, responsive interfaces with reusable components, consistent styling and interactions that feel right on every screen.",
     art: {
       type: "video",
       src: "https://stokt.b-cdn.net/KEYCAPS-loop-01-.webm",
@@ -58,7 +57,7 @@ const services = [
     key: "apps",
     title: "Web Applications",
     description:
-      "Dashboards, admin panels and internal tools — real product surfaces with data, state and permissions, not static pages dressed up as an app.",
+      "Dashboards, admin panels and internal tools built around real data, user roles and workflows that make everyday work simpler.",
     art: {
       type: "lottie",
       src: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/667a7576e7e7ef3ba89b3f87_Platform.json",
@@ -70,10 +69,10 @@ const services = [
     key: "mobile",
     title: "Mobile-First Builds",
     description:
-      "Every layout starts at 360px and works up. Touch targets, loading states and load budgets get decided before the desktop view exists.",
+      "Layouts planned for smaller screens first, with accessible touch targets, sensible loading states and a polished experience at every breakpoint.",
     art: {
       type: "video",
-      src: "https://dl.dropboxusercontent.com/scl/fi/jy5cqifucxea6mo5tx2id/taxi-app-main-v2_XdXjXRKv.mp4?rlkey=7ibn8inbyq804uxjjmhhml5q4&st=tlh7klec&dl=0",
+      src: "https://res.cloudinary.com/agymx2xx/video/upload/v1787151950/taxi-app-transparent-browser.webm",
       fit: "bottom",
     },
   },
@@ -81,7 +80,7 @@ const services = [
     key: "fullstack",
     title: "Full-Stack Systems",
     description:
-      "APIs, databases, auth and deployment designed together with the interface, so the product behaves in production the way it did in the demo.",
+      "Frontend, APIs, databases, authentication and deployment designed as one system so the finished product stays reliable in production.",
     art: {
       type: "video",
       src: "https://stokt.b-cdn.net/robot-hand-v1-%203-alpha%20(1).webm",
@@ -94,7 +93,7 @@ const services = [
     key: "commerce",
     title: "WordPress Builds",
     description:
-      "Custom themes and plugins for teams that need real content control, plus commerce flows built to convert instead of just to render.",
+      "Custom WordPress and WooCommerce builds that give teams easy content control and customers a smooth path from browsing to checkout.",
     art: {
       type: "lottie",
       src: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/667a7576e7e7ef3ba89b3f85_Webst.json",
@@ -106,7 +105,7 @@ const services = [
     key: "integrations",
     title: "APIs & Integrations",
     description:
-      "Payments, third-party services and legacy systems wired in cleanly, with the error handling and retries that keep a live product dependable.",
+      "Payments, third-party services and existing systems connected cleanly, with thoughtful error handling that keeps live products dependable.",
     art: {
       type: "lottie",
       src: "https://cdn.prod.website-files.com/667a7576e7e7ef3ba89b3f2a/66ab8b10eaf1ec4297b4c7e2_Developmnt22.json",
@@ -225,7 +224,11 @@ function ServiceArt({ service }) {
   }
 
   return (
-    <div className={styles.mobileVideoWrap} data-fit={art.fit ?? "bottom"} aria-hidden="true">
+    <div
+      className={styles.mobileVideoWrap}
+      data-fit={art.fit ?? "bottom"}
+      aria-hidden="true"
+    >
       <video
         className={styles.mobileVideo}
         src={art.src}
@@ -240,9 +243,17 @@ function ServiceArt({ service }) {
   );
 }
 
+// Lanes repeat, so card 1 rises on the left, 2 on the right, 3 up the middle,
+// then 4 on the left again.
+const LANES = ["left", "right", "middle"];
+
 function ServiceCard({ service, index }) {
   return (
-    <article className={`${styles.card} ${styles[service.key]}`} data-service-card>
+    <article
+      className={`${styles.card} ${styles[service.key]}`}
+      data-service-card
+      data-lane={LANES[index % LANES.length]}
+    >
       <span className={styles.cardIndex} aria-hidden="true">
         {String(index + 1).padStart(2, "0")}
       </span>
@@ -259,7 +270,7 @@ function ServiceCard({ service, index }) {
   );
 }
 
-const QUOTE = `Instead of a request which sounds like “I need a website”, I'd rather hear “I want this thing to load fast and actually convert” — then work out what to build, and ship the approved plan end to end.`;
+const QUOTE = `A successful website is more than a polished screen. It should load quickly, guide people clearly and support a real business goal. I work backwards from that goal, choose the right solution and deliver it end to end.`;
 
 export default function StoktServices({ onContact }) {
   const sectionRef = useRef(null);
@@ -270,7 +281,14 @@ export default function StoktServices({ onContact }) {
   const cursorRef = useRef(null);
   const wordsRef = useRef([]);
 
-  useServicesTimeline({ sectionRef, heroRef, quoteRef, wordsRef, railRef, trackRef });
+  useServicesTimeline({
+    sectionRef,
+    heroRef,
+    quoteRef,
+    wordsRef,
+    railRef,
+    trackRef,
+  });
 
   const updatePointerEffects = (event) => {
     const track = trackRef.current;
@@ -311,13 +329,13 @@ export default function StoktServices({ onContact }) {
       <div className={styles.viewport}>
         {/* Act 1 */}
         <div ref={heroRef} className={styles.hero}>
-          <h2 id="outcrowd-services-title">Services</h2>
+          <h2 id="outcrowd-services-title">What I Do</h2>
           <p>
-            Whether you need a full-scale IT partner to define the roadmap or a
-            vendor for particular tasks, we got you
+            Whether you need a complete product, a better website or focused
+            development support, I can take the work from plan to launch.
           </p>
           <button type="button" className={styles.tag} onClick={onContact}>
-            Complex solution
+            Discuss your project
           </button>
         </div>
 

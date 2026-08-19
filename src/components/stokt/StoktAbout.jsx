@@ -8,9 +8,9 @@ import bioStyles from "./DeveloperBio.module.css";
 const PORTRAIT = cldUrl("portrait");
 
 const stats = [
-  { value: "4+", label: "Years building" },
+  { value: "4+", label: "Years of experience" },
   { value: "30+", label: "Projects delivered" },
-  { value: "100%", label: "Full-stack focus" },
+  { value: "A–Z", label: "Design to deployment" },
 ];
 
 const tools = [
@@ -175,7 +175,7 @@ export default function StoktAbout() {
             <div className={styles.showcaseMeta}>
               <strong>Full-Stack Systems</strong>
               <span>
-                Interfaces, backend and production delivery{" "}
+                Frontend, backend and production delivery{" "}
                 <b aria-hidden="true">→</b>
               </span>
             </div>
@@ -219,10 +219,11 @@ export default function StoktAbout() {
             </div>
 
             <p className={bioStyles.editorialStatement}>
-              Building <strong>digital products</strong> through thoughtful
-              interfaces, reliable systems, <strong>clean engineering</strong>,
-              and performance-focused experiences that{" "}
-              <strong>work beautifully.</strong>
+              I turn <strong>business ideas</strong> into complete web products
+              with clear interfaces, dependable backends and{" "}
+              <strong>maintainable code</strong>. My focus is simple: build
+              experiences that are fast, useful and ready for{" "}
+              <strong>real people.</strong>
             </p>
 
             <div className={bioStyles.editorialAuthor}>

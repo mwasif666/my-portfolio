@@ -109,9 +109,9 @@ export default function DeveloperSystemsSection() {
       <section className={styles.marqueeSection} aria-labelledby="developer-realtime-title">
         <div className={styles.container}>
           <header className={styles.sectionTitle}>
-            <span className={styles.subTitle}>Production-ready development</span>
+            <span className={styles.subTitle}>Backend &amp; API development</span>
             <h2 id="developer-realtime-title" style={{ fontFamily: "inherit" }}>
-              <span>Real-time systems for smarter web products</span>
+              <span>Reliable systems behind every great interface</span>
             </h2>
           </header>
 
@@ -153,9 +153,9 @@ export default function DeveloperSystemsSection() {
       >
         <div className={styles.container}>
           <header className={styles.sectionTitle}>
-            <span className={styles.subTitle}>Developer capabilities</span>
+            <span className={styles.subTitle}>End-to-end capabilities</span>
             <h2 id="developer-capabilities-title" style={{ fontFamily: "inherit" }}>
-              <span>What I build for the web</span>
+              <span>Everything needed to move from idea to launch</span>
             </h2>
           </header>
         </div>

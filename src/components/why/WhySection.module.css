@@ -1,3 +1,11 @@
+/*
+ * Blues here are the site's three: #48c2f2 highlight, #2563eb glow and #0098f1
+ * accent — the same trio the loader, hero backdrop and services panel run on.
+ * The section used to sit ~20 points lower in saturation and carried none of
+ * the royal blue at all, which read as a different palette rather than the same
+ * light source seen from further out.
+ */
+
 .section {
   --why-title-y: 110px;
   --why-title-scale: .88;
@@ -18,8 +26,8 @@
   overflow: hidden;
   isolation: isolate;
   background:
-    radial-gradient(circle at 50% 62%, rgba(23, 113, 155, .22), transparent 29%),
-    radial-gradient(circle at 50% 47%, rgba(3, 32, 49, .72), rgba(0, 8, 14, .94) 54%, #000 78%);
+    radial-gradient(circle at 50% 62%, rgba(0, 152, 241, .2), transparent 29%),
+    radial-gradient(circle at 50% 47%, rgba(6, 26, 58, .72), rgba(1, 8, 16, .94) 54%, #000 78%);
 }
 
 .stars,
@@ -36,18 +44,18 @@
   transform: translate3d(0, var(--why-stars-y), 0);
   background-image:
     radial-gradient(circle at 3% 61%, rgba(218,247,255,.88) 0 1px, transparent 1.3px),
-    radial-gradient(circle at 10% 24%, rgba(126,202,235,.7) 0 1px, transparent 1.25px),
+    radial-gradient(circle at 10% 24%, rgba(72,194,242,.7) 0 1px, transparent 1.25px),
     radial-gradient(circle at 15% 40%, rgba(255,255,255,.46) 0 1px, transparent 1.2px),
-    radial-gradient(circle at 22% 13%, rgba(116,202,239,.64) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 22% 13%, rgba(72,194,242,.64) 0 1px, transparent 1.2px),
     radial-gradient(circle at 31% 53%, rgba(234,250,255,.68) 0 1px, transparent 1.2px),
     radial-gradient(circle at 36% 20%, rgba(255,255,255,.38) 0 1px, transparent 1.2px),
-    radial-gradient(circle at 43% 33%, rgba(91,183,225,.72) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 43% 33%, rgba(72,194,242,.72) 0 1px, transparent 1.2px),
     radial-gradient(circle at 51% 12%, rgba(255,255,255,.55) 0 1px, transparent 1.2px),
     radial-gradient(circle at 55% 47%, rgba(206,239,252,.66) 0 1px, transparent 1.2px),
-    radial-gradient(circle at 62% 23%, rgba(105,198,237,.66) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 62% 23%, rgba(72,194,242,.66) 0 1px, transparent 1.2px),
     radial-gradient(circle at 70% 53%, rgba(255,255,255,.45) 0 1px, transparent 1.2px),
     radial-gradient(circle at 77% 18%, rgba(222,247,255,.72) 0 1px, transparent 1.2px),
-    radial-gradient(circle at 84% 42%, rgba(89,180,222,.64) 0 1px, transparent 1.2px),
+    radial-gradient(circle at 84% 42%, rgba(72,194,242,.64) 0 1px, transparent 1.2px),
     radial-gradient(circle at 91% 27%, rgba(255,255,255,.42) 0 1px, transparent 1.2px),
     radial-gradient(circle at 96% 61%, rgba(222,247,255,.7) 0 1px, transparent 1.2px);
   will-change: transform;
@@ -58,12 +66,12 @@
   opacity: .34;
   background-image:
     radial-gradient(circle at 8% 74%, #fff 0 .8px, transparent 1px),
-    radial-gradient(circle at 18% 63%, #65b9df 0 .8px, transparent 1px),
+    radial-gradient(circle at 18% 63%, #48c2f2 0 .8px, transparent 1px),
     radial-gradient(circle at 28% 83%, #fff 0 .8px, transparent 1px),
     radial-gradient(circle at 39% 68%, #fff 0 .8px, transparent 1px),
-    radial-gradient(circle at 48% 77%, #65b9df 0 .8px, transparent 1px),
+    radial-gradient(circle at 48% 77%, #48c2f2 0 .8px, transparent 1px),
     radial-gradient(circle at 58% 64%, #fff 0 .8px, transparent 1px),
-    radial-gradient(circle at 68% 81%, #65b9df 0 .8px, transparent 1px),
+    radial-gradient(circle at 68% 81%, #48c2f2 0 .8px, transparent 1px),
     radial-gradient(circle at 79% 71%, #fff 0 .8px, transparent 1px),
     radial-gradient(circle at 89% 86%, #fff 0 .8px, transparent 1px);
 }
@@ -72,7 +80,7 @@
   content: "";
   opacity: .2;
   filter: blur(.3px);
-  background: radial-gradient(circle at 50% 50%, rgba(42,145,186,.24), transparent 43%);
+  background: radial-gradient(circle at 50% 50%, rgba(0,152,241,.24), transparent 43%);
 }
 
 .title {
@@ -87,16 +95,16 @@
   transform: translate3d(-50%, calc(-50% + var(--why-title-y)), 0) scale(var(--why-title-scale));
   transform-origin: center;
   color: transparent;
-  background: linear-gradient(180deg, #58b7df 0%, #bfeafa 45%, #5da9cf 70%, #0f5479 100%);
+  background: linear-gradient(180deg, #48c2f2 0%, #c9edff 45%, #0098f1 70%, #0d3f87 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-stroke: .45px rgba(185, 231, 250, .16);
+  -webkit-text-stroke: .45px rgba(190, 236, 255, .16);
   font-family: "Argesta Display", Georgia, "Times New Roman", serif;
   font-size: clamp(10.5rem, 21vw, 27rem);
   font-weight: 400;
   line-height: .86;
   letter-spacing: -.065em;
-  text-shadow: 0 0 2.4rem rgba(52, 154, 201, .09);
+  text-shadow: 0 0 2.4rem rgba(0, 152, 241, .11);
   white-space: nowrap;
   will-change: transform;
 }
@@ -109,13 +117,13 @@
   width: min(84vw, 96rem);
   aspect-ratio: 1.72 / 1;
   transform: translate3d(-50%, var(--why-planet-y), 0);
-  border: 1px solid rgba(104, 190, 227, .2);
+  border: 1px solid rgba(72, 194, 242, .2);
   border-radius: 50%;
   background:
-    radial-gradient(circle at 50% 4%, rgba(103,190,228,.19), rgba(31,95,128,.08) 30%, rgba(7,30,45,.74) 56%, rgba(1,8,13,.98) 76%);
+    radial-gradient(circle at 50% 4%, rgba(72,194,242,.19), rgba(37,99,235,.1) 30%, rgba(6,24,52,.74) 56%, rgba(1,8,14,.98) 76%);
   box-shadow:
-    inset 0 2px 7px rgba(180,231,250,.07),
-    0 -1.3rem 4rem rgba(38,133,177,.08);
+    inset 0 2px 7px rgba(190,236,255,.07),
+    0 -1.3rem 4rem rgba(0,152,241,.1);
   will-change: transform;
 }
 
@@ -124,7 +132,7 @@
   position: absolute;
   inset: 5% 8% 18%;
   border-radius: 50%;
-  background: radial-gradient(ellipse at 50% 0%, rgba(128,205,239,.11), transparent 52%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(72,194,242,.12), transparent 52%);
   filter: blur(18px);
 }
 
@@ -143,13 +151,13 @@
   min-width: 27rem;
   padding: clamp(1.3rem, 1.55vw, 1.8rem) clamp(1.4rem, 1.75vw, 1.95rem) clamp(1.35rem, 1.65vw, 1.9rem);
   overflow: hidden;
-  border: 1px solid rgba(103,190,228,.22);
+  border: 1px solid rgba(72,194,242,.22);
   border-radius: 18px;
   background:
-    linear-gradient(145deg, rgba(10,31,43,.97), rgba(7,14,20,.985));
+    linear-gradient(145deg, rgba(9,27,48,.97), rgba(6,13,22,.985));
   box-shadow:
     0 1.2rem 3.6rem rgba(0,0,0,.42),
-    0 .35rem 1.6rem rgba(0,75,108,.1),
+    0 .35rem 1.6rem rgba(0,152,241,.12),
     inset 0 1px 0 rgba(197,237,253,.035);
   opacity: 0;
   transform: translate3d(-50%, -50%, 0) translate3d(0, 17vh, 0) scale(.91);
@@ -166,10 +174,10 @@
 
 .card[data-dragging] {
   cursor: grabbing;
-  border-color: rgba(129, 210, 242, .44);
+  border-color: rgba(96, 205, 247, .46);
   box-shadow:
     0 2.4rem 6rem rgba(0,0,0,.58),
-    0 .6rem 2.6rem rgba(0, 96, 138, .24),
+    0 .6rem 2.6rem rgba(0, 152, 241, .24),
     inset 0 1px 0 rgba(197,237,253,.07);
 }
 
@@ -179,7 +187,7 @@
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 12% 0%, rgba(76,176,219,.075), transparent 34%),
+    radial-gradient(circle at 12% 0%, rgba(72,194,242,.09), transparent 34%),
     linear-gradient(135deg, rgba(255,255,255,.018), transparent 38%);
 }
 
@@ -187,7 +195,7 @@
   position: relative;
   z-index: 1;
   margin: 0;
-  color: #eefaff;
+  color: #f2fbff;
   font-size: clamp(1.08rem, 1.22vw, 1.4rem);
   font-weight: 560;
   line-height: 1.15;
@@ -199,7 +207,7 @@
   z-index: 1;
   max-width: 96%;
   margin: .8rem 0 0;
-  color: rgba(199,225,237,.69);
+  color: rgba(214,238,250,.7);
   font-size: clamp(.86rem, .96vw, 1.04rem);
   font-weight: 450;
   line-height: 1.45;

@@ -1,8 +1,8 @@
 /*
  * Three acts scrubbed off one sticky viewport (see useServicesTimeline.js):
- * hero → glass quote whose copy fills word by word → right-to-left carousel.
- * The section's height is set from JS so the carousel gets exactly as much
- * scroll as its track needs.
+ * hero → glass quote whose copy fills word by word and then stays parked →
+ * cards rising from below over that panel through three lanes. The section's
+ * height is set from JS so act three gets exactly as much scroll as it needs.
  */
 
 .section {
@@ -153,40 +153,25 @@
 
 /* ----------------------------------------------------------- act three -- */
 
+/* Above `.quote` (3), so the cards travel over the parked panel rather than
+   disappearing behind it. */
 .rail {
   position: relative;
-  z-index: 2;
-  display: flex;
+  z-index: 4;
   width: 100%;
   height: 100%;
-  align-items: center;
   overflow: hidden;
   opacity: 0;
 }
 
-/* The cards are glass, and glass needs something to refract — over flat black a
-   backdrop blur has nothing to pick up and just reads as a grey panel. This
-   bloom stays put while the track slides across it, so each card lights up as
-   it passes. Absolutely positioned, so it is not a flex item. */
-.rail::before {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  inset: 0;
-  background:
-    radial-gradient(68% 58% at 24% 52%, rgba(37, 99, 235, 0.18), transparent 72%),
-    radial-gradient(62% 52% at 76% 46%, rgba(0, 152, 241, 0.13), transparent 72%);
-  filter: blur(64px);
-  pointer-events: none;
-}
+/* The stage used to carry its own bloom to give the card glass something to
+   refract. It now passes over the quote panel and its glow, which does that
+   job — a second bloom on top would only haze the copy the cards cross. */
 
 .track {
-  position: relative;
+  position: absolute;
   z-index: 1;
-  display: flex;
-  gap: clamp(1rem, 1.6vw, 1.6rem);
-  padding-inline: clamp(1.5rem, 5vw, 6rem);
-  will-change: transform;
+  inset: 0;
 }
 
 /* -------------------------------------------------------------- cards -- */
@@ -194,12 +179,15 @@
 .card {
   --mouse-x: 50%;
   --mouse-y: 50%;
+  --lane: 50%;
   container-type: inline-size;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: var(--lane);
   isolation: isolate;
-  flex: 0 0 auto;
-  width: min(34vw, 30rem);
+  width: min(36vw, 31rem, 56svh);
   aspect-ratio: 0.86 / 1;
+  will-change: transform;
   overflow: hidden;
   border: 1px solid rgba(160, 208, 245, 0.1);
   border-radius: clamp(14px, 1.2vw, 20px);
@@ -217,6 +205,12 @@
   backdrop-filter: blur(20px) saturate(160%);
   transition: border-color 450ms ease, box-shadow 450ms ease;
 }
+
+/* `left` places a card on its lane centre line — the timeline adds the -50%
+   that pulls it back onto it, so `y` stays the only scrubbed property. */
+.card[data-lane="left"] { --lane: 22%; }
+.card[data-lane="middle"] { --lane: 50%; }
+.card[data-lane="right"] { --lane: 78%; }
 
 .card::before,
 .card::after {
@@ -304,7 +298,7 @@
 .artStage {
   position: absolute;
   z-index: 2;
-  inset: 45.3cqw 5.1cqw 7.2cqw;
+  inset: 43.5cqw 3.4cqw 5.4cqw;
   display: grid;
   overflow: hidden;
   place-items: center;
@@ -314,7 +308,7 @@
 .lottieArt {
   position: absolute;
   inset: 0;
-  transform: scale(1.34);
+  transform: scale(1.5);
   transform-origin: center;
 }
 
@@ -326,9 +320,9 @@
 
 /* Two compositions sit low inside their own canvas and leave the most dead
    space, so they need a bigger push plus an upward nudge to stay in frame. */
-.apps .lottieArt { transform: translateY(-11%) scale(1.85); }
-.commerce .lottieArt { transform: translateY(-7%) scale(1.7); }
-.integrations .lottieArt { transform: translateY(-7%) scale(1.28); }
+.apps .lottieArt { transform: translateY(-11%) scale(2.05); }
+.commerce .lottieArt { transform: translateY(-7%) scale(1.9); }
+.integrations .lottieArt { transform: translateY(-7%) scale(1.45); }
 
 .mobileVideoWrap {
   position: absolute;
@@ -367,14 +361,14 @@
 
 .mobileVideoWrap[data-fit="center"] .mobileVideo {
   object-position: 50% 50%;
-  transform: scale(0.82);
+  transform: scale(0.95);
 }
 
 /* The keycap loop is framed tight in its own source, so the shared centre-fit
    shrink left it much smaller than the phone on card three. Scoped to this card
    only — card four uses the same fit and is already sized right. */
 .design .mobileVideoWrap[data-fit="center"] .mobileVideo {
-  transform: scale(1.2);
+  transform: scale(1.38);
 }
 
 /* ---------------------------------------------------- pointer cursor -- */
@@ -461,22 +455,24 @@
   overflow: visible;
 }
 
-/* The track is a flex item of the rail, so stacking it without an explicit
-   width leaves it shrink-to-fit while the cards below ask for `width: 100%` of
-   it — circular, and the column collapsed to the width of its own borders. */
+/* Act three is absolutely positioned when it is scrubbed, so the fallback has
+   to put the track and its cards back into normal flow before stacking them. */
 .section[data-static="true"] .track {
+  position: static;
+  display: flex;
   flex-direction: column;
   width: 100%;
   gap: clamp(1rem, 4vw, 1.6rem);
-  padding-inline: 0;
   transform: none !important;
 }
 
 /* Stacked full-width on mobile, six live backdrop blurs down one column is a
    real cost for no gain — the tint alone carries the same look here. */
 .section[data-static="true"] .card {
+  position: static;
   width: 100%;
   aspect-ratio: auto;
+  transform: none !important;
   min-height: 30rem;
   background:
     linear-gradient(180deg, rgba(226, 242, 255, 0.075), rgba(198, 226, 250, 0.035) 100%),
@@ -489,4 +485,14 @@
   .hero h2 { font-size: clamp(3.4rem, 18vw, 6rem); }
   .quoteText { font-size: clamp(1.05rem, 4.4vw, 1.5rem); }
   .cardCopy { padding: 11cqw 6cqw 0; }
+  .cardCopy h3 {
+    font-size: clamp(1.55rem, 7.2cqw, 2.1rem);
+    line-height: 1.05;
+  }
+  .cardCopy p {
+    max-width: 82cqw;
+    font-size: clamp(.82rem, 3.8cqw, .98rem);
+    line-height: 1.5;
+  }
+  .section[data-static="true"] .card { min-height: clamp(29rem, 132vw, 33rem); }
 }

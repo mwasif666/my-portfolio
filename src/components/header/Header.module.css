@@ -96,16 +96,16 @@
 .link {
   display: inline-flex;
   min-height: 2.55rem;
-  max-width: 9rem;
+  max-width: 10rem;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: .55rem .8rem;
+  padding: .55rem .95rem;
   border: 0;
   border-radius: 999px;
   background: transparent;
   color: rgba(255,255,255,.82);
-  font-size: .92rem;
+  font-size: 1.02rem;
   font-weight: 600;
   line-height: 1;
   white-space: nowrap;
@@ -145,7 +145,7 @@
 
 .label {
   display: block;
-  max-width: 9rem;
+  max-width: 10rem;
   overflow: hidden;
   opacity: 1;
   white-space: nowrap;
@@ -161,14 +161,14 @@
 }
 
 .cta {
-  min-width: 8.6rem;
+  min-width: 9.4rem;
   min-height: 3.2rem;
   padding: .75rem 1.4rem;
   border: 1px solid rgba(255,255,255,.1);
   border-radius: 999px;
   background: rgba(3,18,31,.96);
   color: #fff;
-  font-size: .8rem;
+  font-size: .9rem;
   font-weight: 650;
   line-height: 1;
   box-shadow: 0 .6rem 1.5rem rgba(0,17,32,.22);
@@ -204,7 +204,7 @@
     min-height: 2.55rem;
     max-width: 1.48rem;
     padding-inline: .48rem;
-    font-size: .86rem;
+    font-size: .95rem;
     transform: none;
   }
 
@@ -221,7 +221,7 @@
   }
 
   .compact .activeLink {
-    max-width: 8.75rem;
+    max-width: 9.6rem;
     padding-inline: .6rem;
   }
 
@@ -233,13 +233,13 @@
   }
 
   .compact .activeLink .label {
-    max-width: 7.5rem;
+    max-width: 8.3rem;
     opacity: 1;
   }
 
   .compact .link:hover,
   .compact .link:focus-visible {
-    max-width: 8.75rem;
+    max-width: 9.6rem;
     padding-inline: .6rem;
   }
 
@@ -253,7 +253,7 @@
 
   .compact .link:hover .label,
   .compact .link:focus-visible .label {
-    max-width: 7.5rem;
+    max-width: 8.3rem;
     opacity: 1;
   }
 }

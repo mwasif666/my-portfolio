@@ -46,7 +46,7 @@ export default function NavMenu({ open, onClose, onContact }) {
   return (
     <div id="navmenu" className={shown ? 'in' : ''}>
       <div className="shell nm-top">
-        <div className="nm-brand"><Logo />Portfolio</div>
+        <div className="nm-brand"><Logo />Muhammad Wasif</div>
         <button className="nm-close" onClick={onClose}><XIcon />Close</button>
       </div>
 

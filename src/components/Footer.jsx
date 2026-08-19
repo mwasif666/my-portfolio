@@ -43,7 +43,7 @@ export default function Footer({ onContact }) {
           </p>
 
           <h2 id="footer-title" className={styles.title}>
-            Let&apos;s build the thing that loads fast and actually converts.
+            Have an idea? Let&apos;s turn it into a web product that works.
           </h2>
 
           <button type="button" onClick={onContact} className={styles.cta}>

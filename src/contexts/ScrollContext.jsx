@@ -132,16 +132,19 @@ export function ScrollProvider({ children }) {
     const el = document.getElementById(id);
     if (!el) return;
 
+    const headerOffset = id === 'home' ? 0 : window.innerWidth <= 900 ? 76 : 92;
+    const destination = el.getBoundingClientRect().top + window.scrollY - headerOffset;
+
     const loco = locoRef.current;
     if (loco) {
-      loco.scrollTo(el, {
+      loco.scrollTo(destination, {
         duration: 1.25,
         easing: (t) => 1 - Math.pow(1 - t, 4),
       });
       return;
     }
 
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.scrollTo({ top: destination, behavior: 'smooth' });
   }, []);
 
   // `refresh` re-measures every [data-scroll] element — call it after layout

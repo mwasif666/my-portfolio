@@ -378,7 +378,7 @@
   .shine { display: none; }
 
   .card {
-    min-height: 28rem;
+    min-height: 25rem;
     transform: none !important;
   }
 
@@ -391,7 +391,7 @@
 
   .cardBack {
     position: relative;
-    min-height: 28rem;
+    min-height: 25rem;
     transform: none;
     border-radius: 20px;
   }
@@ -403,7 +403,7 @@
   }
 
   .copy h3 { font-size: clamp(2rem, 8vw, 3rem); }
-  .copy p { margin-top: 5rem; font-size: .95rem; }
+  .copy p { margin-top: clamp(2.75rem, 10vw, 4rem); font-size: .95rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

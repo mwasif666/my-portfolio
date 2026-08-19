@@ -3,7 +3,7 @@ import { Logo, XIcon } from './Icons';
 import PillButton from './PillButton';
 import { useScroll } from '../contexts/ScrollContext';
 
-// Stubbed request modal. Submit is a no-op that shows a success state.
+// Project enquiry modal. Submission transport can be connected separately.
 export default function RequestModal({ open, onClose }) {
   const { stopScroll, startScroll } = useScroll();
   const [mounted, setMounted] = useState(false);
@@ -54,7 +54,7 @@ export default function RequestModal({ open, onClose }) {
           <div>
             <div className="modal-head">
               <span className="row"><span className="dot" />Start a project</span>
-              <h2>Tell me what you're building.</h2>
+              <h2>Tell me about your idea.</h2>
             </div>
             <form className="modal-form" onSubmit={submit}>
               <label>
@@ -70,7 +70,7 @@ export default function RequestModal({ open, onClose }) {
                 <textarea name="project" rows="4" required placeholder="A few words about your project, timeline, and budget." />
               </label>
               <div className="modal-bottom">
-                <span className="modal-note">I'll reply within one business day.</span>
+                <span className="modal-note">Share the goal, timeline and budget you have in mind.</span>
                 <PillButton variant="dark" arrow="up-right" type="submit">
                   {sending ? 'Sending…' : 'Send request'}
                 </PillButton>
@@ -80,8 +80,8 @@ export default function RequestModal({ open, onClose }) {
         ) : (
           <div className="modal-success">
             <div className="badge"><Logo /></div>
-            <h2>Request received</h2>
-            <p>Thanks for reaching out — I'll get back to you within one business day.</p>
+            <h2>Thanks for the details</h2>
+            <p>Your project brief is ready. I look forward to learning more about what you want to build.</p>
             <PillButton variant="dark" onClick={onClose}>Close</PillButton>
           </div>
         )}

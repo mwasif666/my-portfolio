@@ -69,33 +69,57 @@ const projects = [
 
 const INITIAL_PROJECT_COUNT = 6;
 
-/*
- * `playbackRate` is a property of the media element, not an attribute, so it
- * cannot be set in JSX — and it is reset every time the element loads a source,
- * which for a `<source>` list happens after mount. Hence setting it on
- * loadedmetadata rather than once in an effect.
- */
+/* Play previews only while their project card is actually in view. */
 function ProjectVideo({ project }) {
   const ref = useRef(null);
 
   useEffect(() => {
     const video = ref.current;
     if (!video) return undefined;
+    const card = video.closest("article") ?? video;
+    let cardVisible = false;
 
     const applyRate = () => {
       video.playbackRate = PREVIEW_PLAYBACK_RATE;
     };
 
+    const syncPlayback = () => {
+      if (!cardVisible || document.hidden) {
+        video.pause();
+        return;
+      }
+
+      applyRate();
+      const playRequest = video.play();
+      if (playRequest) playRequest.catch(() => {});
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        cardVisible = entry.isIntersecting && entry.intersectionRatio >= 0.3;
+        syncPlayback();
+      },
+      { threshold: [0, 0.3] },
+    );
+
     applyRate();
+    video.pause();
     video.addEventListener("loadedmetadata", applyRate);
-    return () => video.removeEventListener("loadedmetadata", applyRate);
+    document.addEventListener("visibilitychange", syncPlayback);
+    observer.observe(card);
+
+    return () => {
+      observer.disconnect();
+      video.pause();
+      video.removeEventListener("loadedmetadata", applyRate);
+      document.removeEventListener("visibilitychange", syncPlayback);
+    };
   }, []);
 
   return (
     <video
       ref={ref}
       className={styles.previewVideo}
-      autoPlay
       muted
       loop
       playsInline
@@ -223,14 +247,14 @@ export default function ProjectsSection() {
           <div>
             <span className={styles.eyebrow}>Selected work</span>
             <h2 className={styles.title} id="projects-title">
-              Projects built for <em>real use.</em>
+              Work built for <em>real businesses.</em>
             </h2>
           </div>
 
           <div className={styles.headerSide}>
             <p className={styles.copy}>
-              Production websites, commerce builds and custom platforms across
-              business, education, services and digital products.
+              A selection of websites, e-commerce experiences and custom
+              platforms I have delivered across different industries.
             </p>
           </div>
         </header>

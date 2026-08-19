@@ -499,7 +499,9 @@
 
   .sectionTitle h2 {
     font-size: 32px;
-    line-height: 1.5;
+    max-width: 23rem;
+    padding-inline: .35rem;
+    line-height: 1.3;
     letter-spacing: -.065em;
   }
 

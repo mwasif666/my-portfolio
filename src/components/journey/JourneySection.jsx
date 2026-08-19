@@ -5,17 +5,17 @@ import styles from "./JourneySection.module.css";
 const options = [
   {
     title: "Starting from an idea",
-    copy: "Need a product or website from zero? I can shape the structure, interface and full-stack build, then take it through launch without handing you a half-finished prototype.",
+    copy: "Starting with a rough concept? I can turn it into a clear plan, design the interface, build the full product and take it through launch.",
     icon: "launch",
   },
   {
     title: "Scaling what already works",
-    copy: "If the product is live but needs better performance, new features, integrations or stronger architecture, I can extend it without rebuilding everything from scratch.",
+    copy: "If your product is already live, I can improve performance, add features, connect new services or strengthen the architecture without an unnecessary rebuild.",
     icon: "scale",
   },
   {
-    title: "Need a focused fix",
-    copy: "Have a specific page, bug, API, WooCommerce flow or automation that needs to ship quickly? I can step in, solve the problem and keep the implementation clean.",
+    title: "Solving a focused problem",
+    copy: "Need a specific page, bug, API, WooCommerce flow or automation handled quickly? I can solve it cleanly without disrupting the rest of your product.",
     icon: "spark",
   },
 ];
@@ -64,7 +64,7 @@ export default function JourneySection() {
         <div className={styles.grid} aria-hidden="true" />
 
         <h2 className={styles.heading} id="journey-title">
-          Where are you <em>in your build?</em>
+          Where is your project <em>right now?</em>
         </h2>
 
         <div className={styles.frame}>
