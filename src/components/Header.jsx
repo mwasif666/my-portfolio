@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { GridIcon } from "./Icons";
+import { FlowButton } from "@/components/ui/flow-button";
 import { useScroll } from "../contexts/ScrollContext";
 import { useHeaderMorph } from "../hooks/useHeaderMorph";
 import styles from "./header/Header.module.css";
@@ -103,9 +104,14 @@ export default function Header({ ready, onMenu, onContact }) {
         </nav>
 
         <div className={styles.actions}>
-          <button type="button" onClick={onContact} className={styles.cta}>
-            Let&apos;s talk
-          </button>
+          <div className="hidden min-[901px]:block">
+            <FlowButton
+              text="Let's talk"
+              tone="light"
+              onClick={onContact}
+              className="min-w-[9.4rem]"
+            />
+          </div>
 
           <button
             type="button"
