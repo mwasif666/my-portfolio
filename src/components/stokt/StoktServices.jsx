@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useRef } from "react";
+import { FlowButton } from "@/components/ui/flow-button";
 import useServicesTimeline from "./useServicesTimeline";
 import styles from "./Services.module.css";
 
@@ -243,8 +244,6 @@ function ServiceArt({ service }) {
   );
 }
 
-// Lanes repeat, so card 1 rises on the left, 2 on the right, 3 up the middle,
-// then 4 on the left again.
 const LANES = ["left", "right", "middle"];
 
 function ServiceCard({ service, index }) {
@@ -254,16 +253,16 @@ function ServiceCard({ service, index }) {
       data-service-card
       data-lane={LANES[index % LANES.length]}
     >
-      <span className={styles.cardIndex} aria-hidden="true">
+      <span className={styles.cardIndex} data-service-index aria-hidden="true">
         {String(index + 1).padStart(2, "0")}
       </span>
 
-      <div className={styles.cardCopy}>
+      <div className={styles.cardCopy} data-service-copy>
         <h3>{service.title}</h3>
         <p>{service.description}</p>
       </div>
 
-      <div className={styles.artStage}>
+      <div className={styles.artStage} data-service-art>
         <ServiceArt service={service} />
       </div>
     </article>
@@ -326,26 +325,26 @@ export default function StoktServices({ onContact }) {
         <i />
       </span>
 
-      <div className={styles.viewport}>
-        {/* Act 1 */}
-        <div ref={heroRef} className={styles.hero}>
+      <div className={styles.viewport} data-services-viewport>
+        <div ref={heroRef} className={styles.hero} data-services-hero>
           <h2 id="outcrowd-services-title">What I Do</h2>
           <p>
             Whether you need a complete product, a better website or focused
             development support, I can take the work from plan to launch.
           </p>
-          <button type="button" className={styles.tag} onClick={onContact}>
-            Discuss your project
-          </button>
+          <FlowButton
+            text="Discuss your project"
+            tone="light"
+            onClick={onContact}
+            className="mt-[clamp(1.5rem,3vw,2.6rem)]"
+          />
         </div>
 
-        {/* Act 2 — glass panel, copy fills word by word on scrub */}
-        <div ref={quoteRef} className={styles.quote}>
+        <div ref={quoteRef} className={styles.quote} data-services-quote>
           <div className={styles.quoteGlow} aria-hidden="true" />
           <div className={styles.quotePanel}>
             <p className={styles.quoteText}>
               {QUOTE.split(" ").map((word, index) => (
-                // eslint-disable-next-line react/no-array-index-key
                 <Fragment key={`${word}-${index}`}>
                   <span
                     ref={(node) => {
@@ -361,9 +360,8 @@ export default function StoktServices({ onContact }) {
           </div>
         </div>
 
-        {/* Act 3 — carousel */}
-        <div ref={railRef} className={styles.rail}>
-          <div ref={trackRef} className={styles.track}>
+        <div ref={railRef} className={styles.rail} data-services-rail>
+          <div ref={trackRef} className={styles.track} data-services-track>
             {services.map((service, index) => (
               <ServiceCard key={service.key} service={service} index={index} />
             ))}
