@@ -27,8 +27,9 @@ export default function HeroPitch({ onContact }) {
   return (
     <div className={clsx(heroReveal("delay-[380ms]"), styles.root)}>
       <p className={styles.copy}>
-        I design and develop responsive interfaces, robust APIs and scalable web
-        products—from the first idea to production deployment.
+        I build fast, responsive websites and full-stack platforms for real
+        businesses—from polished frontends and CMS builds to APIs, integrations
+        and production deployment.
       </p>
 
       <div className={styles.actions}>
