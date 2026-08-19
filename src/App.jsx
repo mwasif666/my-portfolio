@@ -10,14 +10,15 @@ import JourneySection from "./components/journey/JourneySection";
 import DeveloperSystemsSection from "./components/developerSystems/DeveloperSystemsSection";
 import NavMenu from "./components/NavMenu";
 import Footer from "./components/Footer";
-import RequestModal from "./components/RequestModal";
+import { CONTACT } from "./lib/contact";
 
 export default function App() {
   const [ready, setReady] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
 
-  const openModal = () => setModalOpen(true);
+  const openContact = () => {
+    window.open(CONTACT.whatsappUrl, "_blank", "noopener,noreferrer");
+  };
 
   const handleLoaderDone = () => {
     window.scrollTo(0, 0);
@@ -36,26 +37,25 @@ export default function App() {
       <Header
         ready={ready}
         onMenu={() => setMenuOpen(true)}
-        onContact={openModal}
+        onContact={openContact}
       />
 
       <main id="main">
-        <KontourBanner id="home" theme="blue" onContact={openModal} />
-        <StoktSections onContact={openModal} />
+        <KontourBanner id="home" theme="blue" onContact={openContact} />
+        <StoktSections onContact={openContact} />
         <ProjectsSection />
         <WhySection />
         <JourneySection />
         <DeveloperSystemsSection />
       </main>
 
-      <Footer onContact={openModal} />
+      <Footer />
 
       <NavMenu
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
-        onContact={openModal}
+        onContact={openContact}
       />
-      <RequestModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </ScrollProvider>
   );
 }
