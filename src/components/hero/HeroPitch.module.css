@@ -8,7 +8,7 @@
   margin: 0;
   color: rgba(237,249,255,.72);
   font-family: "Onest", sans-serif;
-  font-size: .94rem;
+  font-size: clamp(.95rem, 1.15vw, 1.05rem);
   font-weight: 400;
   line-height: 1.65;
 }
@@ -24,14 +24,14 @@
 .primary,
 .secondary {
   display: inline-flex;
-  min-height: 3rem;
+  min-height: 3.15rem;
   align-items: center;
   justify-content: center;
-  gap: .5rem;
+  gap: .55rem;
   border-radius: 999px;
-  padding: .75rem 1.5rem;
+  padding: .8rem 1.55rem;
   font-family: "Onest", sans-serif;
-  font-size: .8rem;
+  font-size: clamp(.92rem, 1vw, 1rem);
   font-weight: 600;
   line-height: 1;
   cursor: pointer;
@@ -53,7 +53,7 @@
 
 .secondary {
   border: 1px solid transparent;
-  padding-inline: 1.25rem;
+  padding-inline: 1.35rem;
   color: rgba(241,251,255,.82);
   background: transparent;
   text-decoration: none;
@@ -66,8 +66,8 @@
 }
 
 .icon {
-  width: 1rem;
-  height: 1rem;
+  width: 1.08rem;
+  height: 1.08rem;
   flex: none;
 }
 
@@ -90,7 +90,15 @@
 }
 
 @media (max-width: 520px) {
-  .actions { flex-direction: column; }
+  .actions {
+    flex-direction: column;
+    gap: .75rem;
+  }
+
   .primary,
-  .secondary { width: 100%; }
+  .secondary {
+    width: 100%;
+    min-height: 3.35rem;
+    font-size: 1rem;
+  }
 }
