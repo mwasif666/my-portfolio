@@ -18,6 +18,12 @@ const projects = [
     services: ["React & Vite", "Tailwind CSS", "GSAP ScrollTrigger", "Agency Website", "Responsive UI"],
   },
   {
+    name: "Econetix",
+    url: "https://econetix.net/",
+    image: "https://res.cloudinary.com/agymx2xx/image/upload/v1787152967/8645b931-5272-4f2f-a435-943e838018c6.png",
+    services: ["WordPress", "Elementor", "Advanced Custom Fields", "GSAP Animations", "Responsive Development"],
+  },
+  {
     name: "Offplan DXB",
     url: "https://offplandxb.ae/",
     image: cldUrl("projects/offplan-dxb"),
