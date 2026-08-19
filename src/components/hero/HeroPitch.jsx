@@ -1,27 +1,7 @@
 import clsx from "clsx";
+import { FlowButton } from "@/components/ui/flow-button";
 import { heroReveal } from "./heroMotion";
 import styles from "./HeroPitch.module.css";
-
-const ArrowUpRight = () => (
-  <svg
-    className={styles.icon}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.8"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <path d="M7 17 17 7M8 7h9v9" />
-  </svg>
-);
-
-const Play = () => (
-  <svg className={styles.icon} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="m9 7 8 5-8 5V7Z" />
-  </svg>
-);
 
 export default function HeroPitch({ onContact }) {
   return (
@@ -33,15 +13,19 @@ export default function HeroPitch({ onContact }) {
       </p>
 
       <div className={styles.actions}>
-        <button type="button" onClick={onContact} className={styles.primary}>
-          <ArrowUpRight />
-          Start a project
-        </button>
+        <FlowButton
+          text="Start a project"
+          tone="light"
+          onClick={onContact}
+          className="max-[520px]:w-full"
+        />
 
-        <a href="#projects" className={styles.secondary}>
-          <Play />
-          View projects
-        </a>
+        <FlowButton
+          text="View projects"
+          tone="light"
+          href="#projects"
+          className="max-[520px]:w-full"
+        />
       </div>
     </div>
   );
