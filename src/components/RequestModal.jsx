@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Logo, XIcon } from './Icons';
-import PillButton from './PillButton';
+import { FlowButton } from '@/components/ui/flow-button';
 import { useScroll } from '../contexts/ScrollContext';
 
 // Project enquiry modal. Submission transport can be connected separately.
@@ -26,7 +26,6 @@ export default function RequestModal({ open, onClose }) {
     };
   }, [mounted]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Exit, then unmount; reset the form ~300ms after it's gone.
   useEffect(() => {
     if (open || !mounted) return;
     setShown(false);
@@ -71,9 +70,13 @@ export default function RequestModal({ open, onClose }) {
               </label>
               <div className="modal-bottom">
                 <span className="modal-note">Share the goal, timeline and budget you have in mind.</span>
-                <PillButton variant="dark" arrow="up-right" type="submit">
-                  {sending ? 'Sending…' : 'Send request'}
-                </PillButton>
+                <FlowButton
+                  tone="dark"
+                  type="submit"
+                  text={sending ? 'Sending…' : 'Send request'}
+                  disabled={sending}
+                  className="max-[560px]:w-full"
+                />
               </div>
             </form>
           </div>
@@ -82,7 +85,7 @@ export default function RequestModal({ open, onClose }) {
             <div className="badge"><Logo /></div>
             <h2>Thanks for the details</h2>
             <p>Your project brief is ready. I look forward to learning more about what you want to build.</p>
-            <PillButton variant="dark" onClick={onClose}>Close</PillButton>
+            <FlowButton tone="dark" text="Close" onClick={onClose} />
           </div>
         )}
       </div>
