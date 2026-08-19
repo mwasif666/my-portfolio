@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Logo, XIcon } from './Icons';
+import { FlowButton } from '@/components/ui/flow-button';
 import { NAV } from './Header';
 import { useScroll } from '../contexts/ScrollContext';
 import { useClock } from '../hooks/useClock';
@@ -13,7 +14,6 @@ export default function NavMenu({ open, onClose, onContact }) {
 
   useEffect(() => { if (open) setMounted(true); }, [open]);
 
-  // Enter: lock scroll, fade in, listen for Escape. Cleanup unlocks scroll.
   useEffect(() => {
     if (!mounted) return;
     stopScroll();
@@ -27,7 +27,6 @@ export default function NavMenu({ open, onClose, onContact }) {
     };
   }, [mounted]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Exit: fade out, then unmount after the transition.
   useEffect(() => {
     if (open || !mounted) return;
     setShown(false);
@@ -65,7 +64,12 @@ export default function NavMenu({ open, onClose, onContact }) {
 
       <div className="shell nm-bot">
         <span>Local time — {time}</span>
-        <button className="start" onClick={() => { onClose(); onContact(); }}>Let's work together →</button>
+        <FlowButton
+          text="Let's work together"
+          tone="light"
+          onClick={() => { onClose(); onContact(); }}
+          className="max-[560px]:w-full"
+        />
       </div>
     </div>
   );
