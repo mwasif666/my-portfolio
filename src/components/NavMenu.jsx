@@ -65,7 +65,7 @@ export default function NavMenu({ open, onClose, onContact }) {
       <div className="shell nm-bot">
         <span>Local time — {time}</span>
         <FlowButton
-          text="Let's work together"
+          text="Let's connect"
           tone="light"
           onClick={() => { onClose(); onContact(); }}
           className="max-[560px]:w-full"
