@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import clsx from "clsx";
 import { ArrowUpRight } from "./Icons";
+import { FlowButton } from "@/components/ui/flow-button";
 import { NAV } from "./Header";
 import NoiseDarkBlueGradientWithSquares from "./ui/noise-dark-blue-gradient-with-squares";
 import { useScroll } from "../contexts/ScrollContext";
@@ -24,8 +25,6 @@ export default function Footer({ onContact }) {
       className={clsx(styles.footer, inView && styles.in)}
       aria-labelledby="footer-title"
     >
-      {/* Same field as the loader and the hero, so the page closes on the
-          surface it opened on. */}
       <NoiseDarkBlueGradientWithSquares
         className={styles.backdrop}
         direction="diagonal"
@@ -46,10 +45,12 @@ export default function Footer({ onContact }) {
             Have an idea? Let&apos;s turn it into a web product that works.
           </h2>
 
-          <button type="button" onClick={onContact} className={styles.cta}>
-            Start a project
-            <ArrowUpRight className={styles.ctaIcon} />
-          </button>
+          <FlowButton
+            text="Start a project"
+            tone="light"
+            onClick={onContact}
+            className="mt-[clamp(1.8rem,4vh,2.8rem)] max-[560px]:w-full"
+          />
         </div>
 
         <div className={styles.columns}>
@@ -106,14 +107,12 @@ export default function Footer({ onContact }) {
               © {year} Muhammad Wasif. All rights reserved.
             </p>
 
-            <button
-              type="button"
+            <FlowButton
+              text="Back to top"
+              tone="light"
               onClick={() => scrollToTop(false)}
-              className={styles.toTop}
-            >
-              Back to top
-              <span className={styles.toTopIcon} aria-hidden="true">↑</span>
-            </button>
+              className="min-h-10 px-6 py-2 text-[.82rem]"
+            />
           </div>
         </div>
       </div>
