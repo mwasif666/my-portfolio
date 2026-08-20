@@ -97,6 +97,14 @@ const projects = [
     image: "https://res.cloudinary.com/agymx2xx/image/upload/v1787216455/49d87646-ffad-4e21-b4a8-67160f3fdb46.png",
     services: ["HTML", "CSS", "JavaScript", "Bootstrap"],
   },
+  {
+    name: "MindReach",
+    url: "https://mindreach.us/",
+    image: "https://res.cloudinary.com/agymx2xx/image/upload/v1787217646/d4ba021e-dd61-40e1-804b-b987e960213e.png",
+    // Project owner confirms React on the frontend and Laravel on the backend.
+    // PHP is included as Laravel's runtime; no database is guessed here.
+    services: ["React", "Laravel", "PHP", "Bootstrap", "CSS3"],
+  },
 ];
 
 const INITIAL_PROJECT_COUNT = 6;
