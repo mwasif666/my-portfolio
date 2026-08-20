@@ -81,16 +81,15 @@ const projects = [
     name: "PECO Engineering",
     url: "https://pecoengg.com/",
     image: "https://res.cloudinary.com/agymx2xx/image/upload/v1787153762/d0ed56f9-6be5-41df-88b3-2fb38bd6fe11.png",
-    // BuiltWith identifies this production domain as a Create React App site.
-    services: ["React", "Create React App", "JavaScript", "CSS3"],
+    // Keep portfolio-facing labels focused on the actual frontend stack.
+    services: ["React", "JavaScript", "CSS3"],
   },
   {
     name: "Hope Plants Dubai",
     url: "https://hopeplantsdubai.com/",
     image: "https://res.cloudinary.com/dsjxs1umc/image/upload/v1760473976/colehff0isfg4wsowla3.png",
-    // BuiltWith confirms Tagembed. The site's own privacy policy explicitly
-    // confirms Google Ads/Analytics and Meta Pixel tracking.
-    services: ["Tagembed", "Google Analytics", "Google Ads", "Meta Pixel"],
+    // Project owner confirms Laravel with MySQL for the production application.
+    services: ["Laravel", "PHP", "MySQL", "JavaScript"],
   },
 ];
 
