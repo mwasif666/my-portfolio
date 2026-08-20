@@ -32,6 +32,16 @@ export function cldUrl(id) {
 }
 
 /**
+ * The résumé PDF, opened in its own tab from the hero.
+ *
+ * Not routed through `cldImage`: it sits at the cloud root rather than in
+ * FOLDER, and `f_auto` would hand back a rasterised page instead of the
+ * document. Left unversioned so re-uploading over the same public id is all it
+ * takes to publish a new résumé.
+ */
+export const RESUME_URL = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/Muhammad_Wasif_Resume_2.pdf`;
+
+/**
  * Video renditions for a `<video>` element, VP9 first.
  *
  * These are explicit rather than left to `f_auto`: Cloudinary's negotiation for

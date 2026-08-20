@@ -10,7 +10,6 @@ import HeroActivity from "./hero/HeroActivity";
 import styles from "./KontourBanner.module.css";
 
 export default function KontourBanner({
-  onContact,
   id = "home",
   theme = "orange",
 }) {
@@ -69,7 +68,7 @@ export default function KontourBanner({
         <HeroIntro />
         <HeroPortrait />
         <HeroStats />
-        <HeroPitch onContact={onContact} />
+        <HeroPitch />
         <HeroActivity />
       </div>
 

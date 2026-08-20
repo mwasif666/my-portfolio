@@ -1,9 +1,10 @@
 import clsx from "clsx";
 import { FlowButton } from "@/components/ui/flow-button";
+import { RESUME_URL } from "@/lib/cloudinary";
 import { heroReveal } from "./heroMotion";
 import styles from "./HeroPitch.module.css";
 
-export default function HeroPitch({ onContact }) {
+export default function HeroPitch() {
   return (
     <div className={clsx(heroReveal("delay-[380ms]"), styles.root)}>
       <p className={styles.copy}>
@@ -14,9 +15,11 @@ export default function HeroPitch({ onContact }) {
 
       <div className={styles.actions}>
         <FlowButton
-          text="Start a project"
+          text="Download resume"
           tone="light"
-          onClick={onContact}
+          href={RESUME_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="max-[520px]:w-full"
         />
 

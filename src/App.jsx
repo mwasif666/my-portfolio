@@ -41,7 +41,7 @@ export default function App() {
       />
 
       <main id="main">
-        <KontourBanner id="home" theme="blue" onContact={openContact} />
+        <KontourBanner id="home" theme="blue" />
         <StoktSections onContact={openContact} />
         <ProjectsSection />
         <WhySection />
