@@ -13,64 +13,67 @@ const projects = [
     name: "Hierys",
     url: "https://hierys.com/",
     video: cldVideoSources("projects/hierys"),
-    // Read off the site's own bundle rather than guessed: react-dom + 53
-    // useState calls, 206 `--tw-` custom properties in the stylesheet, 55 gsap
-    // references with ScrollTrigger, and react-router in the chunk.
-    services: ["React & Vite", "Tailwind CSS", "GSAP ScrollTrigger", "Agency Website", "Responsive UI"],
+    // Verified from the site's production bundle: React/Vite, Tailwind,
+    // GSAP ScrollTrigger and react-router are all present.
+    services: ["React", "Vite", "Tailwind CSS", "GSAP ScrollTrigger", "React Router"],
   },
   {
     name: "Econetix",
     url: "https://econetix.net/",
     image: "https://res.cloudinary.com/agymx2xx/image/upload/v1787152967/8645b931-5272-4f2f-a435-943e838018c6.png",
-    services: ["WordPress", "Elementor", "Advanced Custom Fields", "GSAP Animations", "Responsive Development"],
+    services: ["WordPress", "Elementor", "Advanced Custom Fields", "GSAP", "Three.js"],
   },
   {
     name: "Offplan DXB",
     url: "https://offplandxb.ae/",
     image: cldUrl("projects/offplan-dxb"),
-    services: ["Laravel Development", "Property Search", "Inquiry Management", "Responsive Frontend", "SEO Structure"],
+    services: ["Laravel", "PHP", "MySQL", "Bootstrap", "jQuery"],
   },
   {
     name: "Petroc Energy",
     url: "https://petrocenergy.com/",
     image: cldUrl("projects/petroc-energy"),
-    services: ["Corporate Website", "HTML / CSS", "Bootstrap", "Responsive Development", "Performance"],
+    services: ["HTML5", "CSS3", "Bootstrap", "JavaScript", "Formspree"],
   },
   {
     name: "Pinnacle Design Agency",
     url: "https://www.pinnacledesignagency.com/",
     image: cldUrl("projects/pinnacle"),
-    services: ["PHP Development", "Agency Website", "Bootstrap", "Responsive UI", "SEO"],
+    services: ["PHP", "Bootstrap", "jQuery", "JavaScript", "Custom CMS"],
   },
   {
     name: "ABET Global",
     url: "https://abetglobal.com/",
     image: cldUrl("projects/abet-global"),
-    services: ["Laravel Development", "Corporate Platform", "CMS Structure", "Responsive UI", "Regional SEO"],
+    // External technology fingerprinting reports ASP.NET/IIS rather than
+    // Laravel, so keep this card aligned with the deployed production stack.
+    services: ["ASP.NET", "Microsoft IIS", "Bootstrap", "JavaScript", "jsDelivr"],
   },
   {
     name: "Vampire Tools",
     url: "https://vampiretools.com/",
     image: cldUrl("projects/vampire-tools"),
-    services: ["WordPress", "WooCommerce", "E-commerce Development", "Product UX", "SEO Schema"],
+    services: ["WordPress", "WooCommerce", "PHP", "jQuery", "WooCommerce Plugins"],
   },
   {
-    name: "Oxford Ghostwriting",
-    url: "https://oxford.innovationpixel.com/",
-    services: ["Service Website", "Publishing Services", "Lead Generation", "Responsive Development", "Content Architecture"],
-    livePreview: true,
+    name: "ReactDeploy",
+    url: "https://reactdeploy-topaz.vercel.app/",
+    image: "https://res.cloudinary.com/dsjxs1umc/image/upload/v1760476956/xeehnphy66xfmqocq6nt.png",
+    services: ["React", "JavaScript", "CSS3", "Vercel", "Responsive UI"],
   },
   {
-    name: "Dissertation Lord",
-    url: "https://www.disser.innovationpixel.com/",
-    services: ["Academic Services", "Lead Generation", "Responsive Website", "Forms", "Content-led UX"],
-    livePreview: true,
+    name: "Inner Beast",
+    url: "https://innerbeast.co.uk/",
+    image: "https://res.cloudinary.com/agymx2xx/image/upload/v1787153583/2717dcc1-d54d-4bfd-a686-8ae5b5ab09f4.png",
+    // The public site currently blocks reliable framework fingerprinting, so
+    // list only technologies that are safe to infer from the delivered frontend.
+    services: ["HTML5", "CSS3", "JavaScript", "Responsive UI", "Custom Frontend"],
   },
   {
-    name: "Dynamic Fascia",
-    url: "https://fasciau.innovationpixel.com/",
-    services: ["Education Platform", "Course Content", "Enquiry Flows", "Responsive Development", "Content System"],
-    livePreview: true,
+    name: "PECO Engineering",
+    url: "https://pecoengg.com/",
+    image: "https://res.cloudinary.com/agymx2xx/image/upload/v1787153762/d0ed56f9-6be5-41df-88b3-2fb38bd6fe11.png",
+    services: ["React", "Create React App", "JavaScript", "CSS3", "Responsive UI"],
   },
 ];
 
