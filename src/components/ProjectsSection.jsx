@@ -27,53 +27,71 @@ const projects = [
     name: "Offplan DXB",
     url: "https://offplandxb.ae/",
     image: cldUrl("projects/offplan-dxb"),
-    services: ["Laravel", "PHP", "MySQL", "Bootstrap", "jQuery"],
+    // The deployed site serves its media from /public/wp-content; the previous
+    // Laravel/MySQL labels were not sufficiently verified and have been removed.
+    services: ["WordPress", "JavaScript", "Google Tag Manager"],
   },
   {
     name: "Petroc Energy",
     url: "https://petrocenergy.com/",
     image: cldUrl("projects/petroc-energy"),
-    services: ["HTML5", "CSS3", "Bootstrap", "JavaScript", "Formspree"],
+    // The live site exposes static .html routes; BuiltWith detects Formspree.
+    services: ["HTML5", "CSS3", "JavaScript", "Formspree"],
   },
   {
     name: "Pinnacle Design Agency",
     url: "https://www.pinnacledesignagency.com/",
     image: cldUrl("projects/pinnacle"),
-    services: ["PHP", "Bootstrap", "jQuery", "JavaScript", "Custom CMS"],
+    // Public fingerprinting confirms tawk.to; unverified PHP/Bootstrap/CMS
+    // implementation labels were removed rather than guessed.
+    services: ["HTML5", "CSS3", "JavaScript", "tawk.to"],
   },
   {
     name: "ABET Global",
     url: "https://abetglobal.com/",
     image: cldUrl("projects/abet-global"),
-    // External technology fingerprinting reports ASP.NET/IIS rather than
-    // Laravel, so keep this card aligned with the deployed production stack.
-    services: ["ASP.NET", "Microsoft IIS", "Bootstrap", "JavaScript", "jsDelivr"],
+    // Current production fingerprint: ASP.NET on IIS with Bootstrap,
+    // Google Analytics and jsDelivr.
+    services: ["ASP.NET", "Microsoft IIS", "Bootstrap", "Google Analytics", "jsDelivr"],
   },
   {
     name: "Vampire Tools",
     url: "https://vampiretools.com/",
     image: cldUrl("projects/vampire-tools"),
-    services: ["WordPress", "WooCommerce", "PHP", "jQuery", "WooCommerce Plugins"],
+    // WooCommerce is verified through the live commerce UI and a detected
+    // WooCommerce-specific WPC Frequently Bought Together installation.
+    services: ["WordPress", "WooCommerce", "WPC Frequently Bought Together", "Google Tag Manager"],
   },
   {
     name: "ReactDeploy",
     url: "https://reactdeploy-topaz.vercel.app/",
     image: "https://res.cloudinary.com/dsjxs1umc/image/upload/v1760476956/xeehnphy66xfmqocq6nt.png",
-    services: ["React", "JavaScript", "CSS3", "Vercel", "Responsive UI"],
+    // Keep this conservative: React app deployed on Vercel; no guessed router
+    // or build framework is displayed without a reliable production fingerprint.
+    services: ["React", "JavaScript", "CSS3", "Vercel"],
   },
   {
     name: "Inner Beast",
     url: "https://innerbeast.co.uk/",
     image: "https://res.cloudinary.com/agymx2xx/image/upload/v1787153583/2717dcc1-d54d-4bfd-a686-8ae5b5ab09f4.png",
-    // The public site currently blocks reliable framework fingerprinting, so
-    // list only technologies that are safe to infer from the delivered frontend.
-    services: ["HTML5", "CSS3", "JavaScript", "Responsive UI", "Custom Frontend"],
+    // The public site does not currently expose a reliable CMS/framework
+    // fingerprint, so do not invent WordPress, Shopify, React or another stack.
+    services: ["HTML5", "CSS3", "JavaScript"],
   },
   {
     name: "PECO Engineering",
     url: "https://pecoengg.com/",
     image: "https://res.cloudinary.com/agymx2xx/image/upload/v1787153762/d0ed56f9-6be5-41df-88b3-2fb38bd6fe11.png",
-    services: ["React", "Create React App", "JavaScript", "CSS3", "Responsive UI"],
+    // BuiltWith identifies this production domain as a Create React App site.
+    services: ["React", "Create React App", "JavaScript", "CSS3"],
+  },
+  {
+    name: "Hope Plants Dubai",
+    url: "https://hopeplantsdubai.com/",
+    image: "https://res.cloudinary.com/dsjxs1umc/image/upload/v1760473976/colehff0isfg4wsowla3.png",
+    // BuiltWith confirms Tagembed. The site's own privacy policy explicitly
+    // confirms Google Ads/Analytics and Meta Pixel tracking.
+    services: ["Tagembed", "Google Analytics", "Google Ads", "Meta Pixel"],
   },
 ];
 
