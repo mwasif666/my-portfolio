@@ -73,8 +73,9 @@ const projects = [
     name: "Inner Beast",
     url: "https://innerbeast.co.uk/",
     image: "https://res.cloudinary.com/agymx2xx/image/upload/v1787153583/2717dcc1-d54d-4bfd-a686-8ae5b5ab09f4.png",
-    // Project owner confirms this application uses the MERN stack.
-    services: ["MongoDB", "Express.js", "React", "Node.js"],
+    // Project owner confirms Next.js on the frontend with the MongoDB,
+    // Express.js and Node.js backend stack.
+    services: ["Next.js", "MongoDB", "Express.js", "Node.js"],
   },
   {
     name: "PECO Engineering",
