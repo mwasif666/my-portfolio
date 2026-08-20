@@ -216,17 +216,11 @@
   letter-spacing: -0.02em;
 }
 
-.brandMark {
-  display: grid;
+.brandBadge {
+  display: block;
   width: 1.7rem;
   height: 1.7rem;
   flex: none;
-  place-items: center;
-  border-radius: 50%;
-  background: #fff;
-  color: #07466f;
-  font-size: 0.72rem;
-  font-weight: 800;
 }
 
 .copyright {

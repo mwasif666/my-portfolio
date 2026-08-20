@@ -109,6 +109,18 @@ const projects = [
 
 const INITIAL_PROJECT_COUNT = 6;
 
+/* Names the project and the stack it was built on rather than saying "website
+   preview" twelve times — that pairing is what someone searching for a given
+   tool is actually after, and one helper keeps the img, video and iframe
+   labels from drifting apart. */
+function buildPreviewAlt(project) {
+  const stack = project.services?.slice(0, 3).join(", ");
+
+  return stack
+    ? `${project.name} website built with ${stack} by Muhammad Wasif`
+    : `${project.name} website preview by Muhammad Wasif`;
+}
+
 /* Play previews only while their project card is actually in view. */
 function ProjectVideo({ project }) {
   const ref = useRef(null);
@@ -165,7 +177,7 @@ function ProjectVideo({ project }) {
       playsInline
       preload="metadata"
       tabIndex={-1}
-      aria-label={`${project.name} website preview`}
+      aria-label={buildPreviewAlt(project)}
     >
       {project.video.map((source) => (
         <source key={source.type} src={source.src} type={source.type} />
@@ -184,7 +196,7 @@ function LiveProjectPreview({ project }) {
       <img
         className={styles.previewImage}
         src={project.image}
-        alt={`${project.name} website preview`}
+        alt={buildPreviewAlt(project)}
         loading="lazy"
         decoding="async"
       />
@@ -195,7 +207,7 @@ function LiveProjectPreview({ project }) {
     <iframe
       className={styles.previewFrame}
       src={project.url}
-      title={`${project.name} website preview`}
+      title={buildPreviewAlt(project)}
       loading="lazy"
       tabIndex={-1}
       aria-hidden="true"

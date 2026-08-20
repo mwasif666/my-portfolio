@@ -202,7 +202,11 @@ export default function StoktAbout() {
               className={`${styles.profileGlow} ${themeStyles.blueProfileGlow}`}
               aria-hidden="true"
             />
-            <img src={PORTRAIT} alt="Muhammad Wasif" draggable="false" />
+            <img
+              src={PORTRAIT}
+              alt="Muhammad Wasif, front-end and full-stack web developer"
+              draggable="false"
+            />
             <div
               className={`${styles.profileMeta} ${themeStyles.blueProfileMeta}`}
             >

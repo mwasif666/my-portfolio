@@ -13,10 +13,10 @@ export default function HeroPortrait() {
       <div className={styles.rim} aria-hidden="true" />
       <img
         src={PORTRAIT}
-        alt="Muhammad Wasif, full-stack web developer"
+        alt="Muhammad Wasif, front-end and full-stack web developer in Karachi"
         draggable="false"
         decoding="async"
-        fetchPriority="high"
+        fetchpriority="high"
         className={clsx(bannerStyles.portraitImg, styles.image)}
       />
     </div>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://www.wasifmajeed.com/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/agymx2xx/image/upload/f_jpg,q_auto/wasif-portfolio/portrait</image:loc>
+      <image:title>Muhammad Wasif — front-end and full-stack web developer</image:title>
+      <image:caption>Portrait of Muhammad Wasif (Wasif Majeed), a front-end and full-stack web developer based in Karachi, Pakistan.</image:caption>
+    </image:image>
+
+    <image:image>
+      <image:loc>https://res.cloudinary.com/agymx2xx/image/upload/f_jpg,q_auto/v1787218446/me.png</image:loc>
+      <image:title>Muhammad Wasif at his front-end web development workstation</image:title>
+      <image:caption>Muhammad Wasif working on a React front-end build at his desk in Karachi, with the wasifmajeed.com portfolio open on screen.</image:caption>
+    </image:image>
+  </url>
+
+</urlset>

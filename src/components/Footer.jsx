@@ -120,8 +120,16 @@ export default function Footer() {
         <div className={styles.shell}>
           <div className={styles.baselineRow}>
             <span className={styles.brand}>
-              <span className={styles.brandMark} aria-hidden="true">W</span>
-              WASIF.DEV
+              <img
+                src="/brand/logo-badge.svg"
+                alt=""
+                className={styles.brandBadge}
+                width="100"
+                height="100"
+                loading="lazy"
+                decoding="async"
+              />
+              Wasif Majeed
             </span>
 
             <p className={styles.copyright}>

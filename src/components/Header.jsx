@@ -73,11 +73,17 @@ export default function Header({ ready, onMenu, onContact }) {
         <button
           type="button"
           onClick={() => scrollToId("home")}
-          aria-label="Wasif.dev home"
           className={styles.brand}
         >
-          <span className={styles.brandMark} aria-hidden="true">W</span>
-          <span>WASIF.DEV</span>
+          <img
+            src="/brand/logo-badge.svg"
+            alt=""
+            className={styles.brandBadge}
+            width="100"
+            height="100"
+            decoding="async"
+          />
+          <span>Wasif Majeed</span>
         </button>
 
         <nav className={styles.nav} aria-label="Primary navigation">

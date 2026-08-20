@@ -1,0 +1,29 @@
+{
+  "name": "Muhammad Wasif — Front-End & Full-Stack Web Developer",
+  "short_name": "Wasif Majeed",
+  "description": "Portfolio of Muhammad Wasif (Wasif Majeed), a front-end and full-stack web developer in Karachi building websites, web applications, APIs and app development projects.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#010507",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "/brand/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/brand/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

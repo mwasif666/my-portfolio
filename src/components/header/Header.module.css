@@ -63,6 +63,13 @@
 
 .brand:hover { transform: translateY(-1px); }
 
+.brandBadge {
+  display: block;
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+}
+
 .brandMark {
   display: grid;
   width: 1.95rem;
