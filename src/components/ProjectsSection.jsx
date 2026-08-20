@@ -73,9 +73,8 @@ const projects = [
     name: "Inner Beast",
     url: "https://innerbeast.co.uk/",
     image: "https://res.cloudinary.com/agymx2xx/image/upload/v1787153583/2717dcc1-d54d-4bfd-a686-8ae5b5ab09f4.png",
-    // The public site does not currently expose a reliable CMS/framework
-    // fingerprint, so do not invent WordPress, Shopify, React or another stack.
-    services: ["HTML5", "CSS3", "JavaScript"],
+    // Project owner confirms this application uses the MERN stack.
+    services: ["MongoDB", "Express.js", "React", "Node.js"],
   },
   {
     name: "PECO Engineering",
