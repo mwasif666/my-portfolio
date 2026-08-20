@@ -91,6 +91,12 @@ const projects = [
     // Project owner confirms Laravel with MySQL for the production application.
     services: ["Laravel", "PHP", "MySQL", "JavaScript"],
   },
+  {
+    name: "Badaruddin",
+    url: "https://badaruddin.net/",
+    image: "https://res.cloudinary.com/agymx2xx/image/upload/v1787216455/49d87646-ffad-4e21-b4a8-67160f3fdb46.png",
+    services: ["HTML", "CSS", "JavaScript", "Bootstrap"],
+  },
 ];
 
 const INITIAL_PROJECT_COUNT = 6;
