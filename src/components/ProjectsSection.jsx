@@ -27,9 +27,8 @@ const projects = [
     name: "Offplan DXB",
     url: "https://offplandxb.ae/",
     image: cldUrl("projects/offplan-dxb"),
-    // The deployed site serves its media from /public/wp-content; the previous
-    // Laravel/MySQL labels were not sufficiently verified and have been removed.
-    services: ["WordPress", "JavaScript", "Google Tag Manager"],
+    // Project owner confirms the production backend is Laravel with MySQL.
+    services: ["Laravel", "PHP", "MySQL", "JavaScript", "Google Tag Manager"],
   },
   {
     name: "Petroc Energy",
@@ -50,9 +49,9 @@ const projects = [
     name: "ABET Global",
     url: "https://abetglobal.com/",
     image: cldUrl("projects/abet-global"),
-    // Current production fingerprint: ASP.NET on IIS with Bootstrap,
-    // Google Analytics and jsDelivr.
-    services: ["ASP.NET", "Microsoft IIS", "Bootstrap", "Google Analytics", "jsDelivr"],
+    // Project owner confirms React/JavaScript on the frontend with ASP.NET
+    // on the backend; IIS and Bootstrap are also present in production.
+    services: ["React", "JavaScript", "ASP.NET", "Microsoft IIS", "Bootstrap"],
   },
   {
     name: "Vampire Tools",
