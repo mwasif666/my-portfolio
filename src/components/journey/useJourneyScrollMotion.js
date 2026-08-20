@@ -8,7 +8,11 @@ const smoothstep = (from, to, value) => {
   return progress * progress * (3 - 2 * progress);
 };
 
-export default function useJourneyScrollMotion({ sectionRef, cardRefs }) {
+export default function useJourneyScrollMotion({
+  sectionRef,
+  cardRefs,
+  onReveal,
+}) {
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return undefined;
@@ -33,7 +37,8 @@ export default function useJourneyScrollMotion({ sectionRef, cardRefs }) {
       section.style.setProperty("--journey-split", "1");
       section.style.setProperty("--journey-grid-y", "0px");
 
-      cardRefs.current.forEach((node) => {
+      cardRefs.current.forEach((node, index) => {
+        onReveal?.(index, true);
         if (!node) return;
         node.style.transform = "none";
         node.style.setProperty("--card-flip", "180deg");
@@ -90,6 +95,9 @@ export default function useJourneyScrollMotion({ sectionRef, cardRefs }) {
         node.style.setProperty("--card-flip", `${lerp(0, 180, flip)}deg`);
         node.style.setProperty("--card-copy-opacity", String(copy));
         node.style.setProperty("--card-copy-y", `${lerp(24, 0, copy)}px`);
+
+        // The icon animation starts once the back face is actually readable.
+        onReveal?.(index, copy > 0.55);
       });
     };
 
@@ -109,5 +117,5 @@ export default function useJourneyScrollMotion({ sectionRef, cardRefs }) {
       window.removeEventListener("resize", schedule);
       reducedMotion.removeEventListener?.("change", schedule);
     };
-  }, [cardRefs, sectionRef]);
+  }, [cardRefs, onReveal, sectionRef]);
 }

@@ -1,4 +1,8 @@
 .section {
+  --journey-pad-top: clamp(4rem, 8.2vh, 6.4rem);
+  --journey-pad-bottom: clamp(2.5rem, 6vh, 4.5rem);
+  --journey-heading-size: clamp(2.6rem, 4.4vw, 5.4rem);
+  --journey-heading-gap: clamp(1.6rem, 3.6vh, 3rem);
   --journey-heading-opacity: 0;
   --journey-heading-y: 26px;
   /* The photo is fully visible before any scroll — only the heading reveals. */
@@ -10,7 +14,14 @@
   --journey-shadow: 0;
   --journey-split: 0;
   --journey-grid-y: 18px;
-  --journey-reserve: clamp(14rem, 26vh, 20rem);
+  /* One heading line plus the stage chrome, so the panels only ever claim the
+     height that is genuinely left over — the cards can never run past the
+     bottom of the sticky viewport. The last term is slack for the drift and
+     scale the cards pick up while they separate. */
+  --journey-reserve: calc(
+    var(--journey-pad-top) + var(--journey-pad-bottom) +
+    var(--journey-heading-gap) + var(--journey-heading-size) * 1.06 + 2.5rem
+  );
   position: relative;
   height: 315svh;
   overflow: clip;
@@ -26,7 +37,7 @@
   flex-direction: column;
   align-items: center;
   height: 100svh;
-  padding: clamp(4.5rem, 10vh, 7.5rem) clamp(1rem, 4vw, 3rem) clamp(2.5rem, 6vh, 4.5rem);
+  padding: var(--journey-pad-top) clamp(1rem, 4vw, 3rem) var(--journey-pad-bottom);
   overflow: hidden;
   isolation: isolate;
   background:
@@ -51,17 +62,19 @@
   position: relative;
   z-index: 7;
   flex: 0 0 auto;
-  width: min(92vw, 76rem);
-  margin: 0 0 clamp(2rem, 4.6vh, 3.6rem);
+  width: min(94vw, 82rem);
+  margin: 0 0 var(--journey-heading-gap);
   transform: translate3d(0, var(--journey-heading-y), 0);
   opacity: var(--journey-heading-opacity);
   color: #effcff;
   font-family: "Argesta Display", Georgia, "Times New Roman", serif;
-  font-size: clamp(3.4rem, 5.15vw, 6.65rem);
+  font-size: var(--journey-heading-size);
   font-weight: 400;
   line-height: .98;
   letter-spacing: -.045em;
   text-align: center;
+  /* A second line would eat into the panels and overlap the cards. */
+  white-space: nowrap;
   text-shadow: 0 0 1.4rem rgba(89, 192, 231, .16);
   will-change: transform, opacity;
 }
@@ -286,8 +299,10 @@
   z-index: 3;
   top: clamp(1.25rem, 2.1vw, 2rem);
   left: clamp(1.25rem, 2.1vw, 2rem);
-  width: 2rem;
-  height: 2rem;
+  /* Lordicon draws inside a padded 500×500 artboard, so the box runs larger
+     than the inline icons it replaced to land on the same optical size. */
+  width: clamp(2.6rem, 3.6vw, 4rem);
+  height: clamp(2.6rem, 3.6vw, 4rem);
   opacity: var(--card-copy-opacity);
   transform: translateY(var(--card-copy-y));
   color: rgba(226, 248, 255, .82);
@@ -295,6 +310,15 @@
 }
 
 .card:nth-child(1) .icon { color: rgba(5, 33, 46, .74); }
+
+/* The Lordicon animation renders here; the inline icon underneath is only
+   ever seen if the CDN request never lands. */
+.iconPlayer,
+.iconFallback {
+  position: absolute;
+  inset: 0;
+}
+
 .icon svg { display: block; width: 100%; height: 100%; }
 
 .copy {
@@ -329,7 +353,6 @@
 .card:nth-child(1) .copy p { color: rgba(7, 21, 29, .65); }
 
 @media (max-width: 1180px) {
-  .heading { font-size: clamp(3.25rem, 5.8vw, 5.5rem); }
   .copy h3 { font-size: clamp(1.5rem, 2.5vw, 2.6rem); }
   .copy p { margin-top: 3rem; }
 }
@@ -358,6 +381,7 @@
     transform: none !important;
     opacity: 1 !important;
     font-size: clamp(3.1rem, 12vw, 5.2rem);
+    white-space: normal;
   }
 
   .frame { display: block; }

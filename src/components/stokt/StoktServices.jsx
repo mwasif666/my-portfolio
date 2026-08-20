@@ -1,44 +1,8 @@
 import { Fragment, useEffect, useRef } from "react";
 import { FlowButton } from "@/components/ui/flow-button";
+import loadLottieRuntime from "@/lib/lottie";
 import useServicesTimeline from "./useServicesTimeline";
 import styles from "./Services.module.css";
-
-const LOTTIE_SCRIPT =
-  "https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js";
-
-let lottiePromise;
-
-function loadLottieRuntime() {
-  if (typeof window === "undefined") return Promise.resolve(null);
-  if (window.lottie) return Promise.resolve(window.lottie);
-  if (lottiePromise) return lottiePromise;
-
-  lottiePromise = new Promise((resolve, reject) => {
-    const existing = document.querySelector("script[data-outcrowd-lottie]");
-
-    if (existing) {
-      if (window.lottie) {
-        resolve(window.lottie);
-        return;
-      }
-      existing.addEventListener("load", () => resolve(window.lottie), {
-        once: true,
-      });
-      existing.addEventListener("error", reject, { once: true });
-      return;
-    }
-
-    const script = document.createElement("script");
-    script.src = LOTTIE_SCRIPT;
-    script.async = true;
-    script.dataset.outcrowdLottie = "true";
-    script.onload = () => resolve(window.lottie);
-    script.onerror = reject;
-    document.head.appendChild(script);
-  });
-
-  return lottiePromise;
-}
 
 const services = [
   {
