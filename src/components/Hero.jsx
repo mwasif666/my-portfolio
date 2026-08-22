@@ -48,7 +48,7 @@ export default function Hero({ ready, onContact }) {
         revealTintOpacity={0.16}
         revealGridColor="rgba(220, 103, 33, 0.08)"
         positionY="top"
-        alt="Muhammad Wasif, full-stack web developer"
+        alt="Muhammad Wasif, Senior Full-Stack Developer in Karachi, Pakistan"
         priority
       />
       <BackgroundGradient />
@@ -59,7 +59,7 @@ export default function Hero({ ready, onContact }) {
         <div className="reference-copy">
           <Reveal as="span" className="reference-eyebrow" gate ready={ready} delay={180} move={10}>
             <span className="reference-eyebrow-icon"><FocusIcon type="layers" /></span>
-            Full-Stack Web Developer
+            Muhammad Wasif · Senior Full-Stack Developer
           </Reveal>
 
           <LineReveal
