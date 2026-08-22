@@ -4,7 +4,7 @@ import bannerStyles from "../KontourBanner.module.css";
 import styles from "./HeroPortrait.module.css";
 import { heroReveal } from "./heroMotion";
 
-const PORTRAIT = cldUrl("portrait");
+const PORTRAIT = cldUrl("muhammad-wasif-wasif-majeed-senior-full-stack-developer-karachi");
 
 export default function HeroPortrait() {
   return (
