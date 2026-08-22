@@ -13,7 +13,7 @@ export default function HeroPortrait() {
       <div className={styles.rim} aria-hidden="true" />
       <img
         src={PORTRAIT}
-        alt="Muhammad Wasif, Senior Full-Stack Developer in Karachi, Pakistan"
+        alt="Muhammad Wasif (Wasif Majeed), Senior Full-Stack Developer in Karachi, Pakistan"
         draggable="false"
         decoding="async"
         fetchpriority="high"
