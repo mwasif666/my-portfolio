@@ -48,7 +48,7 @@ export default function Hero({ ready, onContact }) {
         revealTintOpacity={0.16}
         revealGridColor="rgba(220, 103, 33, 0.08)"
         positionY="top"
-        alt="Muhammad Wasif, Senior Full-Stack Developer in Karachi, Pakistan"
+        alt="Muhammad Wasif (Wasif Majeed), Senior Full-Stack Developer in Karachi, Pakistan"
         priority
       />
       <BackgroundGradient />
